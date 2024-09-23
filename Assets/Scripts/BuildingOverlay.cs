@@ -12,6 +12,7 @@ public class BuildingOverlay : MonoBehaviour
     [SerializeField] private GameObject structurePrefab;
     [SerializeField] private Material buildMaterial;
     private int collidersInRange;
+    [SerializeField] private int incrementalMovementUnits = 1;
 
     //temporary value for testing with naughtyattributes
     private bool buildMode;
@@ -67,7 +68,7 @@ public class BuildingOverlay : MonoBehaviour
         //also a bit temporary. Final will be to spawn a prefab that's in the growth phase. or in the building phase.
         //enough time passes by, it'll replace itself with a finished building prefab.
 
-        if(IsAllowedToPlace)
+        if(buildMode && IsAllowedToPlace)
             Instantiate(structurePrefab, transform.position, transform.rotation);
         //else
             //feedback that it's not allowed.
@@ -77,6 +78,31 @@ public class BuildingOverlay : MonoBehaviour
     [Button]
     private void RotateClockwise()
     {
-        gameObject.transform.Rotate(new Vector3(0,45,0));
+        transform.Rotate(new Vector3(0,45,0));
+    }
+
+    [Button]
+    private void MoveIncrementallyRight()
+    {
+        transform.position += transform.right * incrementalMovementUnits;
+
+    }
+
+    [Button] 
+    private void MoveIncrementallyLeft()
+    {
+        transform.position -= transform.right * incrementalMovementUnits;
+    }
+
+    [Button]
+    private void MoveIncrementallyUp()
+    {
+        transform.position += transform.forward * incrementalMovementUnits;
+    }
+
+    [Button]
+    private void MoveIncrementallyDown()
+    {
+        transform.position -= transform.forward * incrementalMovementUnits;
     }
 }
