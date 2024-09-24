@@ -99,7 +99,6 @@ public class BuildingOverlay : MonoBehaviour
     private void MoveIncrementallyRight()
     {
         transform.position += transform.right * incrementalMovementUnits;
-
     }
 
     [Button] 
