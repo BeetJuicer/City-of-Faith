@@ -79,7 +79,11 @@ public class BuildingOverlay : MonoBehaviour
         //enough time passes by, it'll replace itself with a finished building prefab.
 
         if(buildMode && IsAllowedToPlace)
+        {
             Instantiate(structure_SO.structurePrefab, transform.position, transform.rotation);
+            //add xp and subtract gold.
+            print("Built " + structure_SO.structureName + ". Subtracted " + structure_SO.goldCost + " gold coins and added " + structure_SO.expValue + " exp.");
+        }
         //else
             //feedback that it's not allowed.
 

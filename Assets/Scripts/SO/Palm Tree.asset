@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b092c9d275587f54e8c29ae9d465cee2, type: 3}
   m_Name: Palm Tree
   m_EditorClassIdentifier: 
-  structureName: Pyramid
+  structureName: Palm Tree
   description: chuchuchuchu
+  structurePrefab: {fileID: 8800199060111772814, guid: d39e7bce0e5c4914284f2f56820d781b,
+    type: 3}
   displayImage: {fileID: 0}
-  collisionSquareSize: {x: 24, y: 24}
   goldCost: 1000
   townHallLevelRequirement: 1

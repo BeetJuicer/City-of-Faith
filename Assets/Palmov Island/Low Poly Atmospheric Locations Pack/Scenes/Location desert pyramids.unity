@@ -159,9 +159,10 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
-  structurePrefab: {fileID: 8800199060111772814, guid: 5370e8202e43bff4b9d4bdca6e624315,
-    type: 3}
-  buildMaterial: {fileID: 2100000, guid: 6007be16c80cbe04b8c9aa060296b280, type: 2}
+  structure_SO: {fileID: 11400000, guid: d6f2d15a35608b4489b99e0e8cf47e35, type: 2}
+  buildPreviewMaterial: {fileID: 2100000, guid: 6007be16c80cbe04b8c9aa060296b280,
+    type: 2}
+  incrementalMovementUnits: 2
 --- !u!65 &928263094
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -243,7 +244,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.00291431, z: -0, w: 0.99999577}
   m_LocalPosition: {x: -62.1, y: 4.5, z: 31.2}
-  m_LocalScale: {x: 24, y: 0.1, z: 24}
+  m_LocalScale: {x: 25, y: 0.1, z: 25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

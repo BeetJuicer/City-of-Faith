@@ -14,8 +14,11 @@ public class Structure_SO : ScriptableObject
 
     //TODO: maybe change the datatype. temporary for now.
     public DateTime buildDuration;
+    public int expValue;
     public int goldCost;
-    public int townHallLevelRequirement;
+    [Tooltip("The resell value MUST be less than the goldCost")]
+    public int resellValue;
     
+    public int townHallLevelRequirement;
     //TODO: make a container?manager? that keeps track of each level's unlockables. maybe the townhall.
 }
