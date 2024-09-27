@@ -9,18 +9,14 @@ public class PinchToZoomAndPan : MonoBehaviour
     [SerializeField] private float maxZoom = 10f;     // Maximum zoom (orthographic size)
 
     private Camera mainCamera; // Reference to the main camera
+    private float previousDistance; // Stores the previous frame's pinch distance
     private TouchControls controls; // Reference to the new input system
 
     private Coroutine zoomCoroutine;
 
-    private Vector2 lastPrimaryFingerPosition;
-    private Vector2 lastSecondaryFingerPosition;
-
-    private bool isZooming = false;
-
     private void Awake()
     {
-        controls = new TouchControls(); // Initialize the new input system controls
+        controls = new TouchControls();
         mainCamera = Camera.main;
     }
 
@@ -59,61 +55,69 @@ public class PinchToZoomAndPan : MonoBehaviour
     {
         float previousDistance = 0f;
 
-        // Store initial finger positions for panning and zooming
-        lastPrimaryFingerPosition = controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>();
-        lastSecondaryFingerPosition = controls.Touch.SecondaryFingerPosition.ReadValue<Vector2>();
+        // Store initial finger positions for panning
+        Vector2 lastPrimaryFingerPosition = controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>();
+        Vector2 lastSecondaryFingerPosition = controls.Touch.SecondaryFingerPosition.ReadValue<Vector2>();
 
         while (true)
         {
-            // Read current positions of both fingers using the New Input System
+            // Read positions of both fingers using the new input system
             Vector2 primaryFingerPosition = controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>();
             Vector2 secondaryFingerPosition = controls.Touch.SecondaryFingerPosition.ReadValue<Vector2>();
 
-            // Check if the secondary finger is touching (i.e., zoom gesture is happening)
-            if (controls.Touch.SecondaryTouchContact.ReadValue<float>() > 0)
+            // Calculate the current distance between the two fingers (for zooming)
+            float currentDistance = Vector2.Distance(primaryFingerPosition, secondaryFingerPosition);
+
+            // Calculate the midpoint between the two fingers (pinch center)
+            Vector2 pinchCenter = (primaryFingerPosition + secondaryFingerPosition) / 2f;
+
+            // Convert pinch center to world point (for zooming towards this point)
+            Vector3 pinchWorldPoint = mainCamera.ScreenToWorldPoint(new Vector3(pinchCenter.x, pinchCenter.y, mainCamera.nearClipPlane));
+
+            // On first touch or pinch start, initialize previousDistance
+            if (previousDistance == 0f)
             {
-                // Handle zooming
-                float currentDistance = Vector2.Distance(primaryFingerPosition, secondaryFingerPosition);
-                Vector2 pinchCenter = (primaryFingerPosition + secondaryFingerPosition) / 2f;
-                Vector3 pinchWorldPoint = mainCamera.ScreenToWorldPoint(new Vector3(pinchCenter.x, pinchCenter.y, mainCamera.nearClipPlane));
-
-                if (previousDistance == 0f)
-                {
-                    previousDistance = currentDistance;
-                    yield return null;
-                }
-
-                float distanceDelta = currentDistance - previousDistance;
-                float newSize = mainCamera.orthographicSize - (distanceDelta * zoomSpeed);
-                newSize = Mathf.Clamp(newSize, minZoom, maxZoom);
-
-                float zoomFactor = mainCamera.orthographicSize / newSize;
-                Vector3 directionToPinch = pinchWorldPoint - mainCamera.transform.position;
-                mainCamera.transform.position += directionToPinch * (1 - 1 / zoomFactor);
-
-                mainCamera.orthographicSize = newSize;
                 previousDistance = currentDistance;
-
-                isZooming = true;
-            }
-            else if (controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>() != Vector2.zero && !isZooming)
-            {
-                // Handle panning when only one finger is active and zooming isn't happening
-                Vector2 primaryFingerDelta = primaryFingerPosition - lastPrimaryFingerPosition;
-
-                Vector3 worldDelta = mainCamera.ScreenToWorldPoint(new Vector3(primaryFingerDelta.x, primaryFingerDelta.y, 0))
-                                     - mainCamera.ScreenToWorldPoint(Vector3.zero);
-
-                mainCamera.transform.position -= worldDelta * panSpeed;
+                yield return null; // Skip the rest of this loop iteration
             }
 
-            // Reset zoom flag when there are no two fingers
-            if (controls.Touch.SecondaryTouchContact.ReadValue<float>() == 0)
-            {
-                isZooming = false;
-            }
+            // Calculate the change in distance between current and previous frame (for zooming)
+            float distanceDelta = currentDistance - previousDistance;
 
-            // Store the current finger positions for the next iteration
+            // Adjust the camera's orthographic size based on the pinch movement
+            float newSize = mainCamera.orthographicSize - (distanceDelta * zoomSpeed);
+
+            // Clamp the camera zoom to stay within min and max bounds
+            newSize = Mathf.Clamp(newSize, minZoom, maxZoom);
+
+            // Calculate the zoom factor (how much we're zooming in or out)
+            float zoomFactor = mainCamera.orthographicSize / newSize;
+
+            // Move the camera to zoom in toward the pinch center
+            Vector3 directionToPinch = pinchWorldPoint - mainCamera.transform.position;
+            mainCamera.transform.position += directionToPinch * (1 - 1 / zoomFactor);
+
+            // Apply the new orthographic size
+            mainCamera.orthographicSize = newSize;
+
+            // Panning (move the camera based on finger drag)
+            Vector2 primaryFingerDelta = primaryFingerPosition - lastPrimaryFingerPosition;
+            Vector2 secondaryFingerDelta = secondaryFingerPosition - lastSecondaryFingerPosition;
+
+            // Calculate the average movement of both fingers (delta)
+            Vector2 averageDelta = (primaryFingerDelta + secondaryFingerDelta) / 2f;
+
+            // Convert screen delta to world delta
+            Vector3 worldDelta = mainCamera.ScreenToWorldPoint(new Vector3(averageDelta.x, averageDelta.y, 0))
+                                 - mainCamera.ScreenToWorldPoint(Vector3.zero);
+
+            // Apply the movement to the camera position (panning)
+            mainCamera.transform.position -= worldDelta * panSpeed;
+
+            // Update previousDistance for the next loop iteration
+            previousDistance = currentDistance;
+
+            // Store current finger positions for next panning calculation
             lastPrimaryFingerPosition = primaryFingerPosition;
             lastSecondaryFingerPosition = secondaryFingerPosition;
 
