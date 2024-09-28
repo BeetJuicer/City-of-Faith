@@ -16,8 +16,15 @@ MonoBehaviour:
   description: A building that produces fish for food.
   structurePrefab: {fileID: 1160180611478981076, guid: 28c5feb91521acb438135d1ac793ee23,
     type: 3}
+  inProgressBuildingPrefab: {fileID: 0}
   displayImage: {fileID: 0}
-  expValue: 0
-  goldCost: 10000
-  resellValue: 3000
+  expGivenOnBuild: 100
   townHallLevelRequirement: 5
+  resourcesRequired:
+    _serializedList:
+    - Key: 0
+      Value: 2000
+  resourcesReturnedOnResell:
+    _serializedList:
+    - Key: 0
+      Value: 700

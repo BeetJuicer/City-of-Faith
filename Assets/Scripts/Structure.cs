@@ -19,15 +19,17 @@ public class Structure : MonoBehaviour
         
     }
 
+
+
     [Button]
-    private void OnStructureClicked()
+    public void OnStructureClicked()
     {
         print("Display UI\n" + structure_so.structureName + ": " + structure_so.description);
     }
 
     [Button]
-    private void OnDestroy()
+    public void OnDestroy()
     {
-        print("Destroyed " + structure_so.structureName + ". Returning " + structure_so.resellValue + " gold coins.");
+        //print("Destroyed " + structure_so.structureName + ". Returning " + structure_so.resellValue + " gold coins.");
     }
 }

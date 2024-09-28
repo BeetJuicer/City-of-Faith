@@ -34,7 +34,7 @@ public class BuildingOverlay : MonoBehaviour
 
     private void Update()
     {
-        //update color
+        //update color,
         gameObject.GetComponent<MeshRenderer>().material.color = (IsAllowedToPlace) ? Color.green : Color.red;
     }
 
@@ -78,11 +78,13 @@ public class BuildingOverlay : MonoBehaviour
         //also a bit temporary. Final will be to spawn a prefab that's in the growth phase. or in the building phase.
         //enough time passes by, it'll replace itself with a finished building prefab.
 
-        if(buildMode && IsAllowedToPlace)
+        if (buildMode && 
+            IsAllowedToPlace && 
+            ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
         {
             Instantiate(structure_SO.structurePrefab, transform.position, transform.rotation);
             //add xp and subtract gold.
-            print("Built " + structure_SO.structureName + ". Subtracted " + structure_SO.goldCost + " gold coins and added " + structure_SO.expValue + " exp.");
+            print("Built " + structure_SO.structureName + ". Subtracted todo continue this"); //+ structure_SO.goldCost + " gold coins and added " + structure_SO.expValue + " exp.");
         }
         //else
             //feedback that it's not allowed.
