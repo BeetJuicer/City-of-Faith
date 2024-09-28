@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/Main Menu.unity
+    guid: 8c6286fa1b7b8b14f9d8efb0f21b85b2
+  - enabled: 0
     path: Assets/Scenes/Gino Touch Scene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/GinoWorld.unity
+    guid: 4cebb10a63384a944967513a9893b84d
   m_configObjects: {}
