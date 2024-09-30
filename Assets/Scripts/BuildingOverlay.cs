@@ -69,7 +69,7 @@ public class BuildingOverlay : MonoBehaviour
     [Button]
     public void ToggleBuildMode()
     {
-        buildMode = !buildMode;
+        GameManager.Instance.ChangeGameState(GameState.Edit_Mode);
     }
 
     [Button]
@@ -78,7 +78,7 @@ public class BuildingOverlay : MonoBehaviour
         //also a bit temporary. Final will be to spawn a prefab that's in the growth phase. or in the building phase.
         //enough time passes by, it'll replace itself with a finished building prefab.
 
-        if (buildMode && 
+        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode && 
             IsAllowedToPlace && 
             ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public class Structure : MonoBehaviour
+public class Structure : MonoBehaviour, IClickableObject
 {
     [SerializeField] private Structure_SO structure_so;
 
@@ -21,10 +21,13 @@ public class Structure : MonoBehaviour
 
     private void DisplayUI()
     {
+        //UIManager.HUD.DisplayStructureUI(structure_so);
+        //TODO: Use UI manager.
         print("Display UI\n" + structure_so.structureName + ": " + structure_so.description);
     }
 
 
+    //temporary naughtyattributes button
     [Button]
     public void OnStructureClicked()
     {
@@ -35,5 +38,10 @@ public class Structure : MonoBehaviour
     public void OnDestroy()
     {
         //print("Destroyed " + structure_so.structureName + ". Returning " + structure_so.resellValue + " gold coins.");
+    }
+
+    public void OnObjectClicked()
+    {
+        DisplayUI();
     }
 }
