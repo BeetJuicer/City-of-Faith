@@ -14,9 +14,6 @@ public class BuildingOverlay : MonoBehaviour
     private int collidersInRange;
     [SerializeField] private int incrementalMovementUnits = 1;
 
-    //temporary value for testing with naughtyattributes
-    private bool buildMode;
-
     private void Awake()
     {
         IsAllowedToPlace = true;
@@ -40,7 +37,7 @@ public class BuildingOverlay : MonoBehaviour
 
     private void OnRenderObject()
     {
-        if (buildMode)
+        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode)
             Graphics.DrawMesh(structure_SO.structurePrefab.GetComponent<MeshFilter>().sharedMesh, transform.position, transform.rotation, buildPreviewMaterial, 0);
     }
 
