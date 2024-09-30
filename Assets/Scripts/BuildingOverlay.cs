@@ -4,7 +4,7 @@ using UnityEngine;
 using NaughtyAttributes;
 
 
-public class BuildingOverlay : MonoBehaviour
+public class BuildingOverlay : MonoBehaviour, IDraggable
 {
     public bool IsAllowedToPlace { get; private set; }
     [SerializeField] private LayerMask whatIsGround;

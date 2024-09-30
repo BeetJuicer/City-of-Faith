@@ -19,8 +19,11 @@ public class Structure_SO : ScriptableObject
     public DateTime buildDuration;
     public int expGivenOnBuild;
 
-    //TODO: make a container?manager? that keeps track of each level's unlockables. maybe the townhall.
+    [Header("Town Stats")]
     public int townHallLevelRequirement;
+    public int numberOfCitizensAdded;
+
+    //TODO: make a container?manager? that keeps track of each level's unlockables. maybe the townhall.
     [Header("Build Cost")]
 
     [SerializedDictionary]

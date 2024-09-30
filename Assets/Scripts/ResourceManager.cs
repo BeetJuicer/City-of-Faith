@@ -21,6 +21,8 @@ public class ResourceManager : MonoBehaviour
     [SerializedDictionary] // serialize for now for debug purposes.
     private SerializedDictionary<Resource, int> playerResources;
     public int PlayerExp { get; private set; }
+    public int CitizenSatisfaction { get; private set; }
+    public int Population { get; private set; }
 
     private void Awake()
     {
