@@ -29,15 +29,8 @@ public class GameManager : MonoBehaviour
         CurrentGameState = state;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void ToggleBuildMode()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ChangeGameState(GameState.Edit_Mode);
     }
 }
