@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5099373656523348369}
   - component: {fileID: 6998710486273355099}
   - component: {fileID: 3552606619360823163}
+  - component: {fileID: 4050245763510684769}
   m_Layer: 0
   m_Name: Structure_PalmTreeBent
   m_TagString: Untagged
@@ -105,3 +106,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6, y: 7.112872, z: 6}
   m_Center: {x: 0, y: 3.556436, z: 0}
+--- !u!114 &4050245763510684769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800199060111772814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7df8812f4fe1c34aad2f1b0b583aad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  structure_so: {fileID: 11400000, guid: d6f2d15a35608b4489b99e0e8cf47e35, type: 2}
