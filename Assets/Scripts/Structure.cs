@@ -19,12 +19,16 @@ public class Structure : MonoBehaviour
         
     }
 
+    private void DisplayUI()
+    {
+        print("Display UI\n" + structure_so.structureName + ": " + structure_so.description);
+    }
 
 
     [Button]
     public void OnStructureClicked()
     {
-        print("Display UI\n" + structure_so.structureName + ": " + structure_so.description);
+        DisplayUI();
     }
 
     [Button]

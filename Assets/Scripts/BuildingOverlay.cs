@@ -67,13 +67,13 @@ public class BuildingOverlay : MonoBehaviour
 
     // Naughty Attributes methods.
     [Button]
-    private void ToggleBuildMode()
+    public void ToggleBuildMode()
     {
         buildMode = !buildMode;
     }
 
     [Button]
-    private void InstantiateBuilding()
+    public void InstantiateBuilding()
     {
         //also a bit temporary. Final will be to spawn a prefab that's in the growth phase. or in the building phase.
         //enough time passes by, it'll replace itself with a finished building prefab.
@@ -92,31 +92,31 @@ public class BuildingOverlay : MonoBehaviour
     }
 
     [Button]
-    private void RotateClockwise()
+    public void RotateClockwise()
     {
         transform.Rotate(new Vector3(0,45,0));
     }
 
     [Button]
-    private void MoveIncrementallyRight()
+    public void MoveIncrementallyRight()
     {
         transform.position += transform.right * incrementalMovementUnits;
     }
 
-    [Button] 
-    private void MoveIncrementallyLeft()
+    [Button]
+    public void MoveIncrementallyLeft()
     {
         transform.position -= transform.right * incrementalMovementUnits;
     }
 
     [Button]
-    private void MoveIncrementallyUp()
+    public void MoveIncrementallyUp()
     {
         transform.position += transform.forward * incrementalMovementUnits;
     }
 
     [Button]
-    private void MoveIncrementallyDown()
+    public void MoveIncrementallyDown()
     {
         transform.position -= transform.forward * incrementalMovementUnits;
     }
