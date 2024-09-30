@@ -11,8 +11,14 @@ public class PinchToZoomAndPan : MonoBehaviour
     private Camera mainCamera; // Reference to the main camera
     private float previousDistance; // Stores the previous frame's pinch distance
     private TouchControls controls; // Reference to the new input system
-
     private Coroutine zoomCoroutine;
+    private GameObject draggableObject;
+    private bool isDraggingBuilding = false; // Flag to check if a building is being dragged
+
+
+
+    // Store last known primary finger position for panning
+    private Vector2 lastPrimaryFingerPosition;
 
     private void Awake()
     {
@@ -23,15 +29,86 @@ public class PinchToZoomAndPan : MonoBehaviour
     private void OnEnable()
     {
         controls.Enable();
+        // Zoom detection
         controls.Touch.SecondaryTouchContact.started += _ => ZoomStart();
         controls.Touch.SecondaryTouchContact.canceled += _ => ZoomEnd();
+
+        // Press or Click detection
+        controls.Touch.PrimaryTouchPress.performed += ctx => OnPrimaryTouchPress();
+
+        // Hold detection
+        controls.Touch.PrimaryTouchHoldRelease.performed += ctx => OnPrimaryTouchHold();
+        controls.Touch.PrimaryTouchHoldRelease.canceled += ctx => OnPrimaryTouchHoldRelease();
     }
 
     private void OnDisable()
     {
         controls.Disable();
+        controls.Touch.PrimaryTouchPress.performed -= ctx => OnPrimaryTouchPress();
+        controls.Touch.PrimaryTouchHoldRelease.performed -= ctx => OnPrimaryTouchHold();
+        controls.Touch.PrimaryTouchHoldRelease.canceled -= ctx => OnPrimaryTouchHoldRelease();
         controls.Touch.SecondaryTouchContact.started -= _ => ZoomStart();
         controls.Touch.SecondaryTouchContact.canceled -= _ => ZoomEnd();
+    }
+
+    private void OnPrimaryTouchPress()
+    {
+        Debug.Log("Primary touch press detected");
+
+        // Get the touch position from the input system
+        Vector2 touchPosition = controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>();
+
+        // Convert the touch position to a ray
+        Ray ray = mainCamera.ScreenPointToRay(touchPosition);
+
+        // Store information about what the ray hits
+        RaycastHit hit;
+
+        // Perform the raycast and check if it hits something
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.TryGetComponent<IClickableObject>(out IClickableObject obj))
+            {
+               obj.OnObjectClicked();
+            }
+
+            if(hit.collider.TryGetComponent<IDraggable>(out IDraggable draggable)){
+                draggableObject = hit.collider.gameObject;
+            }
+        }
+        else
+        {
+            Debug.Log("No GameObject detected at this position.");
+        }
+    }
+
+    private void OnPrimaryTouchHold()
+    {
+        if (draggableObject != null)
+        {
+            isDraggingBuilding = true;
+            // Get the current touch position
+            Vector2 touchPosition = controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>();
+            Ray ray = mainCamera.ScreenPointToRay(touchPosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                // Move the selected object to follow the touch position on the XZ plane
+                Vector3 newPosition = new Vector3(hit.point.x, draggableObject.transform.position.y, hit.point.z);
+                draggableObject.transform.position = newPosition; // Update object's position
+
+                Debug.Log("Primary touch hold detected and object moved to follow finger.");
+            }
+        }
+    }
+
+    private void OnPrimaryTouchHoldRelease()
+    {
+        Debug.Log("Primary touch hold released");
+        // The building will settle on its last position, no need for additional logic
+        draggableObject = null; // Clear the selected object
+        isDraggingBuilding = false;
     }
 
     private void ZoomStart()
@@ -51,11 +128,67 @@ public class PinchToZoomAndPan : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        HandleSingleFingerPan();
+        // Check for the primary touch
+        if (controls.Touch.PrimaryTouchContact.ReadValue<float>() > 0)
+        {
+            OnPrimaryTouchHold(); // Call the hold method to update position continuously
+        }
+        else
+        {
+            OnPrimaryTouchHoldRelease(); // Call the release method when the touch ends
+        }
+
+    }
+
+    // Handle single-finger panning (dragging)
+    private void HandleSingleFingerPan()
+    {
+        // Check if we are currently dragging a building
+        if (isDraggingBuilding)
+        {
+            return; // Skip the panning logic if dragging a building
+        }
+
+        if (controls.Touch.PrimaryTouchContact.ReadValue<float>() > 0 && controls.Touch.SecondaryTouchContact.ReadValue<float>() == 0)
+            {
+                // Get the current position of the primary finger
+                Vector2 primaryFingerPosition = controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>();
+
+                // On first touch, initialize the last primary finger position
+                if (lastPrimaryFingerPosition == Vector2.zero)
+                {
+                    lastPrimaryFingerPosition = primaryFingerPosition;
+                    return;  // Skip this frame
+                }
+
+                // Calculate the delta (change) in position of the primary finger
+                Vector2 delta = primaryFingerPosition - lastPrimaryFingerPosition;
+
+                // Convert screen delta to world delta
+                Vector3 worldDelta = mainCamera.ScreenToWorldPoint(new Vector3(delta.x, delta.y, 0))
+                                     - mainCamera.ScreenToWorldPoint(Vector3.zero);
+
+                // Apply the movement to the camera position (panning)
+                mainCamera.transform.position -= worldDelta * panSpeed;
+
+                // Update the last known primary finger position
+                lastPrimaryFingerPosition = primaryFingerPosition;
+            }
+            else
+            {
+                // Reset the last known finger position when no touch is detected
+                lastPrimaryFingerPosition = Vector2.zero;
+            }
+    }
+
     IEnumerator ZoomDetection()
     {
         float previousDistance = 0f;
 
-        // Store initial finger positions for panning
+        // Store initial finger positions for panning and zooming
         Vector2 lastPrimaryFingerPosition = controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>();
         Vector2 lastSecondaryFingerPosition = controls.Touch.SecondaryFingerPosition.ReadValue<Vector2>();
 
@@ -111,7 +244,7 @@ public class PinchToZoomAndPan : MonoBehaviour
             Vector3 worldDelta = mainCamera.ScreenToWorldPoint(new Vector3(averageDelta.x, averageDelta.y, 0))
                                  - mainCamera.ScreenToWorldPoint(Vector3.zero);
 
-            // Apply the movement to the camera position (panning)
+            // Apply the movement to the camera position (panning while zooming)
             mainCamera.transform.position -= worldDelta * panSpeed;
 
             // Update previousDistance for the next loop iteration
@@ -121,7 +254,7 @@ public class PinchToZoomAndPan : MonoBehaviour
             lastPrimaryFingerPosition = primaryFingerPosition;
             lastSecondaryFingerPosition = secondaryFingerPosition;
 
-            yield return null; // Continue on the next frame
+            yield return null;
         }
     }
 }
