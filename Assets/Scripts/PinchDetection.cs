@@ -12,6 +12,7 @@ public class PinchToZoomAndPan : MonoBehaviour
     private float previousDistance; // Stores the previous frame's pinch distance
     private TouchControls controls; // Reference to the new input system
     private Coroutine zoomCoroutine;
+    private Coroutine dragCoroutine;
     private GameObject draggableObject;
     private bool isDraggingBuilding = false; // Flag to check if a building is being dragged
 
@@ -84,9 +85,40 @@ public class PinchToZoomAndPan : MonoBehaviour
 
     private void OnPrimaryTouchHold()
     {
-        if (draggableObject != null)
+        if (draggableObject != null && !isDraggingBuilding)
         {
             isDraggingBuilding = true;
+            // Start the dragging coroutine if it's not already running
+            if (dragCoroutine == null)
+            {
+                dragCoroutine = StartCoroutine(DragObject());
+            }
+
+            Debug.Log("Primary touch hold detected, object is being dragged.");
+        }
+    }
+
+    private void OnPrimaryTouchHoldRelease()
+    {
+        // Stop the dragging coroutine when the touch is released
+        if (dragCoroutine != null)
+        {
+            StopCoroutine(dragCoroutine);
+            dragCoroutine = null;
+        }
+
+        // Reset draggable object
+        draggableObject = null;
+        isDraggingBuilding = false;
+
+        Debug.Log("Primary touch hold released, object settled.");
+    }
+
+    // Coroutine to update the object's position while being held
+    IEnumerator DragObject()
+    {
+        while (isDraggingBuilding && draggableObject != null)
+        {
             // Get the current touch position
             Vector2 touchPosition = controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>();
             Ray ray = mainCamera.ScreenPointToRay(touchPosition);
@@ -97,19 +129,13 @@ public class PinchToZoomAndPan : MonoBehaviour
                 // Move the selected object to follow the touch position on the XZ plane
                 Vector3 newPosition = new Vector3(hit.point.x, draggableObject.transform.position.y, hit.point.z);
                 draggableObject.transform.position = newPosition; // Update object's position
-
-                Debug.Log("Primary touch hold detected and object moved to follow finger.");
             }
+
+            // Wait for the next frame to continue the coroutine
+            yield return null;
         }
     }
 
-    private void OnPrimaryTouchHoldRelease()
-    {
-        Debug.Log("Primary touch hold released");
-        // The building will settle on its last position, no need for additional logic
-        draggableObject = null; // Clear the selected object
-        isDraggingBuilding = false;
-    }
 
     private void ZoomStart()
     {
@@ -131,16 +157,6 @@ public class PinchToZoomAndPan : MonoBehaviour
     private void Update()
     {
         HandleSingleFingerPan();
-        // Check for the primary touch
-        if (controls.Touch.PrimaryTouchContact.ReadValue<float>() > 0)
-        {
-            OnPrimaryTouchHold(); // Call the hold method to update position continuously
-        }
-        else
-        {
-            OnPrimaryTouchHoldRelease(); // Call the release method when the touch ends
-        }
-
     }
 
     // Handle single-finger panning (dragging)

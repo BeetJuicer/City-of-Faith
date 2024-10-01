@@ -142,7 +142,7 @@ public partial class @TouchControls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""8631735d-beb3-485e-a548-92a0d2ad87b3"",
                     ""path"": ""<Touchscreen>/Press"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Hold(duration=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PrimaryTouchHoldRelease"",
