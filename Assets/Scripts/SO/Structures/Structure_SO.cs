@@ -5,7 +5,7 @@ using System;
 using AYellowpaper.SerializedCollections;
 
 
-[CreateAssetMenu(menuName = "Structure Scriptable Object")]
+[CreateAssetMenu(menuName = "Scriptable Objects/Structure_SO")]
 public class Structure_SO : ScriptableObject
 {
     public string structureName;
@@ -32,5 +32,11 @@ public class Structure_SO : ScriptableObject
     [Tooltip("The resell value must be less than the cost.")]
     [SerializedDictionary]
     public SerializedDictionary<Resource, int> resourcesReturnedOnResell;
+
+    [Header("Time Needed")]
+    public int BuildDays;
+    public int BuildHours;
+    public int BuildMinutes;
+    public int BuildSeconds;
 
 }
