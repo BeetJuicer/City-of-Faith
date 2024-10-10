@@ -13,7 +13,7 @@ public class Structure : MonoBehaviour, IClickableObject
     }
 
     private BuildingState buildingState;
-    [SerializeField] private Structure_SO structure_so;
+    [SerializeField] protected Structure_SO structure_so;
     [Tooltip("The exact time the building was instantiated.")]// problems if user changes date and time of device.
     private DateTime timeInstantiated;
     private DateTime buildFinishedTime;
@@ -38,13 +38,14 @@ public class Structure : MonoBehaviour, IClickableObject
         {
             case BuildingState.Built:
                 {
-                    //shit here
+                    // shit here
                     // decor does nothing
                     // plants 
                     break;
                 }
             case BuildingState.InProgress:
                 {
+                    print("I'm being built fuck. Time left: " + buildFinishedTime.Subtract(DateTime.Now));
                     if (DateTime.Now.Equals(buildFinishedTime))
                     {
                         buildingState = BuildingState.Built;

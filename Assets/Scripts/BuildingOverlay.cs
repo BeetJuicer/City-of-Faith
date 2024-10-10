@@ -75,8 +75,8 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         //also a bit temporary. Final will be to spawn a prefab that's in the growth phase. or in the building phase.
         //enough time passes by, it'll replace itself with a finished building prefab.
 
-        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode && 
-            IsAllowedToPlace && 
+        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode &&
+            IsAllowedToPlace &&
             ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
         {
             Instantiate(structure_SO.structurePrefab, transform.position, transform.rotation);

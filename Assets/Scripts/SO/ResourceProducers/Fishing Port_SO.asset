@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 527de39e89613f5479d6cb532e82449c, type: 3}
-  m_Name: Fishing Port
+  m_Name: Fishing Port_SO
   m_EditorClassIdentifier: 
   resource_SO: {fileID: 11400000, guid: 177a11f5a7feab746a16a125346cdad7, type: 2}
   baseAmountPerClaim: 150

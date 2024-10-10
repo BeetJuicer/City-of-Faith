@@ -43,6 +43,7 @@ public class ResourceProducer : Structure
         }
     }
 
+    //
     public void ClaimResources()
     {
         ResourceManager.Instance.AddToPlayerResources(resourceProducer_SO.resource_SO.resourceType, amountPerClaim);
