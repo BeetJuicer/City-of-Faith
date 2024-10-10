@@ -56,6 +56,7 @@ public class Structure : MonoBehaviour, IClickableObject
         {
             case BuildingState.Built:
                 {
+                    print("Bitch I'm built");
                     // shit here
                     // decor does nothing
                     // plants 
@@ -63,8 +64,9 @@ public class Structure : MonoBehaviour, IClickableObject
                 }
             case BuildingState.InProgress:
                 {
+                    print("Remaining Time: " + buildFinishedTime.Subtract(DateTime.Now));
                     // EXIT STATE.
-                    if (DateTime.Now.Equals(buildFinishedTime))
+                    if (DateTime.Now > buildFinishedTime)
                     {
                         buildingState = BuildingState.Built;
                         //TODO: VFX: Add vfx from object pool here.
