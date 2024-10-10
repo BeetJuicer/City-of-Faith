@@ -25,6 +25,8 @@ public class Structure : MonoBehaviour, IClickableObject
 
     private void Start()
     {
+        //TODO: change to online method
+        timeInstantiated = DateTime.Now;
         buildFinishedTime = timeInstantiated.AddDays(structure_so.BuildDays)
                                             .AddHours(structure_so.BuildHours)
                                             .AddMinutes(structure_so.BuildMinutes)
@@ -45,10 +47,11 @@ public class Structure : MonoBehaviour, IClickableObject
                 }
             case BuildingState.InProgress:
                 {
-                    print("I'm being built fuck. Time left: " + buildFinishedTime.Subtract(DateTime.Now));
                     if (DateTime.Now.Equals(buildFinishedTime))
                     {
                         buildingState = BuildingState.Built;
+                        //change to normal prefab
+
                     }
                     break;
                 }

@@ -12,19 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b092c9d275587f54e8c29ae9d465cee2, type: 3}
   m_Name: RailwayStation_SO
   m_EditorClassIdentifier: 
-  structureName: 
-  description: 
-  structurePrefab: {fileID: 0}
-  inProgressBuildingPrefab: {fileID: 0}
-  displayImage: {fileID: 0}
-  expGivenOnBuild: 0
-  townHallLevelRequirement: 0
-  numberOfCitizensAdded: 0
+  structureName: Railway Station
+  description: A railway station for jesus christ. Provides happiness to citizens.
+  structurePrefab: {fileID: 6403326413462050355, guid: 1674c326d36a172498cdaec454d5143d,
+    type: 3}
+  inProgressBuildingPrefab: {fileID: 6403326413462050355, guid: 1674c326d36a172498cdaec454d5143d,
+    type: 3}
+  displayImage: {fileID: 21300000, guid: 37317cc5dff4c9f4c9b841166a6b6593, type: 3}
+  expGivenOnBuild: 500
+  townHallLevelRequirement: 3
+  numberOfCitizensAdded: 5
   resourcesRequired:
-    _serializedList: []
+    _serializedList:
+    - Key: 2
+      Value: 0
   resourcesReturnedOnResell:
-    _serializedList: []
+    _serializedList:
+    - Key: 0
+      Value: 0
   BuildDays: 0
-  BuildHours: 0
-  BuildMinutes: 0
+  BuildHours: 12
+  BuildMinutes: 30
   BuildSeconds: 0
