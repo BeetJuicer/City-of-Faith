@@ -38,7 +38,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     private void OnRenderObject()
     {
         if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode)
-            Graphics.DrawMesh(structure_SO.structurePrefab.GetComponent<MeshFilter>().sharedMesh, transform.position, transform.rotation, buildPreviewMaterial, 0);
+            Graphics.DrawMesh(structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh, transform.position, transform.rotation, buildPreviewMaterial, 0);
     }
 
     private void OnTriggerEnter(Collider other)

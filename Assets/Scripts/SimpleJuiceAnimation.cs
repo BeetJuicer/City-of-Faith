@@ -6,13 +6,11 @@ using DG.Tweening;
 public class SimpleJuiceAnimation : MonoBehaviour
 {
     // Adjust these values to control the squash and stretch effect
-    private float squashScale = 0.8f;
-    private float stretchScale = 1.2f;
-    private float duration = 0.5f;
+    [SerializeField] private float duration = 0.5f;
 
     private Vector3 originalScale;
-    [SerializeField] private Vector3 scaleFrom;
-    [SerializeField] private Vector3 scaleTo;
+    [SerializeField] private Vector3 scaleFrom = new Vector3(0.7f, 0.7f, 0.7f);
+    [SerializeField] private Vector3 scaleTo = new Vector3(0.9f, 0.9f, 0.9f);
 
     void Start()
     {

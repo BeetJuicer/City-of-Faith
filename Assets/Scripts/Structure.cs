@@ -6,6 +6,9 @@ using System;
 
 public class Structure : MonoBehaviour, IClickableObject
 {
+    [SerializeField] protected Structure_SO structure_so;
+
+    //Building State
     private enum BuildingState
     {
         InProgress,
@@ -13,8 +16,14 @@ public class Structure : MonoBehaviour, IClickableObject
     }
 
     private BuildingState buildingState;
-    [SerializeField] protected Structure_SO structure_so;
-    [Tooltip("The exact time the building was instantiated.")]// problems if user changes date and time of device.
+
+    // In progress and built components
+    private GameObject inProgressVisual;
+    private GameObject builtVisual;
+    private const string IN_PROGRESS_VISUAL_NAME = "InProgressVisual";
+    private const string BUILT_VISUAL_NAME = "BuiltVisual";
+
+    [Tooltip("The exact time the building was instantiated.")]//TODO: problems if user changes date and time of device.
     private DateTime timeInstantiated;
     private DateTime buildFinishedTime;
 
@@ -25,6 +34,13 @@ public class Structure : MonoBehaviour, IClickableObject
 
     private void Start()
     {
+        // ENTER IN-PROGRESS STATE
+        inProgressVisual = transform.Find(IN_PROGRESS_VISUAL_NAME).gameObject;
+        builtVisual = transform.Find(BUILT_VISUAL_NAME).gameObject;
+
+        Debug.Assert(inProgressVisual != null, "In Progress Visual not found. If the Visual exists, check the spelling.");
+        Debug.Assert(builtVisual != null, "Built Visual not found. If the Visual exists, check the spelling.");
+
         //TODO: change to online method
         timeInstantiated = DateTime.Now;
         buildFinishedTime = timeInstantiated.AddDays(structure_so.BuildDays)
@@ -47,11 +63,14 @@ public class Structure : MonoBehaviour, IClickableObject
                 }
             case BuildingState.InProgress:
                 {
+                    // EXIT STATE.
                     if (DateTime.Now.Equals(buildFinishedTime))
                     {
                         buildingState = BuildingState.Built;
+                        //TODO: VFX: Add vfx from object pool here.
                         //change to normal prefab
-
+                        inProgressVisual.SetActive(false);
+                        builtVisual.SetActive(true);
                     }
                     break;
                 }
