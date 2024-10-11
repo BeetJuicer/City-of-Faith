@@ -4,18 +4,18 @@ using UnityEngine;
 using NaughtyAttributes;
 using System;
 
-public class Structure : MonoBehaviour, IClickableObject
+public class Structure : MonoBehaviour
 {
     [SerializeField] protected Structure_SO structure_so;
 
     //Building State
-    private enum BuildingState
+    public enum BuildingState
     {
         InProgress,
         Built
     }
 
-    private BuildingState buildingState;
+    public BuildingState buildingState { get; private set; }
 
     // In progress and built components
     private GameObject inProgressVisual;
@@ -56,7 +56,6 @@ public class Structure : MonoBehaviour, IClickableObject
         {
             case BuildingState.Built:
                 {
-                    print("Bitch I'm built");
                     // shit here
                     // decor does nothing
                     // plants 
@@ -65,14 +64,21 @@ public class Structure : MonoBehaviour, IClickableObject
             case BuildingState.InProgress:
                 {
                     print("Remaining Time: " + buildFinishedTime.Subtract(DateTime.Now));
+
                     // EXIT STATE.
                     if (DateTime.Now > buildFinishedTime)
                     {
-                        buildingState = BuildingState.Built;
+                        // -- Resource Changes
+                        print("TODO: Add " + structure_so.expGivenOnBuild + " exp!!");
+                        print("TODO: Add " + structure_so.numberOfCitizensAdded + " citizens to population!!");
+
+                        // -- Visual Changes
                         //TODO: VFX: Add vfx from object pool here.
-                        //change to normal prefab
                         inProgressVisual.SetActive(false);
                         builtVisual.SetActive(true);
+
+                        // Exit state.
+                        buildingState = BuildingState.Built;
                     }
                     break;
                 }
@@ -115,10 +121,5 @@ public class Structure : MonoBehaviour, IClickableObject
     public void OnDestroy()
     {
         //print("Destroyed " + structure_so.structureName + ". Returning " + structure_so.resellValue + " gold coins.");
-    }
-
-    public void OnObjectClicked()
-    {
-        DisplayUI();
     }
 }

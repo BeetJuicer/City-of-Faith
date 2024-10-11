@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Fishing Port_SO
   m_EditorClassIdentifier: 
   resource_SO: {fileID: 11400000, guid: 177a11f5a7feab746a16a125346cdad7, type: 2}
-  baseAmountPerClaim: 150
-  daysToClaim: 1
-  hoursToClaim: 12
-  minutesToClaim: 50
-  secondsToClaim: 0
+  baseAmountPerClaim: 500
+  daysToClaim: 0
+  hoursToClaim: 0
+  minutesToClaim: 0
+  secondsToClaim: 2

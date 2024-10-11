@@ -131,36 +131,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 319856847180167389, guid: 38a4c54ddd4291143b9eceb85e21e452,
-        type: 3}
-      propertyPath: scaleTo.x
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 319856847180167389, guid: 38a4c54ddd4291143b9eceb85e21e452,
-        type: 3}
-      propertyPath: scaleTo.y
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 319856847180167389, guid: 38a4c54ddd4291143b9eceb85e21e452,
-        type: 3}
-      propertyPath: scaleTo.z
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 319856847180167389, guid: 38a4c54ddd4291143b9eceb85e21e452,
-        type: 3}
-      propertyPath: scaleFrom.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 319856847180167389, guid: 38a4c54ddd4291143b9eceb85e21e452,
-        type: 3}
-      propertyPath: scaleFrom.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 319856847180167389, guid: 38a4c54ddd4291143b9eceb85e21e452,
-        type: 3}
-      propertyPath: scaleFrom.z
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 2465726488859176464, guid: 38a4c54ddd4291143b9eceb85e21e452,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -221,15 +191,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -7270595787915043477, guid: 38a4c54ddd4291143b9eceb85e21e452, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2986965731713266858, guid: 38a4c54ddd4291143b9eceb85e21e452,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1237333604}
+      addedObject: {fileID: 1237333602}
   m_SourcePrefab: {fileID: 100100000, guid: 38a4c54ddd4291143b9eceb85e21e452, type: 3}
 --- !u!1001 &132871659
 PrefabInstance:
@@ -335,7 +304,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
-  structure_SO: {fileID: 11400000, guid: 00aa739dc80a3e449a1530394cd17755, type: 2}
+  structure_SO: {fileID: 11400000, guid: 7383375d1eba73b4b91c918f8e1d637a, type: 2}
   buildPreviewMaterial: {fileID: 2100000, guid: 6007be16c80cbe04b8c9aa060296b280,
     type: 2}
   incrementalMovementUnits: 5
@@ -502,7 +471,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 100200513}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1237333604
+--- !u!114 &1237333602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -514,9 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f43381d34d6a254a8eb23899bad8a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  structure_so: {fileID: 11400000, guid: 7383375d1eba73b4b91c918f8e1d637a, type: 2}
-  resourceProducer_SO: {fileID: 11400000, guid: 478d16a3b5c455a428d7dae3d73caf9f,
-    type: 2}
+  resourceProducer_SO: {fileID: 0}
 --- !u!1 &1333094880
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,14 +528,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a3f792b5cc7514abd30b24d5d605b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerResources:
+  playerFoodResources:
     _serializedList:
     - Key: 0
-      Value: 0
+      Value: 10
     - Key: 1
-      Value: 0
+      Value: 10
     - Key: 2
-      Value: 0
+      Value: 10
   playerCurrencies:
     _serializedList:
     - Key: 0

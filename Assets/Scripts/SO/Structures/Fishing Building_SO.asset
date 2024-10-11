@@ -14,17 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Fishery
   description: A building that produces fish for food.
-  structurePrefab: {fileID: 1160180611478981076, guid: 28c5feb91521acb438135d1ac793ee23,
+  structurePrefab: {fileID: 6403326413462050355, guid: 6ff6032ecb03db241a1916093d3f56b8,
     type: 3}
-  inProgressBuildingPrefab: {fileID: 0}
   displayImage: {fileID: 0}
   expGivenOnBuild: 100
   townHallLevelRequirement: 5
+  numberOfCitizensAdded: 10
+  currencyRequired:
+    _serializedList:
+    - Key: 0
+      Value: 10000
   resourcesRequired:
-    _serializedList:
-    - Key: 0
-      Value: 2000
+    _serializedList: []
   resourcesReturnedOnResell:
-    _serializedList:
-    - Key: 0
-      Value: 700
+    _serializedList: []
+  BuildDays: 0
+  BuildHours: 0
+  BuildMinutes: 0
+  BuildSeconds: 1

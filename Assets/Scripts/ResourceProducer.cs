@@ -2,57 +2,133 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using NaughtyAttributes;
 
-public class ResourceProducer : Structure
+[RequireComponent(typeof(Structure))]
+public class ResourceProducer : MonoBehaviour, IClickableObject
 {
-    //timesinceproductionstarted
-    //timeleft
-    //on exit, store time left. or
+    private Structure structure;
 
-    //store time when production starts, check for time when it will end.
-    //resource scriptable object.
+    private enum ResourceState
+    {
+        Producing,
+        ReadyToClaim,
+    }
+
+    private ResourceState resourceState;
+
     [SerializeField] private ResourceProducer_SO resourceProducer_SO;
     private int amountPerClaim;
-
-    public bool IsReadyToClaim { get; private set; }
 
     private TimeSpan timePerClaim;
     private DateTime startTime;
     private DateTime finishTime;
 
-    private TimeSpan timeLeftToClaim;
+    //temp maybe
+    private bool structureReady = false;
 
-    //Timer
+    // Timer
     private float updateTimer;
 
+    private void Awake()
+    {
+        resourceState = ResourceState.Producing;
+    }
 
     private void Start()
     {
+        structure = GetComponent<Structure>();
+
         amountPerClaim = resourceProducer_SO.baseAmountPerClaim;
         timePerClaim = resourceProducer_SO.baseTimeNeededPerClaim;
     }
 
     private void Update()
     {
-        // Checking only once per second.
-        if(Time.time > (updateTimer + 1))
+        // Checking only twice per second.
+        if (Time.time <= (updateTimer + 0.5f))
         {
-            updateTimer = Time.time;
-            timeLeftToClaim = finishTime - DateTime.Now;
-            IsReadyToClaim = timeLeftToClaim <= TimeSpan.Zero;
+            return;
+        }
+
+        updateTimer = Time.time;
+
+        // Only start production when built.
+        if (structure.buildingState == Structure.BuildingState.InProgress)
+        {
+            return;
+        }
+        else if (!structureReady)
+        {
+            structureReady = true;
+            startTime = DateTime.Now;
+            finishTime = DateTime.Now.Add(timePerClaim);
+        }
+
+        // State handling
+        switch (resourceState)
+        {
+            case ResourceState.ReadyToClaim:
+                {
+                    // nothing here.
+                    print("Ready to Claim!!");
+                    break;
+                }
+            case ResourceState.Producing:
+                {
+                    TimeSpan timeLeftToClaim = finishTime - DateTime.Now;
+                    print("Producing... " + timeLeftToClaim + " seconds left");
+                    if (timeLeftToClaim <= TimeSpan.Zero)
+                    {
+                        resourceState = ResourceState.ReadyToClaim;
+                    }
+
+                    break;
+                }
+            default:
+                {
+                    print("Unhandled Resource State.");
+                    break;
+                }
         }
     }
 
-    //
     public void ClaimResources()
     {
-        ResourceManager.Instance.AddToPlayerResources(resourceProducer_SO.resource_SO.resourceType, amountPerClaim);
+        print("Claimed " + amountPerClaim + resourceProducer_SO.resource_SO.resourceType + "!");
+        ResourceManager.Instance.AddToPlayerResources(FoodResource.Fish, amountPerClaim);
+
         startTime = DateTime.Now;
         finishTime = startTime.Add(timePerClaim);
+
+        resourceState = ResourceState.Producing;
     }
 
     private void OnApplicationQuit()
     {
         //Store the time here.
+    }
+
+    [Button]
+    public void OnObjectClicked()
+    {
+        switch (resourceState)
+        {
+            case ResourceState.ReadyToClaim:
+                {
+                    ClaimResources();
+                    break;
+                }
+            case ResourceState.Producing:
+                {
+                    print("In progress");
+                    break;
+                }
+            default:
+                {
+                    print("Unhandled Resource State.");
+                    break;
+                }
+        }
     }
 }

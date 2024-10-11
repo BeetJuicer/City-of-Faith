@@ -6,7 +6,7 @@ using System;
 [CreateAssetMenu(menuName = "Scriptable Objects/Resource Producer_SO")]
 public class ResourceProducer_SO : ScriptableObject
 {
-    public Resource_SO resource_SO;
+    public FoodResource_SO resource_SO;
 
     public int baseAmountPerClaim;
     [Header("Time Needed Per Claim")]

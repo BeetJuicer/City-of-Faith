@@ -10,13 +10,14 @@ public enum Currency
     Glory,
 }
 
-public enum Resource
+public enum FoodResource
 {
     Fish,
     Meat,
     Plant,
     //pelts, stone, wood
 }
+
 
 public class ResourceManager : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class ResourceManager : MonoBehaviour
 
     // serialize for now for debug purposes.
     [SerializedDictionary] 
-    [SerializeField] private SerializedDictionary<Resource, int> playerResources = new SerializedDictionary<Resource, int>();
+    [SerializeField] private SerializedDictionary<FoodResource, int> playerFoodResources = new SerializedDictionary<FoodResource, int>();
 
     // serialize for now for debug purposes.
     [SerializedDictionary]
@@ -46,17 +47,13 @@ public class ResourceManager : MonoBehaviour
     {
         if (_instance == null)
         {
-            _instance = new ResourceManager();
-        }
-        else
-        {
             _instance = this;
         }
     }
 
-    public void AddToPlayerResources(Resource type, int amount)
+    public void AddToPlayerResources(FoodResource type, int amount)
     {
-        playerResources[type] += amount;
+        playerFoodResources[type] += amount;
         CalculateFoodStash();
     }
 
@@ -78,16 +75,16 @@ public class ResourceManager : MonoBehaviour
         return HasEnough(cost, playerCurrencies);
     }
 
-    public bool HasEnoughResources(Dictionary<Resource, int> cost)
+    public bool HasEnoughResources(Dictionary<FoodResource, int> cost)
     {
-        return HasEnough(cost, playerResources);
+        return HasEnough(cost, playerFoodResources);
     }
 
     public int CalculateFoodStash()
     {
-        FoodStashAmount = playerResources[Resource.Fish] +
-                          playerResources[Resource.Meat] +
-                          playerResources[Resource.Plant];
+        FoodStashAmount = playerFoodResources[FoodResource.Fish] +
+                          playerFoodResources[FoodResource.Meat] +
+                          playerFoodResources[FoodResource.Plant];
 
         return FoodStashAmount;
     }

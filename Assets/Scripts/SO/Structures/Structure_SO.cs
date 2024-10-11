@@ -12,7 +12,6 @@ public class Structure_SO : ScriptableObject
     [TextArea]
     public string description;
     public GameObject structurePrefab;
-    public GameObject inProgressBuildingPrefab;
     public Sprite displayImage;
 
     //TODO: maybe change the datatype. temporary for now.
@@ -27,11 +26,14 @@ public class Structure_SO : ScriptableObject
     [Header("Build Cost")]
 
     [SerializedDictionary]
-    public SerializedDictionary<Resource, int> resourcesRequired;
+    public SerializedDictionary<Currency, int> currencyRequired;
+
+    [SerializedDictionary]
+    public SerializedDictionary<FoodResource, int> resourcesRequired;
 
     [Tooltip("The resell value must be less than the cost.")]
     [SerializedDictionary]
-    public SerializedDictionary<Resource, int> resourcesReturnedOnResell;
+    public SerializedDictionary<FoodResource, int> resourcesReturnedOnResell;
 
     [Header("Time Needed")]
     public int BuildDays;

@@ -72,16 +72,15 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     [Button]
     public void InstantiateBuilding()
     {
-        //also a bit temporary. Final will be to spawn a prefab that's in the growth phase. or in the building phase.
-        //enough time passes by, it'll replace itself with a finished building prefab.
-
         if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode &&
             IsAllowedToPlace &&
             ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
         {
             Instantiate(structure_SO.structurePrefab, transform.position, transform.rotation);
+
             //add xp and subtract gold.
-            print("Built " + structure_SO.structureName + ". Subtracted todo continue this"); //+ structure_SO.goldCost + " gold coins and added " + structure_SO.expValue + " exp.");
+            print("TODO: Built " + structure_SO.structureName + ". Subtracted " + structure_SO.currencyRequired);
+            print("TODO: Built " + structure_SO.structureName + ". Subtracted " + structure_SO.resourcesRequired);
         }
         //else
             //feedback that it's not allowed.
@@ -91,7 +90,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     [Button]
     public void RotateClockwise()
     {
-        transform.Rotate(new Vector3(0,45,0));
+        transform.Rotate(new Vector3(0, 45, 0));
     }
 
     [Button]
