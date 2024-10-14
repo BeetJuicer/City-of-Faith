@@ -53,6 +53,8 @@ public class ResourceManager : MonoBehaviour
 
     public void AddToPlayerResources(FoodResource type, int amount)
     {
+        print("Added " + amount + " units of " + type + " to storage!");
+
         playerFoodResources[type] += amount;
         CalculateFoodStash();
     }

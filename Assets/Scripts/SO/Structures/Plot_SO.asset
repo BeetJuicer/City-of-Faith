@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b092c9d275587f54e8c29ae9d465cee2, type: 3}
+  m_Name: Plot_SO
+  m_EditorClassIdentifier: 
+  structureName: Plot
+  description: A plot of land. Used to grow crops for food.
+  structurePrefab: {fileID: 8699902465094047844, guid: 47eade9f76f5bf045a0637afe1702678,
+    type: 3}
+  displayImage: {fileID: 0}
+  expGivenOnBuild: 0
+  townHallLevelRequirement: 0
+  numberOfCitizensAdded: 0
+  currencyRequired:
+    _serializedList:
+    - Key: 0
+      Value: 120
+  resourcesRequired:
+    _serializedList:
+    - Key: 0
+      Value: 0
+  resourcesReturnedOnResell:
+    _serializedList: []
+  BuildDays: 0
+  BuildHours: 0
+  BuildMinutes: 0
+  BuildSeconds: 3

@@ -22,7 +22,6 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
     private int amountPerClaim;
 
     private TimeSpan timePerClaim;
-    private DateTime startTime;
     private DateTime finishTime;
 
     // Timer
@@ -90,8 +89,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
 
     private void StartProduction()
     {
-        startTime = DateTime.Now;
-        finishTime = startTime.Add(timePerClaim);
+        finishTime = DateTime.Now.Add(timePerClaim);
 
         resourceState = ProducerState.Producing;
     }
