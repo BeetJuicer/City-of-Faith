@@ -9,13 +9,14 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
 {
     private Structure structure;
 
-    private enum ResourceState
+    private enum ProducerState
     {
+        Waiting,
         Producing,
         ReadyToClaim,
     }
 
-    private ResourceState resourceState;
+    private ProducerState resourceState;
 
     [SerializeField] private ResourceProducer_SO resourceProducer_SO;
     private int amountPerClaim;
@@ -24,21 +25,19 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
     private DateTime startTime;
     private DateTime finishTime;
 
-    //temp maybe
-    private bool structureReady = false;
-
     // Timer
     private float updateTimer;
 
     private void Awake()
     {
-        resourceState = ResourceState.Producing;
+        resourceState = ProducerState.Producing;
     }
 
     private void Start()
     {
         structure = GetComponent<Structure>();
 
+        //Keep a base amount per claim in case leveling up buildings is possible.
         amountPerClaim = resourceProducer_SO.baseAmountPerClaim;
         timePerClaim = resourceProducer_SO.baseTimeNeededPerClaim;
     }
@@ -46,41 +45,37 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
     private void Update()
     {
         // Checking only twice per second.
-        if (Time.time <= (updateTimer + 0.5f))
+        if (Time.time <= updateTimer)
         {
             return;
         }
 
-        updateTimer = Time.time;
-
-        // Only start production when built.
-        if (structure.buildingState == Structure.BuildingState.InProgress)
-        {
-            return;
-        }
-        else if (!structureReady)
-        {
-            structureReady = true;
-            startTime = DateTime.Now;
-            finishTime = DateTime.Now.Add(timePerClaim);
-        }
+        updateTimer = Time.time + 0.5f;
 
         // State handling
         switch (resourceState)
         {
-            case ResourceState.ReadyToClaim:
+            case ProducerState.Waiting:
+                {
+                    if (structure.buildingState == Structure.BuildingState.Built)
+                    {
+                        StartProduction();
+                    }
+                    break;
+                }
+            case ProducerState.ReadyToClaim:
                 {
                     // nothing here.
                     print("Ready to Claim!!");
                     break;
                 }
-            case ResourceState.Producing:
+            case ProducerState.Producing:
                 {
                     TimeSpan timeLeftToClaim = finishTime - DateTime.Now;
                     print("Producing... " + timeLeftToClaim + " seconds left");
                     if (timeLeftToClaim <= TimeSpan.Zero)
                     {
-                        resourceState = ResourceState.ReadyToClaim;
+                        resourceState = ProducerState.ReadyToClaim;
                     }
 
                     break;
@@ -93,20 +88,25 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
         }
     }
 
+    private void StartProduction()
+    {
+        startTime = DateTime.Now;
+        finishTime = startTime.Add(timePerClaim);
+
+        resourceState = ProducerState.Producing;
+    }
+
     public void ClaimResources()
     {
         print("Claimed " + amountPerClaim + resourceProducer_SO.resource_SO.resourceType + "!");
         ResourceManager.Instance.AddToPlayerResources(FoodResource.Fish, amountPerClaim);
-
-        startTime = DateTime.Now;
-        finishTime = startTime.Add(timePerClaim);
-
-        resourceState = ResourceState.Producing;
+        StartProduction();
     }
+
 
     private void OnApplicationQuit()
     {
-        //Store the time here.
+        //Save function here.
     }
 
     [Button]
@@ -114,12 +114,17 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
     {
         switch (resourceState)
         {
-            case ResourceState.ReadyToClaim:
+            case ProducerState.Waiting:
+                {
+                    structure.DisplayBuildingState();
+                    break;
+                }
+            case ProducerState.ReadyToClaim:
                 {
                     ClaimResources();
                     break;
                 }
-            case ResourceState.Producing:
+            case ProducerState.Producing:
                 {
                     print("In progress");
                     break;

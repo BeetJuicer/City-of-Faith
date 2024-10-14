@@ -4,6 +4,9 @@ using UnityEngine;
 using NaughtyAttributes;
 using System;
 
+/*
+ This class handles the building progress of a structure.
+ */
 public class Structure : MonoBehaviour
 {
     [SerializeField] protected Structure_SO structure_so;
@@ -63,7 +66,6 @@ public class Structure : MonoBehaviour
                 }
             case BuildingState.InProgress:
                 {
-                    print("Remaining Time: " + buildFinishedTime.Subtract(DateTime.Now));
 
                     // EXIT STATE.
                     if (DateTime.Now > buildFinishedTime)
@@ -88,38 +90,9 @@ public class Structure : MonoBehaviour
         }
     }
 
-
-    private void DisplayUI()
+    public void DisplayBuildingState()
     {
-        //UIManager.HUD.DisplayStructureUI(structure_so, buildState);
-        //TODO: Use UI manager.
-        switch (buildingState)
-        {
-            case BuildingState.Built:
-                {
-
-                    break;
-                }
-            case BuildingState.InProgress:
-                {
-                    print("Time left until built: " + buildFinishedTime.Subtract(timeInstantiated).ToString());
-                    break;
-                }
-        }
-
-        print("Display UI\n" + structure_so.structureName + ": " + structure_so.description);
-    }
-
-    //temporary naughtyattributes button
-    [Button]
-    public void OnStructureClicked()
-    {
-        DisplayUI();
-    }
-
-    [Button]
-    public void OnDestroy()
-    {
-        //print("Destroyed " + structure_so.structureName + ". Returning " + structure_so.resellValue + " gold coins.");
+        //TODO: replace with UI
+        print("Remaining Time: " + buildFinishedTime.Subtract(DateTime.Now));
     }
 }
