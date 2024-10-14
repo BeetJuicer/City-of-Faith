@@ -15,7 +15,7 @@ MonoBehaviour:
   cropName: Corn
   cropDetails: Husk of corn.
   cropImage: {fileID: 0}
-  cropPrefab: {fileID: 0}
+  cropPrefab: {fileID: 1000012844397656, guid: a97ffd75102541b46b48cffc80ef3da0, type: 3}
   amountPerClaim: 100
   daysToClaim: 0
   hoursToClaim: 0
