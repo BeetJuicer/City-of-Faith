@@ -22,6 +22,8 @@ public class Plot : MonoBehaviour, IClickableObject
     //TODO: Temporary serialize field for debugging
     [SerializeField] private Crop_SO crop_SO;
 
+    [SerializeField] private Transform cropVisualPos;
+
     private DateTime finishTime;
 
     // Timer
@@ -104,14 +106,17 @@ public class Plot : MonoBehaviour, IClickableObject
         // Success
         finishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
         plotState = PlotState.Growing;
+
+        //Visual update
+        //TODO: Possible optimization, use crop pools.
+        Instantiate(crop_SO.cropPrefab, cropVisualPos);
     }
 
     // TODO: Temporary button for testing only.
     [Button]
     public void Plant()
     {
-        finishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
-        plotState = PlotState.Growing;
+        Plant(crop_SO);
     }
 
     /// <summary>
@@ -155,6 +160,10 @@ public class Plot : MonoBehaviour, IClickableObject
     public void ClaimHarvest()
     {
         ResourceManager.Instance.AddToPlayerResources(FoodResource.Plant, crop_SO.amountPerClaim);
+
+        //TODO: Possible optimization, use crop pools. May be temporary depending on UI
+        Destroy(cropVisualPos.GetChild(0).gameObject);
+
         plotState = PlotState.Empty;
     }
 }
