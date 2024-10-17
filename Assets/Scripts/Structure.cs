@@ -10,6 +10,9 @@ using System;
 public class Structure : MonoBehaviour
 {
     [SerializeField] protected Structure_SO structure_so;
+    [SerializeField] private Structure_SO[] decorations;
+    [SerializeField] private Structure_SO[] buildings;
+
 
     //Building State
     public enum BuildingState
@@ -51,6 +54,24 @@ public class Structure : MonoBehaviour
                                             .AddMinutes(structure_so.BuildMinutes)
                                             .AddSeconds(structure_so.BuildSeconds);
     }
+
+    //UIManager.cs
+
+    //DisplayStructureDetails(Structure_SO so)
+    // setactive(UI ng display)
+    // structueNametext.value = so.structureName;
+    // description = description
+    // cost. text.value = so.cost
+
+
+    //scriptableObjects[]
+
+    //DisplayScriptables(scriptbale[] arr)
+    //foreach(structure in arr)
+    // display card for each structure
+    // structueNametext.value = so.structureName;
+    // description = description
+    // cost. text.value = so.cost
 
     // Update is called once per frame
     void Update()
@@ -95,4 +116,17 @@ public class Structure : MonoBehaviour
         //TODO: replace with UI
         print("Remaining Time: " + buildFinishedTime.Subtract(DateTime.Now));
     }
+
+    private void OnApplicationQuit()
+    {
+        
+    }
+}
+
+public class StructureSaveData
+{
+    Vector3 position;
+    string prefabName;
+    Structure.BuildingState structureState;
+    DateTime buildFinishedTime;
 }

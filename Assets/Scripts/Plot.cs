@@ -7,6 +7,16 @@ using NaughtyAttributes;
 [RequireComponent(typeof(Structure))]
 public class Plot : MonoBehaviour, IClickableObject
 {
+    private void OnApplicationPause(bool pause)
+    {
+        
+    }
+
+    private void OnApplicationQuit()
+    {
+        
+    }
+
     private Structure structure;
 
     private enum PlotState
@@ -136,6 +146,7 @@ public class Plot : MonoBehaviour, IClickableObject
                 }
             case PlotState.Empty:
                 {
+                    //UIManager.DisplayCropChoices();
                     print("TODO: Display Plant choices UI");
                     break;
                 }

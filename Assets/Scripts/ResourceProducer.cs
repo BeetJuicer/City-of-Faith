@@ -114,6 +114,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
         {
             case ProducerState.Waiting:
                 {
+                    //UIManager.DisplayDetails(structure_SO);
                     structure.DisplayBuildingState();
                     break;
                 }

@@ -131,6 +131,23 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1212997142687699952, guid: 38a4c54ddd4291143b9eceb85e21e452,
+        type: 3}
+      propertyPath: arr.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1212997142687699952, guid: 38a4c54ddd4291143b9eceb85e21e452,
+        type: 3}
+      propertyPath: arr.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3b901db40f406b645a12d6b799437a7f,
+        type: 2}
+    - target: {fileID: 1212997142687699952, guid: 38a4c54ddd4291143b9eceb85e21e452,
+        type: 3}
+      propertyPath: arr.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b6e5d698009bf14cb71ba2bf04e0738,
+        type: 2}
     - target: {fileID: 2465726488859176464, guid: 38a4c54ddd4291143b9eceb85e21e452,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -483,7 +500,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f43381d34d6a254a8eb23899bad8a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceProducer_SO: {fileID: 0}
+  resourceProducer_SO: {fileID: 11400000, guid: 478d16a3b5c455a428d7dae3d73caf9f,
+    type: 2}
 --- !u!1 &1333094880
 GameObject:
   m_ObjectHideFlags: 0
