@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Fisherman House
   description: A building that fisherman lived.
-  structurePrefab: {fileID: 1232766363669618, guid: de5df62b6b1f2da45936b727b4a92306,
+  structurePrefab: {fileID: 1157857068291492, guid: a9538fc75d4939e45b2e975c7e13e0e7,
     type: 3}
-  displayImage: {fileID: 21300000, guid: 8ede49bc2e7d49a4194b80d8e8a19c0e, type: 3}
-  expGivenOnBuild: 0
+  displayImage: {fileID: 21300000, guid: 180487d0e5ba63446993f6263c3a6d8c, type: 3}
+  expGivenOnBuild: 1000
   townHallLevelRequirement: 1
   numberOfCitizensAdded: 3
   currencyRequired:
@@ -30,5 +30,5 @@ MonoBehaviour:
     _serializedList: []
   BuildDays: 0
   BuildHours: 0
-  BuildMinutes: 0
+  BuildMinutes: 25
   BuildSeconds: 0
