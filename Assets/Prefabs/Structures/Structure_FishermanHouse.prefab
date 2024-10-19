@@ -69,6 +69,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   structure_so: {fileID: 11400000, guid: 6277a94ce4f436149a4082142952290a, type: 2}
+  decorations: []
+  buildings: []
 --- !u!1 &1220793761748966536
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,12 +221,12 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b2f7a9877042784da6f113d45cd70e6, type: 2}
-  - {fileID: 2100000, guid: 9923ec4feaebca94382cb2c29c582cfe, type: 2}
-  - {fileID: 2100000, guid: 870bcbe66fbf1e0479f611163b71d61e, type: 2}
-  - {fileID: 2100000, guid: a0c6c4757d70d784b9a1cb379ed3b317, type: 2}
-  - {fileID: 2100000, guid: 21f5d46cfbe5a1944a447dbbd51d3386, type: 2}
-  - {fileID: 2100000, guid: a242f6773b4ccc74193e486bc805bfd7, type: 2}
+  - {fileID: 2100000, guid: b8a509fdf73a8f5459f850aa7a22123a, type: 2}
+  - {fileID: 2100000, guid: b8a509fdf73a8f5459f850aa7a22123a, type: 2}
+  - {fileID: 2100000, guid: b8a509fdf73a8f5459f850aa7a22123a, type: 2}
+  - {fileID: 2100000, guid: b8a509fdf73a8f5459f850aa7a22123a, type: 2}
+  - {fileID: 2100000, guid: b8a509fdf73a8f5459f850aa7a22123a, type: 2}
+  - {fileID: 2100000, guid: b8a509fdf73a8f5459f850aa7a22123a, type: 2}
   - {fileID: 2100000, guid: b8a509fdf73a8f5459f850aa7a22123a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
