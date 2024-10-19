@@ -15,9 +15,9 @@ MonoBehaviour:
   structureName: Carpenter House
   description: 'A carpenter''s house is typically a modest, functional home that
     reflects the craftsmanship and skill of its builder. '
-  structurePrefab: {fileID: 1185082912798350, guid: 6462d7043761fd4468aa04220931d79e,
+  structurePrefab: {fileID: 1480241360480094, guid: b7912811720c628498c63a41dbb52be1,
     type: 3}
-  displayImage: {fileID: 21300000, guid: 2e46fb0936575fd459ba84f58eebc1a4, type: 3}
+  displayImage: {fileID: 21300000, guid: 37a7dd0fb4c7c324e98449b25dfef0ae, type: 3}
   expGivenOnBuild: 500
   townHallLevelRequirement: 1
   numberOfCitizensAdded: 3
