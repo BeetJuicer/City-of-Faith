@@ -69,6 +69,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   structure_so: {fileID: 11400000, guid: ae9a5c43ae21eaf4c87f21fd41774075, type: 2}
+  decorations: []
+  buildings: []
 --- !u!1 &799158733941052164
 GameObject:
   m_ObjectHideFlags: 0
