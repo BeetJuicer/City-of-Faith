@@ -55,6 +55,19 @@ public class Structure : MonoBehaviour
                                             .AddSeconds(structure_so.BuildSeconds);
     }
 
+    // UIManager Integration - Detect when this structure is clicked
+    private void OnMouseDown()
+    {
+        // Assuming the UIManager is already set up in the scene.
+        UIManager uiManager = FindObjectOfType<UIManager>();
+
+        if (uiManager != null)
+        {
+            // Call UIManager to show structure details when clicked
+            uiManager.OnStructureClick(structure_so);
+        }
+    }
+
     //UIManager.cs
 
     //DisplayStructureDetails(Structure_SO so)
@@ -119,7 +132,7 @@ public class Structure : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        
+
     }
 }
 
@@ -129,4 +142,4 @@ public class StructureSaveData
     string prefabName;
     Structure.BuildingState structureState;
     DateTime buildFinishedTime;
-}
+}   

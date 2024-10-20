@@ -24,10 +24,10 @@ public class ExperienceManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            AddExperience(5);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    AddExperience(5);
+        //}
     }
 
     public void AddExperience(int amount)
