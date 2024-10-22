@@ -13,6 +13,7 @@ public class ActivateGameObject : MonoBehaviour
         objectToActivate.SetActive(true); // Activate the GameObject
     }
 
+
     // Drag the GameObject you want to Deactivate in the Inspector
     public GameObject objectToDeactivate;
 
