@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using NaughtyAttributes;
+using SQLite;
+
+public enum ProducerState
+{
+    Waiting,
+    Producing,
+    Ready_To_Claim,
+}
 
 [RequireComponent(typeof(Structure))]
 public class ResourceProducer : MonoBehaviour, IClickableObject
 {
     private Structure structure;
-
-    private enum ProducerState
-    {
-        Waiting,
-        Producing,
-        ReadyToClaim,
-    }
 
     private ProducerState resourceState;
 
@@ -62,7 +63,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                     }
                     break;
                 }
-            case ProducerState.ReadyToClaim:
+            case ProducerState.Ready_To_Claim:
                 {
                     // nothing here.
                     print("Ready to Claim!!");
@@ -74,7 +75,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                     print("Producing... " + timeLeftToClaim + " seconds left");
                     if (timeLeftToClaim <= TimeSpan.Zero)
                     {
-                        resourceState = ProducerState.ReadyToClaim;
+                        resourceState = ProducerState.Ready_To_Claim;
                     }
 
                     break;
@@ -118,7 +119,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                     structure.DisplayBuildingState();
                     break;
                 }
-            case ProducerState.ReadyToClaim:
+            case ProducerState.Ready_To_Claim:
                 {
                     ClaimResources();
                     break;
