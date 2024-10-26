@@ -21,13 +21,13 @@ public class Plot : MonoBehaviour, IClickableObject
 
     private enum PlotState
     {
-        Waiting,
-        Empty,
-        Growing,
-        Ripe,
+        WAITING = 1,
+        EMPTY = 2,
+        GROWING =3,
+        RIPE = 4,
     }
 
-    private PlotState plotState = PlotState.Waiting;
+    private PlotState plotState = PlotState.WAITING;
 
     //TODO: Temporary serialize field for debugging
     [SerializeField] private Crop_SO crop_SO;
@@ -62,31 +62,31 @@ public class Plot : MonoBehaviour, IClickableObject
         // State handling
         switch (plotState)
         {
-            case PlotState.Waiting:
+            case PlotState.WAITING:
                 {
-                    if (structure.buildingState == Structure.BuildingState.Built)
+                    if (structure.buildingState == Structure.BuildingState.BUILT)
                     {
-                        plotState = PlotState.Empty;
+                        plotState = PlotState.EMPTY;
                     }
 
                     break;
                 }
-            case PlotState.Empty:
+            case PlotState.EMPTY:
                 {
                     // Nothing.
                     break;
                 }
-            case PlotState.Growing:
+            case PlotState.GROWING:
                 {
                     TimeSpan timeLeftToClaim = finishTime - DateTime.Now;
                     print("Growing... " + timeLeftToClaim + " seconds left");
                     if (timeLeftToClaim <= TimeSpan.Zero)
                     {
-                        plotState = PlotState.Ripe;
+                        plotState = PlotState.RIPE;
                     }
                     break;
                 }
-            case PlotState.Ripe:
+            case PlotState.RIPE:
                 {
                     // Nothing.
                     break;
@@ -110,12 +110,12 @@ public class Plot : MonoBehaviour, IClickableObject
 
         // Asserts
         Debug.Assert(crop_SO == null, "crop SO cannot be null!");
-        Debug.Assert(plotState == PlotState.Empty, "Plot must be empty to plant!");
+        Debug.Assert(plotState == PlotState.EMPTY, "Plot must be empty to plant!");
         Debug.Assert(crop_SO.baseTimeNeededPerClaim >= TimeSpan.Zero, "Time needed cannot be negative!");
 
         // Success
         finishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
-        plotState = PlotState.Growing;
+        plotState = PlotState.GROWING;
 
         //Visual update
         //TODO: Possible optimization, use crop pools.
@@ -139,23 +139,23 @@ public class Plot : MonoBehaviour, IClickableObject
         // State handling
         switch (plotState)
         {
-            case PlotState.Waiting:
+            case PlotState.WAITING:
                 {
                     structure.DisplayBuildingState();
                     break;
                 }
-            case PlotState.Empty:
+            case PlotState.EMPTY:
                 {
                     //UIManager.DisplayCropChoices();
                     print("TODO: Display Plant choices UI");
                     break;
                 }
-            case PlotState.Growing:
+            case PlotState.GROWING:
                 {
                     print("TODO: Display growth details");
                     break;
                 }
-            case PlotState.Ripe:
+            case PlotState.RIPE:
                 {
                     ClaimHarvest();
                     break;
@@ -175,6 +175,6 @@ public class Plot : MonoBehaviour, IClickableObject
         //TODO: Possible optimization, use crop pools. May be temporary depending on UI
         Destroy(cropVisualPos.GetChild(0).gameObject);
 
-        plotState = PlotState.Empty;
+        plotState = PlotState.EMPTY;
     }
 }

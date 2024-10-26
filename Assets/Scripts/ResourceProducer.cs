@@ -7,9 +7,9 @@ using SQLite;
 
 public enum ProducerState
 {
-    Waiting,
-    Producing,
-    Ready_To_Claim,
+    Waiting = 1,
+    Producing = 2,
+    Ready_To_Claim = 3,
 }
 
 [RequireComponent(typeof(Structure))]
@@ -57,7 +57,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
         {
             case ProducerState.Waiting:
                 {
-                    if (structure.buildingState == Structure.BuildingState.Built)
+                    if (structure.buildingState == Structure.BuildingState.BUILT)
                     {
                         StartProduction();
                     }

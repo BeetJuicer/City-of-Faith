@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SQLite;
+using System;
 
 public class Database : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Database : MonoBehaviour
     private string username = "Carl";
     private string password = "CarlPass";
 
+    SQLiteConnection db;
+
     public class PlayerData
     {
         [PrimaryKey, AutoIncrement]
@@ -19,9 +22,9 @@ public class Database : MonoBehaviour
         public string Password { get; set; }
     }
 
-    private void Start()
+    private void Awake()
     {
-        var db = new SQLiteConnection($"{Application.persistentDataPath}/MyDb.db");
+        db = new SQLiteConnection($"{Application.persistentDataPath}/MyDb.db");
         db.CreateTable<PlayerData>();
 
         //TODO FOR DATABASE: PASSWORD CHECKING
@@ -45,15 +48,42 @@ public class Database : MonoBehaviour
 
         // Player Exists. Load data.
         Debug.Log("Player exists.");
+        LoadGame();
     }
 
+
+    // When player reenters game.
     private void OnApplicationFocus(bool focus)
     {
-        //all Idatabasepersistence objects.save
+        if (focus)
+            LoadGame();
+        else
+            SaveGame();
     }
 
-    private void OnApplicationQuit()
+    // When player goes to home screen.
+    private void OnApplicationPause(bool pause)
     {
-        
+        if (pause)
+            SaveGame();
+    }
+
+    private void SaveGame()
+    {
+
+    }
+
+    private void LoadGame()
+    {
+    }
+
+    public void AddNewStructure(Structure structure, Structure_SO so, DateTime timeBuildFinished, Structure.BuildingState buildingState)
+    {
+        Vector3 structurePos = structure.gameObject.transform.position;
+        string query = $"INSERT INTO tbl_structure('player_id', 'prefab_name', 'time_build_finished', 'buildState', 'posX', 'posY', 'posZ') " +
+                                          $"VALUES(?, ?, ?, ?, ?, ?, ?); ";
+        var result = db.Execute(query, 1, so.structurePrefab.name, timeBuildFinished.ToString(), buildingState.ToString(), structurePos.x, structurePos.y, structurePos.z);
+
+        //Test errors here.
     }
 }

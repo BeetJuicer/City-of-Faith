@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 832615212}
   - component: {fileID: 832615211}
   m_Layer: 0
-  m_Name: Databse
+  m_Name: Database
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -365,10 +365,11 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
-  structure_SO: {fileID: 11400000, guid: 3b901db40f406b645a12d6b799437a7f, type: 2}
+  structure_SO: {fileID: 11400000, guid: 6277a94ce4f436149a4082142952290a, type: 2}
   buildPreviewMaterial: {fileID: 2100000, guid: 6007be16c80cbe04b8c9aa060296b280,
     type: 2}
   incrementalMovementUnits: 5
+  db: {fileID: 832615211}
 --- !u!65 &928263094
 BoxCollider:
   m_ObjectHideFlags: 0

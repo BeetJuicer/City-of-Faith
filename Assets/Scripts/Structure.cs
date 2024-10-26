@@ -9,19 +9,27 @@ using System;
  */
 public class Structure : MonoBehaviour
 {
-    [SerializeField] protected Structure_SO structure_so;
-    [SerializeField] private Structure_SO[] decorations;
-    [SerializeField] private Structure_SO[] buildings;
+    [SerializeField] private Structure_SO structure_so;
 
+    #region Database 
+    private Database db;
 
-    //Building State
+    [Tooltip("True by default. Only gets set to false when the structure is placed using the buildingOverlay.")]
+    private bool isInDatabase = true;
+    #endregion
+
+    #region Building State
+
     public enum BuildingState
     {
-        InProgress,
-        Built
+        IN_PROGRESS = 1,
+        BUILT = 2
     }
-
     public BuildingState buildingState { get; private set; }
+    private DateTime timeInstantiated;
+    private DateTime timeBuildFinished;
+    //TODO: problems if user changes date and time of device.
+    #endregion
 
     // In progress and built components
     private GameObject inProgressVisual;
@@ -29,30 +37,44 @@ public class Structure : MonoBehaviour
     private const string IN_PROGRESS_VISUAL_NAME = "InProgressVisual";
     private const string BUILT_VISUAL_NAME = "BuiltVisual";
 
-    [Tooltip("The exact time the building was instantiated.")]//TODO: problems if user changes date and time of device.
-    private DateTime timeInstantiated;
-    private DateTime buildFinishedTime;
-
-    private void Awake()
-    {
-        buildingState = BuildingState.InProgress;
-    }
-
     private void Start()
     {
-        // ENTER IN-PROGRESS STATE
-        inProgressVisual = transform.Find(IN_PROGRESS_VISUAL_NAME).gameObject;
-        builtVisual = transform.Find(BUILT_VISUAL_NAME).gameObject;
+        if (!isInDatabase)
+        {
+            buildingState = BuildingState.IN_PROGRESS;
 
-        Debug.Assert(inProgressVisual != null, "In Progress Visual not found. If the Visual exists, check the spelling.");
-        Debug.Assert(builtVisual != null, "Built Visual not found. If the Visual exists, check the spelling.");
+            // ENTER IN-PROGRESS STATE
+            inProgressVisual = transform.Find(IN_PROGRESS_VISUAL_NAME).gameObject;
+            builtVisual = transform.Find(BUILT_VISUAL_NAME).gameObject;
 
-        //TODO: change to online method
-        timeInstantiated = DateTime.Now;
-        buildFinishedTime = timeInstantiated.AddDays(structure_so.BuildDays)
-                                            .AddHours(structure_so.BuildHours)
-                                            .AddMinutes(structure_so.BuildMinutes)
-                                            .AddSeconds(structure_so.BuildSeconds);
+            Debug.Assert(inProgressVisual != null, "In Progress Visual not found. If the Visual exists, check the spelling.");
+            Debug.Assert(builtVisual != null, "Built Visual not found. If the Visual exists, check the spelling.");
+
+            //TODO: change to online method
+            timeInstantiated = DateTime.Now;
+            timeBuildFinished = timeInstantiated.AddDays(structure_so.BuildDays)
+                                                .AddHours(structure_so.BuildHours)
+                                                .AddMinutes(structure_so.BuildMinutes)
+                                                .AddSeconds(structure_so.BuildSeconds);
+
+            db.AddNewStructure(this, structure_so, timeBuildFinished, buildingState);
+        }
+        else
+        {
+            //Query and load data here.
+        }
+    }
+
+    public void NewToDatabase(Database db)
+    {
+        this.db = db;
+        isInDatabase = false;
+    }
+
+    public void AlreadyInDatabase(Database db)
+    {
+        this.db = db;
+        isInDatabase = true;
     }
 
     // UIManager Integration - Detect when this structure is clicked
@@ -91,18 +113,18 @@ public class Structure : MonoBehaviour
     {
         switch (buildingState)
         {
-            case BuildingState.Built:
+            case BuildingState.BUILT:
                 {
                     // shit here
                     // decor does nothing
                     // plants 
                     break;
                 }
-            case BuildingState.InProgress:
+            case BuildingState.IN_PROGRESS:
                 {
 
                     // EXIT STATE.
-                    if (DateTime.Now > buildFinishedTime)
+                    if (DateTime.Now > timeBuildFinished)
                     {
                         // -- Resource Changes
                         print("TODO: Add " + structure_so.expGivenOnBuild + " exp!!");
@@ -114,12 +136,12 @@ public class Structure : MonoBehaviour
                         builtVisual.SetActive(true);
 
                         // Exit state.
-                        buildingState = BuildingState.Built;
+                        buildingState = BuildingState.BUILT;
                     }
                     break;
                 }
             default:
-                print("unhandled state");
+                Debug.LogError("Unhandled state! State is: " + buildingState);
                 break;
         }
     }
@@ -127,7 +149,7 @@ public class Structure : MonoBehaviour
     public void DisplayBuildingState()
     {
         //TODO: replace with UI
-        print("Remaining Time: " + buildFinishedTime.Subtract(DateTime.Now));
+        print("Remaining Time: " + timeBuildFinished.Subtract(DateTime.Now));
     }
 
     private void OnApplicationQuit()

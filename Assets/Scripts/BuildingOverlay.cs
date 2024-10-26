@@ -8,6 +8,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
 {
     public bool IsAllowedToPlace { get; private set; }
     [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private Database db;
 
     [SerializeField] private Structure_SO structure_SO;
     [SerializeField] private Material buildPreviewMaterial;
@@ -76,7 +77,9 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             IsAllowedToPlace &&
             ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
         {
-            Instantiate(structure_SO.structurePrefab, transform.position, transform.rotation);
+            GameObject structure = Instantiate(structure_SO.structurePrefab, transform.position, transform.rotation);
+            // Tell the structure that it's new.
+            structure.GetComponent<Structure>().NewToDatabase(db);
 
             //add xp and subtract gold.
             print("TODO: Built " + structure_SO.structureName + ". Subtracted " + structure_SO.currencyRequired);
