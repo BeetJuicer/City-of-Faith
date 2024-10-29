@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Pyramid
   description: A place of rest for the dead. Adds culture of respect for the dead.
-  structurePrefab: {fileID: 2986965731713266858, guid: 37506a9a582ca9d4d8de2edb16f90a48,
+  structurePrefab: {fileID: 2986965731713266858, guid: 38a4c54ddd4291143b9eceb85e21e452,
     type: 3}
-  inProgressBuildingPrefab: {fileID: 0}
   displayImage: {fileID: 0}
   expGivenOnBuild: 3000
   townHallLevelRequirement: 3
+  numberOfCitizensAdded: 0
+  currencyRequired:
+    _serializedList: []
   resourcesRequired:
     _serializedList:
     - Key: 0
@@ -28,3 +30,7 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value: 2000
+  BuildDays: 0
+  BuildHours: 0
+  BuildMinutes: 0
+  BuildSeconds: 2

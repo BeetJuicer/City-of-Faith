@@ -42,6 +42,11 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
         timePerClaim = resourceProducer_SO.baseTimeNeededPerClaim;
     }
 
+    public void LoadData(Database.ResourceProducerData data)
+    {
+        print("Load data here.");
+    }
+
     private void Update()
     {
         // Checking only twice per second.

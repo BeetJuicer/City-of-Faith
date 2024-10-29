@@ -25,7 +25,7 @@ public class Structure : MonoBehaviour
         IN_PROGRESS = 1,
         BUILT = 2
     }
-    public BuildingState buildingState { get; private set; }
+    public BuildingState buildingState { get; private set; } = BuildingState.IN_PROGRESS;
     private DateTime timeInstantiated;
     private DateTime timeBuildFinished;
     //TODO: problems if user changes date and time of device.
@@ -39,16 +39,12 @@ public class Structure : MonoBehaviour
 
     private void Start()
     {
+        // Load default values if not in database.
         if (!isInDatabase)
         {
             buildingState = BuildingState.IN_PROGRESS;
 
-            // ENTER IN-PROGRESS STATE
-            inProgressVisual = transform.Find(IN_PROGRESS_VISUAL_NAME).gameObject;
-            builtVisual = transform.Find(BUILT_VISUAL_NAME).gameObject;
-
-            Debug.Assert(inProgressVisual != null, "In Progress Visual not found. If the Visual exists, check the spelling.");
-            Debug.Assert(builtVisual != null, "Built Visual not found. If the Visual exists, check the spelling.");
+            GetChildrenVisuals();
 
             //TODO: change to online method
             timeInstantiated = DateTime.Now;
@@ -59,10 +55,25 @@ public class Structure : MonoBehaviour
 
             db.AddNewStructure(this, structure_so, timeBuildFinished, buildingState);
         }
-        else
-        {
-            //Query and load data here.
-        }
+    }
+
+    private void GetChildrenVisuals()
+    {
+        // ENTER IN-PROGRESS STATE
+        inProgressVisual = transform.Find(IN_PROGRESS_VISUAL_NAME).gameObject;
+        builtVisual = transform.Find(BUILT_VISUAL_NAME).gameObject;
+
+        Debug.Assert(inProgressVisual != null, "In Progress Visual not found. If the Visual exists, check the spelling.");
+        Debug.Assert(builtVisual != null, "Built Visual not found. If the Visual exists, check the spelling.");
+    }
+
+
+    /// Called by database to initialize needed values.
+    public void LoadData(Database.StructureData data)
+    {
+        timeBuildFinished = data.time_build_finished;
+        buildingState = (BuildingState)data.building_state;
+        GetChildrenVisuals();
     }
 
     public void NewToDatabase(Database db)
@@ -118,6 +129,7 @@ public class Structure : MonoBehaviour
                     // shit here
                     // decor does nothing
                     // plants 
+                    print("Im built");
                     break;
                 }
             case BuildingState.IN_PROGRESS:
@@ -157,11 +169,3 @@ public class Structure : MonoBehaviour
 
     }
 }
-
-public class StructureSaveData
-{
-    Vector3 position;
-    string prefabName;
-    Structure.BuildingState structureState;
-    DateTime buildFinishedTime;
-}   

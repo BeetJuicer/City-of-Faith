@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using SQLite;
 using System;
+using System.Linq;
 
 public class Database : MonoBehaviour
 {
     private readonly int USERNAME_CHARACTER_LIMIT = 50;
     private readonly int MINIMUM_PASSWORD_LENGTH = 8;
 
-    private string username = "Carl";
-    private string password = "CarlPass";
+    private string username = "New";
+    private string password = "Player";
+    private int playerId = 3;
 
     SQLiteConnection db;
 
+    [Table("tbl_player")]
     public class PlayerData
     {
         [PrimaryKey, AutoIncrement]
@@ -35,14 +38,32 @@ public class Database : MonoBehaviour
         [NotNull]
         public DateTime time_build_finished { get; set; }
         [NotNull]
-        public string building_state { get; set; }
+        public int building_state { get; set; }
         [NotNull]
-        public double posX { get; set; }
+        public float posX { get; set; }
         [NotNull]
         public float posY { get; set; }
         [NotNull]
         public float posZ { get; set; }
+        [NotNull]
+        public float rotW { get; set; }
+        [NotNull]
+        public float rotX { get; set; }
+        [NotNull]
+        public float rotY { get; set; }
+        [NotNull]
+        public float rotZ { get; set; }
 
+    }
+
+    [Table("tbl_resourceProducer")]
+    public class ResourceProducerData
+    {
+        [PrimaryKey, NotNull]
+        public int structure_id { get; set; }
+        [NotNull]
+        public int producer_state { get; set; }
+        public DateTime production_finish_time { get; set; }
     }
 
     private void Awake()
@@ -54,8 +75,6 @@ public class Database : MonoBehaviour
 
         // CREATE A STATEMENT CHECKING IF USER EXISTS
         var query = db.Table<PlayerData>().Where(row => row.Username.Equals(username));
-
-        db.CreateTable<StructureData>();
 
         // No player. Start new game.
         //TODO: set flags for tutorials.
@@ -70,6 +89,8 @@ public class Database : MonoBehaviour
             db.Insert(newPlayer);
             return;
         }
+        db.CreateTable<StructureData>();
+        db.CreateTable<ResourceProducerData>();
 
         // Player Exists. Load data.
         Debug.Log("Player exists.");
@@ -99,35 +120,62 @@ public class Database : MonoBehaviour
 
     private void LoadGame()
     {
-        var structures = GetStructureData();
-        foreach (StructureData structure in structures)
+        var structures = DatabaseGetStructureData();
+
+        // Keeping structureIds for multiple queries.
+        var structureIds = structures.Select(s => s.structure_id).ToList();
+
+        // All resource producer data with structure_id in 'structureIds'.
+        // Each structure id is unique, so we're sure that everything in 'structureIds' is owned by this current player.
+        Dictionary<int, ResourceProducerData> resourceProducers = db.Table<ResourceProducerData>()
+                          .Where(row => structureIds.Contains(row.structure_id))
+                          .ToList().ToDictionary(rp => rp.structure_id);
+
+        // Loading the objects. TODO: Callong resources.load is pretty inefficient each time.
+        foreach (StructureData s_data in structures)
         {
-            print(structure.structure_id + ": " + structure.prefab_name + structure.time_build_finished + structure.building_state + structure.posX);
+            // Instantiation of GameObject
+            string path = $"Structures/{s_data.prefab_name}";
+            var prefab = Resources.Load(path);
+            Debug.Assert(prefab != null, $"{s_data.prefab_name} does not exist in {path}!");
+
+            Vector3 pos = new Vector3(s_data.posX, s_data.posY, s_data.posZ);
+            Quaternion rot = new Quaternion(s_data.rotX, s_data.rotY, s_data.rotZ, s_data.rotW);
+
+            GameObject structure = (GameObject)Instantiate(prefab, pos, rot);
+            structure.GetComponent<Structure>().LoadData(s_data);
+
+            // Loading ResourceProducerData
+            if (structure.TryGetComponent(out ResourceProducer rp))
+            {
+                rp.LoadData(resourceProducers[s_data.structure_id]);
+            }
         }
     }
 
-    private List<StructureData> GetStructureData()
+    private List<StructureData> DatabaseGetStructureData()
     {
-        return db.Table<StructureData>().ToList();
+        return db.Table<StructureData>().Where((row) => row.player_id == playerId).ToList();
     }
-
 
     public void AddNewStructure(Structure structure, Structure_SO so, DateTime timeBuildFinished, Structure.BuildingState buildingState)
     {
         Vector3 structurePos = structure.gameObject.transform.position;
-        //string query = $"INSERT INTO tbl_structure('player_id', 'prefab_name', 'time_build_finished', 'buildState', 'posX', 'posY', 'posZ') " +
-        //                                  $"VALUES(?, ?, ?, ?, ?, ?, ?); ";
-        //var result = db.Execute(query, 1, so.structurePrefab.name, timeBuildFinished.ToString(), buildingState.ToString(), structurePos.x, structurePos.y, structurePos.z);
+        Quaternion rotation = structure.gameObject.transform.rotation;
 
         print("Adding: " + so.structurePrefab.name + timeBuildFinished.ToString() + buildingState.ToString() + structurePos.x + structurePos.y + structurePos.z);
         var structureData = new StructureData {
             prefab_name = so.structurePrefab.name,
-            player_id = 2,
+            player_id = playerId,
             time_build_finished = timeBuildFinished,
-            building_state = buildingState.ToString(),
+            building_state = (int)buildingState,
             posX = structurePos.x,
             posY = structurePos.y,
             posZ = structurePos.z,
+            rotW = rotation.w,
+            rotX = rotation.x,
+            rotY = rotation.y,
+            rotZ = rotation.z,
         };
 
         var result = db.Insert(structureData);
