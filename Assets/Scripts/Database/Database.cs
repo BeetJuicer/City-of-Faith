@@ -65,6 +65,17 @@ public class Database : MonoBehaviour
         public int producer_state { get; set; }
         public DateTime production_finish_time { get; set; }
     }
+    
+    [Table("tbl_plot")]
+    public class PlotData
+    {
+        [PrimaryKey, NotNull]
+        public int structure_id { get; set; }
+        [NotNull]
+        public int plot_state { get; set; }
+        public DateTime growth_finish_time { get; set; }
+        public string crop_so_name { get; set; }
+    }
 
     private void Awake()
     {
@@ -125,13 +136,14 @@ public class Database : MonoBehaviour
         // Keeping structureIds for multiple queries.
         var structureIds = structures.Select(s => s.structure_id).ToList();
 
+        // Resource Producer Data from Database
         // All resource producer data with structure_id in 'structureIds'.
         // Each structure id is unique, so we're sure that everything in 'structureIds' is owned by this current player.
         Dictionary<int, ResourceProducerData> resourceProducers = db.Table<ResourceProducerData>()
                           .Where(row => structureIds.Contains(row.structure_id))
                           .ToList().ToDictionary(rp => rp.structure_id);
 
-        // Loading the objects. TODO: Callong resources.load is pretty inefficient each time.
+        // Loading the objects. TODO: Calling resources.load is pretty inefficient each time. Use something else.
         foreach (StructureData s_data in structures)
         {
             // Instantiation of GameObject
@@ -163,7 +175,6 @@ public class Database : MonoBehaviour
         Vector3 structurePos = structure.gameObject.transform.position;
         Quaternion rotation = structure.gameObject.transform.rotation;
 
-        print("Adding: " + so.structurePrefab.name + timeBuildFinished.ToString() + buildingState.ToString() + structurePos.x + structurePos.y + structurePos.z);
         var structureData = new StructureData {
             prefab_name = so.structurePrefab.name,
             player_id = playerId,
@@ -182,5 +193,30 @@ public class Database : MonoBehaviour
         //Test errors here.
         print("result: " + result + ", struc_id: " + structureData.structure_id + ", player_id: " + structureData.player_id);
 
+        // Resource Producer
+        if (structure.TryGetComponent(out ResourceProducer rp))
+        {
+            var rpData = new ResourceProducerData
+            {
+                structure_id = structureData.structure_id,
+                production_finish_time = rp.productionFinishTime,
+                producer_state = (int)rp.producerState,
+            };
+
+            result = db.Insert(rpData);
+        }
+        else if (structure.TryGetComponent(out Plot plot))
+        {
+            // Plot
+            var plotData = new PlotData
+            {
+                structure_id = structureData.structure_id,
+                growth_finish_time = plot.growthFinishTime,
+                plot_state = (int)plot.plotState,
+                crop_so_name = plot.Crop_SO.name,
+            };
+
+            result = db.Insert(plotData);
+        }
     }
 }

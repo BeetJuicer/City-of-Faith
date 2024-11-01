@@ -7,42 +7,28 @@ using NaughtyAttributes;
 [RequireComponent(typeof(Structure))]
 public class Plot : MonoBehaviour, IClickableObject
 {
-    private void OnApplicationPause(bool pause)
-    {
-        
-    }
-
-    private void OnApplicationQuit()
-    {
-        
-    }
-
     private Structure structure;
 
-    private enum PlotState
+    public enum PlotState
     {
         WAITING = 1,
         EMPTY = 2,
-        GROWING =3,
+        GROWING = 3,
         RIPE = 4,
     }
 
-    private PlotState plotState = PlotState.WAITING;
 
     //TODO: Temporary serialize field for debugging
     [SerializeField] private Crop_SO crop_SO;
-
     [SerializeField] private Transform cropVisualPos;
 
-    private DateTime finishTime;
+    // Database
+    public PlotState plotState { get; private set; } = PlotState.WAITING;
+    public Crop_SO Crop_SO { get { return crop_SO; } set { } }
+    public DateTime growthFinishTime { get; private set; }
 
     // Timer
     private float updateTimer;
-
-    private void Awake()
-    {
-        // TODO: Load status here.
-    }
 
     void Start()
     {
@@ -78,7 +64,7 @@ public class Plot : MonoBehaviour, IClickableObject
                 }
             case PlotState.GROWING:
                 {
-                    TimeSpan timeLeftToClaim = finishTime - DateTime.Now;
+                    TimeSpan timeLeftToClaim = growthFinishTime - DateTime.Now;
                     print("Growing... " + timeLeftToClaim + " seconds left");
                     if (timeLeftToClaim <= TimeSpan.Zero)
                     {
@@ -114,7 +100,7 @@ public class Plot : MonoBehaviour, IClickableObject
         Debug.Assert(crop_SO.baseTimeNeededPerClaim >= TimeSpan.Zero, "Time needed cannot be negative!");
 
         // Success
-        finishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
+        growthFinishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
         plotState = PlotState.GROWING;
 
         //Visual update

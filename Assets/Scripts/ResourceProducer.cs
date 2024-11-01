@@ -16,21 +16,19 @@ public enum ProducerState
 public class ResourceProducer : MonoBehaviour, IClickableObject
 {
     private Structure structure;
-
-    private ProducerState resourceState;
-
     [SerializeField] private ResourceProducer_SO resourceProducer_SO;
-    private int amountPerClaim;
 
-    private TimeSpan timePerClaim;
-    private DateTime finishTime;
+    private int amountPerClaim;
+    public ProducerState producerState { get; private set; }
+    public TimeSpan timePerClaim;
+    public DateTime productionFinishTime { get; private set; }
 
     // Timer
     private float updateTimer;
 
     private void Awake()
     {
-        resourceState = ProducerState.Producing;
+        producerState = ProducerState.Producing;
     }
 
     private void Start()
@@ -44,7 +42,8 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
 
     public void LoadData(Database.ResourceProducerData data)
     {
-        print("Load data here.");
+        productionFinishTime = data.production_finish_time;
+        producerState = (ProducerState)data.producer_state;
     }
 
     private void Update()
@@ -58,7 +57,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
         updateTimer = Time.time + 0.5f;
 
         // State handling
-        switch (resourceState)
+        switch (producerState)
         {
             case ProducerState.Waiting:
                 {
@@ -76,11 +75,11 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                 }
             case ProducerState.Producing:
                 {
-                    TimeSpan timeLeftToClaim = finishTime - DateTime.Now;
+                    TimeSpan timeLeftToClaim = productionFinishTime - DateTime.Now;
                     print("Producing... " + timeLeftToClaim + " seconds left");
                     if (timeLeftToClaim <= TimeSpan.Zero)
                     {
-                        resourceState = ProducerState.Ready_To_Claim;
+                        producerState = ProducerState.Ready_To_Claim;
                     }
 
                     break;
@@ -95,9 +94,9 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
 
     private void StartProduction()
     {
-        finishTime = DateTime.Now.Add(timePerClaim);
+        productionFinishTime = DateTime.Now.Add(timePerClaim);
 
-        resourceState = ProducerState.Producing;
+        producerState = ProducerState.Producing;
     }
 
     public void ClaimResources()
@@ -116,7 +115,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
     [Button]
     public void OnObjectClicked()
     {
-        switch (resourceState)
+        switch (producerState)
         {
             case ProducerState.Waiting:
                 {

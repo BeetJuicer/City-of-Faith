@@ -12,10 +12,10 @@ public class Structure : MonoBehaviour
     [SerializeField] private Structure_SO structure_so;
 
     #region Database 
-    private Database db;
+    public Database db { get; private set; }
 
     [Tooltip("True by default. Only gets set to false when the structure is placed using the buildingOverlay.")]
-    private bool isInDatabase = true;
+    public bool isInDatabase { get; private set; } = true;
     #endregion
 
     #region Building State
@@ -76,7 +76,7 @@ public class Structure : MonoBehaviour
         GetChildrenVisuals();
     }
 
-    public void NewToDatabase(Database db)
+    public void NotInDatabase(Database db)
     {
         this.db = db;
         isInDatabase = false;
@@ -134,7 +134,7 @@ public class Structure : MonoBehaviour
                 }
             case BuildingState.IN_PROGRESS:
                 {
-
+                    print("In progress: " + gameObject.name + " Time finished: " + timeBuildFinished);
                     // EXIT STATE.
                     if (DateTime.Now > timeBuildFinished)
                     {

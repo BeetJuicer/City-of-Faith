@@ -79,7 +79,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         {
             GameObject structure = Instantiate(structure_SO.structurePrefab, transform.position, transform.rotation);
             // Tell the structure that it's new.
-            structure.GetComponent<Structure>().NewToDatabase(db);
+            structure.GetComponent<Structure>().NotInDatabase(db);
 
             //add xp and subtract gold.
             print("TODO: Built " + structure_SO.structureName + ". Subtracted " + structure_SO.currencyRequired);
@@ -87,7 +87,6 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         }
         //else
             //feedback that it's not allowed.
-
     }
 
     [Button]
