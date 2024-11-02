@@ -78,8 +78,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
         {
             GameObject structure = Instantiate(structure_SO.structurePrefab, transform.position, transform.rotation);
-            // Tell the structure that it's new.
-            structure.GetComponent<Structure>().NotInDatabase(db);
+            
 
             //add xp and subtract gold.
             print("TODO: Built " + structure_SO.structureName + ". Subtracted " + structure_SO.currencyRequired);

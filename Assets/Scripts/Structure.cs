@@ -12,10 +12,9 @@ public class Structure : MonoBehaviour
     [SerializeField] private Structure_SO structure_so;
 
     #region Database 
-    public Database db { get; private set; }
-
-    [Tooltip("True by default. Only gets set to false when the structure is placed using the buildingOverlay.")]
-    public bool isInDatabase { get; private set; } = true;
+    private Database db;
+    private Database.StructureData structureData = null;
+    public int StructureID { get; private set; }
     #endregion
 
     #region Building State
@@ -39,12 +38,12 @@ public class Structure : MonoBehaviour
 
     private void Start()
     {
+        db = FindFirstObjectByType<Database>();
+
         // Load default values if not in database.
-        if (!isInDatabase)
+        if (structureData == null)
         {
             buildingState = BuildingState.IN_PROGRESS;
-
-            GetChildrenVisuals();
 
             //TODO: change to online method
             timeInstantiated = DateTime.Now;
@@ -53,8 +52,31 @@ public class Structure : MonoBehaviour
                                                 .AddMinutes(structure_so.BuildMinutes)
                                                 .AddSeconds(structure_so.BuildSeconds);
 
-            db.AddNewStructure(this, structure_so, timeBuildFinished, buildingState);
+            Vector3 structurePos = transform.position;
+            Quaternion rotation = transform.rotation;
+
+            structureData = new Database.StructureData
+            {
+                prefab_name = structure_so.structurePrefab.name,
+                player_id = db.PlayerId,
+                time_build_finished = timeBuildFinished,
+                building_state = (int)buildingState,
+                posX = structurePos.x,
+                posY = structurePos.y,
+                posZ = structurePos.z,
+                rotW = rotation.w,
+                rotX = rotation.x,
+                rotY = rotation.y,
+                rotZ = rotation.z,
+            };
+
+            db.AddNewStructure(structureData);
+            StructureID = structureData.structure_id;
+
+            Debug.Assert(StructureID != 0, "Structure ID is 0!");
         }
+
+        GetChildrenVisuals();
     }
 
     private void GetChildrenVisuals()
@@ -67,25 +89,14 @@ public class Structure : MonoBehaviour
         Debug.Assert(builtVisual != null, "Built Visual not found. If the Visual exists, check the spelling.");
     }
 
-
     /// Called by database to initialize needed values.
-    public void LoadData(Database.StructureData data)
+    public void LoadData(Database.StructureData data, Database db)
     {
+        this.db = db;
+        structureData = data;
+
         timeBuildFinished = data.time_build_finished;
         buildingState = (BuildingState)data.building_state;
-        GetChildrenVisuals();
-    }
-
-    public void NotInDatabase(Database db)
-    {
-        this.db = db;
-        isInDatabase = false;
-    }
-
-    public void AlreadyInDatabase(Database db)
-    {
-        this.db = db;
-        isInDatabase = true;
     }
 
     // UIManager Integration - Detect when this structure is clicked
@@ -144,10 +155,5 @@ public class Structure : MonoBehaviour
     {
         //TODO: replace with UI
         print("Remaining Time: " + timeBuildFinished.Subtract(DateTime.Now));
-    }
-
-    private void OnApplicationQuit()
-    {
-
     }
 }

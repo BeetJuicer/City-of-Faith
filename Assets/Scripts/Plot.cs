@@ -8,7 +8,6 @@ using NaughtyAttributes;
 public class Plot : MonoBehaviour, IClickableObject
 {
     private Structure structure;
-
     public enum PlotState
     {
         WAITING = 1,
@@ -23,8 +22,8 @@ public class Plot : MonoBehaviour, IClickableObject
     [SerializeField] private Transform cropVisualPos;
 
     // Database
-
-    private Database.PlotData plotData;
+    private Database db;
+    private Database.PlotData plotData = null;
 
     private PlotState currentPlotState = PlotState.WAITING;
     public PlotState CurrentPlotState
@@ -34,28 +33,53 @@ public class Plot : MonoBehaviour, IClickableObject
         private set
         {
             currentPlotState = value;
-            Database.Instance.UpdatePlotState(currentPlotState, dbStructureID);
+            plotData.plot_state = (int)currentPlotState;
+            db.UpdateRecord(plotData);
         }
     }
 
     public Crop_SO Crop_SO { get { return crop_SO; } set { } }
-    public DateTime GrowthFinishTime { get; private set; }
+    private DateTime growthFinishTime;
+    public DateTime GrowthFinishTime
+    {
+        get => growthFinishTime;
+        private set
+        {
+            growthFinishTime = value;
+            plotData.growth_finish_time = growthFinishTime;
+            db.UpdateRecord(plotData);
+        }
+    }
 
     // Timer
     private float updateTimer;
 
-    // By default, uninitiated.
-    private int dbStructureID = -1;
-
     void Start()
     {
+        db = FindFirstObjectByType<Database>();
         structure = GetComponent<Structure>();
+
+        if (plotData == null)
+        {
+            plotData = new Database.PlotData
+            {
+                structure_id = structure.StructureID,
+                growth_finish_time = GrowthFinishTime,
+                plot_state = (int)CurrentPlotState,
+                crop_so_name = Crop_SO.name
+            };
+
+            db.AddNewPlot(plotData);
+        }
     }
 
-    public void LoadData(Database.PlotData data)
+    public void LoadData(Database.PlotData data, Database db)
     {
+        plotData = data;
+        this.db = db;
+
         CurrentPlotState = (PlotState)data.plot_state;
-        GrowthFinishTime = data.growth_finish_time;
+        growthFinishTime = data.growth_finish_time;
 
         string path = $"Crop/{data.crop_so_name}";
         Crop_SO cropSO = (Crop_SO)Resources.Load(path);
@@ -96,7 +120,7 @@ public class Plot : MonoBehaviour, IClickableObject
                 }
             case PlotState.GROWING:
                 {
-                    TimeSpan timeLeftToClaim = GrowthFinishTime - DateTime.Now;
+                    TimeSpan timeLeftToClaim = growthFinishTime - DateTime.Now;
                     print("Growing... " + timeLeftToClaim + " seconds left");
                     if (timeLeftToClaim <= TimeSpan.Zero)
                     {
@@ -132,7 +156,7 @@ public class Plot : MonoBehaviour, IClickableObject
         Debug.Assert(crop_SO.baseTimeNeededPerClaim >= TimeSpan.Zero, "Time needed cannot be negative!");
 
         // Success
-        GrowthFinishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
+        growthFinishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
         CurrentPlotState = PlotState.GROWING;
 
         //Visual update

@@ -12,9 +12,9 @@ public class Database : MonoBehaviour
     private readonly int USERNAME_CHARACTER_LIMIT = 50;
     private readonly int MINIMUM_PASSWORD_LENGTH = 8;
 
-    private string username = "TestForPlotsAndFarming";
+    private string username = "NewTest";
     private string password = "";
-    private int playerId = 4;
+    public int PlayerId { get; private set; } = 5;
 
     SQLiteConnection db;
 
@@ -172,82 +172,44 @@ public class Database : MonoBehaviour
             Quaternion rot = new Quaternion(s_data.rotX, s_data.rotY, s_data.rotZ, s_data.rotW);
 
             GameObject structure = (GameObject)Instantiate(prefab, pos, rot);
-            structure.GetComponent<Structure>().LoadData(s_data);
+            structure.GetComponent<Structure>().LoadData(s_data, this);
 
             // Loading ResourceProducerData
             if (structure.TryGetComponent(out ResourceProducer rp))
             {
-                rp.LoadData(resourceProducers[s_data.structure_id]);
+                rp.LoadData(resourceProducers[s_data.structure_id], this);
             }
             else if (structure.TryGetComponent(out Plot plot))
             {
                 // Loading Plot
-                plot.LoadData(plots[s_data.structure_id]);
+                plot.LoadData(plots[s_data.structure_id], this);
             }
         }
     }
 
     private List<StructureData> DatabaseGetStructureData()
     {
-        return db.Table<StructureData>().Where((row) => row.player_id == playerId).ToList();
+        return db.Table<StructureData>().Where((row) => row.player_id == PlayerId).ToList();
     }
 
-    // Handles adding a new structure to database.
-    // Checks the structure for the structure type component and adds that to database as well.
-    public void AddNewStructure(Structure structure, Structure_SO so, DateTime timeBuildFinished, Structure.BuildingState buildingState)
+    public void AddNewStructure(StructureData data)
     {
-        Vector3 structurePos = structure.gameObject.transform.position;
-        Quaternion rotation = structure.gameObject.transform.rotation;
-
-        var structureData = new StructureData {
-            prefab_name = so.structurePrefab.name,
-            player_id = playerId,
-            time_build_finished = timeBuildFinished,
-            building_state = (int)buildingState,
-            posX = structurePos.x,
-            posY = structurePos.y,
-            posZ = structurePos.z,
-            rotW = rotation.w,
-            rotX = rotation.x,
-            rotY = rotation.y,
-            rotZ = rotation.z,
-        };
-
-        var result = db.Insert(structureData);
-        //Test errors here.
-        print("result: " + result + ", struc_id: " + structureData.structure_id + ", player_id: " + structureData.player_id);
-
-        // Resource Producer
-        if (structure.TryGetComponent(out ResourceProducer rp))
-        {
-            var rpData = new ResourceProducerData
-            {
-                structure_id = structureData.structure_id,
-                production_finish_time = rp.productionFinishTime,
-                producer_state = (int)rp.producerState,
-            };
-
-            result = db.Insert(rpData);
-        }
-        else if (structure.TryGetComponent(out Plot plot))
-        {
-            // Plot
-            var plotData = new PlotData
-            {
-                structure_id = structureData.structure_id,
-                growth_finish_time = plot.GrowthFinishTime,
-                plot_state = (int)plot.CurrentPlotState,
-                crop_so_name = plot.Crop_SO.name,
-            };
-
-            result = db.Insert(plotData);
-            //plot.Init(plotData, Database, structure_id);
-        }
+        db.Insert(data);
     }
 
-    public void UpdatePlotState(Plot.PlotState newState, int id)
+    public void AddNewResourceProducer(ResourceProducerData data)
     {
-        var result = db.Query<PlotData>("UPDATE tbl_plot SET plot_state = ? WHERE structure_id = ?", (int)newState, id);
-        //test errors here.
+        db.Insert(data);
+    }
+
+    public void AddNewPlot(PlotData data)
+    {
+        db.Insert(data);
+    }
+
+
+    public void UpdateRecord<T>(T newRecord)
+    {
+        db.Update(newRecord);
     }
 }
