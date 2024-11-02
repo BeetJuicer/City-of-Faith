@@ -7,12 +7,14 @@ using System.Linq;
 
 public class Database : MonoBehaviour
 {
+    public static Database Instance { get; private set; }
+
     private readonly int USERNAME_CHARACTER_LIMIT = 50;
     private readonly int MINIMUM_PASSWORD_LENGTH = 8;
 
-    private string username = "New";
-    private string password = "Player";
-    private int playerId = 3;
+    private string username = "TestForPlotsAndFarming";
+    private string password = "";
+    private int playerId = 4;
 
     SQLiteConnection db;
 
@@ -79,6 +81,15 @@ public class Database : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         db = new SQLiteConnection($"{Application.persistentDataPath}/MyDb.db");
         db.CreateTable<PlayerData>();
 
@@ -102,6 +113,7 @@ public class Database : MonoBehaviour
         }
         db.CreateTable<StructureData>();
         db.CreateTable<ResourceProducerData>();
+        db.CreateTable<PlotData>();
 
         // Player Exists. Load data.
         Debug.Log("Player exists.");
@@ -143,6 +155,11 @@ public class Database : MonoBehaviour
                           .Where(row => structureIds.Contains(row.structure_id))
                           .ToList().ToDictionary(rp => rp.structure_id);
 
+        // Same for Plots
+        Dictionary<int, PlotData> plots = db.Table<PlotData>()
+                  .Where(row => structureIds.Contains(row.structure_id))
+                  .ToList().ToDictionary(rp => rp.structure_id);
+
         // Loading the objects. TODO: Calling resources.load is pretty inefficient each time. Use something else.
         foreach (StructureData s_data in structures)
         {
@@ -162,6 +179,11 @@ public class Database : MonoBehaviour
             {
                 rp.LoadData(resourceProducers[s_data.structure_id]);
             }
+            else if (structure.TryGetComponent(out Plot plot))
+            {
+                // Loading Plot
+                plot.LoadData(plots[s_data.structure_id]);
+            }
         }
     }
 
@@ -170,6 +192,8 @@ public class Database : MonoBehaviour
         return db.Table<StructureData>().Where((row) => row.player_id == playerId).ToList();
     }
 
+    // Handles adding a new structure to database.
+    // Checks the structure for the structure type component and adds that to database as well.
     public void AddNewStructure(Structure structure, Structure_SO so, DateTime timeBuildFinished, Structure.BuildingState buildingState)
     {
         Vector3 structurePos = structure.gameObject.transform.position;
@@ -211,12 +235,19 @@ public class Database : MonoBehaviour
             var plotData = new PlotData
             {
                 structure_id = structureData.structure_id,
-                growth_finish_time = plot.growthFinishTime,
-                plot_state = (int)plot.plotState,
+                growth_finish_time = plot.GrowthFinishTime,
+                plot_state = (int)plot.CurrentPlotState,
                 crop_so_name = plot.Crop_SO.name,
             };
 
             result = db.Insert(plotData);
+            //plot.Init(plotData, Database, structure_id);
         }
+    }
+
+    public void UpdatePlotState(Plot.PlotState newState, int id)
+    {
+        var result = db.Query<PlotData>("UPDATE tbl_plot SET plot_state = ? WHERE structure_id = ?", (int)newState, id);
+        //test errors here.
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: Plot
   description: A plot of land. Used to grow crops for food.
-  structurePrefab: {fileID: 8699902465094047844, guid: 47eade9f76f5bf045a0637afe1702678,
+  structurePrefab: {fileID: 8699902465094047844, guid: 100599859de4086449a983c8f164fef7,
     type: 3}
   displayImage: {fileID: 0}
   expGivenOnBuild: 0

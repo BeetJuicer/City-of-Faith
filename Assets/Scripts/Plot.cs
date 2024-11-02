@@ -23,16 +23,48 @@ public class Plot : MonoBehaviour, IClickableObject
     [SerializeField] private Transform cropVisualPos;
 
     // Database
-    public PlotState plotState { get; private set; } = PlotState.WAITING;
+
+    private Database.PlotData plotData;
+
+    private PlotState currentPlotState = PlotState.WAITING;
+    public PlotState CurrentPlotState
+    {
+        get => currentPlotState;
+
+        private set
+        {
+            currentPlotState = value;
+            Database.Instance.UpdatePlotState(currentPlotState, dbStructureID);
+        }
+    }
+
     public Crop_SO Crop_SO { get { return crop_SO; } set { } }
-    public DateTime growthFinishTime { get; private set; }
+    public DateTime GrowthFinishTime { get; private set; }
 
     // Timer
     private float updateTimer;
 
+    // By default, uninitiated.
+    private int dbStructureID = -1;
+
     void Start()
     {
         structure = GetComponent<Structure>();
+    }
+
+    public void LoadData(Database.PlotData data)
+    {
+        CurrentPlotState = (PlotState)data.plot_state;
+        GrowthFinishTime = data.growth_finish_time;
+
+        string path = $"Crop/{data.crop_so_name}";
+        Crop_SO cropSO = (Crop_SO)Resources.Load(path);
+        Debug.Assert(cropSO != null, $"{data.crop_so_name} does not exist in {path}!");
+
+        crop_SO = cropSO;
+
+        if (CurrentPlotState == PlotState.GROWING)
+            Instantiate(cropSO.cropPrefab, cropVisualPos);
     }
 
     void Update()
@@ -46,13 +78,13 @@ public class Plot : MonoBehaviour, IClickableObject
         updateTimer = Time.time + 0.5f;
 
         // State handling
-        switch (plotState)
+        switch (CurrentPlotState)
         {
             case PlotState.WAITING:
                 {
                     if (structure.buildingState == Structure.BuildingState.BUILT)
                     {
-                        plotState = PlotState.EMPTY;
+                        CurrentPlotState = PlotState.EMPTY;
                     }
 
                     break;
@@ -64,11 +96,11 @@ public class Plot : MonoBehaviour, IClickableObject
                 }
             case PlotState.GROWING:
                 {
-                    TimeSpan timeLeftToClaim = growthFinishTime - DateTime.Now;
+                    TimeSpan timeLeftToClaim = GrowthFinishTime - DateTime.Now;
                     print("Growing... " + timeLeftToClaim + " seconds left");
                     if (timeLeftToClaim <= TimeSpan.Zero)
                     {
-                        plotState = PlotState.RIPE;
+                        CurrentPlotState = (PlotState.RIPE);
                     }
                     break;
                 }
@@ -96,12 +128,12 @@ public class Plot : MonoBehaviour, IClickableObject
 
         // Asserts
         Debug.Assert(crop_SO == null, "crop SO cannot be null!");
-        Debug.Assert(plotState == PlotState.EMPTY, "Plot must be empty to plant!");
+        Debug.Assert(CurrentPlotState == PlotState.EMPTY, "Plot must be empty to plant!");
         Debug.Assert(crop_SO.baseTimeNeededPerClaim >= TimeSpan.Zero, "Time needed cannot be negative!");
 
         // Success
-        growthFinishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
-        plotState = PlotState.GROWING;
+        GrowthFinishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
+        CurrentPlotState = PlotState.GROWING;
 
         //Visual update
         //TODO: Possible optimization, use crop pools.
@@ -123,7 +155,7 @@ public class Plot : MonoBehaviour, IClickableObject
     public void OnObjectClicked()
     {
         // State handling
-        switch (plotState)
+        switch (CurrentPlotState)
         {
             case PlotState.WAITING:
                 {
@@ -161,6 +193,6 @@ public class Plot : MonoBehaviour, IClickableObject
         //TODO: Possible optimization, use crop pools. May be temporary depending on UI
         Destroy(cropVisualPos.GetChild(0).gameObject);
 
-        plotState = PlotState.EMPTY;
+        CurrentPlotState = PlotState.EMPTY;
     }
 }

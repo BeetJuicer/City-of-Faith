@@ -101,24 +101,6 @@ public class Structure : MonoBehaviour
         }
     }
 
-    //UIManager.cs
-
-    //DisplayStructureDetails(Structure_SO so)
-    // setactive(UI ng display)
-    // structueNametext.value = so.structureName;
-    // description = description
-    // cost. text.value = so.cost
-
-
-    //scriptableObjects[]
-
-    //DisplayScriptables(scriptbale[] arr)
-    //foreach(structure in arr)
-    // display card for each structure
-    // structueNametext.value = so.structureName;
-    // description = description
-    // cost. text.value = so.cost
-
     // Update is called once per frame
     void Update()
     {
