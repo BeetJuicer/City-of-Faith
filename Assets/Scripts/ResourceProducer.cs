@@ -22,7 +22,6 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
     public ProducerState producerState { get; private set; }
     public TimeSpan timePerClaim;
     public DateTime productionFinishTime { get; private set; }
-
     // Timer
     private float updateTimer;
 
