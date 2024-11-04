@@ -80,6 +80,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
         this.db = db;
         resourceProducerData = data;
 
+        //Not using the property so I don't waste a call to update database.
         productionFinishTime = data.production_finish_time;
         currentProducerState = (ProducerState)data.producer_state;
     }
@@ -99,7 +100,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
         {
             case ProducerState.Waiting:
                 {
-                    if (structure.buildingState == Structure.BuildingState.BUILT)
+                    if (structure.CurrentBuildingState == Structure.BuildingState.BUILT)
                     {
                         StartProduction();
                     }
@@ -113,7 +114,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                 }
             case ProducerState.Producing:
                 {
-                    TimeSpan timeLeftToClaim = productionFinishTime - DateTime.Now;
+                    TimeSpan timeLeftToClaim = ProductionFinishTime - DateTime.Now;
                     print("Producing... " + timeLeftToClaim + " seconds left"); // to be replaced with ui
 
                     if (timeLeftToClaim <= TimeSpan.Zero)
@@ -133,7 +134,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
 
     private void StartProduction()
     {
-        productionFinishTime = DateTime.Now.Add(timePerClaim);
+        ProductionFinishTime = DateTime.Now.Add(timePerClaim);
         CurrentProducerState = ProducerState.Producing;
     }
 

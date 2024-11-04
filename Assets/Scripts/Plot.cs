@@ -56,11 +56,11 @@ public class Plot : MonoBehaviour, IClickableObject
 
     void Start()
     {
-        db = FindFirstObjectByType<Database>();
         structure = GetComponent<Structure>();
 
         if (plotData == null)
         {
+            db = FindFirstObjectByType<Database>();
             plotData = new Database.PlotData
             {
                 structure_id = structure.StructureID,
@@ -79,6 +79,7 @@ public class Plot : MonoBehaviour, IClickableObject
         this.db = db;
 
         CurrentPlotState = (PlotState)data.plot_state;
+        //not using the property so that I don't have to call the update database event. Just loading data. 
         growthFinishTime = data.growth_finish_time;
 
         string path = $"Crop/{data.crop_so_name}";
@@ -106,7 +107,7 @@ public class Plot : MonoBehaviour, IClickableObject
         {
             case PlotState.WAITING:
                 {
-                    if (structure.buildingState == Structure.BuildingState.BUILT)
+                    if (structure.CurrentBuildingState == Structure.BuildingState.BUILT)
                     {
                         CurrentPlotState = PlotState.EMPTY;
                     }
@@ -120,7 +121,7 @@ public class Plot : MonoBehaviour, IClickableObject
                 }
             case PlotState.GROWING:
                 {
-                    TimeSpan timeLeftToClaim = growthFinishTime - DateTime.Now;
+                    TimeSpan timeLeftToClaim = GrowthFinishTime - DateTime.Now;
                     print("Growing... " + timeLeftToClaim + " seconds left");
                     if (timeLeftToClaim <= TimeSpan.Zero)
                     {
@@ -156,7 +157,7 @@ public class Plot : MonoBehaviour, IClickableObject
         Debug.Assert(crop_SO.baseTimeNeededPerClaim >= TimeSpan.Zero, "Time needed cannot be negative!");
 
         // Success
-        growthFinishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
+        GrowthFinishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
         CurrentPlotState = PlotState.GROWING;
 
         //Visual update

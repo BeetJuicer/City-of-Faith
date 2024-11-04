@@ -12,9 +12,9 @@ public class Database : MonoBehaviour
     private readonly int USERNAME_CHARACTER_LIMIT = 50;
     private readonly int MINIMUM_PASSWORD_LENGTH = 8;
 
-    private string username = "NewTest";
+    private string username = "Test Tickles";
     private string password = "";
-    public int PlayerId { get; private set; } = 5;
+    public int PlayerId { get; private set; }
 
     SQLiteConnection db;
 
@@ -96,7 +96,7 @@ public class Database : MonoBehaviour
         //TODO FOR DATABASE: PASSWORD CHECKING
 
         // CREATE A STATEMENT CHECKING IF USER EXISTS
-        var query = db.Table<PlayerData>().Where(row => row.Username.Equals(username));
+        TableQuery<PlayerData> query = db.Table<PlayerData>().Where(row => row.Username.Equals(username));
 
         // No player. Start new game.
         //TODO: set flags for tutorials.
@@ -109,15 +109,22 @@ public class Database : MonoBehaviour
                 Password = password
             };
             db.Insert(newPlayer);
+            PlayerId = newPlayer.Player_id;
+            print($"User {username} not found. Creating new game.");
             return;
         }
-        db.CreateTable<StructureData>();
-        db.CreateTable<ResourceProducerData>();
-        db.CreateTable<PlotData>();
+        else
+        {
+            PlayerId = query.ToList<PlayerData>().First().Player_id;
+            print($"User {username} found. Loading Game.");
 
-        // Player Exists. Load data.
-        Debug.Log("Player exists.");
-        LoadGame();
+            db.CreateTable<StructureData>();
+            db.CreateTable<ResourceProducerData>();
+            db.CreateTable<PlotData>();
+
+            // Player Exists. Load data.
+            LoadGame();
+        }
     }
 
     // When player reenters game.

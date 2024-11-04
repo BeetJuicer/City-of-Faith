@@ -24,7 +24,17 @@ public class Structure : MonoBehaviour
         IN_PROGRESS = 1,
         BUILT = 2
     }
-    public BuildingState buildingState { get; private set; } = BuildingState.IN_PROGRESS;
+    private BuildingState currentBuildingState = BuildingState.IN_PROGRESS;
+    public BuildingState CurrentBuildingState
+    {
+        get => currentBuildingState;
+        private set
+        {
+            currentBuildingState = value;
+            structureData.building_state = (int)currentBuildingState;
+            db.UpdateRecord(structureData);
+        }
+    }
     private DateTime timeInstantiated;
     private DateTime timeBuildFinished;
     //TODO: problems if user changes date and time of device.
@@ -36,14 +46,28 @@ public class Structure : MonoBehaviour
     private const string IN_PROGRESS_VISUAL_NAME = "InProgressVisual";
     private const string BUILT_VISUAL_NAME = "BuiltVisual";
 
+    private void Awake()
+    {
+        GetChildrenVisuals();
+    }
+
+    private void GetChildrenVisuals()
+    {
+        // ENTER IN-PROGRESS STATE
+        inProgressVisual = transform.Find(IN_PROGRESS_VISUAL_NAME).gameObject;
+        builtVisual = transform.Find(BUILT_VISUAL_NAME).gameObject;
+
+        Debug.Assert(inProgressVisual != null, "In Progress Visual not found. If the Visual exists, check the spelling.");
+        Debug.Assert(builtVisual != null, "Built Visual not found. If the Visual exists, check the spelling.");
+    }
+
     private void Start()
     {
-        db = FindFirstObjectByType<Database>();
-
         // Load default values if not in database.
         if (structureData == null)
         {
-            buildingState = BuildingState.IN_PROGRESS;
+            db = FindFirstObjectByType<Database>();
+            currentBuildingState = BuildingState.IN_PROGRESS;
 
             //TODO: change to online method
             timeInstantiated = DateTime.Now;
@@ -60,7 +84,7 @@ public class Structure : MonoBehaviour
                 prefab_name = structure_so.structurePrefab.name,
                 player_id = db.PlayerId,
                 time_build_finished = timeBuildFinished,
-                building_state = (int)buildingState,
+                building_state = (int)currentBuildingState,
                 posX = structurePos.x,
                 posY = structurePos.y,
                 posZ = structurePos.z,
@@ -75,18 +99,6 @@ public class Structure : MonoBehaviour
 
             Debug.Assert(StructureID != 0, "Structure ID is 0!");
         }
-
-        GetChildrenVisuals();
-    }
-
-    private void GetChildrenVisuals()
-    {
-        // ENTER IN-PROGRESS STATE
-        inProgressVisual = transform.Find(IN_PROGRESS_VISUAL_NAME).gameObject;
-        builtVisual = transform.Find(BUILT_VISUAL_NAME).gameObject;
-
-        Debug.Assert(inProgressVisual != null, "In Progress Visual not found. If the Visual exists, check the spelling.");
-        Debug.Assert(builtVisual != null, "Built Visual not found. If the Visual exists, check the spelling.");
     }
 
     /// Called by database to initialize needed values.
@@ -96,7 +108,12 @@ public class Structure : MonoBehaviour
         structureData = data;
 
         timeBuildFinished = data.time_build_finished;
-        buildingState = (BuildingState)data.building_state;
+
+        //not using the property so that I don't have to call the update database event. Just loading data. 
+        currentBuildingState = (BuildingState)data.building_state;
+
+        if (currentBuildingState == BuildingState.BUILT) 
+            EnterBuiltState();
     }
 
     // UIManager Integration - Detect when this structure is clicked
@@ -115,19 +132,15 @@ public class Structure : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (buildingState)
+        switch (currentBuildingState)
         {
             case BuildingState.BUILT:
                 {
-                    // shit here
-                    // decor does nothing
-                    // plants 
-                    print("Im built");
                     break;
                 }
             case BuildingState.IN_PROGRESS:
                 {
-                    print("In progress: " + gameObject.name + " Time finished: " + timeBuildFinished);
+                    //print("In progress: " + gameObject.name + " Time finished: " + timeBuildFinished);
                     // EXIT STATE.
                     if (DateTime.Now > timeBuildFinished)
                     {
@@ -135,20 +148,25 @@ public class Structure : MonoBehaviour
                         print("TODO: Add " + structure_so.expGivenOnBuild + " exp!!");
                         print("TODO: Add " + structure_so.numberOfCitizensAdded + " citizens to population!!");
 
-                        // -- Visual Changes
-                        //TODO: VFX: Add vfx from object pool here.
-                        inProgressVisual.SetActive(false);
-                        builtVisual.SetActive(true);
-
-                        // Exit state.
-                        buildingState = BuildingState.BUILT;
+                        EnterBuiltState();
                     }
                     break;
                 }
             default:
-                Debug.LogError("Unhandled state! State is: " + buildingState);
+                Debug.LogError("Unhandled state! State is: " + currentBuildingState);
                 break;
         }
+    }
+
+    private void EnterBuiltState()
+    {
+        // -- Visual Changes
+        //TODO: VFX: Add vfx from object pool here.
+        inProgressVisual.SetActive(false);
+        builtVisual.SetActive(true);
+
+        // Exit state.
+        CurrentBuildingState = BuildingState.BUILT;
     }
 
     public void DisplayBuildingState()
