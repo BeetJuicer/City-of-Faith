@@ -89,12 +89,18 @@ public class Database : MonoBehaviour
         {
             Instance = this;
         }
-
-        db = new SQLiteConnection($"{Application.persistentDataPath}/MyDb.db");
-        db.CreateTable<PlayerData>();
-
         //TODO FOR DATABASE: PASSWORD CHECKING
 
+        db = new SQLiteConnection($"{Application.persistentDataPath}/MyDb.db");
+
+        //activate foreign key constraints
+        db.Execute("PRAGMA foreign_keys = ON");
+
+        db.CreateTable<PlayerData>();
+        db.CreateTable<StructureData>();
+        db.CreateTable<ResourceProducerData>();
+        db.CreateTable<PlotData>();
+        
         // CREATE A STATEMENT CHECKING IF USER EXISTS
         TableQuery<PlayerData> query = db.Table<PlayerData>().Where(row => row.Username.Equals(username));
 
@@ -117,35 +123,14 @@ public class Database : MonoBehaviour
         {
             PlayerId = query.ToList<PlayerData>().First().Player_id;
             print($"User {username} found. Loading Game.");
-
-            db.CreateTable<StructureData>();
-            db.CreateTable<ResourceProducerData>();
-            db.CreateTable<PlotData>();
-
-            // Player Exists. Load data.
-            LoadGame();
         }
     }
 
     // When player reenters game.
     private void OnApplicationFocus(bool focus)
     {
-        //if (focus)
-        //    LoadGame();
-        //else
-        //    SaveGame();
-    }
-
-    // When player goes to home screen.
-    private void OnApplicationPause(bool pause)
-    {
-        if (pause)
-            SaveGame();
-    }
-
-    private void SaveGame()
-    {
-
+        if (focus)
+            LoadGame();
     }
 
     private void LoadGame()
@@ -218,5 +203,10 @@ public class Database : MonoBehaviour
     public void UpdateRecord<T>(T newRecord)
     {
         db.Update(newRecord);
+    }
+
+    public void DeleteRecord<T>(T recordToDelete)
+    {
+        db.Delete(recordToDelete);
     }
 }

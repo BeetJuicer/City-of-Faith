@@ -158,6 +158,14 @@ public class Structure : MonoBehaviour
         }
     }
 
+    [Button]
+    private void DestroyStructure()
+    {
+        print("TODO: Sold structure! Add resources returned to resourcemanage");
+        db.DeleteRecord(structureData);
+        Destroy(gameObject);
+    }
+
     private void EnterBuiltState()
     {
         // -- Visual Changes
