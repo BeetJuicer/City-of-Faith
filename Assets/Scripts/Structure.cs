@@ -21,6 +21,8 @@ public class Structure : MonoBehaviour
 
     public enum BuildingState
     {
+        // BE CAREFUL WITH CHANGING. ENUM IS STORED AS INT IN DATABASE. DON'T CHANGE ORDER UNLESS ABSOLUTELY NEEDED !!!
+
         IN_PROGRESS = 1,
         BUILT = 2
     }
@@ -94,7 +96,7 @@ public class Structure : MonoBehaviour
                 rotZ = rotation.z,
             };
 
-            db.AddNewStructure(structureData);
+            db.AddNewRecord(structureData);
             StructureID = structureData.structure_id;
 
             Debug.Assert(StructureID != 0, "Structure ID is 0!");

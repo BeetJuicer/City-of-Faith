@@ -7,6 +7,8 @@ using SQLite;
 
 public enum ProducerState
 {
+    // BE CAREFUL WITH CHANGING. ENUM IS STORED AS INT IN DATABASE. DON'T CHANGE ORDER UNLESS ABSOLUTELY NEEDED !!!
+
     Waiting = 1,
     Producing = 2,
     Ready_To_Claim = 3,
@@ -67,7 +69,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                 producer_state = (int)CurrentProducerState,
             };
 
-            db.AddNewResourceProducer(resourceProducerData);
+            db.AddNewRecord(resourceProducerData);
         }
 
         //Keep a base amount per claim in case leveling up buildings is possible.
@@ -141,7 +143,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
     public void ClaimResources()
     {
         print("Claimed " + amountPerClaim + resourceProducer_SO.resource_SO.resourceType + "!");
-        ResourceManager.Instance.AddToPlayerResources(FoodResource.Fish, amountPerClaim);
+        ResourceManager.Instance.AdjustPlayerResources(FoodResource.Fish, amountPerClaim);
         StartProduction();
     }
 

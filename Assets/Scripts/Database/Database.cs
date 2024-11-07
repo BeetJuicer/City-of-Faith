@@ -18,8 +18,10 @@ public class Database : MonoBehaviour
 
     SQLiteConnection db;
 
+    public interface IDatabaseData { }
+
     [Table("tbl_player")]
-    public class PlayerData
+    public class PlayerData : IDatabaseData
     {
         [PrimaryKey, AutoIncrement]
         public int Player_id { get; set; }
@@ -28,7 +30,7 @@ public class Database : MonoBehaviour
     }
 
     [Table("tbl_structure")]
-    public class StructureData
+    public class StructureData : IDatabaseData
     {
         [PrimaryKey, AutoIncrement]
         public int structure_id { get; set; }
@@ -59,7 +61,7 @@ public class Database : MonoBehaviour
     }
 
     [Table("tbl_resourceProducer")]
-    public class ResourceProducerData
+    public class ResourceProducerData : IDatabaseData
     {
         [PrimaryKey, NotNull]
         public int structure_id { get; set; }
@@ -69,7 +71,7 @@ public class Database : MonoBehaviour
     }
     
     [Table("tbl_plot")]
-    public class PlotData
+    public class PlotData : IDatabaseData
     {
         [PrimaryKey, NotNull]
         public int structure_id { get; set; }
@@ -78,6 +80,16 @@ public class Database : MonoBehaviour
         public DateTime growth_finish_time { get; set; }
         public string crop_so_name { get; set; }
     }
+
+    [Table("tbl_currency")]
+    public class CurrencyData : IDatabaseData
+    {
+        [NotNull]
+        public int player_id { get; set; }
+        [NotNull]
+        public int currency_type { get; set; }
+        public int amount{ get; set; }
+}
 
     private void Awake()
     {
@@ -100,8 +112,9 @@ public class Database : MonoBehaviour
         db.CreateTable<StructureData>();
         db.CreateTable<ResourceProducerData>();
         db.CreateTable<PlotData>();
-        
-        // CREATE A STATEMENT CHECKING IF USER EXISTS
+        db.CreateTable<CurrencyData>();
+
+        //Query for user
         TableQuery<PlayerData> query = db.Table<PlayerData>().Where(row => row.Username.Equals(username));
 
         // No player. Start new game.
@@ -184,28 +197,30 @@ public class Database : MonoBehaviour
         return db.Table<StructureData>().Where((row) => row.player_id == PlayerId).ToList();
     }
 
-    public void AddNewStructure(StructureData data)
+    public List<CurrencyData> DatabaseGetCurrencyData()
     {
-        db.Insert(data);
+        return db.Table<CurrencyData>().Where((row) => row.player_id == PlayerId).ToList();
     }
 
-    public void AddNewResourceProducer(ResourceProducerData data)
+    public void AddNewRecord(IDatabaseData newRecord)
     {
-        db.Insert(data);
+        db.Insert(newRecord);
     }
 
-    public void AddNewPlot(PlotData data)
-    {
-        db.Insert(data);
-    }
-
-
-    public void UpdateRecord<T>(T newRecord)
+    public void UpdateRecord(IDatabaseData newRecord)
     {
         db.Update(newRecord);
     }
 
-    public void DeleteRecord<T>(T recordToDelete)
+    public void UpdateRecords(IEnumerable<IDatabaseData> newRecords)
+    {
+        foreach (var record in newRecords)
+        {
+            db.Update(record);
+        }
+    }
+
+    public void DeleteRecord(IDatabaseData recordToDelete)
     {
         db.Delete(recordToDelete);
     }

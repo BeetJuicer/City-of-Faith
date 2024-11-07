@@ -73,16 +73,19 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     [Button]
     public void InstantiateBuilding()
     {
-        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode &&
-            IsAllowedToPlace &&
-            ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
+        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode && 
+            ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired) &&
+            IsAllowedToPlace)
         {
             GameObject structure = Instantiate(structure_SO.structurePrefab, transform.position, transform.rotation);
-            
 
             //add xp and subtract gold.
-            print("TODO: Built " + structure_SO.structureName + ". Subtracted " + structure_SO.currencyRequired);
-            print("TODO: Built " + structure_SO.structureName + ". Subtracted " + structure_SO.resourcesRequired);
+            foreach(KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
+            {
+                ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, currencyCost.Value);
+            }
+
+            print("TODO: Built " + structure_SO.structureName + ". NEED TO ADD " + structure_SO.expGivenOnBuild);
         }
         //else
             //feedback that it's not allowed.

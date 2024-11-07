@@ -453,13 +453,13 @@ MonoBehaviour:
       Value: 10
     - Key: 2
       Value: 10
-  playerCurrencies:
+  startingPlayerCurrencies:
     _serializedList:
-    - Key: 0
-      Value: 99999999
     - Key: 1
-      Value: 99999999
-  foodUnitsRequiredPerCitizen: 0
+      Value: 10000
+    - Key: 2
+      Value: 10000
+  foodUnitsRequiredPerCitizen: 5
 --- !u!1 &1437663069
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using AYellowpaper.SerializedCollections;
 using System.Linq;
-
+using System;
 public enum Currency
 {
-    Gold,
-    Glory,
+    // BE CAREFUL WITH CHANGING. ENUM IS STORED AS INT IN DATABASE. DON'T CHANGE ORDER UNLESS ABSOLUTELY NEEDED !!!
+    Gold = 1,
+    Glory = 2,
 }
 
 public enum FoodResource
@@ -22,46 +23,115 @@ public enum FoodResource
 public class ResourceManager : MonoBehaviour
 {
     private static ResourceManager _instance;
-    public static ResourceManager Instance { get { return _instance; } }
+    public static ResourceManager Instance { get { return _instance; } private set { _instance = value; } }
 
+    private Database db;
 
-    // serialize for now for debug purposes.
-    [SerializedDictionary] 
-    [SerializeField] private SerializedDictionary<FoodResource, int> playerFoodResources = new SerializedDictionary<FoodResource, int>();
+    // Set as a dictionary so that we can update each database record individually when set instead of updating the entire list of currencies.
+    private Dictionary<Currency, Database.CurrencyData> currencyData = null;
 
     // serialize for now for debug purposes.
     [SerializedDictionary]
-    [SerializeField] private SerializedDictionary<Currency, int> playerCurrencies = new SerializedDictionary<Currency, int>();
+    [SerializeField] private SerializedDictionary<FoodResource, int> playerFoodResources = new();
+    private SerializedDictionary<FoodResource, int> PlayerFoodResources
+    {
+        get => playerFoodResources;
+        set
+        {
+            playerFoodResources = value;
+            UpdateFoodStashTotal();
+        }
+    }
 
+    private SerializedDictionary<Currency, int> playerCurrencies = new();
+    private SerializedDictionary<Currency, int> PlayerCurrencies
+    {
+        get => playerCurrencies;
+        set
+        {
+            playerCurrencies = value;
+            // AddToPlayerCurrencies handles updating the single record in database.
+        }
+    }
+
+    [SerializedDictionary]
+    [SerializeField] private SerializedDictionary<Currency, int> startingPlayerCurrencies = new();
 
     public int PlayerExp { get; private set; }
 
     [Tooltip("Citizen Satisfaction is 0 -> 1 -> 2. 1 is the baseline.")]
     public int CitizenSatisfaction { get; private set; }
     public int Population { get; private set; }
-    public int FoodStashAmount { get; private set; }
+    public int FoodStashTotalAmount { get; private set; }
 
     [SerializeField] private int foodUnitsRequiredPerCitizen;
 
     private void Awake()
     {
-        if (_instance == null)
+        if (Instance == null)
         {
-            _instance = this;
+            Instance = this;
+        }
+        else if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+
+    }
+
+    private void Start()
+    {
+        db = FindFirstObjectByType<Database>();
+        Debug.Assert(db != null, "No gameobject with Database component found in scene!");
+
+        currencyData = db.DatabaseGetCurrencyData().ToDictionary(record => (Currency)record.currency_type);
+
+        if (currencyData.Count <= 0)
+        {
+            InitializeDefaultCurrencyData();
         }
     }
 
-    public void AddToPlayerResources(FoodResource type, int amount)
+    private void InitializeDefaultCurrencyData()
     {
-        print("Added " + amount + " units of " + type + " to storage!");
-
-        playerFoodResources[type] += amount;
-        CalculateFoodStash();
+        foreach (Currency type in Enum.GetValues(typeof(Currency)))
+        {
+            print("Initializing: " + type +  ": " + type.ToString() + ", ");
+            Database.CurrencyData typeData = new()
+            {
+                player_id = db.PlayerId,
+                currency_type = (int)type,
+                amount = startingPlayerCurrencies[type]
+            };
+            currencyData.Add(type, typeData);
+            db.AddNewRecord(typeData);
+        }
     }
 
+    // Always use this to set player currency.
+    private void SetPlayerCurrency(Currency type, int newValue)
+    {
+        playerCurrencies[type] = newValue;
+        currencyData[type].amount = newValue;
+
+        db.UpdateRecord(currencyData[type]);
+    }
+
+    public void AdjustPlayerCurrency(Currency type, int amount)
+    {
+        print("Added " + amount + " units of " + type.ToString() + " to storage!");
+
+        SetPlayerCurrency(type, PlayerCurrencies[type] + amount);
+    }
+
+    public void AdjustPlayerResources(FoodResource type, int amount)
+    {
+        print("Added " + amount + " units of " + type.ToString() + " to storage!");
+
+        PlayerFoodResources[type] += amount;
+    }
     public bool HasEnough<T>(Dictionary<T, int> cost, Dictionary<T, int> playerInventory)
     {
-        print(playerInventory);
         foreach (var keyValue in playerInventory)
         {
             if (playerInventory[keyValue.Key] < keyValue.Value)
@@ -74,26 +144,29 @@ public class ResourceManager : MonoBehaviour
 
     public bool HasEnoughCurrency(Dictionary<Currency, int> cost)
     {
-        return HasEnough(cost, playerCurrencies);
+        return HasEnough(cost, PlayerCurrencies);
     }
 
     public bool HasEnoughResources(Dictionary<FoodResource, int> cost)
     {
-        return HasEnough(cost, playerFoodResources);
+        return HasEnough(cost, PlayerFoodResources);
     }
 
-    public int CalculateFoodStash()
+    //Necessary for calculating how much TOTAL food we have.
+    public void UpdateFoodStashTotal()
     {
-        FoodStashAmount = playerFoodResources[FoodResource.Fish] +
-                          playerFoodResources[FoodResource.Meat] +
-                          playerFoodResources[FoodResource.Plant];
+        int sum = 0;
+        foreach(FoodResource type in Enum.GetValues(typeof(FoodResource)))
+        {
+            sum += PlayerFoodResources[type];
+        }
 
-        return FoodStashAmount;
+        FoodStashTotalAmount = sum;
     }
 
     public void CalculateCitizenSatisfaction()
     {
-        if(FoodStashAmount / foodUnitsRequiredPerCitizen < 1)
+        if (FoodStashTotalAmount / foodUnitsRequiredPerCitizen < 1)
         {
             // not enough food per citizen
             // prosperous

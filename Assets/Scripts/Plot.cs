@@ -10,6 +10,8 @@ public class Plot : MonoBehaviour, IClickableObject
     private Structure structure;
     public enum PlotState
     {
+        // BE CAREFUL WITH CHANGING. ENUM IS STORED AS INT IN DATABASE. DON'T CHANGE ORDER UNLESS ABSOLUTELY NEEDED !!!
+
         WAITING = 1,
         EMPTY = 2,
         GROWING = 3,
@@ -69,7 +71,7 @@ public class Plot : MonoBehaviour, IClickableObject
                 crop_so_name = Crop_SO.name
             };
 
-            db.AddNewPlot(plotData);
+            db.AddNewRecord(plotData);
         }
     }
 
@@ -213,7 +215,7 @@ public class Plot : MonoBehaviour, IClickableObject
 
     public void ClaimHarvest()
     {
-        ResourceManager.Instance.AddToPlayerResources(FoodResource.Plant, crop_SO.amountPerClaim);
+        ResourceManager.Instance.AdjustPlayerResources(FoodResource.Plant, crop_SO.amountPerClaim);
 
         //TODO: Possible optimization, use crop pools. May be temporary depending on UI
         Destroy(cropVisualPos.GetChild(0).gameObject);
