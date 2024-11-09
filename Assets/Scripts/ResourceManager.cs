@@ -43,8 +43,8 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    private SerializedDictionary<Currency, int> playerCurrencies = new();
-    private SerializedDictionary<Currency, int> PlayerCurrencies
+    private Dictionary<Currency, int> playerCurrencies = new SerializedDictionary<Currency, int>();
+    private Dictionary<Currency, int> PlayerCurrencies
     {
         get => playerCurrencies;
         set
@@ -86,17 +86,23 @@ public class ResourceManager : MonoBehaviour
 
         currencyData = db.DatabaseGetCurrencyData().ToDictionary(record => (Currency)record.currency_type);
 
+        // No data found. Must be new player.
         if (currencyData.Count <= 0)
         {
-            InitializeDefaultCurrencyData();
+            InitializeDefaultCurrencyAndData();
+        }
+        else
+        {
+            // Load player currencies from data.
+            PlayerCurrencies = currencyData.ToDictionary(pair => pair.Key, pair => pair.Value.amount);
         }
     }
 
-    private void InitializeDefaultCurrencyData()
+    private void InitializeDefaultCurrencyAndData()
     {
+        //curency data.
         foreach (Currency type in Enum.GetValues(typeof(Currency)))
         {
-            print("Initializing: " + type +  ": " + type.ToString() + ", ");
             Database.CurrencyData typeData = new()
             {
                 player_id = db.PlayerId,
@@ -106,6 +112,9 @@ public class ResourceManager : MonoBehaviour
             currencyData.Add(type, typeData);
             db.AddNewRecord(typeData);
         }
+
+        //actual currency
+        PlayerCurrencies = startingPlayerCurrencies;
     }
 
     // Always use this to set player currency.
@@ -121,7 +130,13 @@ public class ResourceManager : MonoBehaviour
     {
         print("Added " + amount + " units of " + type.ToString() + " to storage!");
 
-        SetPlayerCurrency(type, PlayerCurrencies[type] + amount);
+        foreach (KeyValuePair<Currency, int> pair in PlayerCurrencies)
+        {
+            print($"{pair.Key}: {pair.Value}");
+        }
+
+        SetPlayerCurrency(type, 
+            PlayerCurrencies[type] + amount);
     }
 
     public void AdjustPlayerResources(FoodResource type, int amount)

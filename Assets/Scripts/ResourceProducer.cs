@@ -25,7 +25,10 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
 
     [SerializeField] private ResourceProducer_SO resourceProducer_SO;
     private int amountPerClaim;
-    public TimeSpan timePerClaim;
+    private TimeSpan timePerClaim;
+
+    //temp debug bool
+    public bool printTime = false;
 
 
     private ProducerState currentProducerState = ProducerState.Waiting;
@@ -110,14 +113,16 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                 }
             case ProducerState.Ready_To_Claim:
                 {
-                    // nothing here.
-                    print("Ready to Claim!!");
+                        // nothing here.
+                    if (printTime)
+                        print("Ready to Claim!!");
                     break;
                 }
             case ProducerState.Producing:
                 {
                     TimeSpan timeLeftToClaim = ProductionFinishTime - DateTime.Now;
-                    print("Producing... " + timeLeftToClaim + " seconds left"); // to be replaced with ui
+                    if (printTime) 
+                        print("Producing... " + timeLeftToClaim + " seconds left"); // to be replaced with ui
 
                     if (timeLeftToClaim <= TimeSpan.Zero)
                     {

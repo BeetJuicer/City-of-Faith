@@ -84,6 +84,8 @@ public class Database : MonoBehaviour
     [Table("tbl_currency")]
     public class CurrencyData : IDatabaseData
     {
+        [PrimaryKey, NotNull, AutoIncrement]
+        public int currency_id { get; set; }
         [NotNull]
         public int player_id { get; set; }
         [NotNull]

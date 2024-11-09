@@ -82,7 +82,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             //add xp and subtract gold.
             foreach(KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
             {
-                ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, currencyCost.Value);
+                ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
             }
 
             print("TODO: Built " + structure_SO.structureName + ". NEED TO ADD " + structure_SO.expGivenOnBuild);
