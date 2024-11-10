@@ -12,7 +12,7 @@ public class Database : MonoBehaviour
     private readonly int USERNAME_CHARACTER_LIMIT = 50;
     private readonly int MINIMUM_PASSWORD_LENGTH = 8;
 
-    private string username = "Test Tickles";
+    [SerializeField] private string username = "Test Tickles";
     private string password = "";
     public int PlayerId { get; private set; }
 
