@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4031798082164398
 Transform:
@@ -69,8 +69,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   structure_so: {fileID: 11400000, guid: ae9a5c43ae21eaf4c87f21fd41774075, type: 2}
-  decorations: []
-  buildings: []
 --- !u!1 &799158733941052164
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +85,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &1889788351498451
 Transform:
@@ -176,7 +174,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8167415490369102595
 Transform:
