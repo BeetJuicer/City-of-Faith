@@ -48,7 +48,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         if ((whatIsGround & (1 << other.gameObject.layer)) != 0)
             return;
 
-        print("something here: " + other.gameObject);
+        //print("something here: " + other.gameObject);
         collidersInRange++;
         IsAllowedToPlace = false;
     }
@@ -85,7 +85,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
                 ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
             }
 
-            print("TODO: Built " + structure_SO.structureName + ". NEED TO ADD " + structure_SO.expGivenOnBuild);
+            //print("TODO: Built " + structure_SO.structureName + ". NEED TO ADD " + structure_SO.expGivenOnBuild);
         }
         //else
             //feedback that it's not allowed.

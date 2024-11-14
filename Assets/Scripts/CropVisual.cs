@@ -10,7 +10,7 @@ public class CropVisual : MonoBehaviour
     private const string GROWING_GO_STRING = "V_Growing";
     private const string RIPE_GO_STRING = "V_Ripe";
 
-    private void Start()
+    private void Awake()
     {
         growingGO = transform.Find(GROWING_GO_STRING).gameObject;
         ripeGO = transform.Find(RIPE_GO_STRING).gameObject;

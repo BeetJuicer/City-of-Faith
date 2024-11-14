@@ -69,7 +69,7 @@ public class Database : MonoBehaviour
         public int producer_state { get; set; }
         public DateTime production_finish_time { get; set; }
     }
-    
+
     [Table("tbl_plot")]
     public class PlotData : IDatabaseData
     {
@@ -138,15 +138,16 @@ public class Database : MonoBehaviour
         {
             PlayerId = query.ToList<PlayerData>().First().Player_id;
             print($"User {username} found. Loading Game.");
+            LoadGame();
         }
     }
 
     // When player reenters game.
-    private void OnApplicationFocus(bool focus)
-    {
-        if (focus)
-            LoadGame();
-    }
+    //private void OnApplicationFocus(bool focus)
+    //{
+    //    if (focus)
+    //        LoadGame();
+    //}
 
     private void LoadGame()
     {

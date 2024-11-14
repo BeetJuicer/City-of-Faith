@@ -61,10 +61,10 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
     private void Start()
     {
         structure = GetComponent<Structure>();
-        db = FindFirstObjectByType<Database>();
 
         if (resourceProducerData == null)
         {
+            db = FindFirstObjectByType<Database>();
             resourceProducerData = new Database.ResourceProducerData
             {
                 structure_id = structure.StructureID,
