@@ -181,6 +181,7 @@ public class Database : MonoBehaviour
             GameObject structure = (GameObject)Instantiate(prefab, pos, rot);
             structure.GetComponent<Structure>().LoadData(s_data, this);
 
+            // I don't like this checking each type of structure. Might refactor.
             // Loading ResourceProducerData
             if (structure.TryGetComponent(out ResourceProducer rp))
             {
