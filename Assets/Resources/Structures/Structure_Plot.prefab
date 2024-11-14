@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac84a6e9f198964eba80e0ae9658862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crop_SO: {fileID: 11400000, guid: 5d08ff7e3786dcd46ba3961d79f0d9dc, type: 2}
+  tempCropSO: {fileID: 11400000, guid: 87f6198545aba7b4ea1890a0babff650, type: 2}
   cropVisualPos: {fileID: 8019159418975832014}
 --- !u!65 &1637635109213019183
 BoxCollider:
