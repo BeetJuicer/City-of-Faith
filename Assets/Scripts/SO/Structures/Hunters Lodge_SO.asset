@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b092c9d275587f54e8c29ae9d465cee2, type: 3}
-  m_Name: FishermanHouse_SO
+  m_Name: Hunters Lodge_SO
   m_EditorClassIdentifier: 
-  structureName: Fisherman House
-  description: "A fisherman\u2019s patience is his greatest catch."
-  structurePrefab: {fileID: 919132149155446097, guid: dfbd5731111575340b91012b61152c4a,
+  structureName: Hunters Lodge
+  description: "A hunter\u2019s patience is his truest weapon."
+  structurePrefab: {fileID: 919132149155446097, guid: c6b736acc427d7e458622dded3c3757d,
     type: 3}
-  displayImage: {fileID: 21300000, guid: 734998448d7ff4f4ba25146245b1adc4, type: 3}
-  expGivenOnBuild: 20
+  displayImage: {fileID: 21300000, guid: 623db11971a705d4fbdbcb2e74f104ac, type: 3}
+  expGivenOnBuild: 70
   townHallLevelRequirement: 5
-  numberOfCitizensAdded: 3
+  numberOfCitizensAdded: 10
   currencyRequired:
     _serializedList:
     - Key: 1
-      Value: 1500
+      Value: 3000
   resourcesRequired:
     _serializedList: []
   resourcesReturnedOnResell:
     _serializedList: []
   BuildDays: 0
-  BuildHours: 0
+  BuildHours: 1
   BuildMinutes: 30
   BuildSeconds: 0

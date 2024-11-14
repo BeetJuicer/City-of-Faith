@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b092c9d275587f54e8c29ae9d465cee2, type: 3}
-  m_Name: FishermanHouse_SO
+  m_Name: SalemInn_So
   m_EditorClassIdentifier: 
-  structureName: Fisherman House
-  description: "A fisherman\u2019s patience is his greatest catch."
-  structurePrefab: {fileID: 919132149155446097, guid: dfbd5731111575340b91012b61152c4a,
+  structureName: Salem Inn
+  description: Very strange Inn that cost you times 2 of gold when you check in midnight.
+  structurePrefab: {fileID: 919132149155446097, guid: 121764c8001307c4c97269ae3ef021e2,
     type: 3}
-  displayImage: {fileID: 21300000, guid: 734998448d7ff4f4ba25146245b1adc4, type: 3}
-  expGivenOnBuild: 20
-  townHallLevelRequirement: 5
-  numberOfCitizensAdded: 3
+  displayImage: {fileID: 21300000, guid: b315f70926817be43b2fe27dcb4e2ea5, type: 3}
+  expGivenOnBuild: 50
+  townHallLevelRequirement: 4
+  numberOfCitizensAdded: 10
   currencyRequired:
     _serializedList:
     - Key: 1
-      Value: 1500
+      Value: 1000
   resourcesRequired:
     _serializedList: []
   resourcesReturnedOnResell:
     _serializedList: []
   BuildDays: 0
-  BuildHours: 0
+  BuildHours: 1
   BuildMinutes: 30
   BuildSeconds: 0

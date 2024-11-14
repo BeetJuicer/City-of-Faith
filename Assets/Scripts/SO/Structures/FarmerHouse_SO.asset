@@ -10,25 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b092c9d275587f54e8c29ae9d465cee2, type: 3}
-  m_Name: FishermanHouse_SO
+  m_Name: FarmerHouse_SO
   m_EditorClassIdentifier: 
-  structureName: Fisherman House
-  description: "A fisherman\u2019s patience is his greatest catch."
-  structurePrefab: {fileID: 919132149155446097, guid: dfbd5731111575340b91012b61152c4a,
+  structureName: Farmer House
+  description: "A farmer\u2019s work is rooted in patience and grown with care."
+  structurePrefab: {fileID: 919132149155446097, guid: c8e077be5ee72e948944b2f6088d5e0f,
     type: 3}
-  displayImage: {fileID: 21300000, guid: 734998448d7ff4f4ba25146245b1adc4, type: 3}
-  expGivenOnBuild: 20
-  townHallLevelRequirement: 5
-  numberOfCitizensAdded: 3
+  displayImage: {fileID: 21300000, guid: 64c92be065b19a5469111fb25de42f4f, type: 3}
+  expGivenOnBuild: 25
+  townHallLevelRequirement: 2
+  numberOfCitizensAdded: 2
   currencyRequired:
     _serializedList:
     - Key: 1
-      Value: 1500
+      Value: 250
   resourcesRequired:
     _serializedList: []
   resourcesReturnedOnResell:
-    _serializedList: []
+    _serializedList:
+    - Key: 0
+      Value: 0
   BuildDays: 0
   BuildHours: 0
-  BuildMinutes: 30
+  BuildMinutes: 25
   BuildSeconds: 0

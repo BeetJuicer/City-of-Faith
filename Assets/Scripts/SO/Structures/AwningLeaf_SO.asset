@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b092c9d275587f54e8c29ae9d465cee2, type: 3}
-  m_Name: FishermanHouse_SO
+  m_Name: AwningLeaf_SO
   m_EditorClassIdentifier: 
-  structureName: Fisherman House
-  description: "A fisherman\u2019s patience is his greatest catch."
-  structurePrefab: {fileID: 919132149155446097, guid: dfbd5731111575340b91012b61152c4a,
+  structureName: Awning Leaf
+  description: An awning leaf offers shade, but its true gift is peace from the sun.
+  structurePrefab: {fileID: 919132149155446097, guid: 7396c679b2cd61142a813547098a1a0b,
     type: 3}
-  displayImage: {fileID: 21300000, guid: 734998448d7ff4f4ba25146245b1adc4, type: 3}
-  expGivenOnBuild: 20
+  displayImage: {fileID: 21300000, guid: 06acdeb836f4bf9478815885488d8e06, type: 3}
+  expGivenOnBuild: 10
   townHallLevelRequirement: 5
-  numberOfCitizensAdded: 3
+  numberOfCitizensAdded: 0
   currencyRequired:
     _serializedList:
     - Key: 1
-      Value: 1500
+      Value: 300
   resourcesRequired:
     _serializedList: []
   resourcesReturnedOnResell:
     _serializedList: []
   BuildDays: 0
   BuildHours: 0
-  BuildMinutes: 30
+  BuildMinutes: 18
   BuildSeconds: 0

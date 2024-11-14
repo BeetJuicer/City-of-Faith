@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b092c9d275587f54e8c29ae9d465cee2, type: 3}
-  m_Name: FishermanHouse_SO
+  m_Name: Desert Well_SO
   m_EditorClassIdentifier: 
-  structureName: Fisherman House
-  description: "A fisherman\u2019s patience is his greatest catch."
-  structurePrefab: {fileID: 919132149155446097, guid: dfbd5731111575340b91012b61152c4a,
+  structureName: Desert Well
+  description: Even in the harshest places, hope flows where the well is.
+  structurePrefab: {fileID: 919132149155446097, guid: 08e8386c19fc7d940b49170b0124b745,
     type: 3}
-  displayImage: {fileID: 21300000, guid: 734998448d7ff4f4ba25146245b1adc4, type: 3}
+  displayImage: {fileID: 21300000, guid: 135a4144f0c8516429be0e6c74b46122, type: 3}
   expGivenOnBuild: 20
   townHallLevelRequirement: 5
-  numberOfCitizensAdded: 3
+  numberOfCitizensAdded: 0
   currencyRequired:
     _serializedList:
     - Key: 1
-      Value: 1500
+      Value: 2500
   resourcesRequired:
     _serializedList: []
   resourcesReturnedOnResell:
     _serializedList: []
   BuildDays: 0
   BuildHours: 0
-  BuildMinutes: 30
+  BuildMinutes: 15
   BuildSeconds: 0
