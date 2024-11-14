@@ -164,7 +164,11 @@ public class Plot : MonoBehaviour, IClickableObject
 
         //Visual update
         //TODO: Possible optimization, use crop pools.
-        Instantiate(crop_SO.cropPrefab, cropVisualPos);
+        var crop = Instantiate(crop_SO.cropPrefab, cropVisualPos);
+        if(crop.TryGetComponent(out CropVisual cropVisual))
+        {
+            cropVisual.UpdateVisual(CurrentPlotState);
+        }
     }
 
     // TODO: Temporary button for testing only.
