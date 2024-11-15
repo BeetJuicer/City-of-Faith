@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b092c9d275587f54e8c29ae9d465cee2, type: 3}
-  m_Name: SalemInn_So
+  m_Name: Inn_SO
   m_EditorClassIdentifier: 
-  structureName: Salem Inn
+  structureName: Inn
   description: Very strange Inn that cost you times 2 of gold when you check in midnight.
   structurePrefab: {fileID: 919132149155446097, guid: 121764c8001307c4c97269ae3ef021e2,
     type: 3}
