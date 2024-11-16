@@ -77,14 +77,23 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired) &&
             IsAllowedToPlace)
         {
-            GameObject structure = Instantiate(structure_SO.structurePrefab, transform.position, transform.rotation);
-
-            //add xp and subtract gold.
-            foreach(KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
+            //TODO: currently it's only shooting a ray when we hit instantiate building. Have the ray part of the checking for IsAllowedToBuild
+            Ray ray = new Ray(transform.position, Vector3.down);
+            if(Physics.Raycast(ray, out RaycastHit hitInfo, 5f, whatIsGround))
             {
-                ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
-            }
+                float groundHeight = hitInfo.point.y;
+                float halfHeight = (structure_SO.structurePrefab.GetComponent<BoxCollider>().size.y / 2);
+                Vector3 spawnPos = new Vector3(transform.position.x, groundHeight + halfHeight, transform.position.z);
 
+                print($"half height: {halfHeight} + Y: {groundHeight} = spawnpos: {spawnPos.y}");
+                GameObject structure = Instantiate(structure_SO.structurePrefab, spawnPos, transform.rotation);
+
+                //add xp and subtract gold.
+                foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
+                {
+                    ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
+                }
+            }
             //print("TODO: Built " + structure_SO.structureName + ". NEED TO ADD " + structure_SO.expGivenOnBuild);
         }
         //else
