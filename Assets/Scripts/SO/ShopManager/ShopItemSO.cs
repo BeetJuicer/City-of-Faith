@@ -16,5 +16,6 @@ public class ShopItemSO : ScriptableObject
 public enum ItemCategory
 {
     Buildings,
-    Decoration
+    Decoration,
+    Crop
 }

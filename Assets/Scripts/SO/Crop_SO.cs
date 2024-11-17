@@ -8,6 +8,7 @@ public class Crop_SO : ScriptableObject
 {
     public string cropName;
     public string cropDetails;
+    public int cropPrice;
     public Sprite cropImage;
     public GameObject cropPrefab;
 

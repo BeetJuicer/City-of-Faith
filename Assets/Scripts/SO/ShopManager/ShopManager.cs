@@ -6,6 +6,7 @@ using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
+    //ShopItem
     public int coins;
     public TMP_Text coinUI;
     public ShopItemSO[] ShopItemsSO;
@@ -13,8 +14,11 @@ public class ShopManager : MonoBehaviour
     public ShopTemplate[] shopPanels;
     public Button[] myPurchaseBtns;
 
-    private ItemCategory currentCategory = ItemCategory.Buildings;
+    public GameObject ShopManagerUi; // Reference para ma-deactivate Shop UI onclick
+    public GameObject BuildingOverlay; // Reference para ma-activate Building overlay onclick
 
+
+    private ItemCategory currentCategory = ItemCategory.Buildings;
 
     private void Start()
     {
@@ -24,45 +28,27 @@ public class ShopManager : MonoBehaviour
         {
             ShopPanelsGO[i].SetActive(true);
         }
+
         coinUI.text = coins.ToString();
         LoadPanels();
-        checkPurchaseable();
     }
-
-
 
     public void addCoins()
     {
         coins = coins + 100;
         coinUI.text = coins.ToString();
-        checkPurchaseable();
-
     }
-
-    public void checkPurchaseable()
-    {
-        for (int i = 0; i < ShopItemsSO.Length; i++)
-        {
-            if (coins >= ShopItemsSO[i].baseCost)
-                myPurchaseBtns[i].interactable = true;
-            else
-                myPurchaseBtns[i].interactable = false;
-        }
-    }
-
     public void PurchaseItem(int btnNo)
     {
-        if (coins >= ShopItemsSO[btnNo].baseCost)
-        {
-            coins = coins - ShopItemsSO[btnNo].baseCost;
-            coinUI.text = coins.ToString();
-            checkPurchaseable();
-        }
+        // New functionality: Hide Shop UI and show Building Overlay
+        ShopManagerUi.SetActive(false); // Deactivate the shop UI
+        BuildingOverlay.SetActive(true); // Activate the building overlay
     }
+
 
     public void FilterItemsByCategory(ItemCategory category)
     {
-        currentCategory = category;  // Set the current category
+        currentCategory = category; // Set the current category
 
         // Loop through the shop items and only display items that match the selected category
         for (int i = 0; i < ShopItemsSO.Length; i++)
@@ -92,7 +78,6 @@ public class ShopManager : MonoBehaviour
         FilterItemsByCategory(ItemCategory.Decoration);
     }
 
-
     public void LoadPanels()
     {
         for (int i = 0; i < ShopItemsSO.Length; i++)
@@ -101,7 +86,7 @@ public class ShopManager : MonoBehaviour
             shopPanels[i].descriptionTxt.text = ShopItemsSO[i].description;
             shopPanels[i].costTxt.text = ShopItemsSO[i].baseCost.ToString();
             shopPanels[i].itemImage.sprite = ShopItemsSO[i].itemImage;
-
         }
+
     }
 }

@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cef291b526c7dfc459e6043e9cb4cf4a, type: 3}
-  m_Name: SO_Crop_Corn
+  m_Name: Tomato
   m_EditorClassIdentifier: 
-  cropName: Corn
-  cropDetails: Husk of corn.
-  cropPrice: 100
+  cropName: Tomato
+  cropDetails: A red juicy tomato.
+  cropPrice: 20
   cropImage: {fileID: 0}
-  cropPrefab: {fileID: 5188192154254141162, guid: a8f9098ecf3b3414397684707cde121d,
-    type: 3}
-  amountPerClaim: 100
+  cropPrefab: {fileID: 1000013832410636, guid: 323e5d46aea633c42bfadb66b36971d8, type: 3}
+  amountPerClaim: 20
   daysToClaim: 0
   hoursToClaim: 0
   minutesToClaim: 0
-  secondsToClaim: 32
+  secondsToClaim: 15
