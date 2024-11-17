@@ -69,7 +69,12 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         if (!isInBuildMode) return;
 
         print($"{halfHeight} + {transform.position.y}");
-        Graphics.DrawMesh(structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh, new Vector3(transform.position.x, transform.position.y + halfHeight, transform.position.z), transform.rotation, buildPreviewMaterial, 0);
+
+        int count = structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh.subMeshCount;
+        for (int i = 0; i < count; i++)
+        {
+            Graphics.DrawMesh(structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh, new Vector3(transform.position.x, transform.position.y + halfHeight, transform.position.z), transform.rotation, buildPreviewMaterial, 0, null, i);
+        }
     }
 
     // Naughty Attributes methods.
