@@ -240,7 +240,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   db: {fileID: 832615211}
-  structure_SO: {fileID: 11400000, guid: cc50421ce0aaec84792266ca206c6288, type: 2}
+  structure_SO: {fileID: 11400000, guid: d6f2d15a35608b4489b99e0e8cf47e35, type: 2}
   buildPreviewMaterial: {fileID: 2100000, guid: 6007be16c80cbe04b8c9aa060296b280,
     type: 2}
   incrementalMovementUnits: 5
@@ -324,7 +324,7 @@ Transform:
   m_GameObject: {fileID: 928263092}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.00291431, z: -0, w: 0.99999577}
-  m_LocalPosition: {x: -29.7, y: 4.6, z: 43.8}
+  m_LocalPosition: {x: -29.7, y: 5.2, z: 43.8}
   m_LocalScale: {x: 25, y: 0.1, z: 25}
   m_ConstrainProportionsScale: 0
   m_Children: []
