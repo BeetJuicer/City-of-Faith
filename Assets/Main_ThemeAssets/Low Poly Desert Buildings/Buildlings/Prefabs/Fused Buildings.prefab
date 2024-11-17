@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1482177645635640231
+--- !u!1 &8215511359525471623
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3447563277728996553}
-  - component: {fileID: 1919304264838279143}
-  - component: {fileID: 4533889523492901767}
-  - component: {fileID: -6903274796610337942}
+  - component: {fileID: 3642480979322291451}
+  - component: {fileID: 2023654857509431006}
+  - component: {fileID: 3144874287190396743}
+  - component: {fileID: 786408030551709820}
   m_Layer: 0
-  m_Name: Large Building B
+  m_Name: Fused Buildings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3447563277728996553
+--- !u!4 &3642480979322291451
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482177645635640231}
+  m_GameObject: {fileID: 8215511359525471623}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.4753704, y: 3.8693705, z: 2.138813}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1919304264838279143
+--- !u!33 &2023654857509431006
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482177645635640231}
-  m_Mesh: {fileID: 4300000, guid: 395012b31d3cfc542b256aa5d44af447, type: 2}
---- !u!23 &4533889523492901767
+  m_GameObject: {fileID: 8215511359525471623}
+  m_Mesh: {fileID: 4300000, guid: ddc1fdd2f2cfed042a5afdd457bac190, type: 2}
+--- !u!23 &3144874287190396743
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482177645635640231}
+  m_GameObject: {fileID: 8215511359525471623}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -62,11 +62,13 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 8860941307408923268, guid: e57a8fd73ca28e245a169a6a2c679720, type: 3}
+  - {fileID: 6675111044087577755, guid: 2210bcaea1780bc4097014c7f77f0a74, type: 3}
+  - {fileID: -191448823479050371, guid: e57a8fd73ca28e245a169a6a2c679720, type: 3}
+  - {fileID: 5803814994800622788, guid: 2210bcaea1780bc4097014c7f77f0a74, type: 3}
+  - {fileID: 7958164456741261584, guid: e57a8fd73ca28e245a169a6a2c679720, type: 3}
   - {fileID: 8860941307408923268, guid: b6cd89f25680ec148b8319d3ff36f11b, type: 3}
   - {fileID: 6675111044087577755, guid: e57a8fd73ca28e245a169a6a2c679720, type: 3}
-  - {fileID: 5803814994800622788, guid: 2210bcaea1780bc4097014c7f77f0a74, type: 3}
-  - {fileID: -191448823479050371, guid: e57a8fd73ca28e245a169a6a2c679720, type: 3}
-  - {fileID: 7958164456741261584, guid: e57a8fd73ca28e245a169a6a2c679720, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,13 +90,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-6903274796610337942
+--- !u!65 &786408030551709820
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482177645635640231}
+  m_GameObject: {fileID: 8215511359525471623}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -107,5 +109,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.633716, y: 6.5344753, z: 13.906904}
-  m_Center: {x: 0.00000047683716, y: 0, z: 0.0000011920929}
+  m_Size: {x: 12.316691, y: 10.783974, z: 13.953062}
+  m_Center: {x: 0.00000047683716, y: 0, z: 0.0000009536743}
