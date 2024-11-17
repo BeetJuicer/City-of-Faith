@@ -15,6 +15,11 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     private int collidersInRange;
     [SerializeField] private int incrementalMovementUnits = 1;
 
+    //debug
+    private Vector3 hitPos = Vector3.down;
+
+    public bool useRay;
+
     private void Awake()
     {
         IsAllowedToPlace = true;
@@ -33,6 +38,24 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     private void Update()
     {
         //update color,
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 10f, whatIsGround))
+        {
+            hitPos = hitInfo.point;
+            print(hitPos);
+            Vector3 objSpaceHitPos = transform.InverseTransformPoint(hitInfo.point);
+            float groundHeight = objSpaceHitPos.y;
+            float halfHeight = (structure_SO.structurePrefab.GetComponent<BoxCollider>().size.y / 2);
+            Vector3 spawnPos = new Vector3(transform.position.x, groundHeight, transform.position.z);
+
+            GameObject structure = Instantiate(structure_SO.structurePrefab, spawnPos, transform.rotation);
+
+            //add xp and subtract gold.
+            foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
+            {
+                ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
+            }
+        }
         gameObject.GetComponent<MeshRenderer>().material.color = (IsAllowedToPlace) ? Color.green : Color.red;
     }
 
@@ -78,15 +101,29 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             IsAllowedToPlace)
         {
             //TODO: currently it's only shooting a ray when we hit instantiate building. Have the ray part of the checking for IsAllowedToBuild
-            Ray ray = new Ray(transform.position, Vector3.down);
-            if(Physics.Raycast(ray, out RaycastHit hitInfo, 5f, whatIsGround))
+            if(useRay)
             {
-                float groundHeight = hitInfo.point.y;
-                float halfHeight = (structure_SO.structurePrefab.GetComponent<BoxCollider>().size.y / 2);
-                Vector3 spawnPos = new Vector3(transform.position.x, groundHeight + halfHeight, transform.position.z);
+                Ray ray = new Ray(transform.position, Vector3.down);
+                if(Physics.Raycast(ray, out RaycastHit hitInfo, 10f, whatIsGround))
+                {
+                    Vector3 objSpaceHitPos = transform.InverseTransformPoint(hitInfo.point);
+                    float groundHeight = objSpaceHitPos.y;
+                    float halfHeight = (structure_SO.structurePrefab.GetComponent<BoxCollider>().size.y / 2);
+                    Vector3 spawnPos = new Vector3(transform.position.x, groundHeight, transform.position.z);
 
-                print($"half height: {halfHeight} + Y: {groundHeight} = spawnpos: {spawnPos.y}");
-                GameObject structure = Instantiate(structure_SO.structurePrefab, spawnPos, transform.rotation);
+                    GameObject structure = Instantiate(structure_SO.structurePrefab, hitInfo.point, transform.rotation);
+
+                    //add xp and subtract gold.
+                    foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
+                    {
+                        ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
+                    }
+                }
+            }
+            else
+            {
+                float height = structure_SO.structurePrefab.GetComponent<BoxCollider>().size.y;
+                GameObject structure = Instantiate(structure_SO.structurePrefab, new Vector3(transform.position.x, height, transform.position.z), transform.rotation);
 
                 //add xp and subtract gold.
                 foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
@@ -98,6 +135,11 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         }
         //else
             //feedback that it's not allowed.
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, hitPos);
     }
 
     [Button]

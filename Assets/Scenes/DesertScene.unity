@@ -240,10 +240,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   db: {fileID: 832615211}
-  structure_SO: {fileID: 11400000, guid: d6f2d15a35608b4489b99e0e8cf47e35, type: 2}
+  structure_SO: {fileID: 11400000, guid: cc50421ce0aaec84792266ca206c6288, type: 2}
   buildPreviewMaterial: {fileID: 2100000, guid: 6007be16c80cbe04b8c9aa060296b280,
     type: 2}
   incrementalMovementUnits: 5
+  useRay: 0
 --- !u!65 &928263094
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -613,6 +614,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2860044134922500836, guid: 9e905e6d058bb5746847ae6f0f420eb9,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3475405872386564213, guid: 9e905e6d058bb5746847ae6f0f420eb9,
         type: 3}
       propertyPath: m_LocalScale.x
