@@ -2,67 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
-
+using UnityEngine.ProBuilder;
 
 public class BuildingOverlay : MonoBehaviour, IDraggable
 {
-    public bool IsAllowedToPlace { get; private set; }
+    [SerializeField] private Structure_SO debugStructureSO;
+    private Structure_SO structure_SO;
+    private float halfHeight = 0;
+
+    public bool IsAllowedToPlace { get; private set; } = true;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Database db;
 
-    [SerializeField] private Structure_SO structure_SO;
     [SerializeField] private Material buildPreviewMaterial;
     private int collidersInRange;
     [SerializeField] private int incrementalMovementUnits = 1;
 
-    //debug
-    private Vector3 hitPos = Vector3.down;
+    [SerializeField] private GameObject overlayPlane;
+    private GameObject previewGO;
+    private bool isInBuildMode;
 
-    public bool useRay;
-
-    private void Awake()
+    public void EnterBuildMode(Structure_SO structure_SO)
     {
-        IsAllowedToPlace = true;
-    }
+        if (isInBuildMode) return;
 
-    private void Start()
-    {
-        //get the collision x and z of the structure and apply it to the collider of this thing.
+        isInBuildMode = true;
+
+        this.structure_SO = structure_SO;
+
+        //Precalculate the sizes we'll use for placement.
+        //This REQUIRES that the object's pivot is at the center.
         Vector3 structureSize = structure_SO.structurePrefab.GetComponent<BoxCollider>().size;
-        //Vector3 detectorSize = GetComponent<BoxCollider>().size;
-        //GetComponent<BoxCollider>().size = new Vector3(structureSize.x, detectorSize.y, structureSize.z);
-        //also adjust the scale x and z accordingly.
-        transform.localScale = new Vector3(structureSize.x, transform.localScale.y, structureSize.z);
+        halfHeight = structureSize.y / 2;
+
+        //Adjust the scale accordingly for this collider and visual plane.
+        GetComponent<BoxCollider>().size = structureSize;
+        overlayPlane.transform.localScale = new Vector3(structureSize.x, overlayPlane.transform.localScale.y, structureSize.z);
+
+        overlayPlane.SetActive(true);
     }
 
     private void Update()
     {
-        //update color,
-        Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 10f, whatIsGround))
-        {
-            hitPos = hitInfo.point;
-            print(hitPos);
-            Vector3 objSpaceHitPos = transform.InverseTransformPoint(hitInfo.point);
-            float groundHeight = objSpaceHitPos.y;
-            float halfHeight = (structure_SO.structurePrefab.GetComponent<BoxCollider>().size.y / 2);
-            Vector3 spawnPos = new Vector3(transform.position.x, groundHeight, transform.position.z);
-
-            GameObject structure = Instantiate(structure_SO.structurePrefab, spawnPos, transform.rotation);
-
-            //add xp and subtract gold.
-            foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
-            {
-                ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
-            }
-        }
-        gameObject.GetComponent<MeshRenderer>().material.color = (IsAllowedToPlace) ? Color.green : Color.red;
-    }
-
-    private void OnRenderObject()
-    {
-        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode)
-            Graphics.DrawMesh(structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh, transform.position, transform.rotation, buildPreviewMaterial, 0);
+        if (!isInBuildMode) return;
+        //green red visual TODO: isOnground
+        overlayPlane.GetComponent<MeshRenderer>().material.color = (collidersInRange == 0) ? Color.green : Color.red;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -71,75 +55,74 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         if ((whatIsGround & (1 << other.gameObject.layer)) != 0)
             return;
 
-        //print("something here: " + other.gameObject);
         collidersInRange++;
-        IsAllowedToPlace = false;
     }
 
     private void OnTriggerExit(Collider other)
     {
         collidersInRange--;
-        if(collidersInRange == 0)
-        {
-            IsAllowedToPlace = true;
-        }
+        Debug.Assert(collidersInRange >= 0, "Negative count of colliders. Something is wrong.");
     }
 
+    private void OnRenderObject()
+    {
+        if (!isInBuildMode) return;
+
+        print($"{halfHeight} + {transform.position.y}");
+        Graphics.DrawMesh(structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh, new Vector3(transform.position.x, transform.position.y + halfHeight, transform.position.z), transform.rotation, buildPreviewMaterial, 0);
+    }
 
     // Naughty Attributes methods.
     [Button]
-    public void ToggleBuildMode()
+    public void EnterBuildMode()
     {
-        GameManager.Instance.ChangeGameState(GameState.Edit_Mode);
+        EnterBuildMode(debugStructureSO);
+    }
+
+    [Button]
+    public void ExitBuildMode()
+    {
+        Destroy(previewGO);
+        overlayPlane.SetActive(false);
+        isInBuildMode = false;
     }
 
     [Button]
     public void InstantiateBuilding()
     {
-        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode && 
-            ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired) &&
-            IsAllowedToPlace)
+        if (!isInBuildMode)
         {
-            //TODO: currently it's only shooting a ray when we hit instantiate building. Have the ray part of the checking for IsAllowedToBuild
-            if(useRay)
-            {
-                Ray ray = new Ray(transform.position, Vector3.down);
-                if(Physics.Raycast(ray, out RaycastHit hitInfo, 10f, whatIsGround))
-                {
-                    Vector3 objSpaceHitPos = transform.InverseTransformPoint(hitInfo.point);
-                    float groundHeight = objSpaceHitPos.y;
-                    float halfHeight = (structure_SO.structurePrefab.GetComponent<BoxCollider>().size.y / 2);
-                    Vector3 spawnPos = new Vector3(transform.position.x, groundHeight, transform.position.z);
-
-                    GameObject structure = Instantiate(structure_SO.structurePrefab, hitInfo.point, transform.rotation);
-
-                    //add xp and subtract gold.
-                    foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
-                    {
-                        ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
-                    }
-                }
-            }
-            else
-            {
-                float height = structure_SO.structurePrefab.GetComponent<BoxCollider>().size.y;
-                GameObject structure = Instantiate(structure_SO.structurePrefab, new Vector3(transform.position.x, height, transform.position.z), transform.rotation);
-
-                //add xp and subtract gold.
-                foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
-                {
-                    ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
-                }
-            }
-            //print("TODO: Built " + structure_SO.structureName + ". NEED TO ADD " + structure_SO.expGivenOnBuild);
+            Debug.LogWarning("Attempted to instantiate building while not in build mode.");
+            return;
         }
-        //else
-            //feedback that it's not allowed.
-    }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, hitPos);
+        if(ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
+        {
+            Debug.LogError("Building overlay activated but player does not have enough money!");
+        }
+
+        if(collidersInRange > 0 || false)
+        {
+            print("Not allowed! Deactivate the UI button for user's confirmation if not allowed");
+        }
+
+        //TODO: currently it's only shooting a ray when we hit instantiate building. Have the ray part of the checking for IsAllowedToBuild
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if(Physics.Raycast(ray, out RaycastHit hitInfo, 10f, whatIsGround))
+        {
+            float groundHeight = hitInfo.point.y;
+            Vector3 spawnPos = new Vector3(transform.position.x, groundHeight + halfHeight, transform.position.z);
+
+            Instantiate(structure_SO.structurePrefab, spawnPos, transform.rotation);
+        }
+
+        //add xp and subtract gold.
+        foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
+        {
+            ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
+        }
+
+        //print("TODO: Built " + structure_SO.structureName + ". NEED TO ADD " + structure_SO.expGivenOnBuild);
     }
 
     [Button]
