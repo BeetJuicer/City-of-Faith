@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b092c9d275587f54e8c29ae9d465cee2, type: 3}
+  m_Name: Church_SO
+  m_EditorClassIdentifier: 
+  structureName: Church
+  description: Every day we need glory.
+  structurePrefab: {fileID: 1459892952479061260, guid: 443bb8c017002eb43aa01fdf6a6471fa,
+    type: 3}
+  displayImage: {fileID: 21300000, guid: 6ebf8626067fe8a489604b74b73a94b6, type: 3}
+  expGivenOnBuild: 100
+  townHallLevelRequirement: 10
+  numberOfCitizensAdded: 5
+  currencyRequired:
+    _serializedList:
+    - Key: 1
+      Value: 10000
+  resourcesRequired:
+    _serializedList: []
+  resourcesReturnedOnResell:
+    _serializedList: []
+  BuildDays: 0
+  BuildHours: 3
+  BuildMinutes: 0
+  BuildSeconds: 0
