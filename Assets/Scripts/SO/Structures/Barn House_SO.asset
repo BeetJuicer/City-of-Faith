@@ -15,10 +15,10 @@ MonoBehaviour:
   structureName: Barn House
   description: A barn is a masterpiece of honest labor, crafted by hands that understand
     the land.
-  structurePrefab: {fileID: 4437867696242253139, guid: 8552cde0b8094ed44b51df072c3ff84a,
+  structurePrefab: {fileID: 3155131236617483285, guid: 60753cd2b7b9af04b8eb830f01475a65,
     type: 3}
   displayImage: {fileID: 21300000, guid: 10b3ab4d7ac0d9c45b1964f594a074c9, type: 3}
-  expGivenOnBuild: 25
+  expGivenOnBuild: 200
   townHallLevelRequirement: 5
   numberOfCitizensAdded: 3
   currencyRequired:

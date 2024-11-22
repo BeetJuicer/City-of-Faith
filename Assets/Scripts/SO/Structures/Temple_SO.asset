@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b092c9d275587f54e8c29ae9d465cee2, type: 3}
+  m_Name: Temple_SO
+  m_EditorClassIdentifier: 
+  structureName: Temple
+  description: The temple is a place of serenity and peace, where heaven touches
+    the earth.
+  structurePrefab: {fileID: 7576049043184610949, guid: b45d10da6e8211346b51499b747eac22,
+    type: 3}
+  displayImage: {fileID: 21300000, guid: f8796ec97f0884e48b6053227eae3461, type: 3}
+  expGivenOnBuild: 500
+  townHallLevelRequirement: 10
+  numberOfCitizensAdded: 10
+  currencyRequired:
+    _serializedList:
+    - Key: 1
+      Value: 10000
+  resourcesRequired:
+    _serializedList: []
+  resourcesReturnedOnResell:
+    _serializedList: []
+  BuildDays: 0
+  BuildHours: 4
+  BuildMinutes: 0
+  BuildSeconds: 0

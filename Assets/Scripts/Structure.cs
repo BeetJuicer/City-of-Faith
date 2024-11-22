@@ -130,7 +130,6 @@ public class Structure : MonoBehaviour
             uiManager.OnStructureClick(structure_so);
         }
     }
-
     // Update is called once per frame
     void Update()
     {
