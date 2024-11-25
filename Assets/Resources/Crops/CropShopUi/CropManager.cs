@@ -15,12 +15,14 @@ public class CropManager : MonoBehaviour
     public int coins; // Player's coins
     public GameObject cropShopUI; // Reference to the crop shop UI
     public GameObject buildingOverlayUI; // Reference to the building overlay UI
+    public Canvas CropSelectionUI; // Para maopen sa plot, may public method
 
     private void Start()
     {
         //coinUI.text = coins.ToString();
         LoadCropPanels();
         //CheckCropPurchaseable();
+
     }
 
     public void LoadCropPanels()
@@ -34,6 +36,31 @@ public class CropManager : MonoBehaviour
 
         }
     }
+
+    public void OpenCropSelection() //Open the Crop Shop
+    {
+        if (CropSelectionUI != null)
+        {
+            CropSelectionUI.enabled = true;
+        }
+        else
+        {
+            Debug.LogError("Error in OpenCropSelection");
+        }
+    }
+
+    public void CloseCropSelection() //Close the Crop Shop
+    {
+        if (CropSelectionUI != null)
+        {
+            CropSelectionUI.enabled = false;
+        }
+        else
+        {
+            Debug.LogError("Error in OpenCropSelection");
+        }
+    }
+
 
     //public void AddCoins(int amount)
     //{
@@ -59,7 +86,6 @@ public class CropManager : MonoBehaviour
 
     public void PurchaseItem(int btnNo)
     {
-        // New functionality: Hide Shop UI and show Building Overlay
         cropShopUI.SetActive(false); // Deactivate the shop UI
         buildingOverlayUI.SetActive(true); // Activate the building overlay
     }
