@@ -97,7 +97,7 @@ public class Database : MonoBehaviour
     public class CentralData : IDatabaseData
     {
         [PrimaryKey, NotNull]
-        public int structure_id { get; set; }
+        public int player_id { get; set; }
         [NotNull]
         public int level { get; set; }
         [NotNull]
@@ -163,7 +163,7 @@ public class Database : MonoBehaviour
 
     private void LoadGame()
     {
-        var structures = DatabaseGetStructureData();
+        var structures = GetStructureData();
 
         // Keeping structureIds for multiple queries.
         var structureIds = structures.Select(s => s.structure_id).ToList();
@@ -180,7 +180,11 @@ public class Database : MonoBehaviour
                   .Where(row => structureIds.Contains(row.structure_id))
                   .ToList().ToDictionary(rp => rp.structure_id);
 
-        CentralData centralData = db.Table<CentralData>().ToList().Where(row => structureIds.Contains(row.structure_id)).First();
+
+        // Loading the central hall.
+        CentralData centralData = GetCentralData();
+        CentralHall central = FindFirstObjectByType<CentralHall>();
+        central.LoadData(centralData);
 
         // Loading the objects. TODO: Calling resources.load is pretty inefficient each time. Use something else.
         foreach (StructureData s_data in structures)
@@ -196,6 +200,7 @@ public class Database : MonoBehaviour
             GameObject structure = (GameObject)Instantiate(prefab, pos, rot);
             structure.GetComponent<Structure>().LoadData(s_data, this);
 
+
             // I don't like this checking each type of structure. Might refactor.
             // Loading ResourceProducerData
             if (structure.TryGetComponent(out ResourceProducer rp))
@@ -207,21 +212,26 @@ public class Database : MonoBehaviour
                 // Loading Plot
                 plot.LoadData(plots[s_data.structure_id], this);
             }
-            else if (structure.TryGetComponent(out CentralHall central))
-            {
-                central.LoadData(centralData);
-            }
         }
     }
 
-    private List<StructureData> DatabaseGetStructureData()
+    private List<StructureData> GetStructureData()
     {
         return db.Table<StructureData>().Where((row) => row.player_id == PlayerId).ToList();
     }
 
-    public List<CurrencyData> DatabaseGetCurrencyData()
+    public List<CurrencyData> GetCurrencyData()
     {
         return db.Table<CurrencyData>().Where((row) => row.player_id == PlayerId).ToList();
+    }
+
+    public CentralData GetCentralData()
+    {
+        var centralTable = db.Table<CentralData>().ToList().Where(row => row.player_id == PlayerId);
+        if (centralTable.Count() == 0)
+            return null;
+        else
+            return centralTable.First();
     }
 
     public void AddNewRecord(IDatabaseData newRecord)

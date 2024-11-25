@@ -35,12 +35,12 @@ public class CentralHall : MonoBehaviour
     }
 
     [SerializedDictionary("Level", "Exp Required Until Level Up")]
-    private SerializedDictionary<int, int> levelUpExpRequirements = new();
+    [SerializeField] private SerializedDictionary<int, int> levelUpExpRequirements = new();
 
-    private List<Structure_SO> unlockedStructures;
+    private List<Structure_SO> unlockedStructures = new();
     public List<Structure_SO> UnlockedStructures { get => unlockedStructures; private set { unlockedStructures = value; } }
 
-    private List<Crop_SO> unlockedCrops;
+    private List<Crop_SO> unlockedCrops = new();
     public List<Crop_SO> UnlockedCrops { get => unlockedCrops; private set { unlockedCrops = value; } }
 
     public List<Crop_SO> LockedCrops { get => GetLockedCropSOs(); private set { LockedCrops = value; } }
@@ -60,7 +60,7 @@ public class CentralHall : MonoBehaviour
 
     private void LoadDatabaseOrDefault()
     {
-        if(centralData == null)
+        if (centralData == null)
             LoadDefault();
         else
         {
@@ -70,9 +70,16 @@ public class CentralHall : MonoBehaviour
 
     private void LoadDefault()
     {
-        Level = 1;
+        level = 1;
         UnlockedCrops.Concat(unlockables_SO.unclockableCrops[level]);
         UnlockedStructures.Concat(unlockables_SO.unclockableStructures[level]);
+        centralData = new Database.CentralData
+        {
+            player_id = db.PlayerId,
+            level = level,
+            exp = exp,
+        };
+        db.AddNewRecord(centralData);
     }
 
     public void AddToCentralExp(int value)
@@ -89,6 +96,8 @@ public class CentralHall : MonoBehaviour
         Level++;
         UnlockedStructures.Concat(unlockables_SO.unclockableStructures[level]);
         UnlockedCrops.Concat(unlockables_SO.unclockableCrops[level]);
+        //TODO: optimize and store locked structures only once, not everytime they're fetched.
+        //List<car> result = list2.Except(list1).ToList()
         Exp = remainder;
     }
 

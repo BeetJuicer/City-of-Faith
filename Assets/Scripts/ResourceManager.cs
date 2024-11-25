@@ -84,7 +84,7 @@ public class ResourceManager : MonoBehaviour
         db = FindFirstObjectByType<Database>();
         Debug.Assert(db != null, "No gameobject with Database component found in scene!");
 
-        currencyData = db.DatabaseGetCurrencyData().ToDictionary(record => (Currency)record.currency_type);
+        currencyData = db.GetCurrencyData().ToDictionary(record => (Currency)record.currency_type);
 
         // No data found. Must be new player.
         if (currencyData.Count <= 0)
