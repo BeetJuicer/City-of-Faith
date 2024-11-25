@@ -13,16 +13,28 @@ MonoBehaviour:
   m_Name: Unlockables
   m_EditorClassIdentifier: 
   unclockableStructures:
-    _serializedList: []
+    _serializedList:
+    - Key: 0
+      Value:
+      - {fileID: 11400000, guid: 55261ccf8e79d5f43a5e6cd25a01e936, type: 2}
+      - {fileID: 11400000, guid: 254a704fa72f91847966213f4baa69e4, type: 2}
+    - Key: 1
+      Value:
+      - {fileID: 11400000, guid: 55261ccf8e79d5f43a5e6cd25a01e936, type: 2}
+      - {fileID: 11400000, guid: 254a704fa72f91847966213f4baa69e4, type: 2}
   unclockableCrops:
     _serializedList:
     - Key: 1
       Value:
-      - {fileID: 0}
-      - {fileID: 0}
+      - {fileID: 11400000, guid: 5d08ff7e3786dcd46ba3961d79f0d9dc, type: 2}
+      - {fileID: 11400000, guid: d433709d37b301f4d88b7fa3a5a3806e, type: 2}
     - Key: 2
       Value:
-      - {fileID: 0}
-      - {fileID: 0}
+      - {fileID: 11400000, guid: 3e351ef23c29ced47add4bae8f8ee1ed, type: 2}
+      - {fileID: 11400000, guid: bc64409001c4dfb4d82cc7889e3ba3be, type: 2}
   populationLimit:
-    _serializedList: []
+    _serializedList:
+    - Key: 0
+      Value: 100
+    - Key: 1
+      Value: 200
