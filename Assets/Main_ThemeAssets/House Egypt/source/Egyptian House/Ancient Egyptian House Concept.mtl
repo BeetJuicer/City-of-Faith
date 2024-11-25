@@ -1,0 +1,14 @@
+# Blender 4.0.0 MTL File: 'Ancient Egyptian House Concept.blend'
+# www.blender.org
+
+newmtl House
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd textures/Ancient Egyptian House Concept_House_BaseColor.png
+map_Ns textures/Ancient Egyptian House Concept_House_Roughness.png
+map_refl textures/Ancient Egyptian House Concept_House_Metallic.png
+map_Bump -bm 1.000000 textures/Ancient Egyptian House Concept_House_Normal.png

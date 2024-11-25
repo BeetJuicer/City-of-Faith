@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cropName: Tomato
   cropDetails: Pizza for sauce yummy delicious
-  cropImage: {fileID: 0}
+  cropPrice: 15
+  cropImage: {fileID: 21300000, guid: 5349f84fdd022f94db1b16670653b5d0, type: 3}
   cropPrefab: {fileID: 3583997188421615192, guid: cdbcfa765d399bc48ba96754eb4ab175,
     type: 3}
   amountPerClaim: 5

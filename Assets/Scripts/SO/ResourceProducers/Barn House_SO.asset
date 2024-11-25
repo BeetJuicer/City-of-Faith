@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 527de39e89613f5479d6cb532e82449c, type: 3}
+  m_Name: Barn House_SO
+  m_EditorClassIdentifier: 
+  resource_SO: {fileID: 11400000, guid: fe38262854b9bf34a90c079229e151a7, type: 2}
+  baseAmountPerClaim: 250
+  daysToClaim: 0
+  hoursToClaim: 0
+  minutesToClaim: 5
+  secondsToClaim: 30

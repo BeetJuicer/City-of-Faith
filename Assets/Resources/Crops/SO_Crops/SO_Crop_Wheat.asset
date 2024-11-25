@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef291b526c7dfc459e6043e9cb4cf4a, type: 3}
+  m_Name: SO_Crop_Wheat
+  m_EditorClassIdentifier: 
+  cropName: Wheat
+  cropDetails: Out of the smallest grain of wheat comes the bread that nourishes
+    the soul.
+  cropPrice: 30
+  cropImage: {fileID: 21300000, guid: d50570fd0b5c23041885908c5dad14ed, type: 3}
+  cropPrefab: {fileID: 5182767590566736967, guid: efd349315cc85604bbe70e1d1da4f218,
+    type: 3}
+  amountPerClaim: 25
+  daysToClaim: 0
+  hoursToClaim: 0
+  minutesToClaim: 2
+  secondsToClaim: 0
