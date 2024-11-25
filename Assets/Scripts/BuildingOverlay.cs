@@ -22,6 +22,13 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     private GameObject previewGO;
     private bool isInBuildMode;
 
+    private CentralHall centralHall;
+
+    private void Start()
+    {
+        centralHall = FindFirstObjectByType<CentralHall>();
+    }
+
     public void EnterBuildMode(Structure_SO structure_SO)
     {
         if (isInBuildMode) return;
@@ -121,13 +128,14 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             Instantiate(structure_SO.structurePrefab, spawnPos, transform.rotation);
         }
 
-        //add xp and subtract gold.
+        //Subtract currency
         foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
         {
             ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
         }
 
-        //print("TODO: Built " + structure_SO.structureName + ". NEED TO ADD " + structure_SO.expGivenOnBuild);
+        //Add xp.
+        centralHall.AddToCentralExp(structure_SO.expGivenOnBuild);
     }
 
     [Button]

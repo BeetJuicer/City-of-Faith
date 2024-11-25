@@ -22,7 +22,6 @@ public class Structure_SO : ScriptableObject
     public int townHallLevelRequirement;
     public int numberOfCitizensAdded;
 
-    //TODO: make a container?manager? that keeps track of each level's unlockables. maybe the townhall.
     [Header("Build Cost")]
 
     [SerializedDictionary]

@@ -57,7 +57,6 @@ public class Database : MonoBehaviour
         public float rotY { get; set; }
         [NotNull]
         public float rotZ { get; set; }
-
     }
 
     [Table("tbl_resourceProducer")]
@@ -93,6 +92,18 @@ public class Database : MonoBehaviour
         public int amount{ get; set; }
 }
 
+
+    [Table("tbl_central")]
+    public class CentralData : IDatabaseData
+    {
+        [PrimaryKey, NotNull]
+        public int structure_id { get; set; }
+        [NotNull]
+        public int level { get; set; }
+        [NotNull]
+        public int exp { get; set; }
+    }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -115,6 +126,7 @@ public class Database : MonoBehaviour
         db.CreateTable<ResourceProducerData>();
         db.CreateTable<PlotData>();
         db.CreateTable<CurrencyData>();
+        db.CreateTable<CentralData>();
 
         //Query for user
         TableQuery<PlayerData> query = db.Table<PlayerData>().Where(row => row.Username.Equals(username));
@@ -168,6 +180,8 @@ public class Database : MonoBehaviour
                   .Where(row => structureIds.Contains(row.structure_id))
                   .ToList().ToDictionary(rp => rp.structure_id);
 
+        CentralData centralData = db.Table<CentralData>().ToList().Where(row => structureIds.Contains(row.structure_id)).First();
+
         // Loading the objects. TODO: Calling resources.load is pretty inefficient each time. Use something else.
         foreach (StructureData s_data in structures)
         {
@@ -192,6 +206,10 @@ public class Database : MonoBehaviour
             {
                 // Loading Plot
                 plot.LoadData(plots[s_data.structure_id], this);
+            }
+            else if (structure.TryGetComponent(out CentralHall central))
+            {
+                central.LoadData(centralData);
             }
         }
     }
