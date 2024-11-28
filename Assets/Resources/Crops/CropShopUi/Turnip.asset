@@ -15,7 +15,7 @@ MonoBehaviour:
   cropName: Turnip
   cropDetails: whatever this is... I love it!
   cropPrice: 10
-  cropImage: {fileID: 0}
+  cropImage: {fileID: 21300000, guid: 08c04d1f7e1d999478e9dc5ee7101f92, type: 3}
   cropPrefab: {fileID: 1000010164499024, guid: f0666abddd74e5644ac4cf977d74e5e9, type: 3}
   amountPerClaim: 10
   daysToClaim: 0
