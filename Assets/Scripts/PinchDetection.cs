@@ -156,12 +156,16 @@ public class PinchToZoomAndPan : MonoBehaviour
 
     private void Update()
     {
+        //if(gamemanager is in play mode)
         HandleSingleFingerPan();
+        //else buildmode
+        //handlemovingbuildingoverlay() or let building overlay handle following finger.
     }
 
     // Handle single-finger panning (dragging)
     private void HandleSingleFingerPan()
     {
+        //TODO: change to checking if currently in build mode.
         // Check if we are currently dragging a building
         if (isDraggingBuilding)
         {
