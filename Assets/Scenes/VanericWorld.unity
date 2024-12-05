@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18187016, g: 0.22754742, b: 0.30741808, a: 1}
+  m_IndirectSpecularColor: {r: 0.18187064, g: 0.22754848, b: 0.3074189, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1686,6 +1686,7 @@ GameObject:
   - component: {fileID: 169950167}
   - component: {fileID: 169950166}
   - component: {fileID: 169950165}
+  - component: {fileID: 169950169}
   m_Layer: 5
   m_Name: SellButton
   m_TagString: Untagged
@@ -1795,6 +1796,20 @@ RectTransform:
   m_AnchoredPosition: {x: 525, y: -100}
   m_SizeDelta: {x: 350, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &169950169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169950164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44829a8bd98d5d147bbfcaa33ec44a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToActivate: []
+  objectsToDeactivate: []
 --- !u!1 &178173958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,6 +1921,7 @@ GameObject:
   - component: {fileID: 256320482}
   - component: {fileID: 256320481}
   - component: {fileID: 256320480}
+  - component: {fileID: 256320483}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1976,22 +1992,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1575016548}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 256320483}
+        m_TargetAssemblyTypeName: ActivateGameObject, Assembly-CSharp
+        m_MethodName: ActivateObjects
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 987159904}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 256320483}
+        m_TargetAssemblyTypeName: ActivateGameObject, Assembly-CSharp
+        m_MethodName: DeactivateObjects
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2038,6 +2054,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256320478}
   m_CullTransparentMesh: 1
+--- !u!114 &256320483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256320478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44829a8bd98d5d147bbfcaa33ec44a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToActivate:
+  - {fileID: 1575016548}
+  objectsToDeactivate:
+  - {fileID: 987159904}
+  - {fileID: 12079367}
+  - {fileID: 386890859}
 --- !u!1 &261334441
 GameObject:
   m_ObjectHideFlags: 0
@@ -7837,11 +7871,23 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 475939542}
     m_Modifications:
+    - target: {fileID: -6013852386408697952, guid: 60753cd2b7b9af04b8eb830f01475a65,
+        type: 3}
+      propertyPath: structure_so
+      value: 
+      objectReference: {fileID: 11400000, guid: 08a25eec9f62fbf42b8c174d7d825e2c,
+        type: 2}
     - target: {fileID: 3155131236617483285, guid: 60753cd2b7b9af04b8eb830f01475a65,
         type: 3}
       propertyPath: m_Name
       value: Structure_BarnHouse
       objectReference: {fileID: 0}
+    - target: {fileID: 5211538326880462495, guid: 60753cd2b7b9af04b8eb830f01475a65,
+        type: 3}
+      propertyPath: resourceProducer_SO
+      value: 
+      objectReference: {fileID: 11400000, guid: ea4fbb5956da22641a190cf10a6c21dc,
+        type: 2}
     - target: {fileID: 5512624556061570189, guid: 60753cd2b7b9af04b8eb830f01475a65,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11069,9 +11115,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionPanel: {fileID: 386890859}
-  structureDisplayManager: {fileID: 0}
-  infoButton: {fileID: 0}
-  sellButton: {fileID: 0}
+  structureDisplayManager: {fileID: 987159911}
+  infoButton: {fileID: 1764716667}
+  sellButton: {fileID: 169950165}
+  miniGameButton: {fileID: 1759355378}
 --- !u!1001 &1583717906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12144,6 +12191,7 @@ GameObject:
   - component: {fileID: 1764716666}
   - component: {fileID: 1764716665}
   - component: {fileID: 1764716667}
+  - component: {fileID: 1764716668}
   m_Layer: 5
   m_Name: InfoButton
   m_TagString: Untagged
@@ -12253,18 +12301,46 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 987159904}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1764716668}
+        m_TargetAssemblyTypeName: ActivateGameObject, Assembly-CSharp
+        m_MethodName: ActivateObjects
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1764716668}
+        m_TargetAssemblyTypeName: ActivateGameObject, Assembly-CSharp
+        m_MethodName: DeactivateObjects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1764716668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764716663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44829a8bd98d5d147bbfcaa33ec44a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToActivate:
+  - {fileID: 987159904}
+  objectsToDeactivate:
+  - {fileID: 1575016548}
 --- !u!1 &1765082145
 GameObject:
   m_ObjectHideFlags: 0

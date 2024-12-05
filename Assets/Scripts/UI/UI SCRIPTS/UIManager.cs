@@ -7,7 +7,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private StructureDisplayManager structureDisplayManager; // Reference to the StructureDisplayManager
 
     [SerializeField] private Button infoButton; // Reference to the Info button
-    [SerializeField] private Button sellButton; // Reference to the Sell button (optional)
+    [SerializeField] private Button sellButton; // Reference to the Sell button
+    [SerializeField] private Button miniGameButton; // Reference to the Mini Game button
 
     private Structure_SO selectedStructure; // The structure that is currently selected/clicked
 
@@ -21,9 +22,17 @@ public class UIManager : MonoBehaviour
 
         // Reactivate the buttons when clicking a structure
         infoButton.gameObject.SetActive(true);
-        if (sellButton != null)
+        sellButton?.gameObject.SetActive(true);
+
+        // Determine if the Mini Game button should be shown
+        if (selectedStructure.structurePrefab.name == "Structure_FishingPort" || selectedStructure.structurePrefab.name == "Structure_BarnHouse")
         {
-            sellButton.gameObject.SetActive(true);
+            miniGameButton.gameObject.SetActive(true);
+            miniGameButton.onClick.AddListener(OnMiniGameButtonClick); // Add the click listener
+        }
+        else
+        {
+            miniGameButton.gameObject.SetActive(false);
         }
 
         // Call the StructureDisplayManager to show the structure details
@@ -35,6 +44,7 @@ public class UIManager : MonoBehaviour
     {
         actionPanel.SetActive(false);
         structureDisplayManager.CloseCard(); // Optionally close the card when hiding the panel
+        miniGameButton.onClick.RemoveAllListeners(); // Clear listeners to prevent duplicate calls
     }
 
     // This function can be used when opening a structure's details directly
@@ -62,10 +72,7 @@ public class UIManager : MonoBehaviour
         infoButton.onClick.AddListener(OnInfoButtonClick);
 
         // If the sell button is included, assign a listener to it
-        if (sellButton != null)
-        {
-            sellButton.onClick.AddListener(OnSellButtonClick); // Even though it's currently disabled
-        }
+        sellButton?.onClick.AddListener(OnSellButtonClick);
     }
 
     // Function that gets called when the Info button is clicked
@@ -75,19 +82,23 @@ public class UIManager : MonoBehaviour
 
         // Hide the Info and Sell buttons when info is clicked
         infoButton.gameObject.SetActive(false);
-        if (sellButton != null)
-        {
-            sellButton.gameObject.SetActive(false); // Only if sellButton is not null
-        }
+        sellButton?.gameObject.SetActive(false);
 
         // Optionally hide the action panel as well
-        HideActionPanel(); // You can keep this if you want to close the panel too
+        HideActionPanel();
     }
 
-    // Empty function for the Sell button (disabled for now)
+    // Function that gets called when the Sell button is clicked
     private void OnSellButtonClick()
     {
         HideActionPanel(); // Only hides the panel
-        // No additional logic for selling is implemented here.
+        // Add logic for selling the structure here
+    }
+
+    // Function that gets called when the Mini Game button is clicked
+    private void OnMiniGameButtonClick()
+    {
+        Debug.Log($"Starting mini game for {selectedStructure.structurePrefab.name}");
+        // Add your mini game logic here
     }
 }
