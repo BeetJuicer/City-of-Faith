@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1165646995455017732}
   - component: {fileID: 8789836585804325243}
   - component: {fileID: 2009709317352278690}
-  - component: {fileID: 5441337746507252055}
+  - component: {fileID: 5169575443913469233}
   m_Layer: 5
   m_Name: CropTemplate
   m_TagString: Untagged
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5441337746507252055
+--- !u!114 &5169575443913469233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,13 +89,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1259366436064692955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 336377349c228e144a8e2ab7ea1dd6f9, type: 3}
+  m_Script: {fileID: 11500000, guid: a29c723f7ffdc7f40beed632feed4145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   titleTxt: {fileID: 1472415068585587636}
   descriptionTxt: {fileID: 9005427968686058772}
   costTxt: {fileID: 6132128854240001079}
   itemImage: {fileID: 5514923408573986838}
+  button: {fileID: 5048842418649043931}
 --- !u!1 &1854013049272678220
 GameObject:
   m_ObjectHideFlags: 0

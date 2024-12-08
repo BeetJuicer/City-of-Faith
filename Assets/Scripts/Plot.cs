@@ -22,6 +22,7 @@ public class Plot : MonoBehaviour, IClickableObject
     //TODO: Temporary serialize field for debugging
     [SerializeField] Crop_SO tempCropSO;
 
+    private GameObject cropSelectionUI;
     private CropVisual cropVisual;
     private CropImageDisplay cropImageDisplay;
     private Crop_SO crop_SO;
@@ -69,6 +70,7 @@ public class Plot : MonoBehaviour, IClickableObject
     {
         structure = GetComponent<Structure>();
         cropImageDisplay = GetComponentInChildren<CropImageDisplay>();
+        cropSelectionUI = GameObject.FindGameObjectWithTag("CropSelectionUI");//dirty.
         Debug.Assert(cropImageDisplay != null, "Cannot find crop image display in children!");
 
         if (plotData == null)
@@ -216,18 +218,17 @@ public class Plot : MonoBehaviour, IClickableObject
         {
             case PlotState.WAITING:
                 {
-                    structure.DisplayBuildingState();
+                    //do nothing
                     break;
                 }
             case PlotState.EMPTY:
                 {
-                    //UIManager.DisplayCropChoices();
-                    print("TODO: Display Plant choices UI");
+                    cropSelectionUI.SetActive(true);
                     break;
                 }
             case PlotState.GROWING:
                 {
-                    print("TODO: Display growth details");
+                    // do nothing.
                     break;
                 }
             case PlotState.RIPE:

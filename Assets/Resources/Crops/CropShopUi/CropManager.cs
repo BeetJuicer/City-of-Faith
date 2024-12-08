@@ -7,8 +7,6 @@ using TMPro;
 public class CropManager : MonoBehaviour
 {
     public Crop_SO[] cropItemsSO; // Array of Crop Scriptable Objects
-    public GameObject[] cropPanelsGO; // Array of UI panels for each crop
-    public ShopTemplate[] cropPanels; // Array of templates for crop UI
     public Button[] cropPurchaseBtns; // Buttons for purchasing crops
 
     public TMP_Text coinUI; // Reference to coin text
@@ -17,28 +15,43 @@ public class CropManager : MonoBehaviour
     public GameObject buildingOverlayUI; // Reference to the building overlay UI
     public Canvas CropSelectionUI; // Para maopen sa plot, may public method
 
+
+
+    //carl
+    private Plot selectedPlot;
+    [SerializeField] private GameObject cropCardTemplate;
+    [SerializeField] private GameObject csContent;
+
+
     private void Start()
     {
         //coinUI.text = coins.ToString();
-        LoadCropPanels();
         //CheckCropPurchaseable();
+        LoadCropPanels();
+    }
 
+    public void Purchase(Crop_SO so)
+    {
+        // this is only called when the button is enabled anyway, so no checking needed.
+        selectedPlot.Plant(so);
+        ResourceManager.Instance.AdjustPlayerCurrency(so.cropPrice);
     }
 
     public void LoadCropPanels()
     {
         for (int i = 0; i < cropItemsSO.Length; i++)
         {
-            cropPanels[i].titleTxt.text = cropItemsSO[i].cropName;
-            cropPanels[i].descriptionTxt.text = cropItemsSO[i].cropDetails;
-            cropPanels[i].costTxt.text = cropItemsSO[i].cropPrice.ToString();
-            cropPanels[i].itemImage.sprite = cropItemsSO[i].cropImage;
-
+            print(i);
+            var card = Instantiate(cropCardTemplate, transform.position, Quaternion.identity, csContent.transform);
+            card.GetComponent<CropShopTemplate>().Init(cropItemsSO[i], this);
+            card.SetActive(true);
         }
     }
 
-    public void OpenCropSelection() //Open the Crop Shop
+    public void OpenCropSelection(Plot plot) //Open the Crop Shop
     {
+        selectedPlot = plot;
+
         if (CropSelectionUI != null)
         {
             CropSelectionUI.enabled = true;
@@ -60,29 +73,6 @@ public class CropManager : MonoBehaviour
             Debug.LogError("Error in OpenCropSelection");
         }
     }
-
-
-    //public void AddCoins(int amount)
-    //{
-    //    coins += amount;
-    //    coinUI.text = coins.ToString();
-    //    CheckCropPurchaseable();
-    //}
-
-    //private void CheckCropPurchaseable()
-    //{
-    //    for (int i = 0; i < cropItemsSO.Length; i++)
-    //    {
-    //        if (coins >= cropItemsSO[i].cropPrice)
-    //        {
-    //            cropPurchaseBtns[i].interactable = true;
-    //        }
-    //        else
-    //        {
-    //            cropPurchaseBtns[i].interactable = false;
-    //        }
-    //    }
-    //}
 
     public void PurchaseItem(int btnNo)
     {

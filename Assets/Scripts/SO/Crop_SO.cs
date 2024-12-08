@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using AYellowpaper.SerializedCollections;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Crop_SO")]
 public class Crop_SO : ScriptableObject
 {
     public string cropName;
     public string cropDetails;
-    public int cropPrice;
+    [SerializedDictionary("Currency", "Price")]
+    public SerializedDictionary<Currency, int> cropPrice;
     public Sprite cropImage;
     public GameObject cropPrefab;
 

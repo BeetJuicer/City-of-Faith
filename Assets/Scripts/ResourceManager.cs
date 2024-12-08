@@ -120,6 +120,9 @@ public class ResourceManager : MonoBehaviour
     // Always use this to set player currency.
     private void SetPlayerCurrency(Currency type, int newValue)
     {
+        if (newValue < 0)
+            Debug.LogError("Negative Currency detected!!");
+
         playerCurrencies[type] = newValue;
         currencyData[type].amount = newValue;
 
@@ -128,15 +131,16 @@ public class ResourceManager : MonoBehaviour
 
     public void AdjustPlayerCurrency(Currency type, int amount)
     {
-        print("Added " + amount + " units of " + type.ToString() + " to storage!");
-
-        foreach (KeyValuePair<Currency, int> pair in PlayerCurrencies)
-        {
-            print($"{pair.Key}: {pair.Value}");
-        }
-
         SetPlayerCurrency(type, 
             PlayerCurrencies[type] + amount);
+    }
+
+    public void AdjustPlayerCurrency(Dictionary<Currency, int> amounts)
+    {
+        foreach (KeyValuePair<Currency, int> p in amounts)
+        {
+            SetPlayerCurrency(p.Key, PlayerCurrencies[p.Key] + p.Value);
+        }
     }
 
     public void AdjustPlayerResources(FoodResource type, int amount)
