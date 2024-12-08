@@ -6,36 +6,17 @@ using NaughtyAttributes;
 
 public class CropImageDisplay : MonoBehaviour
 {
-    public Image cropImage;
-    [SerializeField] private Plot plotScript;
+    [SerializeField] private GameObject harvestCanvas;
+    private Plot plot;
 
-    // Method to put the crop image to Image UI
-    public void Setup(Plot plot)
+    private void Start()
     {
-        plotScript = plot;
-
-        // Get Crop_SO from the Plot.cs
-        if (plotScript != null && plotScript.Crop_SO != null)
-        {
-            Crop_SO cropData = plotScript.Crop_SO;
-            if (cropData != null)
-            {
-                cropImage.sprite = cropData.cropImage; // Update the Image
-                Debug.Log("Crop image updated to: " + cropData.cropImage.name);
-            }
-        }
+        Plot plot = GetComponentInParent<Plot>();
     }
 
-    [Button("Test Setup")]
-    public void TestSetup()
+    // Method to put the crop image to Image UI
+    public void UpdateVisual(Plot.PlotState state)
     {
-        if (plotScript != null)
-        {
-            Setup(plotScript);
-        }
-        else
-        {
-            Debug.LogWarning("Plot script not assigned!");
-        }
+        harvestCanvas.SetActive(state == Plot.PlotState.RIPE);
     }
 }

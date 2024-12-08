@@ -23,6 +23,7 @@ public class Plot : MonoBehaviour, IClickableObject
     [SerializeField] Crop_SO tempCropSO;
 
     private CropVisual cropVisual;
+    private CropImageDisplay cropImageDisplay;
     private Crop_SO crop_SO;
     [SerializeField] private Transform cropVisualPos;
 
@@ -41,7 +42,9 @@ public class Plot : MonoBehaviour, IClickableObject
             currentPlotState = value;
             plotData.plot_state = (int)currentPlotState;
             db.UpdateRecord(plotData);
+                //UI
             if (cropVisual != null) cropVisual.UpdateVisual(currentPlotState);
+            if (cropImageDisplay != null) cropImageDisplay.UpdateVisual(currentPlotState);
         }
     }
 
@@ -60,6 +63,9 @@ public class Plot : MonoBehaviour, IClickableObject
 
     // Timer
     private float updateTimer;
+
+    public delegate void RipeDelegate();
+    public event RipeDelegate OnRipeEvent;
 
     void Start()
     {
