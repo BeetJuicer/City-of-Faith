@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cropName: Turnip
   cropDetails: Turnips teach us that greatness comes in all shapes and sizes
-  cropPrice: 35
+  cropPrice:
+    _serializedList:
+    - Key: 1
+      Value: 100
   cropImage: {fileID: 21300000, guid: 08c04d1f7e1d999478e9dc5ee7101f92, type: 3}
   cropPrefab: {fileID: 7924419385183927644, guid: 8ee5ad8c19995044a902b0189d84062f,
     type: 3}

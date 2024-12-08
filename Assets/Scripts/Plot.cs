@@ -213,6 +213,7 @@ public class Plot : MonoBehaviour, IClickableObject
     [Button]
     public void OnObjectClicked()
     {
+        print("clicked. state is: " + currentPlotState);
         // State handling
         switch (CurrentPlotState)
         {
@@ -223,7 +224,7 @@ public class Plot : MonoBehaviour, IClickableObject
                 }
             case PlotState.EMPTY:
                 {
-                    cropSelectionUI.SetActive(true);
+                    cropSelectionUI.GetComponent<CropManager>().OpenCropSelection(this);
                     break;
                 }
             case PlotState.GROWING:

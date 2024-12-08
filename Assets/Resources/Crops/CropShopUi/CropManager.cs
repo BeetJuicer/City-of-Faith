@@ -7,15 +7,11 @@ using TMPro;
 public class CropManager : MonoBehaviour
 {
     public Crop_SO[] cropItemsSO; // Array of Crop Scriptable Objects
-    public Button[] cropPurchaseBtns; // Buttons for purchasing crops
 
     public TMP_Text coinUI; // Reference to coin text
     public int coins; // Player's coins
     public GameObject cropShopUI; // Reference to the crop shop UI
     public GameObject buildingOverlayUI; // Reference to the building overlay UI
-    public Canvas CropSelectionUI; // Para maopen sa plot, may public method
-
-
 
     //carl
     private Plot selectedPlot;
@@ -35,13 +31,13 @@ public class CropManager : MonoBehaviour
         // this is only called when the button is enabled anyway, so no checking needed.
         selectedPlot.Plant(so);
         ResourceManager.Instance.AdjustPlayerCurrency(so.cropPrice);
+        CloseCropSelection();
     }
 
     public void LoadCropPanels()
     {
         for (int i = 0; i < cropItemsSO.Length; i++)
         {
-            print(i);
             var card = Instantiate(cropCardTemplate, transform.position, Quaternion.identity, csContent.transform);
             card.GetComponent<CropShopTemplate>().Init(cropItemsSO[i], this);
             card.SetActive(true);
@@ -52,9 +48,9 @@ public class CropManager : MonoBehaviour
     {
         selectedPlot = plot;
 
-        if (CropSelectionUI != null)
+        if (cropShopUI != null)
         {
-            CropSelectionUI.enabled = true;
+            cropShopUI.SetActive(true);
         }
         else
         {
@@ -64,19 +60,13 @@ public class CropManager : MonoBehaviour
 
     public void CloseCropSelection() //Close the Crop Shop
     {
-        if (CropSelectionUI != null)
+        if (cropShopUI != null)
         {
-            CropSelectionUI.enabled = false;
+            cropShopUI.SetActive(false);
         }
         else
         {
             Debug.LogError("Error in OpenCropSelection");
         }
-    }
-
-    public void PurchaseItem(int btnNo)
-    {
-        cropShopUI.SetActive(false); // Deactivate the shop UI
-        buildingOverlayUI.SetActive(true); // Activate the building overlay
     }
 }
