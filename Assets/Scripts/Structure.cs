@@ -118,18 +118,6 @@ public class Structure : MonoBehaviour
             EnterBuiltState();
     }
 
-    // UIManager Integration - Detect when this structure is clicked
-    private void OnMouseDown()
-    {
-        // Assuming the UIManager is already set up in the scene.
-        UIManager uiManager = FindObjectOfType<UIManager>();
-
-        if (uiManager != null)
-        {
-            // Call UIManager to show structure details when clicked
-            uiManager.OnStructureClick(structure_so);
-        }
-    }
     // Update is called once per frame
     void Update()
     {
