@@ -273,8 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd00cb32af7cea346972dd6ba17b14ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cropImage: {fileID: 144016852842766665}
-  plotScript: {fileID: 0}
+  harvestCanvas: {fileID: 8504324960595202201}
+  image: {fileID: 144016852842766665}
 --- !u!1 &8504324960595202201
 GameObject:
   m_ObjectHideFlags: 0

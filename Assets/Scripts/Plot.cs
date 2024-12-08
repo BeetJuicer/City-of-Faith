@@ -44,7 +44,7 @@ public class Plot : MonoBehaviour, IClickableObject
             db.UpdateRecord(plotData);
                 //UI
             if (cropVisual != null) cropVisual.UpdateVisual(currentPlotState);
-            if (cropImageDisplay != null) cropImageDisplay.UpdateVisual(currentPlotState);
+            if (cropImageDisplay != null) cropImageDisplay.UpdateVisual(currentPlotState, crop_SO);
         }
     }
 
@@ -64,12 +64,12 @@ public class Plot : MonoBehaviour, IClickableObject
     // Timer
     private float updateTimer;
 
-    public delegate void RipeDelegate();
-    public event RipeDelegate OnRipeEvent;
 
     void Start()
     {
         structure = GetComponent<Structure>();
+        cropImageDisplay = GetComponentInChildren<CropImageDisplay>();
+        Debug.Assert(cropImageDisplay != null, "Cannot find crop image display in children!");
 
         if (plotData == null)
         {
