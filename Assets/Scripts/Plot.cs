@@ -88,6 +88,8 @@ public class Plot : MonoBehaviour, IClickableObject
 
             db.AddNewRecord(plotData);
         }
+
+        cropImageDisplay.UpdateVisual(CurrentPlotState, crop_SO);
     }
 
     public void LoadData(Database.PlotData data, Database db)
