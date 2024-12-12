@@ -247,12 +247,6 @@ public class Plot : MonoBehaviour, IClickableObject
         }
     }
 
-    //for pc
-    private void OnMouseDown()
-    {
-        OnObjectClicked();
-    }
-
     public void ClaimHarvest()
     {
         ResourceManager.Instance.AdjustPlayerResources(FoodResource.Plant, crop_SO.amountPerClaim);

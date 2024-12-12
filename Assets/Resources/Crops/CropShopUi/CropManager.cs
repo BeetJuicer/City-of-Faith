@@ -11,7 +11,6 @@ public class CropManager : MonoBehaviour
     public TMP_Text coinUI; // Reference to coin text
     public int coins; // Player's coins
     public GameObject cropShopUI; // Reference to the crop shop UI
-    public GameObject buildingOverlayUI; // Reference to the building overlay UI
 
     //carl
     private Plot selectedPlot;
@@ -30,7 +29,7 @@ public class CropManager : MonoBehaviour
     {
         // this is only called when the button is enabled anyway, so no checking needed.
         selectedPlot.Plant(so);
-        ResourceManager.Instance.AdjustPlayerCurrency(so.cropPrice);
+        ResourceManager.Instance.AdjustPlayerCurrency(so.cropPrice); // TODO: negative dapat
         CloseCropSelection();
     }
 

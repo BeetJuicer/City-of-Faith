@@ -131,9 +131,10 @@ public class ResourceManager : MonoBehaviour
 
     public void AdjustPlayerCurrency(Currency type, int amount)
     {
-        SetPlayerCurrency(type, 
+        SetPlayerCurrency(type,
             PlayerCurrencies[type] + amount);
     }
+
 
     public void AdjustPlayerCurrency(Dictionary<Currency, int> amounts)
     {

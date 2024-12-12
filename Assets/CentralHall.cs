@@ -46,7 +46,6 @@ public class CentralHall : MonoBehaviour
     public List<Crop_SO> LockedCrops { get => GetLockedCropSOs(); private set { LockedCrops = value; } }
     public List<Structure_SO> LockedStructures { get => GetLockedStructureSOs(); private set { LockedStructures = value; } }
 
-
     private void Start()
     {
         db = FindFirstObjectByType<Database>();
