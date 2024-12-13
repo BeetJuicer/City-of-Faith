@@ -25,10 +25,14 @@ public class Bomb : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Check if the egg collides with the basket
+        // Check if the bomb collides with the basket
         if (collision.gameObject.name == "Basket")
         {
             Destroy(this.gameObject);  // Destroy the bomb
+
+            // Play bomb explosion sound
+            AudioSourceMiniGame.instance.PlaySoundEffect(AudioSourceMiniGame.instance.bombExplosionSound);
+
             gameController.AddScore(-100); // Deduct score on bomb collision
         }
     }

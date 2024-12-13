@@ -30,6 +30,9 @@ public class Egg : MonoBehaviour
         {
             Destroy(gameObject);
 
+            // Play egg catch sound
+            AudioSourceMiniGame.instance.PlaySoundEffect(AudioSourceMiniGame.instance.eggCatchSound);
+
             // Access the GameController instance and call AddScore
             GameController.instance.AddScore(5);
         }
