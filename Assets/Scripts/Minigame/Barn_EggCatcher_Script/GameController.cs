@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController instance;
+    public static GameController instance;  // Singleton instance for easy access across other scripts
 
-    float timer = 30;
-    public GameObject[] gm;
-    public TextMeshProUGUI timeText;
-    public TextMeshProUGUI scoreText;
+    float timer = 30;                      // Game timer, countdown from 30 seconds
+    public GameObject[] gm;                // Array of game objects to spawn (e.g., eggs, bombs)
+    public TextMeshProUGUI timeText;       // UI Text for displaying remaining time
+    public TextMeshProUGUI scoreText;      // UI Text for displaying current score
 
+    // Game Over UI components
     public GameObject gameOverPanel;
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI finalScoreText;
@@ -20,16 +21,18 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI expText;
     public Button exitButton;
 
-    int score = 0;
-    int gold = 0;
-    int exp = 0;
+    // Player data
+    int score = 0;                         // Player's score
+    int gold = 0;                          // Gold earned at the end of the game
+    int exp = 0;                           // Experience points earned
 
-    float spawnCooldown = 0.5f;
-    float currentCooldown = 0.0f;
-    bool isGameOver = false; // Flag to control game-over logic
+    float spawnCooldown = 0.5f;            // Time interval between object spawns
+    float currentCooldown = 0.0f;         // Tracks current cooldown time
+    bool isGameOver = false;              // Flag to control game-over state
 
     void Awake()
     {
+        // Singleton pattern: ensures only one instance of GameController exists
         if (instance == null)
         {
             instance = this;
@@ -43,20 +46,16 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        // Stop all current sounds before starting
-        AudioSourceMiniGame.instance.sfxSource.Stop();  // Stop any lingering sound effects
+        // Initial setup when the game starts
+        AudioSourceMiniGame.instance.sfxSource.Stop();  // Stop lingering sound effects
+        AudioSourceMiniGame.instance.PlayStartSound();  // Play the start sound effect
+        AudioSourceMiniGame.instance.PlayBackgroundMusic();  // Start playing background music
 
-        // Play the start sound effect once when the game begins
-        AudioSourceMiniGame.instance.PlayStartSound();
-
-        // Start playing background music
-        AudioSourceMiniGame.instance.PlayBackgroundMusic();
-
-        // Initialize UI
+        // Initialize the UI elements
         timeText.text = "Time Left: " + Mathf.RoundToInt(timer) + "s";
         scoreText.text = "Score: 0";
 
-        // Initially hide the game-over panel
+        // Hide the game-over panel at the start
         gameOverPanel.SetActive(false);
     }
 
@@ -64,18 +63,19 @@ public class GameController : MonoBehaviour
     {
         if (timer > 0)
         {
+            // Countdown timer
             timer -= Time.deltaTime;
             timeText.text = "Time Left: " + Mathf.RoundToInt(timer) + "s";
 
+            // Handle object spawning at regular intervals
             currentCooldown -= Time.deltaTime;
-
             if (currentCooldown <= 0)
             {
-                SpawnObjects();
-                currentCooldown = spawnCooldown;
+                SpawnObjects();  // Call function to spawn new objects
+                currentCooldown = spawnCooldown;  // Reset cooldown
             }
         }
-        else if (!isGameOver) // Trigger game-over logic only once
+        else if (!isGameOver) // Trigger game-over logic once
         {
             HandleGameOver();
         }
@@ -83,13 +83,15 @@ public class GameController : MonoBehaviour
 
     private void SpawnObjects()
     {
+        // Spawn objects at random positions within the screen bounds
         for (int i = 0; i < 3; i++)
         {
-            float pos_x = Random.Range(-4.0f, 4.0f);
-            float pos_y = 6.0f;
-            float initialVelocity = Random.Range(5.0f, 8.0f);
+            float pos_x = Random.Range(-4.0f, 4.0f);  // Random x position for spawning
+            float pos_y = 6.0f;                       // Fixed y position for spawning
+            float initialVelocity = Random.Range(5.0f, 8.0f);  // Random downward velocity
 
             GameObject obj;
+            // Randomly choose whether to spawn an egg (80% chance) or a bomb (20% chance)
             if (Random.Range(0, 100) < 80)
             {
                 obj = Instantiate(gm[0], new Vector3(pos_x, pos_y, 0.1f), Quaternion.identity);
@@ -99,6 +101,7 @@ public class GameController : MonoBehaviour
                 obj = Instantiate(gm[1], new Vector3(pos_x, pos_y, 0.1f), Quaternion.identity);
             }
 
+            // Add downward force to the object
             Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
@@ -109,18 +112,17 @@ public class GameController : MonoBehaviour
 
     private void HandleGameOver()
     {
-        isGameOver = true; // Set the game-over flag
+        // Flag the game as over
+        isGameOver = true;
 
-        // Stop background music
+        // Stop background music and sound effects
         AudioSourceMiniGame.instance.StopBackgroundMusic();
-
-        // Stop any other sound effects to avoid overlap
         AudioSourceMiniGame.instance.sfxSource.Stop();
 
-        // Play the game-over sound effect once
+        // Play game-over sound effect
         AudioSourceMiniGame.instance.PlayGameOverSound();
 
-        // Display the game-over UI
+        // Display the game-over UI and show the final score
         gameOverPanel.SetActive(true);
         gameOverText.text = "Game Over";
         finalScoreText.text = "Final Score: " + score;
@@ -128,18 +130,20 @@ public class GameController : MonoBehaviour
         // Calculate rewards based on score
         CalculateRewards();
 
-        // Display rewards
+        // Display rewards (Gold and EXP)
         goldText.text = "Gold: " + gold;
         expText.text = "EXP: " + exp;
 
+        // Show exit button
         exitButton.gameObject.SetActive(true);
 
-        // Pause the game loop
+        // Pause the game
         Time.timeScale = 0f;
     }
 
     private void CalculateRewards()
     {
+        // Rewards based on score thresholds
         if (score == 0)
         {
             gold = 0;
@@ -164,13 +168,14 @@ public class GameController : MonoBehaviour
 
     public void AddScore(int points)
     {
+        // Add points to the score and ensure it doesn't go below 0
         score += points;
-        score = Mathf.Max(score, 0); // Ensure score doesn't drop below 0
+        score = Mathf.Max(score, 0);
         scoreText.text = "Score: " + score;
     }
 
     public void ExitGame()
     {
-        // Implement your exit logic here (e.g., quit the game or return to the main menu)
+        // Logic to exit the game (e.g., quit or return to the main menu)
     }
 }
