@@ -3,12 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ShopTemplate : MonoBehaviour
 {
-    public TMP_Text titleTxt;
-    public TMP_Text descriptionTxt;
-    public TMP_Text costTxt;
-    public Image itemImage;
+    private Structure_SO siso;
+    private ShopManager shopManager;
+
+    [SerializeField] private TMP_Text titleTxt;
+    [SerializeField] private TMP_Text descriptionTxt;
+    [SerializeField] private TMP_Text costTxt;
+    [SerializeField] private Image itemImg;
+    [SerializeField] private Button button;
+
+    public void Init(Structure_SO so, ShopManager sm)
+    {
+        this.siso = so;
+        this.shopManager = sm;
+
+        titleTxt.text = so.structureName;
+        costTxt.text = so.currencyRequired.Values.First().ToString();
+        itemImg.sprite = so.displayImage;
+
+        //costTxt.text = so.baseCost.Values.First().ToString(); //First for now. a bit hacky.
+
+        // check price, enable button if enough money.
+        //button.enabled = (ResourceManager.Instance.HasEnoughCurrency(so.baseCost));
+        // ideally, gray yung card.
+
+        // call cm.Purchase when button is clicked.
+        //button.onClick.AddListener(() => sm.PurchaseItem(so));
+    }
+    public void OnClick()
+    {
+        Debug.Log("ShopTemplate clicked!");
+        shopManager.PurchaseItem(siso);
+    }
+
+    private void OnDestroy()
+    {
+        button.onClick.RemoveAllListeners();
+    }
 }
 

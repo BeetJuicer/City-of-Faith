@@ -164,10 +164,7 @@ public partial class @TouchControls: IInputActionCollection2, IDisposable
         m_Touch_PrimaryTouchHoldRelease = m_Touch.FindAction("PrimaryTouchHoldRelease", throwIfNotFound: true);
     }
 
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
+    public void Dispose() => UnityEngine.Object.Destroy(asset);
 
     public InputBinding? bindingMask
     {
@@ -183,42 +180,21 @@ public partial class @TouchControls: IInputActionCollection2, IDisposable
 
     public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
 
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
+    public bool Contains(InputAction action) => asset.Contains(action);
 
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
+    public IEnumerator<InputAction> GetEnumerator() => asset.GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public void Enable()
-    {
-        asset.Enable();
-    }
+    public void Enable() => asset.Enable();
 
-    public void Disable()
-    {
-        asset.Disable();
-    }
+    public void Disable() => asset.Disable();
 
     public IEnumerable<InputBinding> bindings => asset.bindings;
 
-    public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
-    {
-        return asset.FindAction(actionNameOrId, throwIfNotFound);
-    }
+    public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false) => asset.FindAction(actionNameOrId, throwIfNotFound);
 
-    public int FindBinding(InputBinding bindingMask, out InputAction action)
-    {
-        return asset.FindBinding(bindingMask, out action);
-    }
+    public int FindBinding(InputBinding bindingMask, out InputAction action) => asset.FindBinding(bindingMask, out action);
 
     // Touch
     private readonly InputActionMap m_Touch;
@@ -239,9 +215,9 @@ public partial class @TouchControls: IInputActionCollection2, IDisposable
         public InputAction @PrimaryTouchContact => m_Wrapper.m_Touch_PrimaryTouchContact;
         public InputAction @PrimaryTouchPress => m_Wrapper.m_Touch_PrimaryTouchPress;
         public InputAction @PrimaryTouchHoldRelease => m_Wrapper.m_Touch_PrimaryTouchHoldRelease;
-        public InputActionMap Get() { return m_Wrapper.m_Touch; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
+        public InputActionMap Get() => m_Wrapper.m_Touch;
+        public void Enable() => Get().Enable();
+        public void Disable() => Get().Disable();
         public bool enabled => Get().enabled;
         public static implicit operator InputActionMap(TouchActions set) { return set.Get(); }
         public void AddCallbacks(ITouchActions instance)

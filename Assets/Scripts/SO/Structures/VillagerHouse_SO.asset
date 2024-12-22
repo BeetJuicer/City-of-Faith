@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: VillagerHouse_SO
   m_EditorClassIdentifier: 
   structureName: Villager House
-  description: The strength of the village lies in its people.
+  description: 0
   structurePrefab: {fileID: 7438028695792643795, guid: fc94951bdc156894f9beb724aaca264d,
     type: 3}
   displayImage: {fileID: 21300000, guid: 3549ad49a7327884a98d320b1c857819, type: 3}
   expGivenOnBuild: 30
-  townHallLevelRequirement: 3
+  townHallLevelRequirement: 1
   numberOfCitizensAdded: 5
   currencyRequired:
     _serializedList:

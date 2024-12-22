@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8df7ad862bedd84b88b158b5bbfcc34, type: 3}
   m_Name: Fence
   m_EditorClassIdentifier: 
-  title: Fence
-  description: A wooden sturdy fence.
-  baseCost: 200
-  itemImage: {fileID: 21300000, guid: 4e809f66ecfe1cc469d09af3c6f91d05, type: 3}
+  title: Desert Well
+  description: 30
+  baseCost:
+    _serializedList: []
+  itemImage: {fileID: 21300000, guid: 135a4144f0c8516429be0e6c74b46122, type: 3}
   category: 1

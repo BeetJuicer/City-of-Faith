@@ -7,9 +7,6 @@ using TMPro;
 public class CropManager : MonoBehaviour
 {
     public Crop_SO[] cropItemsSO; // Array of Crop Scriptable Objects
-
-    public TMP_Text coinUI; // Reference to coin text
-    public int coins; // Player's coins
     public GameObject cropShopUI; // Reference to the crop shop UI
 
     //carl
@@ -20,8 +17,6 @@ public class CropManager : MonoBehaviour
 
     private void Start()
     {
-        //coinUI.text = coins.ToString();
-        //CheckCropPurchaseable();
         LoadCropPanels();
     }
 

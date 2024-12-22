@@ -20,7 +20,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
 
     [SerializeField] private GameObject overlayPlane;
     private GameObject previewGO;
-    private bool isInBuildMode;
+    public bool isInBuildMode;
 
     private CentralHall centralHall;
 
@@ -141,7 +141,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     [Button]
     public void RotateClockwise()
     {
-        transform.Rotate(new Vector3(0, 45, 0));
+        transform.Rotate(new Vector3(0, 90, 0));
     }
 
     [Button]
