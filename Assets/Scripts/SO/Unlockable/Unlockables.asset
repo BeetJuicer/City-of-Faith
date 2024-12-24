@@ -15,23 +15,36 @@ MonoBehaviour:
   unclockableStructures:
     _serializedList:
     - Key: 0
-      Value:
-      - {fileID: 11400000, guid: 55261ccf8e79d5f43a5e6cd25a01e936, type: 2}
-      - {fileID: 11400000, guid: 254a704fa72f91847966213f4baa69e4, type: 2}
+      Value: []
     - Key: 1
       Value:
-      - {fileID: 11400000, guid: 55261ccf8e79d5f43a5e6cd25a01e936, type: 2}
-      - {fileID: 11400000, guid: 254a704fa72f91847966213f4baa69e4, type: 2}
-  unclockableCrops:
-    _serializedList:
-    - Key: 1
-      Value:
-      - {fileID: 11400000, guid: 5d08ff7e3786dcd46ba3961d79f0d9dc, type: 2}
-      - {fileID: 11400000, guid: d433709d37b301f4d88b7fa3a5a3806e, type: 2}
+      - {fileID: 11400000, guid: c843465539497d74986b0b041463682e, type: 2}
     - Key: 2
       Value:
-      - {fileID: 11400000, guid: 3e351ef23c29ced47add4bae8f8ee1ed, type: 2}
-      - {fileID: 11400000, guid: bc64409001c4dfb4d82cc7889e3ba3be, type: 2}
+      - {fileID: 11400000, guid: 08a25eec9f62fbf42b8c174d7d825e2c, type: 2}
+      - {fileID: 11400000, guid: 52af7883aea7f9844b10f8aa7bc96f0e, type: 2}
+      - {fileID: 11400000, guid: 254a704fa72f91847966213f4baa69e4, type: 2}
+      - {fileID: 11400000, guid: 52af7883aea7f9844b10f8aa7bc96f0e, type: 2}
+    - Key: 3
+      Value:
+      - {fileID: 11400000, guid: 55261ccf8e79d5f43a5e6cd25a01e936, type: 2}
+  unclockableCrops:
+    _serializedList:
+    - Key: 0
+      Value: []
+    - Key: 1
+      Value:
+      - {fileID: 11400000, guid: eab7d26a882887f4fa652af421ba36fa, type: 2}
+    - Key: 2
+      Value:
+      - {fileID: 11400000, guid: 0161e6ee0bbecf3419c260683d702ac4, type: 2}
+      - {fileID: 11400000, guid: 2ccacbe19d00ed847bade49a33008459, type: 2}
+      - {fileID: 11400000, guid: 1a29cfdd4551cf6499fec3510455a345, type: 2}
+    - Key: 3
+      Value:
+      - {fileID: 11400000, guid: 5d08ff7e3786dcd46ba3961d79f0d9dc, type: 2}
+      - {fileID: 11400000, guid: 1a29cfdd4551cf6499fec3510455a345, type: 2}
+      - {fileID: 11400000, guid: d433709d37b301f4d88b7fa3a5a3806e, type: 2}
   populationLimit:
     _serializedList:
     - Key: 0

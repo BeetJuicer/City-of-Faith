@@ -8,7 +8,7 @@ using TMPro;
 public class ShopManager : MonoBehaviour
 {
     //ShopItem
-    public Structure_SO[] Shop_SO;
+    //public Structure_SO[] Shop_SO;
     //public Button[] myPurchaseBtns;
 
     public GameObject ShopManagerUi; // Reference para ma-deactivate Shop UI onclick
@@ -16,6 +16,7 @@ public class ShopManager : MonoBehaviour
     public Dialogue dialogue;
     public BuildingMoveUIManager moveUI;
 
+    [SerializeField] private CentralHall centralhall;
     [SerializeField] private GameObject ShopTemplate;
     [SerializeField] private GameObject shopContent;
 
@@ -30,13 +31,40 @@ public class ShopManager : MonoBehaviour
 
     public void LoadPanels()
     {
-        for (int i = 0; i < Shop_SO.Length; i++)
+        if (centralhall == null)
         {
-            Debug.Log("Instantiating card for: " + Shop_SO[i].name);
+            Debug.LogError("UnlockManager reference is missing in ShopManager!");
+            return;
+        }
+
+         if (shopContent == null)
+        {
+            Debug.LogError("ShopContent reference is missing in ShopManager!");
+            return;
+        }
+
+        List<Structure_SO> unlockedStructures = centralhall.UnlockedStructures;
+        List<Structure_SO> lockedStructures = centralhall.LockedStructures;
+
+        Debug.Log($"Unlocked structures count: {unlockedStructures.Count}");
+        Debug.Log($"Locked structures count: {lockedStructures.Count}");
+
+        foreach (var structure in unlockedStructures)
+        {
+            Debug.Log("Instantiating unlocked card for: " + structure.name);
             var card = Instantiate(ShopTemplate, shopContent.transform);
-            card.GetComponent<ShopTemplate>().Init(Shop_SO[i], this);
+            card.GetComponent<ShopTemplate>().Init(structure, this, isLocked: true);
             card.SetActive(true);
-            Debug.Log("Card instantiated and initialized.");
+            Debug.Log("Unlocked card instantiated and initialized.");
+        }
+
+        foreach (var structure in lockedStructures)
+        {
+            Debug.Log("Instantiating locked card for: " + structure.name);
+            var card = Instantiate(ShopTemplate, shopContent.transform);
+            card.GetComponent<ShopTemplate>().Init(structure, this, isLocked: false);
+            card.SetActive(true);
+            Debug.Log("Locked card instantiated and initialized.");
         }
     }
 

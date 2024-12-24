@@ -38,10 +38,10 @@ public class CentralHall : MonoBehaviour
     [SerializeField] private SerializedDictionary<int, int> levelUpExpRequirements = new();
 
     private List<Structure_SO> unlockedStructures = new();
-    public List<Structure_SO> UnlockedStructures { get => unlockedStructures; private set { unlockedStructures = value; } }
+    public List<Structure_SO> UnlockedStructures { get => GetUnlockedStructureSOs(); private set { unlockedStructures = value; } }
 
     private List<Crop_SO> unlockedCrops = new();
-    public List<Crop_SO> UnlockedCrops { get => unlockedCrops; private set { unlockedCrops = value; } }
+    public List<Crop_SO> UnlockedCrops { get => GetUnlockedCropSOs(); private set { unlockedCrops = value; } }
 
     public List<Crop_SO> LockedCrops { get => GetLockedCropSOs(); private set { LockedCrops = value; } }
     public List<Structure_SO> LockedStructures { get => GetLockedStructureSOs(); private set { LockedStructures = value; } }
@@ -105,10 +105,30 @@ public class CentralHall : MonoBehaviour
         List<Structure_SO> locked = new();
         for (int i = Level + 1; i < unlockables_SO.unclockableStructures.Count; i++)
         {
-            locked.Concat(unlockables_SO.unclockableStructures[i]);
+            locked = locked.Concat(unlockables_SO.unclockableStructures[i]).ToList();
         }
 
         return locked;
+    }
+
+    private List<Structure_SO> GetUnlockedStructureSOs()
+    {
+        List<Structure_SO> unlocked = new();
+        for (int i = 0; i <= Level; i++)
+        {
+            unlocked = unlocked.Concat(unlockables_SO.unclockableStructures[i]).ToList();
+        }
+        return unlocked;
+    }
+
+    private List<Crop_SO> GetUnlockedCropSOs()
+    {
+        List<Crop_SO> unlocked = new();
+        for (int i = 0; i <= Level; i++)
+        {
+            unlocked = unlocked.Concat(unlockables_SO.unclockableCrops[i]).ToList();
+        }
+        return unlocked;
     }
 
     private List<Crop_SO> GetLockedCropSOs()
@@ -116,7 +136,7 @@ public class CentralHall : MonoBehaviour
         List<Crop_SO> locked = new();
         for (int i = Level + 1; i < unlockables_SO.unclockableCrops.Count; i++)
         {
-            locked.Concat(unlockables_SO.unclockableCrops[i]);
+            locked = locked.Concat(unlockables_SO.unclockableCrops[i]).ToList();
         }
 
         return locked;

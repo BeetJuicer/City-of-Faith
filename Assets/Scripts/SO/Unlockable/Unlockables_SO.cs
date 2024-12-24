@@ -11,7 +11,7 @@ public class Unlockables_SO : ScriptableObject
     public SerializedDictionary<int, List<Structure_SO>> unclockableStructures = new();
 
     [SerializedDictionary("Level", "Crops")]
-    public SerializedDictionary<int, Crop_SO[]> unclockableCrops = new();
+    public SerializedDictionary<int, List<Crop_SO>> unclockableCrops = new();
 
     [SerializedDictionary("Level", "Population Limit")]
     public SerializedDictionary<int, int> populationLimit = new();
