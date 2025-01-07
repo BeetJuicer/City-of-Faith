@@ -149,6 +149,12 @@ public class ResourceManager : MonoBehaviour
 
         PlayerFoodResources[type] += amount;
     }
+
+    public bool HasEnoughCurrency(Currency currency, int amount)
+    {
+        return PlayerCurrencies[currency] > amount;
+    }
+
     public bool HasEnough<T>(Dictionary<T, int> cost, Dictionary<T, int> playerInventory)
     {
         foreach (var keyValue in playerInventory)

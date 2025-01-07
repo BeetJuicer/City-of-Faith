@@ -37,8 +37,10 @@ public class Structure : MonoBehaviour, IClickableObject
             db.UpdateRecord(structureData);
         }
     }
+
+
     private DateTime timeInstantiated;
-    private DateTime timeBuildFinished;
+    public DateTime TimeBuildFinished { get; private set; }
     //TODO: problems if user changes date and time of device.
     #endregion
 
@@ -75,7 +77,7 @@ public class Structure : MonoBehaviour, IClickableObject
 
             //TODO: change to online method
             timeInstantiated = DateTime.Now;
-            timeBuildFinished = timeInstantiated.AddDays(structure_so.BuildDays)
+            TimeBuildFinished = timeInstantiated.AddDays(structure_so.BuildDays)
                                                 .AddHours(structure_so.BuildHours)
                                                 .AddMinutes(structure_so.BuildMinutes)
                                                 .AddSeconds(structure_so.BuildSeconds);
@@ -87,7 +89,7 @@ public class Structure : MonoBehaviour, IClickableObject
             {
                 prefab_name = structure_so.structurePrefab.name,
                 player_id = db.PlayerId,
-                time_build_finished = timeBuildFinished,
+                time_build_finished = TimeBuildFinished,
                 building_state = (int)currentBuildingState,
                 posX = structurePos.x,
                 posY = structurePos.y,
@@ -114,7 +116,7 @@ public class Structure : MonoBehaviour, IClickableObject
         this.db = db;
         structureData = data;
 
-        timeBuildFinished = data.time_build_finished;
+        TimeBuildFinished = data.time_build_finished;
 
         //not using the property so that I don't have to call the update database event. Just loading data. 
         currentBuildingState = (BuildingState)data.building_state;
@@ -136,7 +138,7 @@ public class Structure : MonoBehaviour, IClickableObject
                 {
                     //print("In progress: " + gameObject.name + " Time finished: " + timeBuildFinished);
                     // EXIT STATE.
-                    if (DateTime.Now > timeBuildFinished)
+                    if (DateTime.Now > TimeBuildFinished)
                     {
                         // -- Resource Changes
                         print("TODO: Add " + structure_so.expGivenOnBuild + " exp!!");
@@ -174,7 +176,7 @@ public class Structure : MonoBehaviour, IClickableObject
     public void DisplayBuildingState()
     {
         //TODO: replace with UI
-        print("Remaining Time: " + timeBuildFinished.Subtract(DateTime.Now));
+        print("Remaining Time: " + TimeBuildFinished.Subtract(DateTime.Now));
     }
 
     [Button]
@@ -183,7 +185,7 @@ public class Structure : MonoBehaviour, IClickableObject
         switch (CurrentBuildingState)
         {
             case BuildingState.IN_PROGRESS:
-                glorySpeedUpUI.OpenGlorySpeedUpPanel(structure_so, this, timeBuildFinished);
+                glorySpeedUpUI.OpenGlorySpeedUpPanel(structure_so, this);
                 break;
             case BuildingState.BUILT:
                 //do nothing
@@ -192,5 +194,10 @@ public class Structure : MonoBehaviour, IClickableObject
                 Debug.LogWarning("Unhandled building state case!");
                 break;
         }
+    }
+
+    public void SpeedUpBuildingProgress()
+    {
+        TimeBuildFinished = DateTime.Now;
     }
 }

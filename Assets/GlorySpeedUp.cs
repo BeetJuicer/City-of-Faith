@@ -18,29 +18,52 @@ public class GlorySpeedUp : MonoBehaviour
     [SerializeField] private Button button;
 
     private DateTime finishTime;
-    public void OpenGlorySpeedUpPanel(Structure_SO structureSO, Structure structure, DateTime finishTime)
-    {
-        this.finishTime = finishTime;
-        nameText.text = structureSO.structureName;
+    private DateTime totalDuration;
+    private Structure attachedStructure;
 
+    public void OpenGlorySpeedUpPanel(Structure_SO structureSO, Structure structure)
+    {
+        this.attachedStructure = structure;
+        nameText.text = structureSO.structureName;
         container.SetActive(true);
+
         button.enabled = true;
+        button.onClick.AddListener(structure.SpeedUpBuildingProgress);
+    }
+
+    public void CloseGlorySpeedUpPanel()
+    {
+        button.onClick.RemoveAllListeners();
+        container.SetActive(false);
     }
 
     private void Update()
     {
-        var durationLeft = finishTime.Subtract(DateTime.Now);
-        timeLeftText.text = durationLeft.ToString();
+        if (!container.activeInHierarchy) 
+            return;
+
+
+        var durationLeft = attachedStructure.TimeBuildFinished.Subtract(DateTime.Now);
 
         if (durationLeft.Seconds <= 0)
         {
-            PriceText.text = "Finished";
-            button.enabled = false;
+            CloseGlorySpeedUpPanel();
+            print("Open structure display panel here.");
+            return;
         }
-        else
-        {
-            PriceText.text = CalculateGloryCost(durationLeft).ToString();
-        }
+
+        timeLeftText.text = durationLeft.ToString(@"dd\.hh\:mm\:ss");
+        int cost = CalculateGloryCost(durationLeft);
+        PriceText.text = cost.ToString();
+        button.enabled = ResourceManager.Instance.HasEnoughCurrency(Currency.Glory, cost);
+    }
+
+    public double GetPercentageLeft(TimeSpan part, TimeSpan whole)
+    {
+        double partInSeconds = part.TotalSeconds;
+        double wholeInSeconds = whole.TotalSeconds;
+
+        return (partInSeconds / wholeInSeconds) * 100;
     }
 
     private int CalculateGloryCost(TimeSpan duration)
