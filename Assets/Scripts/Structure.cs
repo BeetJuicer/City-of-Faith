@@ -7,7 +7,7 @@ using System;
 /*
  This class handles the building progress of a structure.
  */
-public class Structure : MonoBehaviour, IClickableObject
+public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
 {
     [SerializeField] private Structure_SO structure_so;
 
@@ -50,7 +50,7 @@ public class Structure : MonoBehaviour, IClickableObject
     private const string IN_PROGRESS_VISUAL_NAME = "InProgressVisual";
     private const string BUILT_VISUAL_NAME = "BuiltVisual";
 
-    private GlorySpeedUp glorySpeedUpUI;
+    UIManager uiManager;
 
     private void Awake()
     {
@@ -106,8 +106,8 @@ public class Structure : MonoBehaviour, IClickableObject
             Debug.Assert(StructureID != 0, "Structure ID is 0!");
         }
 
-        glorySpeedUpUI = FindFirstObjectByType<GlorySpeedUp>();
-        Debug.Assert(glorySpeedUpUI != null, "Glory Speed Up UI not found!");
+        uiManager = FindObjectOfType<UIManager>();
+        Debug.Assert(uiManager != null, "Glory Speed Up UI not found!");
     }
 
     /// Called by database to initialize needed values.
@@ -185,10 +185,8 @@ public class Structure : MonoBehaviour, IClickableObject
         switch (CurrentBuildingState)
         {
             case BuildingState.IN_PROGRESS:
-                // open glory speed up button
-                // open info button
-                // open sell button
-                glorySpeedUpUI.OpenGlorySpeedUpPanel(structure_so, this);
+                TimeSpan totaltime = new TimeSpan(structure_so.BuildDays, structure_so.BuildHours, structure_so.BuildMinutes, structure_so.BuildSeconds);
+                uiManager.OpenBoostButton(this, TimeBuildFinished, totaltime);
                 break;
             case BuildingState.BUILT:
                 //do nothing
@@ -199,7 +197,13 @@ public class Structure : MonoBehaviour, IClickableObject
         }
     }
 
-    public void SpeedUpBuildingProgress()
+//for pc
+    private void OnMouseDown()
+    {
+        OnObjectClicked();
+    }
+
+    public void BoostProgress()
     {
         TimeBuildFinished = DateTime.Now;
     }

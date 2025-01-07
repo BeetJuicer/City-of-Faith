@@ -15,7 +15,7 @@ public enum ProducerState
 }
 
 [RequireComponent(typeof(Structure))]
-public class ResourceProducer : MonoBehaviour, IClickableObject
+public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObject
 {
     private Structure structure;
     private GlorySpeedUp glorySpeedUpUI;
@@ -31,6 +31,8 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
 
     //temp debug bool
     public bool printTime = false;
+
+    UIManager uiManager;
 
 
     private ProducerState currentProducerState = ProducerState.Waiting;
@@ -81,7 +83,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
         amountPerClaim = resourceProducer_SO.baseAmountPerClaim;
         timePerClaim = resourceProducer_SO.baseTimeNeededPerClaim;
 
-        glorySpeedUpUI = FindObjectOfType<GlorySpeedUp>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     public void LoadData(Database.ResourceProducerData data, Database db)
@@ -173,7 +175,10 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                 }
             case ProducerState.Producing:
                 {
-                    glorySpeedUpUI.OpenGlorySpeedUpPanel(resourceProducer_SO, this);
+                    //UIManager.ActivateSellButton(goldOnSell);
+                    //UIManager.ActivateInfoButton(resourceProducerSo);
+                    //UIManager.ActivateBoostButton(timeLeft);
+                    uiManager.OpenBoostButton(this, ProductionFinishTime, timePerClaim);
                     break;
                 }
             default:
@@ -184,7 +189,12 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
         }
     }
 
-    public void SpeedUpResourceProgress()
+    private void OnMouseDown()
+    {
+        OnObjectClicked();
+    }
+
+    public void BoostProgress()
     {
         ClaimResources();
     }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button miniGameButton; // Reference to the Mini Game button
 
     private Structure_SO selectedStructure; // The structure that is currently selected/clicked
+
+    [SerializeField] private GlorySpeedUp glorySpeedUp;
 
     // Show the action panel when a structure is clicked
     public void OnStructureClick(Structure_SO structure)
@@ -102,8 +105,8 @@ public class UIManager : MonoBehaviour
         // Add your mini game logic here
     }
 
-    public void OpenGloryButton(Structure_SO structureSO,  Structure structure)
+    public void OpenBoostButton(IBoostableObject boostableObject, DateTime finishTime, TimeSpan totalDuration)
     {
-
+        glorySpeedUp.OpenGlorySpeedUpPanel(boostableObject, finishTime, totalDuration);
     }
 }

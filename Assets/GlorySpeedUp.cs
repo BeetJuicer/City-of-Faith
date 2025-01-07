@@ -24,25 +24,32 @@ public class GlorySpeedUp : MonoBehaviour
         button.onClick.AddListener(() => finishTime = DateTime.Now);
     }
 
-    public void OpenGlorySpeedUpPanel(Structure_SO structureSO, Structure structure)
+    public void OpenGlorySpeedUpPanel(IBoostableObject boostableObject, DateTime finishTime, TimeSpan totalDuration)
     {
         container.SetActive(true);
-        button.onClick.AddListener(structure.SpeedUpBuildingProgress);
+        button.onClick.AddListener(boostableObject.BoostProgress);
+        this.finishTime = finishTime;
     }
 
-    public void OpenGlorySpeedUpPanel(Crop_SO cropSO, Plot p)
-    {
-        container.SetActive(true);
+//    public void OpenGlorySpeedUpPanel(Structure_SO structureSO, Structure structure)
+//    {
+//        container.SetActive(true);
+//        button.onClick.AddListener(structure.SpeedUpBuildingProgress);
+//    }
 
-//        button.onClick.AddListener(p.SpeedUpBuildingProgress);
-    }
+//    public void OpenGlorySpeedUpPanel(Crop_SO cropSO, Plot p)
+//    {
+//        container.SetActive(true);
 
-    public void OpenGlorySpeedUpPanel(ResourceProducer_SO rpSO, ResourceProducer rp)
-    {
-        container.SetActive(true);
+////        button.onClick.AddListener(p.SpeedUpBuildingProgress);
+//    }
 
-        button.onClick.AddListener(rp.SpeedUpResourceProgress);
-    }
+//    public void OpenGlorySpeedUpPanel(ResourceProducer_SO rpSO, ResourceProducer rp)
+//    {
+//        container.SetActive(true);
+
+//        button.onClick.AddListener(rp.SpeedUpResourceProgress);
+//    }
 
     public void CloseGlorySpeedUpPanel()
     {
@@ -52,18 +59,18 @@ public class GlorySpeedUp : MonoBehaviour
 
     private void Update()
     {
-        if (!container.activeInHierarchy) 
+        if (!container.activeInHierarchy)
             return;
-
 
         var durationLeft = finishTime.Subtract(DateTime.Now);
 
         if (durationLeft.Seconds <= 0)
         {
             CloseGlorySpeedUpPanel();
-            print("Open structure display panel here.");
             return;
         }
+
+        print("Received!!");
 
         timeLeftText.text = durationLeft.ToString(@"dd\.hh\:mm\:ss");
         int cost = CalculateGloryCost(durationLeft);

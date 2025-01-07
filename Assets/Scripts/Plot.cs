@@ -5,7 +5,7 @@ using System;
 using NaughtyAttributes;
 
 [RequireComponent(typeof(Structure))]
-public class Plot : MonoBehaviour, IClickableObject
+public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 {
     private Structure structure;
     public enum PlotState
@@ -26,6 +26,7 @@ public class Plot : MonoBehaviour, IClickableObject
     private CropVisual cropVisual;
     private CropImageDisplay cropImageDisplay;
     private Crop_SO crop_SO;
+    private UIManager uiManager;
     [SerializeField] private Transform cropVisualPos;
 
     // Database
@@ -90,6 +91,7 @@ public class Plot : MonoBehaviour, IClickableObject
         }
 
         cropImageDisplay.UpdateVisual(CurrentPlotState, crop_SO);
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     public void LoadData(Database.PlotData data, Database db)
@@ -231,7 +233,8 @@ public class Plot : MonoBehaviour, IClickableObject
                 }
             case PlotState.GROWING:
                 {
-                    // do nothing.
+                    TimeSpan totalTime = new TimeSpan(Crop_SO.daysToClaim, Crop_SO.hoursToClaim, Crop_SO.minutesToClaim, Crop_SO.secondsToClaim);
+                    uiManager.OpenBoostButton(this, GrowthFinishTime, totalTime);
                     break;
                 }
             case PlotState.RIPE:
@@ -247,6 +250,11 @@ public class Plot : MonoBehaviour, IClickableObject
         }
     }
 
+    private void OnMouseDown()
+    {
+        OnObjectClicked();
+    }
+
     public void ClaimHarvest()
     {
         ResourceManager.Instance.AdjustPlayerResources(FoodResource.Plant, crop_SO.amountPerClaim);
@@ -255,5 +263,10 @@ public class Plot : MonoBehaviour, IClickableObject
         Destroy(cropVisualPos.GetChild(0).gameObject);
 
         CurrentPlotState = PlotState.EMPTY;
+    }
+
+    public void BoostProgress()
+    {
+        GrowthFinishTime = DateTime.Now;
     }
 }
