@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class GlorySpeedUp : MonoBehaviour
 {
     [SerializeField] private GameObject container;
-    [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI timeLeftText;
     [SerializeField] private TextMeshProUGUI PriceText;
 
@@ -18,17 +17,31 @@ public class GlorySpeedUp : MonoBehaviour
     [SerializeField] private Button button;
 
     private DateTime finishTime;
-    private DateTime totalDuration;
-    private Structure attachedStructure;
+
+
+    private void Start()
+    {
+        button.onClick.AddListener(() => finishTime = DateTime.Now);
+    }
 
     public void OpenGlorySpeedUpPanel(Structure_SO structureSO, Structure structure)
     {
-        this.attachedStructure = structure;
-        nameText.text = structureSO.structureName;
+        container.SetActive(true);
+        button.onClick.AddListener(structure.SpeedUpBuildingProgress);
+    }
+
+    public void OpenGlorySpeedUpPanel(Crop_SO cropSO, Plot p)
+    {
         container.SetActive(true);
 
-        button.enabled = true;
-        button.onClick.AddListener(structure.SpeedUpBuildingProgress);
+//        button.onClick.AddListener(p.SpeedUpBuildingProgress);
+    }
+
+    public void OpenGlorySpeedUpPanel(ResourceProducer_SO rpSO, ResourceProducer rp)
+    {
+        container.SetActive(true);
+
+        button.onClick.AddListener(rp.SpeedUpResourceProgress);
     }
 
     public void CloseGlorySpeedUpPanel()
@@ -43,7 +56,7 @@ public class GlorySpeedUp : MonoBehaviour
             return;
 
 
-        var durationLeft = attachedStructure.TimeBuildFinished.Subtract(DateTime.Now);
+        var durationLeft = finishTime.Subtract(DateTime.Now);
 
         if (durationLeft.Seconds <= 0)
         {

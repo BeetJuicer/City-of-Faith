@@ -101,4 +101,9 @@ public class UIManager : MonoBehaviour
         Debug.Log($"Starting mini game for {selectedStructure.structurePrefab.name}");
         // Add your mini game logic here
     }
+
+    public void OpenGloryButton(Structure_SO structureSO,  Structure structure)
+    {
+
+    }
 }

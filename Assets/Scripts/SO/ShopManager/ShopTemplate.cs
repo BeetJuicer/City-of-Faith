@@ -45,9 +45,11 @@ public class ShopTemplate : MonoBehaviour
         //button.enabled = (ResourceManager.Instance.HasEnoughCurrency(so.baseCost));
         // ideally, gray yung card.
 
+
         // call cm.Purchase when button is clicked.
         //button.onClick.AddListener(() => sm.PurchaseItem(so));
     }
+
     public void OnClick()
     {
         Debug.Log("ShopTemplate clicked!");

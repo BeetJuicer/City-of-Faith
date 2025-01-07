@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using AYellowpaper.SerializedCollections;
 using System.Linq;
+using System;
 
 public class CentralHall : MonoBehaviour
 {
     private Database db;
     private Database.CentralData centralData = null;
+    public event Action<int> OnPlayerLevelUp;
 
     [SerializeField] private Unlockables_SO unlockables_SO;
     private int level;
@@ -19,6 +21,7 @@ public class CentralHall : MonoBehaviour
             level = value;
             centralData.level = level;
             db.UpdateRecord(centralData);
+            OnPlayerLevelUp?.Invoke(value);
         }
     }
 

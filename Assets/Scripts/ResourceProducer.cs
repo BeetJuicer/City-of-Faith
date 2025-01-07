@@ -18,6 +18,8 @@ public enum ProducerState
 public class ResourceProducer : MonoBehaviour, IClickableObject
 {
     private Structure structure;
+    private GlorySpeedUp glorySpeedUpUI;
+
 
     // Database
     private Database db;
@@ -78,6 +80,8 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
         //Keep a base amount per claim in case leveling up buildings is possible.
         amountPerClaim = resourceProducer_SO.baseAmountPerClaim;
         timePerClaim = resourceProducer_SO.baseTimeNeededPerClaim;
+
+        glorySpeedUpUI = FindObjectOfType<GlorySpeedUp>();
     }
 
     public void LoadData(Database.ResourceProducerData data, Database db)
@@ -169,7 +173,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                 }
             case ProducerState.Producing:
                 {
-                    Debug.LogWarning("Same UI as speed up state, just dialed different.");
+                    glorySpeedUpUI.OpenGlorySpeedUpPanel(resourceProducer_SO, this);
                     break;
                 }
             default:
@@ -178,5 +182,10 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                     break;
                 }
         }
+    }
+
+    public void SpeedUpResourceProgress()
+    {
+        ClaimResources();
     }
 }

@@ -27,6 +27,7 @@ public class Database : MonoBehaviour
         public int Player_id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public int Play_sessions { get; set; }
     }
 
     [Table("tbl_structure")]
@@ -104,6 +105,8 @@ public class Database : MonoBehaviour
         public int exp { get; set; }
     }
 
+    public PlayerData CurrentPlayerData { get; private set; }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -148,8 +151,13 @@ public class Database : MonoBehaviour
         }
         else
         {
-            PlayerId = query.ToList<PlayerData>().First().Player_id;
+            CurrentPlayerData = query.ToList<PlayerData>().First();
+            PlayerId = CurrentPlayerData.Player_id;
+            //increase play sessions count
+            CurrentPlayerData.Play_sessions += 1;
+
             print($"User {username} found. Loading Game.");
+            db.Update(CurrentPlayerData);
             LoadGame();
         }
     }
@@ -214,6 +222,7 @@ public class Database : MonoBehaviour
             }
         }
     }
+
 
     private List<StructureData> GetStructureData()
     {

@@ -185,6 +185,9 @@ public class Structure : MonoBehaviour, IClickableObject
         switch (CurrentBuildingState)
         {
             case BuildingState.IN_PROGRESS:
+                // open glory speed up button
+                // open info button
+                // open sell button
                 glorySpeedUpUI.OpenGlorySpeedUpPanel(structure_so, this);
                 break;
             case BuildingState.BUILT:
