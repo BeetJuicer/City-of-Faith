@@ -148,7 +148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &382731440588323703
 RectTransform:
   m_ObjectHideFlags: 0
@@ -253,9 +253,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 408c3c711ae505e429ac662e99843331, type: 2}
   textComponent: {fileID: 3176147802843557186}
   nextButton: {fileID: 5589218187830442258}
-  textSpeed: 0.05
+  textSpeed: 0.03
   dialogueBox: {fileID: 4537484203753755357}
   arrow: {fileID: 1043314941516290223}
+  shopButton: {fileID: 0}
 --- !u!1 &8048680605491799048
 GameObject:
   m_ObjectHideFlags: 0
