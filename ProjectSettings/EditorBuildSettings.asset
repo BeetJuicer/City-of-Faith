@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Gino Touch Scene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GinoWorld.unity
     guid: 4cebb10a63384a944967513a9893b84d
+  - enabled: 1
+    path: Assets/Scenes/DesertScene.unity
+    guid: 0edecaf13b593624e8812d812e8bb8c8
   m_configObjects: {}

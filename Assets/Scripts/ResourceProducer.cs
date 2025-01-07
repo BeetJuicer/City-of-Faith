@@ -113,7 +113,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                 }
             case ProducerState.Ready_To_Claim:
                 {
-                        // nothing here.
+                    // nothing here.
                     if (printTime)
                         print("Ready to Claim!!");
                     break;
@@ -159,7 +159,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
         {
             case ProducerState.Waiting:
                 {
-                    structure.DisplayBuildingState();
+                    //do nothing
                     break;
                 }
             case ProducerState.Ready_To_Claim:
@@ -169,7 +169,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject
                 }
             case ProducerState.Producing:
                 {
-                    print("In progress");
+                    Debug.LogWarning("Same UI as speed up state, just dialed different.");
                     break;
                 }
             default:

@@ -135,7 +135,6 @@ public class ResourceManager : MonoBehaviour
             PlayerCurrencies[type] + amount);
     }
 
-
     public void AdjustPlayerCurrency(Dictionary<Currency, int> amounts)
     {
         foreach (KeyValuePair<Currency, int> p in amounts)

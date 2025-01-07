@@ -113,7 +113,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             Debug.LogError("Building overlay activated but player does not have enough money!");
         }
 
-        if(collidersInRange > 0 || false)
+        if(collidersInRange > 0)
         {
             print("Not allowed! Deactivate the UI button for user's confirmation if not allowed");
         }
@@ -136,6 +136,8 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
 
         //Add xp.
         centralHall.AddToCentralExp(structure_SO.expGivenOnBuild);
+
+        ExitBuildMode();
     }
 
     [Button]

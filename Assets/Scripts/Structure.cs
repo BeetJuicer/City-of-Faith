@@ -7,7 +7,7 @@ using System;
 /*
  This class handles the building progress of a structure.
  */
-public class Structure : MonoBehaviour
+public class Structure : MonoBehaviour, IClickableObject
 {
     [SerializeField] private Structure_SO structure_so;
 
@@ -47,6 +47,8 @@ public class Structure : MonoBehaviour
     private GameObject builtVisual;
     private const string IN_PROGRESS_VISUAL_NAME = "InProgressVisual";
     private const string BUILT_VISUAL_NAME = "BuiltVisual";
+
+    private GlorySpeedUp glorySpeedUpUI;
 
     private void Awake()
     {
@@ -101,6 +103,9 @@ public class Structure : MonoBehaviour
 
             Debug.Assert(StructureID != 0, "Structure ID is 0!");
         }
+
+        glorySpeedUpUI = FindFirstObjectByType<GlorySpeedUp>();
+        Debug.Assert(glorySpeedUpUI != null, "Glory Speed Up UI not found!");
     }
 
     /// Called by database to initialize needed values.
@@ -170,5 +175,22 @@ public class Structure : MonoBehaviour
     {
         //TODO: replace with UI
         print("Remaining Time: " + timeBuildFinished.Subtract(DateTime.Now));
+    }
+
+    [Button]
+    public void OnObjectClicked()
+    {
+        switch (CurrentBuildingState)
+        {
+            case BuildingState.IN_PROGRESS:
+                glorySpeedUpUI.OpenGlorySpeedUpPanel(structure_so, this, timeBuildFinished);
+                break;
+            case BuildingState.BUILT:
+                //do nothing
+                break;
+            default:
+                Debug.LogWarning("Unhandled building state case!");
+                break;
+        }
     }
 }
