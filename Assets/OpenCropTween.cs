@@ -21,6 +21,5 @@ public class OpenCropTween : MonoBehaviour
     void OnComplete()
     {
         gameObject.SetActive(false);
-        CropShop.SetActive(false );
     }
 }

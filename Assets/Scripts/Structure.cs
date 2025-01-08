@@ -187,6 +187,9 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
             case BuildingState.IN_PROGRESS:
                 TimeSpan totaltime = new TimeSpan(structure_so.BuildDays, structure_so.BuildHours, structure_so.BuildMinutes, structure_so.BuildSeconds);
                 uiManager.OpenBoostButton(this, TimeBuildFinished, totaltime);
+                uiManager.OpenDetailsButton();
+
+
                 break;
             case BuildingState.BUILT:
                 //do nothing
@@ -206,5 +209,11 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     public void BoostProgress()
     {
         TimeBuildFinished = DateTime.Now;
+    }
+
+    public void SellStructure()
+    {
+        //resourcemanager.addmoney(price)
+        //destroy self
     }
 }

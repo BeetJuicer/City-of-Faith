@@ -105,6 +105,11 @@ public class UIManager : MonoBehaviour
         // Add your mini game logic here
     }
 
+    //OpenSellButton(Structure structure)    //{
+    //    sellbutton.enable
+    //    sellbutton.onClick.addlistener(structure.SellStructure())
+    //}
+
     public void OpenBoostButton(IBoostableObject boostableObject, DateTime finishTime, TimeSpan totalDuration)
     {
         glorySpeedUp.OpenGlorySpeedUpPanel(boostableObject, finishTime, totalDuration);

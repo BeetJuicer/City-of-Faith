@@ -44,10 +44,10 @@ public class ResourceManager : MonoBehaviour
     }
 
     private Dictionary<Currency, int> playerCurrencies = new SerializedDictionary<Currency, int>();
-    private Dictionary<Currency, int> PlayerCurrencies
+    public Dictionary<Currency, int> PlayerCurrencies
     {
         get => playerCurrencies;
-        set
+        private set
         {
             playerCurrencies = value;
             // AddToPlayerCurrencies handles updating the single record in database.

@@ -37,8 +37,12 @@ public class CentralHall : MonoBehaviour
         }
     }
 
+    CentralHall ch;
+    //text.text = ch.Exp + "/" + ch.levelUpRequirements[ch.Level]
+
     [SerializedDictionary("Level", "Exp Required Until Level Up")]
     [SerializeField] private SerializedDictionary<int, int> levelUpExpRequirements = new();
+    public SerializedDictionary<int, int> LevelUpExpRequirements { get => levelUpExpRequirements; private set => levelUpExpRequirements = value; }
 
     private List<Structure_SO> unlockedStructures = new();
     public List<Structure_SO> UnlockedStructures { get => GetUnlockedStructureSOs(); private set { unlockedStructures = value; } }
@@ -48,6 +52,7 @@ public class CentralHall : MonoBehaviour
 
     public List<Crop_SO> LockedCrops { get => GetLockedCropSOs(); private set { LockedCrops = value; } }
     public List<Structure_SO> LockedStructures { get => GetLockedStructureSOs(); private set { LockedStructures = value; } }
+
 
     private void Start()
     {
@@ -87,9 +92,9 @@ public class CentralHall : MonoBehaviour
     public void AddToCentralExp(int value)
     {
         Exp += value;
-        if (Exp >= levelUpExpRequirements[Level])
+        if (Exp >= LevelUpExpRequirements[Level])
         {
-            LevelUp(levelUpExpRequirements[Level] - Exp);
+            LevelUp(LevelUpExpRequirements[Level] - Exp);
         }
     }
 

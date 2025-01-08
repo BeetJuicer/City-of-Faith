@@ -177,7 +177,6 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
                 {
                     //UIManager.ActivateSellButton(goldOnSell);
                     //UIManager.ActivateInfoButton(resourceProducerSo);
-                    //UIManager.ActivateBoostButton(timeLeft);
                     uiManager.OpenBoostButton(this, ProductionFinishTime, timePerClaim);
                     break;
                 }

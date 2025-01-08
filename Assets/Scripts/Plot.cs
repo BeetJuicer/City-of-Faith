@@ -233,6 +233,9 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
                 }
             case PlotState.GROWING:
                 {
+                    //UIManager.OpenInfoButton(cropSO);
+                    //UIManager.OpenSellButton(this.GetComponent<Structure>())
+
                     TimeSpan totalTime = new TimeSpan(Crop_SO.daysToClaim, Crop_SO.hoursToClaim, Crop_SO.minutesToClaim, Crop_SO.secondsToClaim);
                     uiManager.OpenBoostButton(this, GrowthFinishTime, totalTime);
                     break;
