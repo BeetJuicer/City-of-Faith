@@ -9,6 +9,7 @@ public class OpenTransitionTween : MonoBehaviour
 
     private void OnEnable()
     {
+        LeanTween.reset();
         background.alpha = 0;
         background.LeanAlpha(1, 0.5f);
 

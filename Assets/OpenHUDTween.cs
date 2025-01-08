@@ -13,6 +13,7 @@ public class OpenHUDTween : MonoBehaviour
 
     private void OnEnable()
     {
+        LeanTween.reset();
         //Settings to Zero
         ExperienceBar.transform.localScale = Vector3.zero;
         OptionButton.transform.localScale = Vector3.zero;

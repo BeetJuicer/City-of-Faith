@@ -8,6 +8,7 @@ public class OpenCropTween : MonoBehaviour
 
     public void OnEnable()
     {
+        LeanTween.reset();
         CropShop.transform.localScale = Vector3.zero;
         LeanTween.scale(CropShop, Vector3.one, 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
     }

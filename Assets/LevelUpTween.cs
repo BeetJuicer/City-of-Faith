@@ -8,6 +8,7 @@ public class LevelUpTween : MonoBehaviour
 
     public void OnEnable()
     {
+        LeanTween.reset();
         HUD.SetActive(false);
         LeanTween.rotateAround(SoftWheel, Vector3.forward, -360, 10f).setLoopClamp();
         LeanTween.rotateAround(HardWheel, Vector3.forward, 360, 10f).setLoopClamp();
