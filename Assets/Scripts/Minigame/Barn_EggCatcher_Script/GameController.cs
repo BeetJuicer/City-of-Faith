@@ -30,6 +30,9 @@ public class GameController : MonoBehaviour
     float currentCooldown = 0.0f;         // Tracks current cooldown time
     bool isGameOver = false;              // Flag to control game-over state
 
+    private ResourceManager resourceManager;  // Reference to ResourceManager
+    private CentralHall centralHall;        // Reference to CentralHall
+
     void Awake()
     {
         // Singleton pattern: ensures only one instance of GameController exists
@@ -42,14 +45,34 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        // Get references to ResourceManager and CentralHall
+        resourceManager = ResourceManager.Instance;
+        if (resourceManager == null)
+        {
+            Debug.LogError("ResourceManager is not initialized! Please ensure ResourceManager is set up correctly.");
+        }
+
+        centralHall = FindObjectOfType<CentralHall>();
+        if (centralHall == null)
+        {
+            Debug.LogError("CentralHall is not found in the scene! Please make sure CentralHall is attached to a game object.");
+        }
     }
 
     void Start()
     {
         // Initial setup when the game starts
-        AudioSourceMiniGame.instance.sfxSource.Stop();  // Stop lingering sound effects
-        AudioSourceMiniGame.instance.PlayStartSound();  // Play the start sound effect
-        AudioSourceMiniGame.instance.PlayBackgroundMusic();  // Start playing background music
+        if (AudioSourceMiniGame.instance != null)
+        {
+            AudioSourceMiniGame.instance.sfxSource.Stop();  // Stop lingering sound effects
+            AudioSourceMiniGame.instance.PlayStartSound();  // Play the start sound effect
+            AudioSourceMiniGame.instance.PlayBackgroundMusic();  // Start playing background music
+        }
+        else
+        {
+            Debug.LogError("AudioSourceMiniGame instance is not found.");
+        }
 
         // Initialize the UI elements
         timeText.text = "Time Left: " + Mathf.RoundToInt(timer) + "s";
@@ -116,11 +139,14 @@ public class GameController : MonoBehaviour
         isGameOver = true;
 
         // Stop background music and sound effects
-        AudioSourceMiniGame.instance.StopBackgroundMusic();
-        AudioSourceMiniGame.instance.sfxSource.Stop();
+        if (AudioSourceMiniGame.instance != null)
+        {
+            AudioSourceMiniGame.instance.StopBackgroundMusic();
+            AudioSourceMiniGame.instance.sfxSource.Stop();
 
-        // Play game-over sound effect
-        AudioSourceMiniGame.instance.PlayGameOverSound();
+            // Play game-over sound effect
+            AudioSourceMiniGame.instance.PlayGameOverSound();
+        }
 
         // Display the game-over UI and show the final score
         gameOverPanel.SetActive(true);
@@ -134,6 +160,17 @@ public class GameController : MonoBehaviour
         goldText.text = "Gold: " + gold;
         expText.text = "EXP: " + exp;
 
+        // Update player resources and central hall data
+        if (resourceManager != null)
+        {
+            resourceManager.AdjustPlayerCurrency(Currency.Gold, gold);  // Add gold to player's currency
+        }
+
+        if (centralHall != null)
+        {
+            centralHall.AddToCentralExp(exp);  // Add experience to CentralHall
+        }
+
         // Show exit button
         exitButton.gameObject.SetActive(true);
 
@@ -143,26 +180,46 @@ public class GameController : MonoBehaviour
 
     private void CalculateRewards()
     {
-        // Rewards based on score thresholds
+        // Define score ranges
+        int lowAverageScore = 140;    // Low average range
+        int averageScore = 280;       // Average score
+        int highAverageScore = 560;   // High average range
+
+        // Initialize rewards
+        int baseGold = 5;
+        int baseExp = 5;
+
+        // Reward multiplier calculation based on the score range
+        if (score < lowAverageScore)
+        {
+            // Below low average: minimal reward
+            gold = Mathf.FloorToInt(baseGold * 0.5f); // 50% of base reward
+            exp = Mathf.FloorToInt(baseExp * 0.5f);   // 50% of base reward
+        }
+        else if (score >= lowAverageScore && score < averageScore)
+        {
+            // Low average to average: moderate reward
+            gold = Mathf.FloorToInt(baseGold * 1.0f); // 100% of base reward
+            exp = Mathf.FloorToInt(baseExp * 1.0f);   // 100% of base reward
+        }
+        else if (score >= averageScore && score < highAverageScore)
+        {
+            // Average to high average: greater reward
+            gold = Mathf.FloorToInt(baseGold * 1.5f); // 150% of base reward
+            exp = Mathf.FloorToInt(baseExp * 1.5f);   // 150% of base reward
+        }
+        else
+        {
+            // High average: maximum reward
+            gold = Mathf.FloorToInt(baseGold * 2.0f); // 200% of base reward
+            exp = Mathf.FloorToInt(baseExp * 2.0f);   // 200% of base reward
+        }
+
+        // For very low scores, ensure at least a small reward (e.g., 0 score)
         if (score == 0)
         {
             gold = 0;
             exp = 0;
-        }
-        else if (score >= 1 && score <= 250)
-        {
-            gold = 3;
-            exp = 3;
-        }
-        else if (score > 250 && score <= 425)
-        {
-            gold = 6;
-            exp = 6;
-        }
-        else if (score > 450)
-        {
-            gold = 10;
-            exp = 10;
         }
     }
 

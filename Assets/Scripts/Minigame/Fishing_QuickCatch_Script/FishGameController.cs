@@ -1,9 +1,11 @@
+
 using UnityEngine;
 using TMPro;
 using System.Collections;
 
 public class FishGameController : MonoBehaviour
 {
+    public static FishGameController instance;
     // Prefabs for fish and trash objects to spawn
     public GameObject[] fishPrefabs;
     public GameObject[] trashPrefabs;
@@ -13,6 +15,8 @@ public class FishGameController : MonoBehaviour
     public float trashJumpForce = 5f;       // Force for trash jumping
     public float gameTime = 30f;            // Total game time in seconds
     public int score = 0;                   // Current score
+    private int goldReward = 0;
+    private int expReward = 0;
     public TextMeshProUGUI scoreText;       // UI text to display score
     public TextMeshProUGUI timeText;        // UI text to display remaining time
     public GameObject gameOverPanel;       // UI panel to display at game over
@@ -28,6 +32,30 @@ public class FishGameController : MonoBehaviour
     private Camera mainCamera;              // Camera reference
     private readonly Vector2[] spawnPositions = new Vector2[3]; // Spawn positions on screen
     private int lastSpawnIndex = -1;        // Prevent consecutive spawns at the same position
+    private ResourceManager resourceManager;   // Reference to ResourceManager
+    private CentralHall centralHall;           // Reference to CentralHall
+
+    void Awake()
+    {
+        // Singleton pattern
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        // Get references to ResourceManager and CentralHall
+        resourceManager = ResourceManager.Instance;
+        centralHall = FindObjectOfType<CentralHall>();
+        if (resourceManager == null || centralHall == null)
+        {
+            Debug.LogError("ResourceManager or CentralHall not found!");
+        }
+    }
 
     void Start()
     {
@@ -59,7 +87,7 @@ public class FishGameController : MonoBehaviour
 
             // Check if time is up
             if (timeLeft <= 0)
-                GameOver();
+                HandleGameOver();  // Call HandleGameOver instead of GameOver
         }
     }
 
@@ -148,24 +176,72 @@ public class FishGameController : MonoBehaviour
     }
 
     // Handle game over logic
-    void GameOver()
+    private void HandleGameOver()
     {
-        isGameOver = true;  // Set the game over flag
-        gameOverPanel.SetActive(true); // Show game over panel
-        gameOverText.text = "Game Over"; // Display game over message
-        finalScoreText.text = "Final Score: " + score; // Show final score
+        isGameOver = true;
+        gameOverPanel.SetActive(true);
+        gameOverText.text = "Game Over";
+        finalScoreText.text = "Final Score: " + score;
 
-        // Determine rewards based on the final score
-        int goldReward = score >= 300 ? 10 : score >= 150 ? 6 : 3;
-        int expReward = score >= 300 ? 10 : score >= 150 ? 6 : 3;
+        // Calculate rewards based on the score
+        CalculateRewards();
 
-        // Display rewards on the UI
-        goldText.text = "Gold: " + goldReward;
-        expText.text = "EXP: " + expReward;
+        // Update UI with rewards
+        goldText.text = "Gold: " + goldReward;   // Use goldReward
+        expText.text = "EXP: " + expReward;      // Use expReward
 
-        // Pause the game and stop background music
+        // Update player resources
+        resourceManager?.AdjustPlayerCurrency(Currency.Gold, goldReward);  // Pass goldReward
+        centralHall?.AddToCentralExp(expReward);  // Pass expReward
+
+        // Pause the game
         Time.timeScale = 0f;
         fishAudioSource.StopBackgroundMusic();
         fishAudioSource.PlayGameOverSFX(); // Play game over sound
+    }
+
+    private void CalculateRewards()
+    {
+        int lowAverageScore = 55;    // Low average range
+        int averageScore = 115;       // Average score
+        int highAverageScore = 230;   // High average range
+
+        int baseGold = 5;
+        int baseExp = 5;
+
+        // Define reward variables
+        int goldReward = 0;
+        int expReward = 0;
+
+        if (score < lowAverageScore)
+        {
+            goldReward = Mathf.FloorToInt(baseGold * 0.5f);  // 50% of base gold reward
+            expReward = Mathf.FloorToInt(baseExp * 0.5f);    // 50% of base exp reward
+        }
+        else if (score >= lowAverageScore && score < averageScore)
+        {
+            goldReward = Mathf.FloorToInt(baseGold * 1.0f);  // 100% of base gold reward
+            expReward = Mathf.FloorToInt(baseExp * 1.0f);    // 100% of base exp reward
+        }
+        else if (score >= averageScore && score < highAverageScore)
+        {
+            goldReward = Mathf.FloorToInt(baseGold * 1.5f);  // 150% of base gold reward
+            expReward = Mathf.FloorToInt(baseExp * 1.5f);    // 150% of base exp reward
+        }
+        else
+        {
+            goldReward = Mathf.FloorToInt(baseGold * 2.0f);  // 200% of base gold reward
+            expReward = Mathf.FloorToInt(baseExp * 2.0f);    // 200% of base exp reward
+        }
+
+        if (score == 0)
+        {
+            goldReward = 0;  // No reward for score 0
+            expReward = 0;   // No reward for score 0
+        }
+
+        // Assign calculated rewards to the instance variables
+        this.goldReward = goldReward;
+        this.expReward = expReward;
     }
 }
