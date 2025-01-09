@@ -13,6 +13,8 @@ public class Structure_SO : ScriptableObject
     public string description;
     public GameObject structurePrefab;
     public Sprite displayImage;
+    public string structurePrefabName;
+    public string minigameSceneName;
 
     //TODO: maybe change the datatype. temporary for now.
     public DateTime buildDuration;

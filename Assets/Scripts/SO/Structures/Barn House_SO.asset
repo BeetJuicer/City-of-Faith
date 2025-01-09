@@ -18,6 +18,8 @@ MonoBehaviour:
   structurePrefab: {fileID: 3155131236617483285, guid: 60753cd2b7b9af04b8eb830f01475a65,
     type: 3}
   displayImage: {fileID: 21300000, guid: 10b3ab4d7ac0d9c45b1964f594a074c9, type: 3}
+  structurePrefabName: Structure_BarnHouse
+  minigameSceneName: BarnGame
   expGivenOnBuild: 200
   townHallLevelRequirement: 5
   numberOfCitizensAdded: 3

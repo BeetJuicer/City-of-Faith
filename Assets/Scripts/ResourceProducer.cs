@@ -166,6 +166,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
             case ProducerState.Waiting:
                 {
                     //do nothing
+
                     break;
                 }
             case ProducerState.Ready_To_Claim:

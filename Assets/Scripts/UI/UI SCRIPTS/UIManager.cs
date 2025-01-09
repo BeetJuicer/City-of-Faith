@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Resources;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject actionPanel; // The panel that holds buttons or structure details
+
     [SerializeField] private StructureDisplayManager structureDisplayManager; // Reference to the StructureDisplayManager
 
     [SerializeField] private Button infoButton; // Reference to the Info button
@@ -15,37 +18,27 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GlorySpeedUp glorySpeedUp;
 
-    // Show the action panel when a structure is clicked
-    public void OnStructureClick(Structure_SO structure)
+    // Constants for Minigame Scene Names
+    private const string BARN_GAME_SCENE = "BarnGame";
+    private const string FISHING_GAME_SCENE = "FishingQuickCatch";
+
+    public void LoadMinigameScene(string sceneName)
     {
-        selectedStructure = structure;
-
-        // Show the panel
-        actionPanel.SetActive(true);
-
-        // Reactivate the buttons when clicking a structure
-        infoButton.gameObject.SetActive(true);
-        sellButton?.gameObject.SetActive(true);
-
-        // Determine if the Mini Game button should be shown
-        if (selectedStructure.structurePrefab.name == "Structure_FishingPort" || selectedStructure.structurePrefab.name == "Structure_BarnHouse")
+        if (!string.IsNullOrEmpty(sceneName))
         {
-            miniGameButton.gameObject.SetActive(true);
-            miniGameButton.onClick.AddListener(OnMiniGameButtonClick); // Add the click listener
+            Debug.Log($"Loading Minigame Scene: {sceneName}");
+            DOTween.KillAll(); // Kill all active tweens before loading the new scene
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
         }
         else
         {
-            miniGameButton.gameObject.SetActive(false);
+            Debug.LogWarning("Scene name is null or empty. Cannot load the minigame.");
         }
-
-        // Call the StructureDisplayManager to show the structure details
-        structureDisplayManager.DisplayStructureDetails(selectedStructure);
     }
 
-    // Hide the action panel (useful when deselecting or closing)
+
     public void HideActionPanel()
     {
-        actionPanel.SetActive(false);
         structureDisplayManager.CloseCard(); // Optionally close the card when hiding the panel
         miniGameButton.onClick.RemoveAllListeners(); // Clear listeners to prevent duplicate calls
     }
@@ -57,25 +50,12 @@ public class UIManager : MonoBehaviour
 
         // Call the StructureDisplayManager to display the structure's details
         structureDisplayManager.DisplayStructureDetails(selectedStructure);
-
-        // Show the action panel
-        actionPanel.SetActive(true);
     }
 
     // Function to handle closing the structure info
     public void CloseStructureInfo()
     {
         structureDisplayManager.CloseCard(); // Close the card
-        actionPanel.SetActive(false);        // Hide the action panel
-    }
-
-    // Assign button actions during Start or Awake
-    void Start()
-    {
-        infoButton.onClick.AddListener(OnInfoButtonClick);
-
-        // If the sell button is included, assign a listener to it
-        sellButton?.onClick.AddListener(OnSellButtonClick);
     }
 
     // Function that gets called when the Info button is clicked
@@ -99,19 +79,108 @@ public class UIManager : MonoBehaviour
     }
 
     // Function that gets called when the Mini Game button is clicked
-    private void OnMiniGameButtonClick()
+    private void OnMiniGameButtonClick(string structureName)
     {
-        Debug.Log($"Starting mini game for {selectedStructure.structurePrefab.name}");
-        // Add your mini game logic here
-    }
+        Debug.Log($"Starting mini game for {structureName}");
 
-    //OpenSellButton(Structure structure)    //{
-    //    sellbutton.enable
-    //    sellbutton.onClick.addlistener(structure.SellStructure())
-    //}
+        switch (structureName)
+        {
+            case "Structure_BarnHouse":
+                SceneManager.LoadScene(BARN_GAME_SCENE);
+                break;
+            case "Structure_FishingPort":
+                SceneManager.LoadScene(FISHING_GAME_SCENE);
+                break;
+            default:
+                Debug.LogWarning("No minigame associated with this structure.");
+                break;
+        }
+    }
 
     public void OpenBoostButton(IBoostableObject boostableObject, DateTime finishTime, TimeSpan totalDuration)
     {
         glorySpeedUp.OpenGlorySpeedUpPanel(boostableObject, finishTime, totalDuration);
     }
+
+    public void ActivateInfoButton(Structure structure)
+    {
+        Debug.LogWarning("Info Button Clicked");
+        // Show the action panel
+
+        infoButton.gameObject.SetActive(true);
+
+        // Set up the Info button to display structure details
+        infoButton.onClick.RemoveAllListeners();
+        infoButton.onClick.AddListener(() =>
+        {
+            structureDisplayManager.DisplayStructureDetails(structure.GetStructureSO());
+            // Optionally hide the panel and buttons after clicking
+            HideActionPanel();
+        });
+
+    }
+
+    // Method to activate the Sell button dynamically
+    public void ActivateSellButton(Structure structure)
+    {
+        Debug.LogWarning("Structure Clicked");
+        // Show the action panel
+
+        // Ensure the Sell button is visible
+        sellButton.gameObject.SetActive(true);
+
+        // Set up the Sell button to handle selling the structure
+        sellButton.onClick.RemoveAllListeners();
+        sellButton.onClick.AddListener(() =>
+        {
+            SellStructure(structure);
+            // Optionally hide the panel and buttons after selling
+            infoButton.gameObject.SetActive(false);
+            sellButton?.gameObject.SetActive(false);
+            HideActionPanel();
+        });
+
+    }
+
+    public void ActivateMinigameButton(ResourceProducer resource)
+    {
+        miniGameButton.gameObject.SetActive(true);
+        miniGameButton.onClick.RemoveAllListeners();
+
+        string sceneName = selectedStructure.structurePrefab.name switch
+        {
+            "Structure_BarnHouse" => BARN_GAME_SCENE,
+            "Structure_FishingPort" => FISHING_GAME_SCENE,
+            _ => null
+        };
+
+        if (sceneName != null)
+        {
+            miniGameButton.onClick.AddListener(() => LoadMinigameScene(sceneName));
+            Debug.Log($"Minigame Button is set to load: {sceneName}");
+        }
+        else
+        {
+            miniGameButton.gameObject.SetActive(false);
+            Debug.LogWarning("No minigame associated with the selected structure.");
+        }
+    }
+
+
+    private void SellStructure(Structure structure)
+    {
+        if (structure != null)
+        {
+            // Implement your selling logic here, e.g., award gold or resources
+
+            Debug.Log($"Sold structure: {structure.GetStructureSO().name}");
+            // Optional: Destroy the structure GameObject if necessary
+            Destroy(structure.gameObject);
+        }
+        else
+        {
+            Debug.LogWarning("Structure is null. Cannot sell.");
+        }
+    }
+
 }

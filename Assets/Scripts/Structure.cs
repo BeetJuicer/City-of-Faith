@@ -9,7 +9,7 @@ using System;
  */
 public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
 {
-    [SerializeField] private Structure_SO structure_so;
+    [SerializeField] public Structure_SO structure_so;
 
     #region Database 
     private Database db;
@@ -50,11 +50,23 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     private const string IN_PROGRESS_VISUAL_NAME = "InProgressVisual";
     private const string BUILT_VISUAL_NAME = "BuiltVisual";
 
-    UIManager uiManager;
+    private UIManager uiManager;
 
     private void Awake()
     {
+        // Dynamically find the UIManager in the scene if not assigned in the Inspector
+        if (uiManager == null)
+        {
+            uiManager = FindObjectOfType<UIManager>();
+        }
+
         GetChildrenVisuals();
+    }
+
+    // Add this public getter method or property to the Structure class
+    public Structure_SO GetStructureSO()
+    {
+        return structure_so;
     }
 
     private void GetChildrenVisuals()
@@ -121,7 +133,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         //not using the property so that I don't have to call the update database event. Just loading data. 
         currentBuildingState = (BuildingState)data.building_state;
 
-        if (currentBuildingState == BuildingState.BUILT) 
+        if (currentBuildingState == BuildingState.BUILT)
             EnterBuiltState();
     }
 
@@ -182,17 +194,31 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     [Button]
     public void OnObjectClicked()
     {
+        // Ensure UIManager is assigned before proceeding
+        if (uiManager == null)
+        {
+            Debug.LogError("UIManager is not assigned or found!");
+            return;
+        }
+
         switch (CurrentBuildingState)
         {
             case BuildingState.IN_PROGRESS:
+                Debug.LogWarning("InProgress Working");
                 TimeSpan totaltime = new TimeSpan(structure_so.BuildDays, structure_so.BuildHours, structure_so.BuildMinutes, structure_so.BuildSeconds);
                 uiManager.OpenBoostButton(this, TimeBuildFinished, totaltime);
-                //uiManager.OpenDetailsButton();
-
+                uiManager.ActivateInfoButton(this);
+                uiManager.ActivateSellButton(this);
 
                 break;
             case BuildingState.BUILT:
-                //do nothing
+                uiManager.ActivateInfoButton(this);
+                uiManager.ActivateSellButton(this);
+                // Check if the structure has a minigame
+                if (!string.IsNullOrEmpty(structure_so.minigameSceneName))
+                {
+                    uiManager.ActivateMinigameButton(GetComponent<ResourceProducer>());
+                }
                 break;
             default:
                 Debug.LogWarning("Unhandled building state case!");
@@ -200,7 +226,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         }
     }
 
-//for pc
+    //for pc
     private void OnMouseDown()
     {
         OnObjectClicked();

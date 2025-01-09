@@ -24,18 +24,15 @@ public class AudioSourceMiniGame : MonoBehaviour
 
     void Awake()
     {
-        // Implementing the Singleton pattern
-        // If an instance already exists, destroy this object to maintain a single instance
-        if (instance == null)
+        if (transform.parent != null)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Preserve this object across scenes
+            transform.SetParent(null); // Detach from parent to make it a root GameObject
         }
-        else
-        {
-            Destroy(gameObject); // Destroy duplicate instance
-        }
+
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("[AudioSourceMiniGame] GameObject set to DontDestroyOnLoad.");
     }
+
 
     // Method to start playing the background music
     public void PlayBackgroundMusic()
