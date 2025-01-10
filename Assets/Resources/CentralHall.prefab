@@ -48,6 +48,8 @@ MonoBehaviour:
   unlockables_SO: {fileID: 11400000, guid: 59874d10a8b84c44fb0861ff919ff32f, type: 2}
   levelUpExpRequirements:
     _serializedList:
+    - Key: 0
+      Value: 1
     - Key: 1
       Value: 10
     - Key: 2
@@ -119,7 +121,7 @@ PrefabInstance:
     - target: {fileID: 7576049043184610949, guid: 17f1d19a9293610459cda88ad03d99fc,
         type: 3}
       propertyPath: m_Name
-      value: Temple_Merge
+      value: Temple_Merged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
