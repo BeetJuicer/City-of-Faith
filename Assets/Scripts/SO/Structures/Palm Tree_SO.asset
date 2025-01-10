@@ -17,5 +17,21 @@ MonoBehaviour:
   structurePrefab: {fileID: 8800199060111772814, guid: d39e7bce0e5c4914284f2f56820d781b,
     type: 3}
   displayImage: {fileID: 0}
-  goldCost: 1000
+  structurePrefabName: 
+  minigameSceneName: 
+  Category: 1
+  expGivenOnBuild: 0
   townHallLevelRequirement: 1
+  numberOfCitizensAdded: 0
+  currencyRequired:
+    _serializedList:
+    - Key: 1
+      Value: 300
+  resourcesRequired:
+    _serializedList: []
+  resourcesReturnedOnResell:
+    _serializedList: []
+  BuildDays: 0
+  BuildHours: 0
+  BuildMinutes: 0
+  BuildSeconds: 0

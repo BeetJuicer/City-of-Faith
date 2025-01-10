@@ -98,14 +98,38 @@ public class Dialogue : MonoBehaviour
     IEnumerator TypeLine()
     {
         Debug.Log("Typing line at index " + index);
+
+        // Make the next button interactable immediately
+        nextButton.interactable = true;
+
+        // Initialize a boolean to check if the typing effect should skip
+        bool isTypingSkipped = false;
+
+        // Event listener for the next button to skip typing
+        nextButton.onClick.AddListener(() => isTypingSkipped = true);
+
+        // Iterate through each character
         foreach (char c in lines[dialogueIndex].dialogueLines[index].ToCharArray())
         {
+            // Check if typing has been skipped
+            if (isTypingSkipped)
+            {
+                // Display the full sentence and break the loop
+                textComponent.text = lines[dialogueIndex].dialogueLines[index];
+                break;
+            }
+
+            // Add the character and wait
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
         Debug.Log("Line typed: " + lines[dialogueIndex].dialogueLines[index]);
-        nextButton.interactable = true;
+
+        // Ensure the listener is removed to avoid issues when re-adding
+        nextButton.onClick.RemoveListener(() => isTypingSkipped = true);
     }
+
 
     void OnNextButtonClick()
     {

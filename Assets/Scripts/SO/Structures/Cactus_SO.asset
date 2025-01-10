@@ -17,6 +17,9 @@ MonoBehaviour:
   structurePrefab: {fileID: 920840439178744372, guid: ecc7faab2116f5846a214f2973fe7aa0,
     type: 3}
   displayImage: {fileID: 21300000, guid: dd9fad95d7ce63d42a3049d8a3d7f77c, type: 3}
+  structurePrefabName: 
+  minigameSceneName: 
+  Category: 1
   expGivenOnBuild: 10
   townHallLevelRequirement: 3
   numberOfCitizensAdded: 0

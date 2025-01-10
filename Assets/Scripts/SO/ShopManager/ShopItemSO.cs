@@ -14,12 +14,4 @@ public class ShopItemSO : ScriptableObject
     public SerializedDictionary<Currency, int> baseCost;
     public Sprite itemImage;
 
-    public ItemCategory category;
-}
-
-public enum ItemCategory
-{
-    Buildings,
-    Decoration,
-    Crop
 }

@@ -37,17 +37,6 @@ public class ShopTemplate : MonoBehaviour
         {
             GetComponent<Button>().onClick.AddListener(() => sm.PurchaseItem(so));
         }
-
-
-        //costTxt.text = so.baseCost.Values.First().ToString(); //First for now. a bit hacky.
-
-        // check price, enable button if enough money.
-        //button.enabled = (ResourceManager.Instance.HasEnoughCurrency(so.baseCost));
-        // ideally, gray yung card.
-
-
-        // call cm.Purchase when button is clicked.
-        //button.onClick.AddListener(() => sm.PurchaseItem(so));
     }
 
     public void OnClick()
@@ -56,9 +45,9 @@ public class ShopTemplate : MonoBehaviour
         shopManager.PurchaseItem(siso);
     }
 
-    private void OnDestroy()
-    {
-        button.onClick.RemoveAllListeners();
-    }
+    //private void OnDestroy()
+    //{
+    //    button.onClick.RemoveAllListeners();
+    //}
 }
 

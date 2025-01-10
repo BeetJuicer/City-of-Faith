@@ -5,6 +5,7 @@ using System;
 using AYellowpaper.SerializedCollections;
 
 
+
 [CreateAssetMenu(menuName = "Scriptable Objects/Structure_SO")]
 public class Structure_SO : ScriptableObject
 {
@@ -15,6 +16,9 @@ public class Structure_SO : ScriptableObject
     public Sprite displayImage;
     public string structurePrefabName;
     public string minigameSceneName;
+
+    [Header("Category")]
+    public ItemCategory Category;
 
     //TODO: maybe change the datatype. temporary for now.
     public DateTime buildDuration;
@@ -42,4 +46,10 @@ public class Structure_SO : ScriptableObject
     public int BuildMinutes;
     public int BuildSeconds;
 
+}
+
+public enum ItemCategory
+{
+    Buildings,
+    Decorations
 }
