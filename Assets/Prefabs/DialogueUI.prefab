@@ -148,7 +148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &382731440588323703
 RectTransform:
   m_ObjectHideFlags: 0
@@ -257,6 +257,7 @@ MonoBehaviour:
   dialogueBox: {fileID: 4537484203753755357}
   arrow: {fileID: 1043314941516290223}
   shopButton: {fileID: 0}
+  centralHall: {fileID: 0}
 --- !u!1 &8048680605491799048
 GameObject:
   m_ObjectHideFlags: 0

@@ -187,7 +187,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
             case BuildingState.IN_PROGRESS:
                 TimeSpan totaltime = new TimeSpan(structure_so.BuildDays, structure_so.BuildHours, structure_so.BuildMinutes, structure_so.BuildSeconds);
                 uiManager.OpenBoostButton(this, TimeBuildFinished, totaltime);
-                uiManager.OpenDetailsButton();
+                //uiManager.OpenDetailsButton();
 
 
                 break;

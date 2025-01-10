@@ -72,9 +72,8 @@ public class ShopManager : MonoBehaviour
     {
         ShopManagerUi.SetActive(false);
         dialogue.OnShopItemClicked();
-        moveUI.OpenMoveUI();
         buildingOverlay.EnterBuildMode(so);
-        ResourceManager.Instance.AdjustPlayerCurrency(so.currencyRequired);
+        moveUI.OpenMoveUI();
     }
 
     //public void FilterItemsByCategory(ItemCategory category)

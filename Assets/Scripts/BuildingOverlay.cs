@@ -94,6 +94,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     [Button]
     public void ExitBuildMode()
     {
+        Debug.Log("ExitBuildMode natriggered.");
         Destroy(previewGO);
         overlayPlane.SetActive(false);
         isInBuildMode = false;
@@ -137,6 +138,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         //Add xp.
         centralHall.AddToCentralExp(structure_SO.expGivenOnBuild);
 
+        Debug.Log("Instantiate building end reached.");
         ExitBuildMode();
     }
 
@@ -149,24 +151,28 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     [Button]
     public void MoveIncrementallyRight()
     {
-        transform.position += transform.right * incrementalMovementUnits;
+        // Move the building to the world right
+        transform.position += Vector3.right * incrementalMovementUnits;
     }
 
     [Button]
     public void MoveIncrementallyLeft()
     {
-        transform.position -= transform.right * incrementalMovementUnits;
+        // Move the building to the world left
+        transform.position += Vector3.left * incrementalMovementUnits;
     }
 
     [Button]
     public void MoveIncrementallyUp()
     {
-        transform.position += transform.forward * incrementalMovementUnits;
+        // Move the building to the world forward (world up direction)
+        transform.position += Vector3.forward * incrementalMovementUnits;
     }
 
     [Button]
     public void MoveIncrementallyDown()
     {
-        transform.position -= transform.forward * incrementalMovementUnits;
+        // Move the building to the world backward (world down direction)
+        transform.position += Vector3.back * incrementalMovementUnits;
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18187016, g: 0.22754742, b: 0.30741808, a: 1}
+  m_IndirectSpecularColor: {r: 0.18187037, g: 0.22754803, b: 0.30741802, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -945,16 +945,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 870952766036150464, guid: c9cd204550ecf4a4e85b97ee2c3ea676,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2745878265640059875, guid: c9cd204550ecf4a4e85b97ee2c3ea676,
         type: 3}
       propertyPath: m_Name
       value: DialogueUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2745878265640059875, guid: c9cd204550ecf4a4e85b97ee2c3ea676,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3429750908140298694, guid: c9cd204550ecf4a4e85b97ee2c3ea676,
         type: 3}
       propertyPath: shopButton
       value: 
       objectReference: {fileID: 871387340}
+    - target: {fileID: 7680860703854623487, guid: c9cd204550ecf4a4e85b97ee2c3ea676,
+        type: 3}
+      propertyPath: m_TagString
+      value: UI_Button
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2128,6 +2143,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 1994064818}
+    - target: {fileID: 586932186178724766, guid: 4e242375c2e0af24cb02d38616701523,
+        type: 3}
+      propertyPath: m_TagString
+      value: UI_Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 907252688460307452, guid: 4e242375c2e0af24cb02d38616701523,
+        type: 3}
+      propertyPath: m_TagString
+      value: UI_Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083842306556697453, guid: 4e242375c2e0af24cb02d38616701523,
+        type: 3}
+      propertyPath: m_TagString
+      value: UI_Button
+      objectReference: {fileID: 0}
     - target: {fileID: 3130357440302708303, guid: 4e242375c2e0af24cb02d38616701523,
         type: 3}
       propertyPath: m_Camera
@@ -2233,6 +2263,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -80.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6345986237493067117, guid: 4e242375c2e0af24cb02d38616701523,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6493455266675250446, guid: 4e242375c2e0af24cb02d38616701523,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2253,6 +2288,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VanericManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7414958015767199397, guid: 4e242375c2e0af24cb02d38616701523,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7454693528250083363, guid: 4e242375c2e0af24cb02d38616701523,
         type: 3}
       propertyPath: m_CellSize.x
@@ -2267,6 +2307,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Padding.m_Left
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8733412403100604394, guid: 4e242375c2e0af24cb02d38616701523,
+        type: 3}
+      propertyPath: m_TagString
+      value: UI_Button
       objectReference: {fileID: 0}
     - target: {fileID: 8749769031367666344, guid: 4e242375c2e0af24cb02d38616701523,
         type: 3}
@@ -3589,6 +3634,11 @@ PrefabInstance:
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 1994064818}
+    - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
+        type: 3}
+      propertyPath: HUDCanvas
+      value: 
+      objectReference: {fileID: 1287143500}
     - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
         type: 3}
       propertyPath: buildingOverlay

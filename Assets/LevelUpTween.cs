@@ -38,7 +38,7 @@ public class LevelUpTween : MonoBehaviour
         gameObject.SetActive(false);
         HUD.SetActive(true);
 
-        ResourceManager rs;
+        //ResourceManager rs;
         //text.text = rs.PlayerCurrencies[Currency.Glory].ToString();
     }
 

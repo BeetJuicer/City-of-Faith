@@ -26,6 +26,7 @@ public class Dialogue : MonoBehaviour
     public GameObject dialogueBox; // Reference to the dialogue box GameObject
     public Image arrow; // Reference to the Arrow GameObject (not just the Image)
     public GameObject shopButton;
+    public CentralHall centralHall;
 
     private int dialogueIndex = 0;
     private int index = 0;
@@ -49,19 +50,22 @@ public class Dialogue : MonoBehaviour
         switch (currentStep)
         {
             case TutorialStep.StartDialogue:
+                ToggleButtons(false);
                 StartDialogue();
                 break;
             case TutorialStep.ShowArrowToShop:
                 shopButton.SetActive(true);
-                ShowArrow(new Vector3(285f, -44f, 0));
+                ToggleButtons(true);
+                ShowArrow(new Vector3(285f, -111f, 0));
                 break;
 
             case TutorialStep.NPCDialogue2:
+                ToggleButtons(false);
                 StartDialogue2();
                 break;
 
             case TutorialStep.ShowArrowToItem:
-                ShowArrow(new Vector3(-24f, 57f, 1f)); // Offset arrow above shop item
+                ShowArrow(new Vector3(-75f, 57f, 1f)); // Offset arrow above shop item
                 break;
 
             case TutorialStep.NPCDialogue3:
@@ -73,6 +77,7 @@ public class Dialogue : MonoBehaviour
                 break;
 
             case TutorialStep.NPCDialogue4:
+                ToggleButtons(true);
                 StartDialogue2();
                 break;
 
@@ -217,5 +222,44 @@ public class Dialogue : MonoBehaviour
 
         isItemClickComplete = true;
     }
+
+    void ToggleButtons(bool state)
+    {
+        // Find all GameObjects with the "UI_Button" tag
+        GameObject[] allButtons = GameObject.FindGameObjectsWithTag("UI_Button");
+
+        foreach (GameObject buttonObj in allButtons)
+        {
+            // Get the Button component and disable/enable it
+            Button button = buttonObj.GetComponent<Button>();
+            if (button != null && button != nextButton) // Exclude the Next button
+            {
+                button.interactable = state;
+            }
+        }
+    }
+
+    //private void OnEnable()
+    //{
+    //    centralHall.OnPlayerLevelUp += TriggerTutorial;
+    //}
+
+    //private void OnDisable()
+    //{
+    //    centralHall.OnPlayerLevelUp -= TriggerTutorial;
+    //}
+
+    //private void TriggerTutorial(int level)
+    //{
+    //    if (level == 1)
+    //    {
+    //        currentStep = TutorialStep.StartDialogue;
+    //        HandleTutorialSteps();
+    //    }
+    //    else if (level == 2) 
+    //    {
+
+    //    }
+    //}
 
 }

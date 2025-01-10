@@ -6,11 +6,8 @@ public class BuildingMoveUIManager : MonoBehaviour
     [SerializeField] private Vector3 offset;  // Offset from the building's position
     public BuildingOverlay buildingOverlay;  // Reference to the BuildingOverlay script
     public GameObject buildingMoveUI;  // Reference to the BuildingMoveUI GameObject
+    public GameObject HUDCanvas;
     public Dialogue dialogue;
-    void Start()
-    {
-        buildingMoveUI.SetActive(false);
-    }
 
     public void OpenMoveUI()
     {
@@ -49,20 +46,21 @@ public class BuildingMoveUIManager : MonoBehaviour
     public void ConfirmBuildingPlacement()
     {
         dialogue.placeBuilding();
-        buildingOverlay.InstantiateBuilding();
+        HUDCanvas.SetActive(true);
         buildingMoveUI.SetActive(false);
+        buildingOverlay.InstantiateBuilding();
     }
 
     public void CancelBuildingPlacement()
     {
         buildingOverlay.ExitBuildMode();
         buildingMoveUI.SetActive(false);
-
+        HUDCanvas.SetActive(true);
     }
 
     public void RotateBuilding()
     {
+        buildingMoveUIRectTransform.rotation = Quaternion.identity;
         buildingOverlay.RotateClockwise();
-        buildingMoveUI.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 }
