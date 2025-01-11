@@ -1,7 +1,8 @@
-
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FishGameController : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class FishGameController : MonoBehaviour
     public TextMeshProUGUI goldText;        // UI text for gold reward
     public TextMeshProUGUI expText;         // UI text for experience points
     public FishAudioSource fishAudioSource; // Audio source for game sounds
+    public Button exitButton;
 
     // Private variables
     private float timeLeft;                 // Remaining game time
@@ -190,9 +192,31 @@ public class FishGameController : MonoBehaviour
         goldText.text = "Gold: " + goldReward;   // Use goldReward
         expText.text = "EXP: " + expReward;      // Use expReward
 
-        // Update player resources
-        resourceManager?.AdjustPlayerCurrency(Currency.Gold, goldReward);  // Pass goldReward
-        centralHall?.AddToCentralExp(expReward);  // Pass expReward
+        // Update player resources and central hall data
+        if (resourceManager != null)
+        {
+            Debug.Log("Adding Gold");
+            resourceManager.AdjustPlayerCurrency(Currency.Gold, goldReward);
+        }
+        else
+        {
+            Debug.LogError("ResourceManager is null!");
+        }
+
+        if (centralHall != null)
+        {
+            Debug.Log("Adding Exp");
+            centralHall.AddToCentralExp(expReward);
+        }
+        else
+        {
+            Debug.LogError("CentralHall is null!");
+        }
+
+        // Show exit button and assign the event listener
+        exitButton.gameObject.SetActive(true);
+        exitButton.onClick.RemoveAllListeners();  // Clear existing listeners to prevent duplicates
+        exitButton.onClick.AddListener(ExitToMainScene);
 
         // Pause the game
         Time.timeScale = 0f;
@@ -244,4 +268,30 @@ public class FishGameController : MonoBehaviour
         this.goldReward = goldReward;
         this.expReward = expReward;
     }
+
+    public void ExitToMainScene()
+    {
+        // Save the rewards to a static class or PlayerPrefs
+        PlayerPrefs.SetInt("GoldEarned", goldReward);
+        PlayerPrefs.SetInt("ExpEarned", expReward);
+        PlayerPrefs.SetInt("MinigameCompleted", 1); // 1 means completed
+        PlayerPrefs.SetString("MinigameName", "Quick Catch"); // Save the mini-game name
+
+        Debug.Log("Resetting Time Scale and Exiting Game");
+        Time.timeScale = 1f;
+
+        string targetScene = "VanericWorld";
+
+        // Check if the scene is available in Build Settings
+        if (Application.CanStreamedLevelBeLoaded(targetScene))
+        {
+            Debug.Log($"Loading scene: {targetScene}");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
+        }
+        else
+        {
+            Debug.LogError($"Scene '{targetScene}' not found in Build Settings. Please add it.");
+        }
+    }
+
 }

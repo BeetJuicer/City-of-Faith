@@ -209,22 +209,21 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
                 uiManager.OpenBoostButton(this, TimeBuildFinished, totaltime);
                 uiManager.ActivateInfoButton(this);
                 uiManager.ActivateSellButton(this);
-
                 break;
+
             case BuildingState.BUILT:
                 uiManager.ActivateInfoButton(this);
                 uiManager.ActivateSellButton(this);
-                // Check if the structure has a minigame
-                if (!string.IsNullOrEmpty(structure_so.minigameSceneName))
-                {
-                    uiManager.ActivateMinigameButton(GetComponent<ResourceProducer>());
-                }
+                // Pass the clicked structure to ActivateMinigameButton
+                uiManager.ActivateMinigameButton(this);
                 break;
+
             default:
                 Debug.LogWarning("Unhandled building state case!");
                 break;
         }
     }
+
 
     //for pc
     private void OnMouseDown()
