@@ -10,6 +10,7 @@ public class CentralHall : MonoBehaviour
     private Database db;
     private Database.CentralData centralData = null;
     public event Action<int> OnPlayerLevelUp;
+    public event Action<int> OnExpChanged;
 
     [SerializeField] private Unlockables_SO unlockables_SO;
     private int level;
@@ -34,6 +35,7 @@ public class CentralHall : MonoBehaviour
             exp = value;
             centralData.exp = exp;
             db.UpdateRecord(centralData);
+            OnExpChanged?.Invoke(value);
         }
     }
 
