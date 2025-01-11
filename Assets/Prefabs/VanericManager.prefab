@@ -1066,7 +1066,6 @@ GameObject:
   - component: {fileID: 1304113611416362603}
   - component: {fileID: 988270836521095518}
   - component: {fileID: 2582401381744595016}
-  - component: {fileID: 6307036941208264225}
   m_Layer: 5
   m_Name: MinigameButton
   m_TagString: Untagged
@@ -1175,48 +1174,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 988270836521095518}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5722523973826581929}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: LoadMinigameScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: BarnGame
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5722523973826581929}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnMiniGameButtonClick
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: FishingQuickCatch
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6307036941208264225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575255604196655378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44829a8bd98d5d147bbfcaa33ec44a57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectsToActivate: []
-  objectsToDeactivate:
-  - {fileID: 5838602202398766611}
-  - {fileID: 6873628262438110367}
-  - {fileID: 575255604196655378}
+      m_Calls: []
 --- !u!1 &586932186178724766
 GameObject:
   m_ObjectHideFlags: 0
@@ -3159,68 +3117,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &2509366291169215513
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5652125173937617637}
-  - component: {fileID: 8650100010479045877}
-  m_Layer: 5
-  m_Name: SDOpenButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &5652125173937617637
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2509366291169215513}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7508744214086799570}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -400, y: 170}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8650100010479045877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2509366291169215513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &2669968847671471638
 GameObject:
   m_ObjectHideFlags: 0
@@ -5409,8 +5305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d50f65446c84994d81a23c7f7d7bc24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  structure_so: {fileID: 0}
-  card: {fileID: 0}
+  card: {fileID: 6482177845139894421}
   nameText: {fileID: 967921268484909590}
   descriptionText: {fileID: 1426071293878076696}
   artworkImage: {fileID: 4537249203209782964}
@@ -6845,7 +6740,7 @@ MonoBehaviour:
   objectsToDeactivate:
   - {fileID: 4008448462040247191}
   - {fileID: 6064221575297747784}
-  - {fileID: 2509366291169215513}
+  - {fileID: 0}
 --- !u!1 &5409587607117978659
 GameObject:
   m_ObjectHideFlags: 0
@@ -8131,7 +8026,6 @@ RectTransform:
   - {fileID: 7793632525205298551}
   - {fileID: 7830141499217982290}
   - {fileID: 8274880686385765441}
-  - {fileID: 5652125173937617637}
   - {fileID: 8089127074233283502}
   - {fileID: 5152509418072439029}
   - {fileID: 3722746659127672907}
@@ -8237,7 +8131,7 @@ MonoBehaviour:
   infoButton: {fileID: 6428229711179264922}
   sellButton: {fileID: 878286669255181408}
   miniGameButton: {fileID: 2582401381744595016}
-  glorySpeedUp: {fileID: 0}
+  glorySpeedUp: {fileID: 8345735435123002266}
 --- !u!114 &3750140140790545608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11191,7 +11085,7 @@ MonoBehaviour:
   - {fileID: 6345986237493067117}
   objectsToDeactivate:
   - {fileID: 6064221575297747784}
-  - {fileID: 2509366291169215513}
+  - {fileID: 0}
 --- !u!1 &8733412403100604394
 GameObject:
   m_ObjectHideFlags: 0
@@ -12032,4 +11926,4 @@ MonoBehaviour:
   objectsToActivate:
   - {fileID: 6345986237493067117}
   objectsToDeactivate:
-  - {fileID: 2509366291169215513}
+  - {fileID: 0}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class GameController : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
@@ -163,16 +164,28 @@ public class GameController : MonoBehaviour
         // Update player resources and central hall data
         if (resourceManager != null)
         {
-            resourceManager.AdjustPlayerCurrency(Currency.Gold, gold);  // Add gold to player's currency
+            Debug.Log("Adding Gold");
+            resourceManager.AdjustPlayerCurrency(Currency.Gold, gold);
+        }
+        else
+        {
+            Debug.LogError("ResourceManager is null!");
         }
 
         if (centralHall != null)
         {
-            centralHall.AddToCentralExp(exp);  // Add experience to CentralHall
+            Debug.Log("Adding Exp");
+            centralHall.AddToCentralExp(exp);
+        }
+        else
+        {
+            Debug.LogError("CentralHall is null!");
         }
 
-        // Show exit button
+        // Show exit button and assign the event listener
         exitButton.gameObject.SetActive(true);
+        exitButton.onClick.RemoveAllListeners();  // Clear existing listeners to prevent duplicates
+        exitButton.onClick.AddListener(ExitGame);
 
         // Pause the game
         Time.timeScale = 0f;
@@ -233,6 +246,29 @@ public class GameController : MonoBehaviour
 
     public void ExitGame()
     {
-        // Logic to exit the game (e.g., quit or return to the main menu)
+        // Save the rewards to a static class or PlayerPrefs
+        PlayerPrefs.SetInt("GoldEarned", gold);
+        PlayerPrefs.SetInt("ExpEarned", exp);
+        PlayerPrefs.SetInt("MinigameCompleted", 1); // 1 means completed
+        PlayerPrefs.SetString("MinigameName", "Egg Catcher"); // Save the mini-game name
+
+        Debug.Log("Resetting Time Scale and Exiting Game");
+
+        // Ensure time scale is reset to normal
+        Time.timeScale = 1f;
+
+        string targetScene = "VanericWorld";
+
+        // Check if the scene is available in Build Settings
+        if (Application.CanStreamedLevelBeLoaded(targetScene))
+        {
+            Debug.Log($"Loading scene: {targetScene}");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
+        }
+        else
+        {
+            Debug.LogError($"Scene '{targetScene}' not found in Build Settings. Please add it.");
+        }
     }
+
 }
