@@ -96,6 +96,13 @@ public class ResourceManager : MonoBehaviour
             // Load player currencies from data.
             PlayerCurrencies = currencyData.ToDictionary(pair => pair.Key, pair => pair.Value.amount);
         }
+
+
+        print("Currencies: " + PlayerCurrencies);
+        foreach (KeyValuePair<Currency, int> kv in PlayerCurrencies)
+        {
+            print(kv.Key + ": " + kv.Value);
+        }
     }
 
     private void InitializeDefaultCurrencyAndData()
