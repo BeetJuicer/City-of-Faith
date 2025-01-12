@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 303a8cc680e1b624db5217fd6e642476
+guid: 5dbd1ec31edd41d4bae0f4ae9eb41490
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -21,7 +21,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Slot base_0
+      name: NewBanner_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 14
-        width: 237
-        height: 233
+        x: 2
+        y: 74
+        width: 498
+        height: 376
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6ff526d14ba0bf4988e3cc7c8920cd3
-      internalID: -285800868
+      spriteID: c26608b039325e24bb76c54608163cdb
+      internalID: -622166920
       vertices: []
       indices: 
       edges: []
@@ -147,14 +147,14 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Slot base_0: -285800868
+      NewBanner_0: -622166920
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
