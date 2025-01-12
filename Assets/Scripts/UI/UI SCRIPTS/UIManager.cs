@@ -102,7 +102,6 @@ public class UIManager : MonoBehaviour
     private void OnMiniGameButtonClick(string structureName)
     {
         Debug.Log($"Starting mini game for {structureName}");
-
         switch (structureName)
         {
             case "Structure_BarnHouse":

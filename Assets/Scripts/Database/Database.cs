@@ -90,8 +90,8 @@ public class Database : MonoBehaviour
         public int player_id { get; set; }
         [NotNull]
         public int currency_type { get; set; }
-        public int amount{ get; set; }
-}
+        public int amount { get; set; }
+    }
 
 
     [Table("tbl_central")]
@@ -265,4 +265,5 @@ public class Database : MonoBehaviour
     {
         db.Delete(recordToDelete);
     }
+
 }
