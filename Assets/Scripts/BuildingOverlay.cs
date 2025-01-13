@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using UnityEngine.ProBuilder;
+using System;
 
 public class BuildingOverlay : MonoBehaviour, IDraggable
 {
+    public event Action<Vector3> OnStructureBuilt;
+
     [SerializeField] private Structure_SO debugStructureSO;
     private Structure_SO structure_SO;
     private float halfHeight = 0;
@@ -119,26 +122,29 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             print("Not allowed! Deactivate the UI button for user's confirmation if not allowed");
         }
 
+        Vector3 spawnPos;
         //TODO: currently it's only shooting a ray when we hit instantiate building. Have the ray part of the checking for IsAllowedToBuild
         Ray ray = new Ray(transform.position, Vector3.down);
         if(Physics.Raycast(ray, out RaycastHit hitInfo, 10f, whatIsGround))
         {
             float groundHeight = hitInfo.point.y;
-            Vector3 spawnPos = new Vector3(transform.position.x, groundHeight + halfHeight, transform.position.z);
+            spawnPos = new Vector3(transform.position.x, groundHeight + halfHeight, transform.position.z);
 
             Instantiate(structure_SO.structurePrefab, spawnPos, transform.rotation);
+
+                    //Subtract currency
+            foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
+            {
+                ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
+            }
+
+            //Add xp.
+            centralHall.AddToCentralExp(structure_SO.expGivenOnBuild);
+
+            Debug.Log("Instantiate building end reached.");
+            OnStructureBuilt?.Invoke(spawnPos);
         }
 
-        //Subtract currency
-        foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
-        {
-            ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
-        }
-
-        //Add xp.
-        centralHall.AddToCentralExp(structure_SO.expGivenOnBuild);
-
-        Debug.Log("Instantiate building end reached.");
         ExitBuildMode();
     }
 
