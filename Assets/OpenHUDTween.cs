@@ -23,11 +23,11 @@ public class OpenHUDTween : MonoBehaviour
         CoinBar.transform.localScale = Vector3.zero;
 
         //Animations
-        LeanTween.scale(ExperienceBar, new Vector3(1.562077f, 1.450505f, 1.076218f), 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
-        LeanTween.scale(OptionButton, Vector3.one, 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
-        LeanTween.scale(FriendButton, Vector3.one, 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
-        LeanTween.scale(ShopButton, new Vector3(0.9990134f, 1.017725f, 3.2f), 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
-        LeanTween.scale(GloryBar, new Vector3(1.233764f, 1.233764f, 1.233764f), 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
-        LeanTween.scale(CoinBar, new Vector3(1.233764f, 1.233764f, 1.233764f), 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
+        LeanTween.scale(ExperienceBar, new Vector3(1.172214f, 1.088488f, 0.8076155f), 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
+        LeanTween.scale(OptionButton, new Vector3(0.7672241f, 0.7672241f, 0.7672241f), 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
+        LeanTween.scale(FriendButton, new Vector3(0.7458504f, 0.7458504f, 0.7458504f), 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
+        LeanTween.scale(ShopButton, new Vector3(0.7558168f, 0.7699736f, 2.421002f), 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
+        LeanTween.scale(GloryBar, new Vector3(0.9331497f, 0.9331497f, 0.9331497f), 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
+        LeanTween.scale(CoinBar, new Vector3(0.9591717f, 0.9591717f, 0.9591717f), 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
     }
 }
