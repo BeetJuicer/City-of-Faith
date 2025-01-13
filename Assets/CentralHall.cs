@@ -4,6 +4,7 @@ using UnityEngine;
 using AYellowpaper.SerializedCollections;
 using System.Linq;
 using System;
+using NaughtyAttributes;
 
 public class CentralHall : MonoBehaviour
 {
@@ -24,6 +25,13 @@ public class CentralHall : MonoBehaviour
             db.UpdateRecord(centralData);
             OnPlayerLevelUp?.Invoke(value);
         }
+    }
+
+    [Button]
+    public void LevelUp()
+    {
+        Level++;
+        Debug.Log("Current Level: " + Level);
     }
 
     private int exp;

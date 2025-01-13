@@ -33,8 +33,6 @@ public class LevelUpTween : MonoBehaviour
 
     public void OnComplete()
     {
-        SoftWheel.SetActive(false);
-        HardWheel.SetActive(false);
         gameObject.SetActive(false);
         HUD.SetActive(true);
 

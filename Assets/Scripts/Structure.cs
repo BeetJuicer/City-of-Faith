@@ -241,4 +241,5 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         //resourcemanager.addmoney(price)
         //destroy self
     }
+
 }
