@@ -15,6 +15,15 @@ public class Dialogue : MonoBehaviour
         NPCDialogue3,
         PlaceBuilding,
         NPCDialogue4,
+        ShowArrowToBuilding,
+        //NPCDialogue5,
+        NPCDialogue7,
+        Complete,
+    }
+
+    public enum TutorialStep2
+    {
+        NPCDialogue7,
         Complete,
     }
 
@@ -33,14 +42,35 @@ public class Dialogue : MonoBehaviour
     private bool isShopTutorialComplete = false;
     private bool isItemClickComplete = false;
     private bool isItemBuild = false;
+    private bool isItemBuilding = false;
 
-    void Start()
+    //void Start()
+    //{
+    //    textComponent.text = string.Empty;
+    //    nextButton.onClick.AddListener(OnNextButtonClick);
+    //    arrow.gameObject.SetActive(false);
+    //    currentStep = TutorialStep.StartDialogue; // Initialize to StartDialogue step
+    //    HandleTutorialSteps();
+    //}
+
+    private void TriggerTutorial(int level)
     {
-        textComponent.text = string.Empty;
-        nextButton.onClick.AddListener(OnNextButtonClick);
-        arrow.gameObject.SetActive(false);
-        currentStep = TutorialStep.StartDialogue; // Initialize to StartDialogue step
-        HandleTutorialSteps();
+        if (level == 0)
+        {
+            textComponent.text = string.Empty;
+            nextButton.onClick.AddListener(OnNextButtonClick);
+            arrow.gameObject.SetActive(false);
+            currentStep = TutorialStep.StartDialogue; // Initialize to StartDialogue step
+            HandleTutorialSteps();
+        }
+        else if (level == 2)
+        {
+            textComponent.text = string.Empty;
+            nextButton.onClick.AddListener(OnNextButtonClick);
+            arrow.gameObject.SetActive(false);
+            currentStep = TutorialStep.NPCDialogue7; // Initialize to start the Plot Tutorial (DPlot_Seven)
+            HandleTutorialSteps();
+        }
     }
 
 
@@ -77,12 +107,24 @@ public class Dialogue : MonoBehaviour
                 break;
 
             case TutorialStep.NPCDialogue4:
-                ToggleButtons(true);
                 StartDialogue2();
                 break;
 
+            case TutorialStep.ShowArrowToBuilding:
+                ShowArrow(new Vector3(-75f, 57f, 1f));
+                break;
+
+            //case TutorialStep.NPCDialogue5:
+            //    StartDialogue2();
+            //    break;
+
+            //case TutorialStep.NPCDialogue7:
+            //    StartDialogue2();
+            //    break;
+
             case TutorialStep.Complete:
                 Debug.Log("Tutorial Complete!!!");
+                ToggleButtons(true);
                 break;
 
             default:
@@ -193,6 +235,10 @@ public class Dialogue : MonoBehaviour
         {
             currentStep = TutorialStep.Complete;
         }
+        //else if (currentStep == TutorialStep.NPCDialogue7)
+        //{
+        //    currentStep = TutorialStep.Complete;
+        //}
 
         HandleTutorialSteps();
     }
@@ -247,6 +293,19 @@ public class Dialogue : MonoBehaviour
         isItemClickComplete = true;
     }
 
+    public void boostBuilding()
+    {
+        if (isItemBuilding)
+        {
+            return;
+        }
+
+        currentStep = TutorialStep.NPCDialogue4;
+        HandleTutorialSteps();
+
+        isItemBuilding = true;
+    }
+
     void ToggleButtons(bool state)
     {
         // Find all GameObjects with the "UI_Button" tag
@@ -263,27 +322,16 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    //private void OnEnable()
-    //{
-    //    centralHall.OnPlayerLevelUp += TriggerTutorial;
-    //}
+    private void OnEnable()
+    {
+        centralHall.OnPlayerLevelUp += TriggerTutorial;
+    }
 
-    //private void OnDisable()
-    //{
-    //    centralHall.OnPlayerLevelUp -= TriggerTutorial;
-    //}
+    private void OnDisable()
+    {
+        centralHall.OnPlayerLevelUp -= TriggerTutorial;
+    }
 
-    //private void TriggerTutorial(int level)
-    //{
-    //    if (level == 1)
-    //    {
-    //        currentStep = TutorialStep.StartDialogue;
-    //        HandleTutorialSteps();
-    //    }
-    //    else if (level == 2) 
-    //    {
 
-    //    }
-    //}
 
 }

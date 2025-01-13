@@ -15,10 +15,10 @@ MonoBehaviour:
   unclockableStructures:
     _serializedList:
     - Key: 0
-      Value: []
-    - Key: 1
       Value:
       - {fileID: 11400000, guid: c843465539497d74986b0b041463682e, type: 2}
+    - Key: 1
+      Value:
       - {fileID: 11400000, guid: 3b901db40f406b645a12d6b799437a7f, type: 2}
       - {fileID: 11400000, guid: d2051b2a8e1fc8144914a13d2f9dae38, type: 2}
       - {fileID: 11400000, guid: d6f2d15a35608b4489b99e0e8cf47e35, type: 2}
