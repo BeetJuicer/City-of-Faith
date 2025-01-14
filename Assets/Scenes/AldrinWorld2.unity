@@ -875,7 +875,7 @@ PrefabInstance:
     - target: {fileID: 2745878265640059875, guid: c9cd204550ecf4a4e85b97ee2c3ea676,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3429750908140298694, guid: c9cd204550ecf4a4e85b97ee2c3ea676,
         type: 3}
@@ -889,14 +889,19 @@ PrefabInstance:
       objectReference: {fileID: 1385502624}
     - target: {fileID: 3429750908140298694, guid: c9cd204550ecf4a4e85b97ee2c3ea676,
         type: 3}
+      propertyPath: buildingOverlay
+      value: 
+      objectReference: {fileID: 916827017}
+    - target: {fileID: 3429750908140298694, guid: c9cd204550ecf4a4e85b97ee2c3ea676,
+        type: 3}
       propertyPath: lines.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3429750908140298694, guid: c9cd204550ecf4a4e85b97ee2c3ea676,
         type: 3}
       propertyPath: lines.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: 4264bcbf20fa8d44782ddf8723a44b97,
+      objectReference: {fileID: 11400000, guid: 668abdf41a0b28e49935b8f53aab968f,
         type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2430,7 +2435,7 @@ PrefabInstance:
     - target: {fileID: 3455384700655316656, guid: fc94951bdc156894f9beb724aaca264d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -43.5
+      value: -34.9
       objectReference: {fileID: 0}
     - target: {fileID: 3455384700655316656, guid: fc94951bdc156894f9beb724aaca264d,
         type: 3}
@@ -2440,7 +2445,7 @@ PrefabInstance:
     - target: {fileID: 3455384700655316656, guid: fc94951bdc156894f9beb724aaca264d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 30.6
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3455384700655316656, guid: fc94951bdc156894f9beb724aaca264d,
         type: 3}
@@ -3043,6 +3048,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LevelUpCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 957943621002296379, guid: 543d036552537054eb401c83a9c64474,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2912108574051141796, guid: 543d036552537054eb401c83a9c64474,
         type: 3}

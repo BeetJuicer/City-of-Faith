@@ -16,8 +16,7 @@ public class Dialogue : MonoBehaviour
         PlaceBuilding,
         NPCDialogue4,
         ShowArrowToBuilding,
-        //NPCDialogue5,
-        NPCDialogue7,
+        NPCDialogue5,
         Complete,
     }
 
@@ -36,6 +35,7 @@ public class Dialogue : MonoBehaviour
     public Image arrow; // Reference to the Arrow GameObject (not just the Image)
     public GameObject shopButton;
     public CentralHall centralHall;
+    public BuildingOverlay buildingOverlay;
 
     private int dialogueIndex = 0;
     private int index = 0;
@@ -55,7 +55,7 @@ public class Dialogue : MonoBehaviour
 
     private void TriggerTutorial(int level)
     {
-        if (level == 0)
+        if (level == 1)
         {
             textComponent.text = string.Empty;
             nextButton.onClick.AddListener(OnNextButtonClick);
@@ -63,14 +63,14 @@ public class Dialogue : MonoBehaviour
             currentStep = TutorialStep.StartDialogue; // Initialize to StartDialogue step
             HandleTutorialSteps();
         }
-        else if (level == 2)
-        {
-            textComponent.text = string.Empty;
-            nextButton.onClick.AddListener(OnNextButtonClick);
-            arrow.gameObject.SetActive(false);
-            currentStep = TutorialStep.NPCDialogue7; // Initialize to start the Plot Tutorial (DPlot_Seven)
-            HandleTutorialSteps();
-        }
+        //else if (level == 2)
+        //{
+        //    textComponent.text = string.Empty;
+        //    nextButton.onClick.AddListener(OnNextButtonClick);
+        //    arrow.gameObject.SetActive(false);
+        //    currentStep = TutorialStep.NPCDialogue7; // Initialize to start the Plot Tutorial (DPlot_Seven)
+        //    HandleTutorialSteps();
+        //}
     }
 
 
@@ -111,12 +111,17 @@ public class Dialogue : MonoBehaviour
                 break;
 
             case TutorialStep.ShowArrowToBuilding:
-                ShowArrow(new Vector3(-75f, 57f, 1f));
+
+                if (buildingOverlay != null)
+                {
+                    Debug.Log("Showing arroooooooow!");
+                    buildingOverlay.OnStructureBuilt += ShowArrow;
+                }
                 break;
 
-            //case TutorialStep.NPCDialogue5:
-            //    StartDialogue2();
-            //    break;
+            case TutorialStep.NPCDialogue5:
+                StartDialogue2();
+                break;
 
             //case TutorialStep.NPCDialogue7:
             //    StartDialogue2();
@@ -233,12 +238,12 @@ public class Dialogue : MonoBehaviour
         }
         else if (currentStep == TutorialStep.NPCDialogue4)
         {
+            currentStep = TutorialStep.ShowArrowToBuilding;
+        }
+        else if (currentStep == TutorialStep.NPCDialogue5)
+        {
             currentStep = TutorialStep.Complete;
         }
-        //else if (currentStep == TutorialStep.NPCDialogue7)
-        //{
-        //    currentStep = TutorialStep.Complete;
-        //}
 
         HandleTutorialSteps();
     }
@@ -280,13 +285,12 @@ public class Dialogue : MonoBehaviour
         isItemClickComplete = true;
     }
 
-    public void placeBuilding()
+    public void PlaceBuilding()
     {
         if (isItemBuild)
         {
             return;
         }
-
         currentStep = TutorialStep.NPCDialogue4;
         HandleTutorialSteps();
 
@@ -299,8 +303,8 @@ public class Dialogue : MonoBehaviour
         {
             return;
         }
-
-        currentStep = TutorialStep.NPCDialogue4;
+        Debug.Log("Building Boosted");
+        currentStep = TutorialStep.NPCDialogue5;
         HandleTutorialSteps();
 
         isItemBuilding = true;
@@ -330,6 +334,11 @@ public class Dialogue : MonoBehaviour
     private void OnDisable()
     {
         centralHall.OnPlayerLevelUp -= TriggerTutorial;
+    }
+
+    private void OnDestroy()
+    {
+        buildingOverlay.OnStructureBuilt -= ShowArrow;
     }
 
 

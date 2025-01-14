@@ -10,12 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5feb03e258349524b90d83ddefa295f7, type: 3}
-  m_Name: D_fourth
+  m_Name: D_five
   m_EditorClassIdentifier: 
   dialogueLines:
-  - Well done!
-  - The work of our hands is blessed.
-  - Soon, this house will be complete, and we can receive a new citizen into our
-    fold
-  - Click the Villager House, to use the Speed Up button.
+  - 'Well Done! '
+  - First Tutorial Complete!
   npcImage: {fileID: 21300000, guid: 368ceaf0ec3f3ce4b8de9ae8144b8b70, type: 3}

@@ -17,11 +17,13 @@ public class GlorySpeedUp : MonoBehaviour
     [SerializeField] private Button button;
 
     private DateTime finishTime;
+    public Dialogue dialogue;
 
 
     private void Start()
     {
         button.onClick.AddListener(() => finishTime = DateTime.Now);
+        dialogue.boostBuilding();
     }
 
     public void OpenGlorySpeedUpPanel(IBoostableObject boostableObject, DateTime finishTime, TimeSpan totalDuration)
@@ -97,4 +99,6 @@ public class GlorySpeedUp : MonoBehaviour
         else
             return 0;
     }
+
+
 }
