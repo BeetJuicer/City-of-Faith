@@ -30,6 +30,8 @@ public class ResourceManager : MonoBehaviour
     // Set as a dictionary so that we can update each database record individually when set instead of updating the entire list of currencies.
     private Dictionary<Currency, Database.CurrencyData> currencyData = null;
 
+    public event Action<Currency, int> OnCurrencyUpdated;
+
     // serialize for now for debug purposes.
     [SerializedDictionary]
     [SerializeField] private SerializedDictionary<FoodResource, int> playerFoodResources = new();
@@ -132,6 +134,9 @@ public class ResourceManager : MonoBehaviour
 
         playerCurrencies[type] = newValue;
         currencyData[type].amount = newValue;
+
+        OnCurrencyUpdated?.Invoke(type, newValue);
+        //ResourceManager.Instance.OnCurrencyUpdated +=
 
         db.UpdateRecord(currencyData[type]);
     }
