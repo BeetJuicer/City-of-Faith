@@ -5,7 +5,8 @@ using System.Collections;
 
 public class Dialogue : MonoBehaviour
 {
-    public enum TutorialStep
+
+    public enum TutorialSection1Steps
     {
         StartDialogue,
         ShowArrowToShop,
@@ -20,13 +21,14 @@ public class Dialogue : MonoBehaviour
         Complete,
     }
 
-    public enum TutorialStep2
+    public enum TutorialSection2Steps
     {
         NPCDialogue7,
         Complete,
     }
 
-    public TutorialStep currentStep;
+    public TutorialSection1Steps section1Step;
+    public TutorialSection2Steps section2Step;
     [SerializeField] private Dialogue_SO[] lines;
     public TMP_Text textComponent;
     public Button nextButton;
@@ -36,6 +38,7 @@ public class Dialogue : MonoBehaviour
     public GameObject shopButton;
     public CentralHall centralHall;
     public BuildingOverlay buildingOverlay;
+    [SerializeField] private Camera cam;
 
     private int dialogueIndex = 0;
     private int index = 0;
@@ -44,14 +47,16 @@ public class Dialogue : MonoBehaviour
     private bool isItemBuild = false;
     private bool isItemBuilding = false;
 
-    //void Start()
-    //{
-    //    textComponent.text = string.Empty;
-    //    nextButton.onClick.AddListener(OnNextButtonClick);
-    //    arrow.gameObject.SetActive(false);
-    //    currentStep = TutorialStep.StartDialogue; // Initialize to StartDialogue step
-    //    HandleTutorialSteps();
-    //}
+    private Structure structureObservee;
+
+    void Start()
+    {
+        textComponent.text = string.Empty;
+        nextButton.onClick.AddListener(OnNextButtonClick);
+        arrow.gameObject.SetActive(false);
+        section1Step = TutorialSection1Steps.StartDialogue; // Initialize to StartDialogue step
+        HandleTutorialSteps();
+    }
 
     private void TriggerTutorial(int level)
     {
@@ -60,7 +65,7 @@ public class Dialogue : MonoBehaviour
             textComponent.text = string.Empty;
             nextButton.onClick.AddListener(OnNextButtonClick);
             arrow.gameObject.SetActive(false);
-            currentStep = TutorialStep.StartDialogue; // Initialize to StartDialogue step
+            section2Step = TutorialSection2Steps.NPCDialogue7; // Initialize to StartDialogue step
             HandleTutorialSteps();
         }
         //else if (level == 2)
@@ -76,64 +81,81 @@ public class Dialogue : MonoBehaviour
 
     void HandleTutorialSteps()
     {
-        Debug.Log("Current Step: " + currentStep); // Log the current step
-        switch (currentStep)
+        Debug.Log("Current Step: " + section1Step); // Log the current step
+        switch (section1Step)
         {
-            case TutorialStep.StartDialogue:
+            case TutorialSection1Steps.StartDialogue:
                 ToggleButtons(false);
                 StartDialogue();
                 break;
-            case TutorialStep.ShowArrowToShop:
+            case TutorialSection1Steps.ShowArrowToShop:
                 shopButton.SetActive(true);
                 ToggleButtons(true);
                 ShowArrow(new Vector3(285f, -111f, 0));
                 break;
 
-            case TutorialStep.NPCDialogue2:
+            case TutorialSection1Steps.NPCDialogue2:
                 ToggleButtons(false);
                 StartDialogue2();
                 break;
 
-            case TutorialStep.ShowArrowToItem:
+            case TutorialSection1Steps.ShowArrowToItem:
                 ShowArrow(new Vector3(-75f, 57f, 1f)); // Offset arrow above shop item
                 break;
 
-            case TutorialStep.NPCDialogue3:
+            case TutorialSection1Steps.NPCDialogue3:
                 StartDialogue2();
                 break;
 
-            case TutorialStep.PlaceBuilding:
+            case TutorialSection1Steps.PlaceBuilding:
+                buildingOverlay.OnStructureBuilt += ShowArrowViewpoint;
+
                 //Wait for the player to place the structure
                 break;
 
-            case TutorialStep.NPCDialogue4:
+            case TutorialSection1Steps.NPCDialogue4:
                 StartDialogue2();
                 break;
 
-            case TutorialStep.ShowArrowToBuilding:
+            case TutorialSection1Steps.ShowArrowToBuilding:
 
                 if (buildingOverlay != null)
                 {
-                    Debug.Log("Showing arroooooooow!");
-                    buildingOverlay.OnStructureBuilt += ShowArrow;
+                    Debug.Log("listening to buildingoverlay!");
                 }
                 break;
 
-            case TutorialStep.NPCDialogue5:
+            case TutorialSection1Steps.NPCDialogue5:
                 StartDialogue2();
                 break;
+
+            /*
+             case naclickna, boost naman
+                structure.OnStructureInProgressClicked += boostdialoguecucgy   
+             
+             */
 
             //case TutorialStep.NPCDialogue7:
             //    StartDialogue2();
             //    break;
 
-            case TutorialStep.Complete:
+            case TutorialSection1Steps.Complete:
                 Debug.Log("Tutorial Complete!!!");
                 ToggleButtons(true);
                 break;
 
             default:
-                Debug.LogWarning("Unhandled tutorial step: " + currentStep);
+                Debug.LogWarning("Unhandled tutorial step: " + section1Step);
+                break;
+        }
+    }
+
+    void HandleTutorialSteps2()
+    {
+        switch (section2Step)
+        {
+            case TutorialSection2Steps.NPCDialogue7:
+                StartDialogue2();
                 break;
         }
     }
@@ -221,28 +243,28 @@ public class Dialogue : MonoBehaviour
 
     void EndDialogue()
     {
-        Debug.Log("Ending dialogue. Current step: " + currentStep);
+        Debug.Log("Ending dialogue. Current step: " + section1Step);
         dialogueBox.SetActive(false);
 
-        if (currentStep == TutorialStep.StartDialogue)
+        if (section1Step == TutorialSection1Steps.StartDialogue)
         {
-            currentStep = TutorialStep.ShowArrowToShop;
+            section1Step = TutorialSection1Steps.ShowArrowToShop;
         }
-        else if (currentStep == TutorialStep.NPCDialogue2)
+        else if (section1Step == TutorialSection1Steps.NPCDialogue2)
         {
-            currentStep = TutorialStep.ShowArrowToItem;
+            section1Step = TutorialSection1Steps.ShowArrowToItem;
         }
-        else if (currentStep == TutorialStep.NPCDialogue3)
+        else if (section1Step == TutorialSection1Steps.NPCDialogue3)
         {
-            currentStep = TutorialStep.PlaceBuilding;
+            section1Step = TutorialSection1Steps.PlaceBuilding;
         }
-        else if (currentStep == TutorialStep.NPCDialogue4)
+        else if (section1Step == TutorialSection1Steps.NPCDialogue4)
         {
-            currentStep = TutorialStep.ShowArrowToBuilding;
+            section1Step = TutorialSection1Steps.ShowArrowToBuilding;
         }
-        else if (currentStep == TutorialStep.NPCDialogue5)
+        else if (section1Step == TutorialSection1Steps.NPCDialogue5)
         {
-            currentStep = TutorialStep.Complete;
+            section1Step = TutorialSection1Steps.Complete;
         }
 
         HandleTutorialSteps();
@@ -250,11 +272,24 @@ public class Dialogue : MonoBehaviour
 
     void ShowArrow(Vector3 newPosition)
     {
+        Vector2 ScreenPosition = cam.WorldToScreenPoint(newPosition);
         RectTransform rectTransform = arrow.rectTransform; // Get RectTransform of the Image
         rectTransform.anchoredPosition = new Vector2(newPosition.x, newPosition.y); // Update position
         arrow.gameObject.SetActive(true);
         Debug.Log($"Arrow Position Updated: {newPosition}");
     }
+    void ShowArrowViewpoint(Vector3 newPosition, Structure structure)
+    {
+        structureObservee = structure;
+        Vector2 viewportPoint = cam.WorldToViewportPoint(newPosition);
+        RectTransform rectTransform = arrow.rectTransform; // Get RectTransform of the Image
+        rectTransform.anchorMin = viewportPoint;
+        rectTransform.anchorMax = viewportPoint;
+        rectTransform.anchoredPosition = viewportPoint;//new Vector2(newPosition.x, newPosition.y); // Update position
+        arrow.gameObject.SetActive(true);
+        print("Viewportpoint is: " + viewportPoint);
+    }
+
     public void OnShopButtonClicked()
     {
         if (isShopTutorialComplete)
@@ -263,7 +298,7 @@ public class Dialogue : MonoBehaviour
         }
 
         arrow.gameObject.SetActive(false);
-        currentStep = TutorialStep.NPCDialogue2;
+        section1Step = TutorialSection1Steps.NPCDialogue2;
         HandleTutorialSteps();
 
         isShopTutorialComplete = true;
@@ -279,7 +314,7 @@ public class Dialogue : MonoBehaviour
         }
         Debug.Log("arrow false item click");
         arrow.gameObject.SetActive(false);
-        currentStep = TutorialStep.NPCDialogue3;
+        section1Step = TutorialSection1Steps.NPCDialogue3;
         HandleTutorialSteps();
 
         isItemClickComplete = true;
@@ -291,7 +326,7 @@ public class Dialogue : MonoBehaviour
         {
             return;
         }
-        currentStep = TutorialStep.NPCDialogue4;
+        section1Step = TutorialSection1Steps.NPCDialogue4;
         HandleTutorialSteps();
 
         isItemClickComplete = true;
@@ -304,7 +339,7 @@ public class Dialogue : MonoBehaviour
             return;
         }
         Debug.Log("Building Boosted");
-        currentStep = TutorialStep.NPCDialogue5;
+        section1Step = TutorialSection1Steps.NPCDialogue5;
         HandleTutorialSteps();
 
         isItemBuilding = true;
@@ -338,7 +373,7 @@ public class Dialogue : MonoBehaviour
 
     private void OnDestroy()
     {
-        buildingOverlay.OnStructureBuilt -= ShowArrow;
+        buildingOverlay.OnStructureBuilt -= ShowArrowViewpoint;
     }
 
 

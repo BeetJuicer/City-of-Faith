@@ -52,6 +52,8 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
 
     private UIManager uiManager;
 
+    public event Action OnStructureInProgressClicked;
+
     private void Awake()
     {
         // Dynamically find the UIManager in the scene if not assigned in the Inspector
@@ -201,6 +203,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
             return;
         }
 
+
         switch (CurrentBuildingState)
         {
             case BuildingState.IN_PROGRESS:
@@ -209,6 +212,8 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
                 uiManager.OpenBoostButton(this, TimeBuildFinished, totaltime);
                 uiManager.ActivateInfoButton(this);
                 uiManager.ActivateSellButton(this);
+                OnStructureInProgressClicked?.Invoke();
+
                 break;
 
             case BuildingState.BUILT:

@@ -7,7 +7,7 @@ using System;
 
 public class BuildingOverlay : MonoBehaviour, IDraggable
 {
-    public event Action<Vector3> OnStructureBuilt;
+    public event Action<Vector3, Structure> OnStructureBuilt;
 
     [SerializeField] private Structure_SO debugStructureSO;
     private Structure_SO structure_SO;
@@ -130,7 +130,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             float groundHeight = hitInfo.point.y;
             spawnPos = new Vector3(transform.position.x, groundHeight + halfHeight, transform.position.z);
 
-            Instantiate(structure_SO.structurePrefab, spawnPos, transform.rotation);
+            var newBuilding = Instantiate(structure_SO.structurePrefab, spawnPos, transform.rotation);
 
                     //Subtract currency
             foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
@@ -142,7 +142,8 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             centralHall.AddToCentralExp(structure_SO.expGivenOnBuild);
 
             Debug.Log("Instantiate building end reached.");
-            OnStructureBuilt?.Invoke(spawnPos);
+            OnStructureBuilt?.Invoke(spawnPos, newBuilding.GetComponent<Structure>());
+            Debug.Log("OnStructureBuilt Invoked.");
         }
 
         ExitBuildMode();
