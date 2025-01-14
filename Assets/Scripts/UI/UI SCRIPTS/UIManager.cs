@@ -17,18 +17,31 @@ public class UIManager : MonoBehaviour
     private Structure_SO selectedStructure; // The structure that is currently selected/clicked
 
     [SerializeField] private Camera MainCamera3d;
-    [SerializeField] private GameObject fishingScene;
+    [SerializeField] private GameObject fishingMinigamePrefab;
+    [SerializeField] private GameObject BarnMinigamePrefab;
     [SerializeField] private GlorySpeedUp glorySpeedUp;
-    VolumeSettings volumeSettings;
+
+    [SerializeField] private GameObject audioManager;
 
     private const string BARN_GAME = "BarnGame";
     private const string FISHING_GAME = "FishingGame";
 
+
     public void LoadFishingMinigame()
     {
+        audioManager.gameObject.SetActive(false);
         DOTween.KillAll();
         MainCamera3d.gameObject.SetActive(false);
-        fishingScene.SetActive(true);
+        fishingMinigamePrefab.SetActive(true);
+        gameObject.SetActive(false);
+    }
+
+    public void LoadBarnMinigame()
+    {
+        audioManager.gameObject.SetActive(false);
+        DOTween.KillAll();
+        MainCamera3d.gameObject.SetActive(false);
+        BarnMinigamePrefab.SetActive(true);
         gameObject.SetActive(false);
     }
 
@@ -68,7 +81,7 @@ public class UIManager : MonoBehaviour
         switch (structureName)
         {
             case "Structure_BarnHouse":
-                //SceneManager.LoadScene(BARN_GAME_SCENE);
+                LoadBarnMinigame();
                 break;
             case "Structure_FishingPort":
                 LoadFishingMinigame();
@@ -135,12 +148,10 @@ public class UIManager : MonoBehaviour
             switch (structureName)
             {
                 case "Structure_BarnHouse":
-                    //SceneManager.LoadScene(BARN_GAME_SCENE);
-                    miniGameButtonOpen.onClick.RemoveAllListeners();
+                    LoadBarnMinigame();
                     break;
                 case "Structure_FishingPort":
                     LoadFishingMinigame();
-                    miniGameButtonOpen.onClick.RemoveAllListeners();
                     break;
                 default:
                     Debug.LogWarning("No minigame associated with this structure.");

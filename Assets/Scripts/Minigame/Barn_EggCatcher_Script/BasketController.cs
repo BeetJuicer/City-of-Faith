@@ -7,7 +7,7 @@ public class BasketController : MonoBehaviour
     public Camera cam;                 // Reference to the camera used to calculate screen bounds
     private float maxWidth;            // The maximum horizontal position the basket can move
     private Rigidbody2D rb;            // Rigidbody2D component for smooth movement
-    private float yOffset = -3.5f;     // Vertical offset to keep the basket at a fixed height
+    private float yOffset;             // Vertical offset to keep the basket at a fixed height
 
     void Start()
     {
@@ -18,12 +18,17 @@ public class BasketController : MonoBehaviour
         }
 
         // Calculate the maximum width of the screen in world coordinates
-        Vector3 upperCorner = new Vector3(Screen.width, Screen.height, 0.0f); // Top-right corner of the screen
-        Vector3 targetWidth = cam.ScreenToWorldPoint(upperCorner);           // Convert screen position to world position
-        maxWidth = targetWidth.x;                                           // Set the maximum horizontal width
+        Vector3 upperCorner = new Vector3(Screen.width, Screen.height, 0.0f);
+        Vector3 targetWidth = cam.ScreenToWorldPoint(upperCorner);
+        maxWidth = targetWidth.x;
 
         // Get the Rigidbody2D component attached to this GameObject
         rb = GetComponent<Rigidbody2D>();
+
+        // Dynamically calculate the yOffset to position the basket near the bottom of the screen
+        Vector3 lowerCorner = new Vector3(0.0f, 0.0f, 0.0f); // Bottom-left corner of the screen
+        Vector3 targetHeight = cam.ScreenToWorldPoint(lowerCorner);
+        yOffset = targetHeight.y + 0.5f; // Add a small offset to ensure it's visible above the bottom edge
     }
 
     void FixedUpdate()

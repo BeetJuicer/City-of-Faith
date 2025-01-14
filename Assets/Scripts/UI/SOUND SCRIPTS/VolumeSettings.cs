@@ -59,10 +59,4 @@ public class VolumeSettings : MonoBehaviour
         SetMusicVolume();
         SetSFXVolume();
     }
-
-    public void muteVolume()
-    {
-        myMixer.SetFloat("music", Mathf.Log10(0) * 20);
-        myMixer.SetFloat("SFX", Mathf.Log10(0) * 20);
-    }
 }

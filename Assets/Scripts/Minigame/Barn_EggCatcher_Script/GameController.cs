@@ -34,6 +34,12 @@ public class GameController : MonoBehaviour
     private ResourceManager resourceManager;  // Reference to ResourceManager
     private CentralHall centralHall;        // Reference to CentralHall
 
+    [SerializeField] private GameObject HUDCanvas;
+    [SerializeField] private Camera MainCamera3d;
+    [SerializeField] private GameObject BarnMinigamePrefab;
+    [SerializeField] private GameObject audioManager;
+    [SerializeField] private Transform spawnParent;
+
     void Awake()
     {
         // Singleton pattern: ensures only one instance of GameController exists
@@ -61,26 +67,72 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void Start()
+    void OnEnable()
     {
-        // Initial setup when the game starts
+        // Initialize the game state
+        ResetGameState();
+
+        // Initialize UI elements
+        timeText.text = "Time Left: " + Mathf.RoundToInt(timer) + "s";
+        scoreText.text = "Score: 0";
+        gameOverPanel.SetActive(false);
+
+        // Handle audio setup
         if (AudioSourceMiniGame.instance != null)
         {
-            AudioSourceMiniGame.instance.sfxSource.Stop();  // Stop lingering sound effects
-            AudioSourceMiniGame.instance.PlayStartSound();  // Play the start sound effect
-            AudioSourceMiniGame.instance.PlayBackgroundMusic();  // Start playing background music
+            AudioSourceMiniGame.instance.sfxSource.Stop();
+            AudioSourceMiniGame.instance.PlayStartSound();
+            AudioSourceMiniGame.instance.PlayBackgroundMusic();
         }
         else
         {
             Debug.LogError("AudioSourceMiniGame instance is not found.");
         }
+    }
+    public void ResetGameState()
+    {
+        // Reset game variables
+        timer = 30f;
+        score = 0;
+        gold = 0;
+        exp = 0;
+        isGameOver = false;
+        currentCooldown = spawnCooldown;
 
-        // Initialize the UI elements
+        // Update UI to reflect the reset state
         timeText.text = "Time Left: " + Mathf.RoundToInt(timer) + "s";
         scoreText.text = "Score: 0";
 
-        // Hide the game-over panel at the start
+        // Hide the game-over panel
         gameOverPanel.SetActive(false);
+
+        // Clear all spawned objects (e.g., eggs and bombs)
+        ClearSpawnedObjects();
+
+        // Pause gameplay mechanics and start with a delay
+        StartCoroutine(DelayedGameStart());
+    }
+
+    private void ClearSpawnedObjects()
+    {
+        foreach (Transform child in spawnParent)
+        {
+            Destroy(child.gameObject); // Remove all child objects under the spawn parent
+        }
+    }
+
+    private IEnumerator DelayedGameStart()
+    {
+        Debug.Log("Game will start in 1 second...");
+
+        // Optional: Show a "Get Ready!" message or countdown UI here
+        timeText.text = "Get Ready!";
+        yield return new WaitForSeconds(1f); // Delay for 1 second
+
+        // Begin gameplay after delay
+        timeText.text = "Time Left: " + Mathf.RoundToInt(timer) + "s";
+        currentCooldown = spawnCooldown; // Allow spawning to start
+        Debug.Log("Game started!");
     }
 
     void Update()
@@ -110,19 +162,18 @@ public class GameController : MonoBehaviour
         // Spawn objects at random positions within the screen bounds
         for (int i = 0; i < 3; i++)
         {
-            float pos_x = Random.Range(-4.0f, 4.0f);  // Random x position for spawning
-            float pos_y = 6.0f;                       // Fixed y position for spawning
+            float x_offset = Random.Range(-4.0f, 4.0f);  // Random x position for spawning
             float initialVelocity = Random.Range(5.0f, 8.0f);  // Random downward velocity
 
             GameObject obj;
             // Randomly choose whether to spawn an egg (80% chance) or a bomb (20% chance)
             if (Random.Range(0, 100) < 80)
             {
-                obj = Instantiate(gm[0], new Vector3(pos_x, pos_y, 0.1f), Quaternion.identity);
+                obj = Instantiate(gm[0], new Vector3(spawnParent.position.x + x_offset, spawnParent.position.y, 0.1f), Quaternion.identity, spawnParent);
             }
             else
             {
-                obj = Instantiate(gm[1], new Vector3(pos_x, pos_y, 0.1f), Quaternion.identity);
+                obj = Instantiate(gm[1], new Vector3(spawnParent.position.x + x_offset, spawnParent.position.y, 0.1f), Quaternion.identity, spawnParent);
             }
 
             // Add downward force to the object
@@ -182,10 +233,10 @@ public class GameController : MonoBehaviour
             Debug.LogError("CentralHall is null!");
         }
 
-        // Show exit button and assign the event listener
-        exitButton.gameObject.SetActive(true);
-        exitButton.onClick.RemoveAllListeners();  // Clear existing listeners to prevent duplicates
-        exitButton.onClick.AddListener(ExitGame);
+        //// Show exit button and assign the event listener
+        //exitButton.gameObject.SetActive(true);
+        //exitButton.onClick.RemoveAllListeners();  // Clear existing listeners to prevent duplicates
+        //exitButton.onClick.AddListener(ExitGame);
 
         // Pause the game
         Time.timeScale = 0f;
@@ -246,29 +297,13 @@ public class GameController : MonoBehaviour
 
     public void ExitGame()
     {
-        // Save the rewards to a static class or PlayerPrefs
-        PlayerPrefs.SetInt("GoldEarned", gold);
-        PlayerPrefs.SetInt("ExpEarned", exp);
-        PlayerPrefs.SetInt("MinigameCompleted", 1); // 1 means completed
-        PlayerPrefs.SetString("MinigameName", "Egg Catcher"); // Save the mini-game name
-
-        Debug.Log("Resetting Time Scale and Exiting Game");
-
-        // Ensure time scale is reset to normal
         Time.timeScale = 1f;
+        BarnMinigamePrefab.SetActive(false);
+        HUDCanvas.SetActive(true);
+        MainCamera3d.gameObject.SetActive(true);
+        audioManager.gameObject.SetActive(true);
 
-        string targetScene = "VanericWorld";
-
-        // Check if the scene is available in Build Settings
-        if (Application.CanStreamedLevelBeLoaded(targetScene))
-        {
-            Debug.Log($"Loading scene: {targetScene}");
-            UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
-        }
-        else
-        {
-            Debug.LogError($"Scene '{targetScene}' not found in Build Settings. Please add it.");
-        }
+        Debug.Log("Exiting mini-game and saving rewards.");
     }
 
 }

@@ -40,7 +40,8 @@ public class FishGameController : MonoBehaviour
 
     [SerializeField] private GameObject HUDCanvas;
     [SerializeField] private Camera MainCamera3d;
-    [SerializeField] private GameObject fishingScene;
+    [SerializeField] private GameObject fishingMinigamePrefab;
+    [SerializeField] private GameObject audioManager;
 
     void Awake()
     {
@@ -105,7 +106,7 @@ public class FishGameController : MonoBehaviour
         UpdateTimerText();                  // Reset timer text
 
         // Re-enable gameplay-related objects if necessary
-        fishingScene.SetActive(true);
+        fishingMinigamePrefab.SetActive(true);
     }
 
 
@@ -302,9 +303,10 @@ public class FishGameController : MonoBehaviour
     public void ExitToMainScene()
     {
         Time.timeScale = 1f;
-        fishingScene.SetActive(false);
+        fishingMinigamePrefab.SetActive(false);
         HUDCanvas.SetActive(true);
         MainCamera3d.gameObject.SetActive(true);
+        audioManager.gameObject.SetActive(true);
 
         Debug.Log("Exiting mini-game and saving rewards.");
     }

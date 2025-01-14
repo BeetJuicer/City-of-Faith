@@ -12,8 +12,18 @@ public class Bomb : MonoBehaviour
         // Cache the Transform component of the bomb
         tr = GetComponent<Transform>();
 
-        // Find and assign the GameController script from the "GameController" GameObject
-        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        // Find and assign the GameController script from the "BarnMiniGame - Egg Catcher" GameObject
+        GameObject barnMiniGame = GameObject.Find("BarnMiniGame - Egg Catcher");
+        if (barnMiniGame != null)
+        {
+            gameController = barnMiniGame.GetComponent<GameController>();
+        }
+
+        // Check if gameController was successfully assigned
+        if (gameController == null)
+        {
+            Debug.LogError("GameController script not found on 'BarnMiniGame - Egg Catcher'.");
+        }
     }
 
     void FixedUpdate()
@@ -36,10 +46,20 @@ public class Bomb : MonoBehaviour
             Destroy(this.gameObject); // Destroy the bomb upon collision
 
             // Play the bomb explosion sound effect
-            AudioSourceMiniGame.instance.PlaySoundEffect(AudioSourceMiniGame.instance.bombExplosionSound);
+            if (AudioSourceMiniGame.instance != null)
+            {
+                AudioSourceMiniGame.instance.PlaySoundEffect(AudioSourceMiniGame.instance.bombExplosionSound);
+            }
+            else
+            {
+                Debug.LogWarning("AudioSourceMiniGame instance is missing!");
+            }
 
             // Deduct 100 points from the score for hitting a bomb
-            gameController.AddScore(-100);
+            if (gameController != null)
+            {
+                gameController.AddScore(-100);
+            }
         }
     }
 }

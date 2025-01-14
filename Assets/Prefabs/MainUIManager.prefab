@@ -2156,6 +2156,7 @@ MonoBehaviour:
   costMedium: 10
   costHigh: 15
   button: {fileID: 8423762852469972139}
+  dialogue: {fileID: 0}
 --- !u!1 &2077366052713932428
 GameObject:
   m_ObjectHideFlags: 0
@@ -7796,8 +7797,11 @@ MonoBehaviour:
   structureDisplayManager: {fileID: 4163264073250295481}
   infoButton: {fileID: 6428229711179264922}
   sellButton: {fileID: 878286669255181408}
-  miniGameButton: {fileID: 2582401381744595016}
+  miniGameButtonOpen: {fileID: 2582401381744595016}
+  MainCamera3d: {fileID: 0}
+  fishingScene: {fileID: 0}
   glorySpeedUp: {fileID: 8345735435123002266}
+  audioManager: {fileID: 0}
 --- !u!114 &3750140140790545608
 MonoBehaviour:
   m_ObjectHideFlags: 0
