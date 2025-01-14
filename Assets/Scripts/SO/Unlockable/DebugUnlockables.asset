@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25eb3d0aac23f174e9c1953818975ced, type: 3}
+  m_Name: DebugUnlockables
+  m_EditorClassIdentifier: 
+  unclockableStructures:
+    _serializedList:
+    - Key: 0
+      Value:
+      - {fileID: 11400000, guid: c843465539497d74986b0b041463682e, type: 2}
+      - {fileID: 11400000, guid: 3b901db40f406b645a12d6b799437a7f, type: 2}
+      - {fileID: 11400000, guid: 55261ccf8e79d5f43a5e6cd25a01e936, type: 2}
+      - {fileID: 11400000, guid: 08a25eec9f62fbf42b8c174d7d825e2c, type: 2}
+      - {fileID: 11400000, guid: 52af7883aea7f9844b10f8aa7bc96f0e, type: 2}
+      - {fileID: 11400000, guid: 254a704fa72f91847966213f4baa69e4, type: 2}
+    - Key: 1
+      Value: []
+    - Key: 2
+      Value:
+      - {fileID: 11400000, guid: 08a25eec9f62fbf42b8c174d7d825e2c, type: 2}
+      - {fileID: 11400000, guid: 52af7883aea7f9844b10f8aa7bc96f0e, type: 2}
+      - {fileID: 11400000, guid: 254a704fa72f91847966213f4baa69e4, type: 2}
+      - {fileID: 11400000, guid: bd0e2950df8d3464f8c0494a2c2e5ab6, type: 2}
+    - Key: 3
+      Value:
+      - {fileID: 11400000, guid: 55261ccf8e79d5f43a5e6cd25a01e936, type: 2}
+  unclockableCrops:
+    _serializedList:
+    - Key: 0
+      Value:
+      - {fileID: 11400000, guid: eab7d26a882887f4fa652af421ba36fa, type: 2}
+      - {fileID: 11400000, guid: 0161e6ee0bbecf3419c260683d702ac4, type: 2}
+      - {fileID: 11400000, guid: 5d08ff7e3786dcd46ba3961d79f0d9dc, type: 2}
+      - {fileID: 11400000, guid: 2ccacbe19d00ed847bade49a33008459, type: 2}
+    - Key: 1
+      Value: []
+    - Key: 2
+      Value:
+      - {fileID: 11400000, guid: 0161e6ee0bbecf3419c260683d702ac4, type: 2}
+      - {fileID: 11400000, guid: 2ccacbe19d00ed847bade49a33008459, type: 2}
+      - {fileID: 11400000, guid: 1a29cfdd4551cf6499fec3510455a345, type: 2}
+    - Key: 3
+      Value:
+      - {fileID: 11400000, guid: 5d08ff7e3786dcd46ba3961d79f0d9dc, type: 2}
+      - {fileID: 11400000, guid: 1a29cfdd4551cf6499fec3510455a345, type: 2}
+      - {fileID: 11400000, guid: d433709d37b301f4d88b7fa3a5a3806e, type: 2}
+  populationLimit:
+    _serializedList:
+    - Key: 0
+      Value: 100
+    - Key: 1
+      Value: 200

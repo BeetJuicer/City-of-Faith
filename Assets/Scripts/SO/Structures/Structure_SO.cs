@@ -34,6 +34,9 @@ public class Structure_SO : ScriptableObject
     public SerializedDictionary<Currency, int> currencyRequired;
 
     [SerializedDictionary]
+    public SerializedDictionary<Currency, int> currencyReturnedOnResell;
+
+    [SerializedDictionary]
     public SerializedDictionary<FoodResource, int> resourcesRequired;
 
     [Tooltip("The resell value must be less than the cost.")]

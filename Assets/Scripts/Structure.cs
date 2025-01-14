@@ -121,7 +121,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         }
 
         uiManager = FindObjectOfType<UIManager>();
-        Debug.Assert(uiManager != null, "Glory Speed Up UI not found!");
+        Debug.Assert(uiManager != null, "UI Manager not assigned!");
     }
 
     /// Called by database to initialize needed values.
@@ -243,8 +243,8 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
 
     public void SellStructure()
     {
-        //resourcemanager.addmoney(price)
-        //destroy self
+        Debug.LogWarning("Use currency returned on resell instead of required!!");
+        ResourceManager.Instance.AdjustPlayerCurrency(structure_so.currencyRequired);
     }
 
 }

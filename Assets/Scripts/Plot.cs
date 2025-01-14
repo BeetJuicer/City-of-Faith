@@ -22,7 +22,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     //TODO: Temporary serialize field for debugging
     [SerializeField] Crop_SO tempCropSO;
 
-    private GameObject cropSelectionUI;
+    private GameObject cropSelectionUI; 
     private CropVisual cropVisual;
     private CropImageDisplay cropImageDisplay;
     private Crop_SO crop_SO;
@@ -257,6 +257,8 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     {
         OnObjectClicked();
     }
+
+
 
     public void ClaimHarvest()
     {
