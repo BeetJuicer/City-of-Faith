@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2981764167348935775
 Transform:
@@ -60,7 +60,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &7634484527447349428
 Transform:
@@ -116,7 +116,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6556749427679354745
 Transform:
@@ -221,6 +221,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -244,6 +249,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -369,6 +379,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -392,6 +407,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -517,6 +537,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -590,6 +615,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -665,6 +695,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -738,6 +773,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -813,6 +853,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -836,6 +881,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -911,6 +961,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap2 (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -984,6 +1039,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -1109,6 +1169,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1132,6 +1197,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -1257,6 +1327,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1331,6 +1406,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1354,6 +1434,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -1479,6 +1564,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1502,6 +1592,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -1576,6 +1671,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -1701,6 +1801,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1775,6 +1880,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1798,6 +1908,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -1873,6 +1988,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap2 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1946,6 +2066,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -2021,6 +2146,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap2
       objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2094,6 +2224,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -2169,6 +2304,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap2 (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2243,6 +2383,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap2 (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2316,6 +2461,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -2441,6 +2591,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2514,6 +2669,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2589,6 +2749,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2612,6 +2777,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -2686,6 +2856,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -2811,6 +2986,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2834,6 +3014,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -2959,6 +3144,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3033,6 +3223,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3056,6 +3251,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -3130,6 +3330,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -3255,6 +3460,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3278,6 +3488,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -3403,6 +3618,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3476,6 +3696,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3551,6 +3776,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3624,6 +3854,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3699,6 +3934,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grap
       objectReference: {fileID: 0}
+    - target: {fileID: 7609603476449789342, guid: 30aac480450c87d49adb624a69c459c3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3722,6 +3962,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}
@@ -3796,6 +4041,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grap2 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068548485391432094, guid: cfc1f2c58f98ac4489f7b27b508f16db,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8457363274522395146, guid: cfc1f2c58f98ac4489f7b27b508f16db,
         type: 3}

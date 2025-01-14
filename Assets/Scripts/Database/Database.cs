@@ -268,16 +268,4 @@ public class Database : MonoBehaviour
         db.Delete(recordToDelete);
     }
 
-    public int GetStructureId()
-    {
-        // Example: Assuming Structure_ID is stored in a local or remote database.
-        // You will need to fetch the data here, this is just a placeholder.
-
-        // For testing purposes, let's return a mock value. Replace this with your actual query.
-        int structureId = 0;  // 0 for new player, 1 for old player
-
-        // You should replace the above line with the actual code that gets the player's Structure_ID from the database.
-        return structureId;
-    }
-
 }

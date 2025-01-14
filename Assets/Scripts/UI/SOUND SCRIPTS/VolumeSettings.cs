@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 // Manages audio volume settings for music and sound effects (SFX).
@@ -57,5 +58,11 @@ public class VolumeSettings : MonoBehaviour
         // Apply loaded settings
         SetMusicVolume();
         SetSFXVolume();
+    }
+
+    public void muteVolume()
+    {
+        myMixer.SetFloat("music", Mathf.Log10(0) * 20);
+        myMixer.SetFloat("SFX", Mathf.Log10(0) * 20);
     }
 }

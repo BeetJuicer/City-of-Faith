@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &5179024105325488503
 Transform:
@@ -54,7 +54,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3369665354219523088
 Transform:
@@ -95,7 +95,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6692224430200744033
 Transform:
@@ -189,6 +189,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: beet (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -262,6 +267,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: beet (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -337,6 +347,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: beet (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -410,6 +425,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: beet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -485,6 +505,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: beet
       objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -558,6 +583,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: beet (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -633,6 +663,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: beet (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -706,6 +741,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: beet (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -781,6 +821,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: beet (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -854,6 +899,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: beet (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -929,6 +979,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: beet (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1002,6 +1057,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: beet (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1077,6 +1137,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: beet (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1150,6 +1215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: beet (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1225,6 +1295,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: beet (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1298,6 +1373,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: beet (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1373,6 +1453,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: beet (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1446,6 +1531,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: beet (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506960738215581151, guid: 4d39c15f0e689b74da7a4065f8a3b7ac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

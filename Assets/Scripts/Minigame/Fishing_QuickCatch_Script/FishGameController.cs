@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Threading;
 
 public class FishGameController : MonoBehaviour
 {
@@ -37,6 +38,10 @@ public class FishGameController : MonoBehaviour
     private ResourceManager resourceManager;   // Reference to ResourceManager
     private CentralHall centralHall;           // Reference to CentralHall
 
+    [SerializeField] private GameObject HUDCanvas;
+    [SerializeField] private Camera MainCamera3d;
+    [SerializeField] private GameObject fishingScene;
+
     void Awake()
     {
         // Singleton pattern
@@ -59,8 +64,13 @@ public class FishGameController : MonoBehaviour
         }
     }
 
-    void Start()
+    void OnEnable()
     {
+        if (isGameOver)
+        {
+            ResetGameState();
+        }
+
         // Initialize variables and set up game
         mainCamera = Camera.main;
         timeLeft = gameTime;
@@ -77,7 +87,27 @@ public class FishGameController : MonoBehaviour
 
         // Update score display
         UpdateScoreText();
+
     }
+
+    private void ResetGameState()
+    {
+        isGameOver = false;               // Reset the game over flag
+        timeLeft = gameTime;              // Reset the timer
+        score = 0;                        // Reset the score
+        goldReward = 0;                   // Reset gold reward
+        expReward = 0;                    // Reset experience points
+
+        // Reset UI elements
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false); // Hide the game over panel
+        UpdateScoreText();                  // Reset score text
+        UpdateTimerText();                  // Reset timer text
+
+        // Re-enable gameplay-related objects if necessary
+        fishingScene.SetActive(true);
+    }
+
 
     void Update()
     {
@@ -213,10 +243,10 @@ public class FishGameController : MonoBehaviour
             Debug.LogError("CentralHall is null!");
         }
 
-        // Show exit button and assign the event listener
-        exitButton.gameObject.SetActive(true);
-        exitButton.onClick.RemoveAllListeners();  // Clear existing listeners to prevent duplicates
-        exitButton.onClick.AddListener(ExitToMainScene);
+        //// Show exit button and assign the event listener
+        //exitButton.gameObject.SetActive(true);
+        //exitButton.onClick.RemoveAllListeners();
+        //exitButton.onClick.AddListener(ExitToMainScene);
 
         // Pause the game
         Time.timeScale = 0f;
@@ -271,27 +301,12 @@ public class FishGameController : MonoBehaviour
 
     public void ExitToMainScene()
     {
-        // Save the rewards to a static class or PlayerPrefs
-        PlayerPrefs.SetInt("GoldEarned", goldReward);
-        PlayerPrefs.SetInt("ExpEarned", expReward);
-        PlayerPrefs.SetInt("MinigameCompleted", 1); // 1 means completed
-        PlayerPrefs.SetString("MinigameName", "Quick Catch"); // Save the mini-game name
-
-        Debug.Log("Resetting Time Scale and Exiting Game");
         Time.timeScale = 1f;
+        fishingScene.SetActive(false);
+        HUDCanvas.SetActive(true);
+        MainCamera3d.gameObject.SetActive(true);
 
-        string targetScene = "VanericWorld";
-
-        // Check if the scene is available in Build Settings
-        if (Application.CanStreamedLevelBeLoaded(targetScene))
-        {
-            Debug.Log($"Loading scene: {targetScene}");
-            UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
-        }
-        else
-        {
-            Debug.LogError($"Scene '{targetScene}' not found in Build Settings. Please add it.");
-        }
+        Debug.Log("Exiting mini-game and saving rewards.");
     }
 
 }

@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4252190413029676843
 Transform:
@@ -60,7 +60,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &554085066489550820
 Transform:
@@ -116,7 +116,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6634405963350064244
 Transform:
@@ -221,6 +221,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -294,6 +299,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -369,6 +379,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -442,6 +457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -517,6 +537,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -590,6 +615,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -665,6 +695,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -738,6 +773,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -813,6 +853,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -886,6 +931,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -961,6 +1011,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1034,6 +1089,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1109,6 +1169,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1182,6 +1247,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1257,6 +1327,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1330,6 +1405,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1405,6 +1485,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1478,6 +1563,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1553,6 +1643,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1626,6 +1721,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1701,6 +1801,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1774,6 +1879,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1849,6 +1959,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1922,6 +2037,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1997,6 +2117,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2070,6 +2195,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2145,6 +2275,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2218,6 +2353,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2293,6 +2433,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2366,6 +2511,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2441,6 +2591,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2514,6 +2669,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2589,6 +2749,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2662,6 +2827,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2737,6 +2907,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2810,6 +2985,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2885,6 +3065,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2958,6 +3143,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3033,6 +3223,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3106,6 +3301,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3181,6 +3381,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3254,6 +3459,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3329,6 +3539,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3402,6 +3617,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3477,6 +3697,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat1 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3550,6 +3775,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3625,6 +3855,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3698,6 +3933,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat2 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3773,6 +4013,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheat2 (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 7172788349690322858, guid: 527b987a6b2dd4f4b89fae65945b11bd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3846,6 +4091,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wheat1 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741476911223934438, guid: efffbcf04a722bf4aa0cea1512ed4baf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

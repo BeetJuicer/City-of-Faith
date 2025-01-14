@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2129631210042915166
 Transform:
@@ -61,7 +61,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6416087491569472112
 Transform:
@@ -106,7 +106,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &3069916445482480743
 Transform:
@@ -149,6 +149,10 @@ PrefabInstance:
     - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_Name
       value: Turnip_Fruit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -213,6 +217,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Plant (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.13
@@ -275,6 +283,10 @@ PrefabInstance:
     - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_Name
       value: Turnip_Fruit (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -339,6 +351,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Plant (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.13
@@ -401,6 +417,10 @@ PrefabInstance:
     - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_Name
       value: Turnip_Plant (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
@@ -465,6 +485,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Fruit (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.43
@@ -527,6 +551,10 @@ PrefabInstance:
     - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_Name
       value: Turnip_Fruit (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -591,6 +619,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Plant (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.29
@@ -653,6 +685,10 @@ PrefabInstance:
     - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_Name
       value: Turnip_Fruit (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -717,6 +753,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Fruit (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.68
@@ -779,6 +819,10 @@ PrefabInstance:
     - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_Name
       value: Turnip_Fruit (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -843,6 +887,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Fruit (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.14
@@ -905,6 +953,10 @@ PrefabInstance:
     - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_Name
       value: Turnip_Plant (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
@@ -969,6 +1021,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Plant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.13
@@ -1031,6 +1087,10 @@ PrefabInstance:
     - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_Name
       value: Turnip_Fruit (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1095,6 +1155,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Plant (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.36
@@ -1157,6 +1221,10 @@ PrefabInstance:
     - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_Name
       value: Turnip_Plant (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1221,6 +1289,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Fruit (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.68
@@ -1283,6 +1355,10 @@ PrefabInstance:
     - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_Name
       value: Turnip_Fruit (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1347,6 +1423,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Fruit (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.68
@@ -1409,6 +1489,10 @@ PrefabInstance:
     - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_Name
       value: Turnip_Plant (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1473,6 +1557,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Plant
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.83
@@ -1535,6 +1623,10 @@ PrefabInstance:
     - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_Name
       value: Turnip_Fruit (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1599,6 +1691,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Plant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.36
@@ -1661,6 +1757,10 @@ PrefabInstance:
     - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_Name
       value: Turnip_Fruit (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1725,6 +1825,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Plant (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.29
@@ -1787,6 +1891,10 @@ PrefabInstance:
     - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_Name
       value: Turnip_Plant (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1851,6 +1959,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Plant (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.83
@@ -1914,6 +2026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnip_Fruit (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011853396770, guid: becd827951d0b4046808ba97418ecf28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013812120868, guid: becd827951d0b4046808ba97418ecf28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.43
@@ -1976,6 +2092,10 @@ PrefabInstance:
     - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_Name
       value: Turnip_Plant (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013676697600, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4000013084491326, guid: 61b0f6b970bd324438f2ffc56c6ddf14, type: 3}
       propertyPath: m_LocalPosition.x
