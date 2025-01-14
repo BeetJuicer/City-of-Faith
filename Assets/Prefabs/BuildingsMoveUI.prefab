@@ -969,6 +969,7 @@ MonoBehaviour:
   offset: {x: 13.5, y: -2.11, z: -5.04}
   buildingOverlay: {fileID: 0}
   buildingMoveUI: {fileID: 7870754934766674068}
+  HUDCanvas: {fileID: 0}
   dialogue: {fileID: 0}
 --- !u!1 &8224788223399660115
 GameObject:
