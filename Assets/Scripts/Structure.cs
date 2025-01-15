@@ -171,7 +171,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     [Button]
     private void DestroyStructure()
     {
-        print("TODO: Sold structure! Add resources returned to resourcemanage");
+        ResourceManager.Instance.AdjustPlayerCurrency(structure_so.currencyRequired);
         db.DeleteRecord(structureData);
         Destroy(gameObject);
     }
@@ -239,12 +239,6 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     public void BoostProgress()
     {
         TimeBuildFinished = DateTime.Now;
-    }
-
-    public void SellStructure()
-    {
-        Debug.LogWarning("Use currency returned on resell instead of required!!");
-        ResourceManager.Instance.AdjustPlayerCurrency(structure_so.currencyRequired);
     }
 
 }
