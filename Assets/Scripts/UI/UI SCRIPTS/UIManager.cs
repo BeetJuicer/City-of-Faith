@@ -165,11 +165,7 @@ public class UIManager : MonoBehaviour
     {
         if (structure != null)
         {
-            // Implement your selling logic here, e.g., award gold or resources
-
-            Debug.Log($"Sold structure: {structure.GetStructureSO().name}");
-            // Optional: Destroy the structure GameObject if necessary
-            Destroy(structure.gameObject);
+            structure.GetComponent<Structure>().DestroyStructure();
         }
         else
         {

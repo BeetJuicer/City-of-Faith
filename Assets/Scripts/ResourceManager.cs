@@ -132,6 +132,7 @@ public class ResourceManager : MonoBehaviour
         if (newValue < 0)
             Debug.LogError("Negative Currency detected!!");
 
+        print($"Oncurrencyupdated is invoked with newValue: {newValue}, oldValue is:  {playerCurrencies[type]}");
         playerCurrencies[type] = newValue;
         currencyData[type].amount = newValue;
 

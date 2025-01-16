@@ -169,7 +169,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     }
 
     [Button]
-    private void DestroyStructure()
+    public void DestroyStructure()
     {
         ResourceManager.Instance.AdjustPlayerCurrency(structure_so.currencyRequired);
         db.DeleteRecord(structureData);

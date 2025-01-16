@@ -9,24 +9,9 @@ public class ResourcesBarUI : MonoBehaviour
     [SerializeField] private TMP_Text goldText; // Reference to a UI Text component for gold
     [SerializeField] private TMP_Text gloryText; // Reference to a UI Text component for glory
 
-    private ResourceManager resourceManager;
-
     private void Start()
     {
-        // Assuming ResourceManager is a singleton or accessible in the scene
-        resourceManager = FindObjectOfType<ResourceManager>();
-        if (resourceManager == null)
-        {
-            Debug.Log("ResourceManager not found in the scene.");
-        }
-        Debug.Log("ResourceManagerFound");
-        UpdateResourcesUI();
-    }
-
-
-    public void UpdateResourcesUI()
-    {
-        Debug.Log("UpdateResourcesUI activated");
+        ResourceManager resourceManager = ResourceManager.Instance;
 
         if (resourceManager != null)
         {
@@ -51,6 +36,28 @@ public class ResourcesBarUI : MonoBehaviour
         {
             Debug.LogWarning("ResourceManager is not set.");
         }
+    }
+
+    private void OnEnable()
+    {
+        ResourceManager.Instance.OnCurrencyUpdated += ResourceManager_OnCurrencyUpdated;
+    }
+
+    private void OnDisable()
+    {
+        ResourceManager.Instance.OnCurrencyUpdated -= ResourceManager_OnCurrencyUpdated;
+    }
+
+    private void ResourceManager_OnCurrencyUpdated(Currency type, int amount)
+    {
+        print($"Should be setting UI to {amount}.");
+
+        if (type == Currency.Gold)
+            goldText.text = amount.ToString();
+        else if (type == Currency.Glory)
+            gloryText.text = amount.ToString();
+        else
+            Debug.LogWarning("Currency type not handled by resources UI!");
     }
 
 }
