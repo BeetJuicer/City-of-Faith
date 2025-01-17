@@ -1,29 +1,67 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
-// Manages background music and sound effects (SFX) for the game.
-// Allows for easy playback of background music and one-shot sound effects.
+using UnityEngine.Audio;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
-    [Header("---------- Audio Source --------")]
-    [SerializeField] AudioSource musicSource; // Audio source for playing background music
-    [SerializeField] AudioSource SFXSource;   // Audio source for playing sound effects
+    public static AudioManager Instance;
+    public Sound[] musicSounds, sfxSounds;
+    public AudioSource musicSource, sfxSource;
 
-    [Header("---------- Audio Clip --------")]
-    public AudioClip background; // Background music clip
-    public AudioClip start;      // Start sound effect clip
-
-    // Initializes the AudioManager by starting the background music.
-    private void Start()
+    private void Awake()
     {
-        musicSource.clip = background; // Assigns the background music to the music source
-        musicSource.Play();            // Starts playing the background music
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Plays a sound effect using the SFX audio source.
- 
-    public void PlaySFX(AudioClip clip)
+    private void Start()
     {
-        SFXSource.PlayOneShot(clip); // Plays the sound effect without interrupting others
+        PlayMusic("Theme");
+    }
+
+    public void PlayMusic(string name)
+    {
+        Sound s = Array.Find(musicSounds, x => x.name == name);
+        if (s == null)
+        {
+            Debug.Log("Sound Not Found");
+        }
+        else
+        {
+            musicSource.clip = s.clip;
+            musicSource.Play();
+        }
+    }
+
+    public void PlaySFX(string name)
+    {
+        Sound s = Array.Find(sfxSounds, x => x.name == name);
+        if (s == null)
+        {
+            Debug.Log("Sound Not Found");
+        }
+        else
+        {
+            sfxSource.PlayOneShot(s.clip);
+        }
+    }
+
+    public void MusicVolume(float volume)
+    {
+        musicSource.volume = volume;
+    }
+
+    public void SFXVolume(float volume)
+    {
+        sfxSource.volume = volume;
     }
 }
