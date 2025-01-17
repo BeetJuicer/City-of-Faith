@@ -8,6 +8,7 @@ public class OpenCropTween : MonoBehaviour
 
     public void OnEnable()
     {
+        AudioManager.Instance.PlaySFX("Canvas");
         LeanTween.reset();
         CropShop.transform.localScale = Vector3.zero;
         LeanTween.scale(CropShop, Vector3.one, 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
@@ -20,6 +21,7 @@ public class OpenCropTween : MonoBehaviour
 
     void OnComplete()
     {
+        AudioManager.Instance.PlaySFX("Canvas");
         gameObject.SetActive(false);
     }
 }
