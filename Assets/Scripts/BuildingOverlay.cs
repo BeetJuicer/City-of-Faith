@@ -157,8 +157,6 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
                 ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
             }
 
-            //Add xp.
-            centralHall.AddToCentralExp(structure_SO.expGivenOnBuild);
 
             Debug.Log("Instantiate building end reached.");
             OnStructureBuilt?.Invoke(spawnPos, newBuilding.GetComponent<Structure>());

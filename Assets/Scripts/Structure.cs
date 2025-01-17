@@ -56,6 +56,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     private UIManager uiManager;
 
     public event Action OnStructureInProgressClicked;
+    CentralHall centralHall;
 
     private void Awake()
     {
@@ -127,6 +128,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
 
         uiManager = FindObjectOfType<UIManager>();
         Debug.Assert(uiManager != null, "UI Manager not assigned!");
+        centralHall = FindObjectOfType<CentralHall>();
     }
 
     /// Called by database to initialize needed values.
@@ -183,6 +185,9 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
 
     private void EnterBuiltState()
     {
+
+        //Add xp.
+        centralHall.AddToCentralExp(structure_so.expGivenOnBuild);
         // -- Visual Changes
         //TODO: VFX: Add vfx from object pool here.
         inProgressVisual.SetActive(false);
