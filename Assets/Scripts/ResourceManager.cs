@@ -92,10 +92,12 @@ public class ResourceManager : MonoBehaviour
         if (currencyData.Count <= 0)
         {
             InitializeDefaultCurrencyAndData();
+            print("Initializing default currency");
         }
         else
         {
             // Load player currencies from data.
+            print("Initializing old player currency");
             PlayerCurrencies = currencyData.ToDictionary(pair => pair.Key, pair => pair.Value.amount);
         }
 

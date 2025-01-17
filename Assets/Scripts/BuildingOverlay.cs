@@ -123,7 +123,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             return;
         }
 
-        if (ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
+        if (!ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
         {
             Debug.LogError("Building overlay activated but player does not have enough money!");
             ExitBuildMode();

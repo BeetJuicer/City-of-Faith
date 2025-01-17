@@ -231,6 +231,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
             case PlotState.EMPTY:
                 {
                     cropManager.OpenCropSelection(this);
+                    print("Empty plot clicked." + "Opening crop selection");
                     break;
                 }
             case PlotState.GROWING:

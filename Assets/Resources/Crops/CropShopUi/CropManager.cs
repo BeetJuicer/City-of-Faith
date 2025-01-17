@@ -53,7 +53,7 @@ public class CropManager : MonoBehaviour
             var card = Instantiate(cropCardTemplate, transform.position, Quaternion.identity, csContent.transform);
             card.GetComponent<CropShopTemplate>().Init(cropItemsSO, this, isLocked: true);
             card.SetActive(true);
-            Debug.Log("Unlocked card instantiated and initialized.");
+           // Debug.Log("Unlocked card instantiated and initialized.");
         }
 
         foreach (var cropItemsSO in lockedCrops)
@@ -61,7 +61,7 @@ public class CropManager : MonoBehaviour
             var card = Instantiate(cropCardTemplate, transform.position, Quaternion.identity, csContent.transform);
             card.GetComponent<CropShopTemplate>().Init(cropItemsSO, this, isLocked: false);
             card.SetActive(true);
-            Debug.Log("Unlocked card instantiated and initialized.");
+           // Debug.Log("Unlocked card instantiated and initialized.");
         }
     }
 

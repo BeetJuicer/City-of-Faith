@@ -29,7 +29,7 @@ public class ResourcesBarUI : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("PlayerCurrencies dictionary does not contain Gold or Glory keys.");
+                Debug.LogError("PlayerCurrencies dictionary does not contain Gold or Glory keys.");
             }
         }
         else

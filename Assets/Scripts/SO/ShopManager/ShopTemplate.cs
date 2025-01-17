@@ -28,7 +28,7 @@ public class ShopTemplate : MonoBehaviour
         itemImg.sprite = so.displayImage;
 
         lockedOverlay.SetActive(!isLocked);
-        Debug.Log($"Setting lock overlay for {so.structureName} to {!isLocked}");
+        //Debug.Log($"Setting lock overlay for {so.structureName} to {!isLocked}");
 
         GetComponent<Button>().interactable = isLocked;
 
