@@ -28,7 +28,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
 
     private CentralHall centralHall;
 
-    private GameObject[] objectsInRangeForDebug;
+    //private List<GameObject> objectsInRangeForDebug = new();
 
     private void Start()
     {
@@ -69,7 +69,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             return;
 
         collidersInRange++;
-        print($"Detected collider. Num: {collidersInRange} Name: {other.gameObject.name}");
+        //objectsInRangeForDebug.Add(other.gameObject);
     }
 
     private void OnTriggerExit(Collider other)
@@ -79,7 +79,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             return;
 
         collidersInRange--;
-        print($"Exited collider. Num: {collidersInRange} Name: {other.gameObject.name}");
+        //objectsInRangeForDebug.Remove(other.gameObject);
         Debug.Assert(collidersInRange >= 0, "Negative count of colliders. Something is wrong.");
     }
 
@@ -119,18 +119,21 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         {
 
             Debug.LogWarning("Attempted to instantiate building while not in build mode.");
+            ExitBuildMode();
             return;
         }
 
         if (ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
         {
             Debug.LogError("Building overlay activated but player does not have enough money!");
+            ExitBuildMode();
             return;
         }
 
         if (collidersInRange > 0)
         {
             print("Not allowed! Deactivate the UI button for user's confirmation if not allowed");
+            ExitBuildMode();
             return;
         }
 
