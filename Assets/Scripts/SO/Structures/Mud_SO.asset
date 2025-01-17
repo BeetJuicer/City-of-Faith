@@ -16,7 +16,7 @@ MonoBehaviour:
   description: A very rare mud to plant.
   structurePrefab: {fileID: 8209775890509911002, guid: a544fd93dc2b53d4c99adc9db5a193a2,
     type: 3}
-  displayImage: {fileID: 0}
+  displayImage: {fileID: 21300000, guid: 7591f1ce291a1f244b314bedaa9a2cbd, type: 3}
   structurePrefabName: 
   minigameSceneName: 
   Category: 1
@@ -27,6 +27,8 @@ MonoBehaviour:
     _serializedList:
     - Key: 1
       Value: 500
+  currencyReturnedOnResell:
+    _serializedList: []
   resourcesRequired:
     _serializedList: []
   resourcesReturnedOnResell:
