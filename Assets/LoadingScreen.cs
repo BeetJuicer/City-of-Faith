@@ -10,6 +10,7 @@ public class LoadingScreen : MonoBehaviour
     public GameObject cutsceneCanvas; // Reference to the GameObject containing the CutSceneCanvas
     public int targetSceneId;         // Scene to load after the cutscene
     public Database database;         // Reference to your Database script
+    public GameObject StartMenuScene;
 
     private VideoPlayer videoPlayer;
     private bool videoFinished = false;
@@ -84,6 +85,7 @@ public class LoadingScreen : MonoBehaviour
 
     private void PlayCutsceneAndLoadScene(Action onCutsceneComplete = null)
     {
+        StartMenuScene.SetActive(false);
         if (videoPlayer != null)
         {
             cutsceneCanvas.SetActive(true); // Show the cutscene GameObject
