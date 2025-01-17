@@ -9396,6 +9396,7 @@ GameObject:
   - component: {fileID: 2133474453831438340}
   - component: {fileID: 8572721372643339286}
   - component: {fileID: 4054683227019183646}
+  - component: {fileID: 1207707305707006296}
   m_Layer: 0
   m_Name: MainUIManager
   m_TagString: Untagged
@@ -9492,6 +9493,23 @@ MonoBehaviour:
   cropCardTemplate: {fileID: 1259366436064692955, guid: 1fb86e2bcff856341bf15f6a0c8ea105,
     type: 3}
   csContent: {fileID: 4379782784772322215}
+--- !u!114 &1207707305707006296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414958015767199397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee43fa965ac17949b70033280a0f059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropShopUI: {fileID: 987014409936514559}
+  centralhall: {fileID: 0}
+  cropCardTemplate: {fileID: 1259366436064692955, guid: 1fb86e2bcff856341bf15f6a0c8ea105,
+    type: 3}
+  csContent: {fileID: 0}
 --- !u!1 &7485855223154349903
 GameObject:
   m_ObjectHideFlags: 0
