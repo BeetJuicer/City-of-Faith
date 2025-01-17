@@ -306,13 +306,13 @@ public class Dialogue : MonoBehaviour
 
     public void OnShopItemClicked()
     {
-        Debug.Log("On Shop item clicked is working");
+        //Debug.Log("On Shop item clicked is working");
         if (isItemClickComplete)
         {
-            Debug.Log("tutorial done");
+            //Debug.Log("tutorial done");
             return;
         }
-        Debug.Log("arrow false item click");
+        //Debug.Log("arrow false item click");
         arrow.gameObject.SetActive(false);
         section1Step = TutorialSection1Steps.NPCDialogue3;
         HandleTutorialSteps();
