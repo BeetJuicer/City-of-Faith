@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Palm Tree_SO
   m_EditorClassIdentifier: 
   structureName: Palm Tree
-  description: chuchuchuchu
+  description: Commonly found in tropical and subtropical regions, it symbolizes
+    relaxation and exotic landscapes.
   structurePrefab: {fileID: 8800199060111772814, guid: d39e7bce0e5c4914284f2f56820d781b,
     type: 3}
-  displayImage: {fileID: 0}
+  displayImage: {fileID: 21300000, guid: 3d78cf717696d05438b8fdcd6ab893db, type: 3}
   structurePrefabName: 
   minigameSceneName: 
   Category: 1
@@ -27,11 +28,13 @@ MonoBehaviour:
     _serializedList:
     - Key: 1
       Value: 300
+  currencyReturnedOnResell:
+    _serializedList: []
   resourcesRequired:
     _serializedList: []
   resourcesReturnedOnResell:
     _serializedList: []
   BuildDays: 0
   BuildHours: 0
-  BuildMinutes: 0
+  BuildMinutes: 3
   BuildSeconds: 0

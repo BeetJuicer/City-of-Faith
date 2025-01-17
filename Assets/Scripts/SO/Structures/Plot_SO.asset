@@ -16,7 +16,10 @@ MonoBehaviour:
   description: A plot of land. Used to grow crops for food.
   structurePrefab: {fileID: 8699902465094047844, guid: 100599859de4086449a983c8f164fef7,
     type: 3}
-  displayImage: {fileID: 0}
+  displayImage: {fileID: 21300000, guid: afec2b736d382cb41bb680bfdd26f858, type: 3}
+  structurePrefabName: 
+  minigameSceneName: 
+  Category: 0
   expGivenOnBuild: 0
   townHallLevelRequirement: 0
   numberOfCitizensAdded: 0
@@ -24,6 +27,8 @@ MonoBehaviour:
     _serializedList:
     - Key: 1
       Value: 120
+  currencyReturnedOnResell:
+    _serializedList: []
   resourcesRequired:
     _serializedList:
     - Key: 0
