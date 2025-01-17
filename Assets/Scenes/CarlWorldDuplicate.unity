@@ -711,6 +711,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1084070077769703329, guid: 9897d7d59748e6f40be724c9694f5a95,
+        type: 3}
+      propertyPath: startingPlayerCurrencies._serializedList.Array.data[0].Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1084070077769703329, guid: 9897d7d59748e6f40be724c9694f5a95,
+        type: 3}
+      propertyPath: startingPlayerCurrencies._serializedList.Array.data[1].Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2093132593490892666, guid: 9897d7d59748e6f40be724c9694f5a95,
         type: 3}
       propertyPath: m_Name
@@ -2492,7 +2502,7 @@ PrefabInstance:
     - target: {fileID: 7014676771989128693, guid: dc982e2ba541219489aa4da781647ae7,
         type: 3}
       propertyPath: username
-      value: NewPlayer1
+      value: testmoney
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
