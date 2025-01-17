@@ -11,13 +11,12 @@ public class LevelUpScreenUnlock : MonoBehaviour
     [SerializeField] private GameObject newTemplate;
     [SerializeField] private GameObject newBContent;
     [SerializeField] private GameObject newCContent;
+    [SerializeField] public GameObject levelUpScreenCanvas;
 
     private CentralHall centralHall;
 
-    private void OnEnable()
+    private void Awake()
     {
-        Debug.Log("LevelUpScreenUnlock enabled.");
-
         // Assign centralHall by finding the CentralHall component in the scene
         centralHall = FindObjectOfType<CentralHall>();
         if (centralHall == null)
@@ -27,8 +26,30 @@ public class LevelUpScreenUnlock : MonoBehaviour
         }
 
         Debug.Log("CentralHall found: " + centralHall.name);
-        LevelScreenFetchNumber(centralHall.Level);
-        PopulateUnlockables(centralHall.Level);
+
+        // Subscribe to the OnPlayerLevelUp event
+        centralHall.OnPlayerLevelUp += HandleLevelUp;
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe from the event to avoid memory leaks
+        if (centralHall != null)
+        {
+            centralHall.OnPlayerLevelUp -= HandleLevelUp;
+        }
+    }
+
+    private void HandleLevelUp(int level)
+    {
+        Debug.Log("HandleLevelUp called with level: " + level);
+
+        // Activate this GameObject
+        levelUpScreenCanvas.SetActive(true);
+
+        // Update the level number and populate unlockables
+        LevelScreenFetchNumber(level);
+        PopulateUnlockables(level);
     }
 
     private void LevelScreenFetchNumber(int level)
