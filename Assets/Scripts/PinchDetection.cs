@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Cinemachine;
 using System.Collections.Generic;
 
 public class PinchToZoomAndPan : MonoBehaviour
 {
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private float zoomSpeed = 0.1f;  // How fast the camera zooms in and out
     [SerializeField] private float panSpeed = 0.5f;   // How fast the camera moves (panning)
     [SerializeField] private float minZoom = 2f;      // Minimum zoom (orthographic size)
@@ -221,7 +223,7 @@ public class PinchToZoomAndPan : MonoBehaviour
                                     - mainCamera.ScreenToWorldPoint(Vector3.zero);
 
             // Apply the movement to the camera position (panning)
-            mainCamera.transform.position -= worldDelta * panSpeed;
+            virtualCamera.transform.position -= worldDelta * panSpeed;
 
             // Update the last known primary finger position
             lastPrimaryFingerPosition = primaryFingerPosition;
@@ -267,20 +269,20 @@ public class PinchToZoomAndPan : MonoBehaviour
             float distanceDelta = currentDistance - previousDistance;
 
             // Adjust the camera's orthographic size based on the pinch movement
-            float newSize = mainCamera.orthographicSize - (distanceDelta * zoomSpeed);
+            float newSize = virtualCamera.m_Lens.OrthographicSize - (distanceDelta * zoomSpeed);
 
             // Clamp the camera zoom to stay within min and max bounds
             newSize = Mathf.Clamp(newSize, minZoom, maxZoom);
 
             // Calculate the zoom factor (how much we're zooming in or out)
-            float zoomFactor = mainCamera.orthographicSize / newSize;
+            float zoomFactor = virtualCamera.m_Lens.OrthographicSize / newSize;
 
             // Move the camera to zoom in toward the pinch center
             Vector3 directionToPinch = pinchWorldPoint - mainCamera.transform.position;
             mainCamera.transform.position += directionToPinch * (1 - 1 / zoomFactor);
 
             // Apply the new orthographic size
-            mainCamera.orthographicSize = newSize;
+            virtualCamera.m_Lens.OrthographicSize = newSize;
 
             // Panning (move the camera based on finger drag)
             Vector2 primaryFingerDelta = primaryFingerPosition - lastPrimaryFingerPosition;
@@ -294,7 +296,7 @@ public class PinchToZoomAndPan : MonoBehaviour
                                  - mainCamera.ScreenToWorldPoint(Vector3.zero);
 
             // Apply the movement to the camera position (panning while zooming)
-            mainCamera.transform.position -= worldDelta * panSpeed;
+            virtualCamera.transform.position -= worldDelta * panSpeed;
 
             // Update previousDistance for the next loop iteration
             previousDistance = currentDistance;
