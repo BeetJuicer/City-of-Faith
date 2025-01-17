@@ -101,10 +101,13 @@ public class CentralHall : MonoBehaviour
 
     public void AddToCentralExp(int value)
     {
+        //83 + 25 : 100
         Exp += value;
+
+        //108 : 100
         if (Exp >= LevelUpExpRequirements[Level])
         {
-            LevelUp(LevelUpExpRequirements[Level] - Exp);
+            LevelUp(Exp - LevelUpExpRequirements[Level]);
         }
     }
 
