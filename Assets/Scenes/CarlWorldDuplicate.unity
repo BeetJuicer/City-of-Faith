@@ -188,10 +188,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208d5ec912173cf42936eae75c985368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicSounds: []
+  sfxSounds: []
   musicSource: {fileID: 1836128613}
-  SFXSource: {fileID: 818739096}
-  background: {fileID: 8300000, guid: 307f3330283dee741935059ab040e4f4, type: 3}
-  start: {fileID: 8300000, guid: 3b5a105e8a4d20d4f912244c21c6bd11, type: 3}
+  sfxSource: {fileID: 0}
 --- !u!4 &293451428
 Transform:
   m_ObjectHideFlags: 0
@@ -2260,7 +2260,7 @@ PrefabInstance:
     - target: {fileID: 7014676771989128693, guid: dc982e2ba541219489aa4da781647ae7,
         type: 3}
       propertyPath: username
-      value: Carl
+      value: ThisShitNew
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11013,9 +11013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdcb94ca6c8fde64ab64ae67f8b8f2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMixer: {fileID: 24100000, guid: afdc989aa1f57dc4bbb4129ec79aa3f0, type: 2}
-  musicSlider: {fileID: 1889734331281219069}
-  SFXSlider: {fileID: 3535132275957502645}
+  _musicSlider: {fileID: 0}
+  _sfxSlider: {fileID: 0}
 --- !u!114 &7269605274640679514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11985,11 +11984,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1193315820842496795, guid: 9e905e6d058bb5746847ae6f0f420eb9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 7877468419587357376, guid: 9e905e6d058bb5746847ae6f0f420eb9,
         type: 3}
       propertyPath: m_LocalPosition.x
