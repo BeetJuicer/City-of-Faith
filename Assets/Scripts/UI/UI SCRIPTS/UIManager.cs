@@ -97,6 +97,14 @@ public class UIManager : MonoBehaviour
         glorySpeedUp.OpenGlorySpeedUpPanel(boostableObject, finishTime, totalDuration);
     }
 
+    private void DisableOnStructureClickButtons()
+    {
+        infoButton.gameObject.SetActive(false);
+        sellButton.gameObject.SetActive(false);
+        miniGameButtonOpen.gameObject.SetActive(false);
+        glorySpeedUp.CloseGlorySpeedUpPanel();
+    }
+
     public void ActivateInfoButton(Structure structure)
     {
         if (structure != null)
@@ -106,6 +114,7 @@ public class UIManager : MonoBehaviour
             infoButton.onClick.AddListener(() =>
             {
                 ShowStructureInfo(structure.GetStructureSO());
+                DisableOnStructureClickButtons();
             });
         }
         else
@@ -128,9 +137,7 @@ public class UIManager : MonoBehaviour
         sellButton.onClick.AddListener(() =>
         {
             SellStructure(structure);
-            // Optionally hide the panel and buttons after selling
-            infoButton.gameObject.SetActive(false);
-            sellButton?.gameObject.SetActive(false);
+            DisableOnStructureClickButtons();
         });
 
     }
@@ -144,6 +151,8 @@ public class UIManager : MonoBehaviour
         miniGameButtonOpen.onClick.RemoveAllListeners();
         miniGameButtonOpen.onClick.AddListener(() =>
         {
+            DisableOnStructureClickButtons();
+
             Debug.Log($"Starting mini game for {structureName}");
             switch (structureName)
             {
@@ -163,6 +172,8 @@ public class UIManager : MonoBehaviour
 
     private void SellStructure(Structure structure)
     {
+        DisableOnStructureClickButtons();
+
         if (structure != null)
         {
             structure.GetComponent<Structure>().DestroyStructure();
