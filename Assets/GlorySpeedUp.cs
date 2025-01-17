@@ -23,7 +23,7 @@ public class GlorySpeedUp : MonoBehaviour
     private void Start()
     {
         button.onClick.AddListener(() => finishTime = DateTime.Now);
-        dialogue.boostBuilding();
+        //dialogue.boostBuilding();
     }
 
     public void OpenGlorySpeedUpPanel(IBoostableObject boostableObject, DateTime finishTime, TimeSpan totalDuration)

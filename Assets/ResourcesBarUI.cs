@@ -36,10 +36,7 @@ public class ResourcesBarUI : MonoBehaviour
         {
             Debug.LogWarning("ResourceManager is not set.");
         }
-    }
 
-    private void OnEnable()
-    {
         ResourceManager.Instance.OnCurrencyUpdated += ResourceManager_OnCurrencyUpdated;
     }
 

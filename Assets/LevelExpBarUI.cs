@@ -10,19 +10,10 @@ public class LevelExpBarUI : MonoBehaviour
     [SerializeField] private Slider expSlider; // Slider for EXP bar
     [SerializeField] private TMP_Text expText; // TMP_Text for displaying EXP progress (optional)
 
-    private CentralHall centralHall;
+    [SerializeField] private CentralHall centralHall;
 
     private void Start()
     {
-        // Assign centralHall by finding the CentralHall component in the scene
-        centralHall = FindObjectOfType<CentralHall>();
-        if (centralHall == null)
-        {
-            Debug.LogError("CentralHall not found in the scene.");
-            return;
-        }
-
-        Debug.Log("CentralHall found.");
         // Subscribe to the OnPlayerLevelUp event
         centralHall.OnPlayerLevelUp += UpdateExpLvUI;
         UpdateExpLvUI(centralHall.Level); // Initialize UI with the current level
