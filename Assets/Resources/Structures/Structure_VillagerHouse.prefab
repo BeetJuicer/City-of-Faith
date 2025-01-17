@@ -268,20 +268,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3455384700655316656}
     m_Modifications:
-    - target: {fileID: 212892785631247488, guid: fdbf7fe3e9e035448acf17ee0e527394,
+    - target: {fileID: -1671667648017583598, guid: fdbf7fe3e9e035448acf17ee0e527394,
         type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: timerUI
+      value: 
+      objectReference: {fileID: 4745617333898309600}
+    - target: {fileID: -1671667648017583598, guid: fdbf7fe3e9e035448acf17ee0e527394,
+        type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 2090333417549677887}
+    - target: {fileID: -1671667648017583598, guid: fdbf7fe3e9e035448acf17ee0e527394,
+        type: 3}
+      propertyPath: progressSlider
+      value: 
+      objectReference: {fileID: 5506001798511925410}
     - target: {fileID: 1407478550073438119, guid: fdbf7fe3e9e035448acf17ee0e527394,
         type: 3}
       propertyPath: m_Name
       value: BuildingTimerUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 1407478550073438119, guid: fdbf7fe3e9e035448acf17ee0e527394,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6624346216037381461, guid: fdbf7fe3e9e035448acf17ee0e527394,
         type: 3}
@@ -336,11 +341,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1407478550073438119, guid: fdbf7fe3e9e035448acf17ee0e527394,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4867492317568536656}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdbf7fe3e9e035448acf17ee0e527394, type: 3}
 --- !u!4 &1081619942167359715 stripped
 Transform:
@@ -360,29 +361,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5144401715610167825 stripped
+--- !u!1 &4745617333898309600 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1407478550073438119, guid: fdbf7fe3e9e035448acf17ee0e527394,
+  m_CorrespondingSourceObject: {fileID: 1528718638011427414, guid: fdbf7fe3e9e035448acf17ee0e527394,
     type: 3}
   m_PrefabInstance: {fileID: 6119486248584299958}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4867492317568536656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5144401715610167825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0e60ebb0ad7ee0438ca040ffeca2fa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  structureData: {fileID: 11400000, guid: c843465539497d74986b0b041463682e, type: 2}
-  progressSlider: {fileID: 5506001798511925410}
-  timerText: {fileID: 2090333417549677887}
-  timerUI: {fileID: 5144401715610167825}
-  structure: {fileID: 0}
 --- !u!114 &5506001798511925410 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1767090165525142804, guid: fdbf7fe3e9e035448acf17ee0e527394,

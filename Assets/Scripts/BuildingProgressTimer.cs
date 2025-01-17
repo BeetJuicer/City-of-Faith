@@ -9,11 +9,11 @@ using static Database;
 
 public class BuildingProgressTimer : MonoBehaviour
 {
-    [SerializeField] private Structure_SO structureData;
+    private Structure_SO structure_SO;
+    private Structure structure;
     [SerializeField] private Slider progressSlider;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private GameObject timerUI;
-    [SerializeField] private Structure structure;
 
 
     private DateTime timeBuildStarted;
@@ -21,6 +21,8 @@ public class BuildingProgressTimer : MonoBehaviour
 
     private void Start()
     {
+        structure = GetComponentInParent<Structure>();
+        structure_SO = structure.structure_so;
         InitializeBuildTimer();
     }
 
@@ -28,10 +30,10 @@ public class BuildingProgressTimer : MonoBehaviour
     {
         timeBuildStarted = DateTime.Now;
         timeBuildFinished = timeBuildStarted
-                            .AddDays(structureData.BuildDays)
-                            .AddHours(structureData.BuildHours)
-                            .AddMinutes(structureData.BuildMinutes)
-                            .AddSeconds(structureData.BuildSeconds);
+                            .AddDays(structure_SO.BuildDays)
+                            .AddHours(structure_SO.BuildHours)
+                            .AddMinutes(structure_SO.BuildMinutes)
+                            .AddSeconds(structure_SO.BuildSeconds);
     }
 
     private void Update()

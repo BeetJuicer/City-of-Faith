@@ -209,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5450535945332030002}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22846031, y: 0.669183, z: -0.669183, w: 0.22846031}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.5105786, y: 0.7377557, z: -6.9935746}
   m_LocalScale: {x: 0.38897136, y: 1.1198812, z: 1.2820277}
   m_ConstrainProportionsScale: 0
@@ -217,7 +217,7 @@ Transform:
   - {fileID: 1918349224666269646}
   - {fileID: 16377007114161782}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -142.3}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3993099719165403781
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -260,6 +260,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1918349224666269646}
     m_Modifications:
+    - target: {fileID: 212892785631247488, guid: fdbf7fe3e9e035448acf17ee0e527394,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1407478550073438119, guid: fdbf7fe3e9e035448acf17ee0e527394,
         type: 3}
       propertyPath: m_Name
@@ -364,6 +369,7 @@ MonoBehaviour:
   progressSlider: {fileID: 144947847178977689}
   timerText: {fileID: 6010494680806317060}
   timerUI: {fileID: 652841765952434986}
+  structure: {fileID: 0}
 --- !u!4 &4713410228931373528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6624346216037381461, guid: fdbf7fe3e9e035448acf17ee0e527394,
