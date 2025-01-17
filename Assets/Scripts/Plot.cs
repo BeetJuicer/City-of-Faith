@@ -66,9 +66,11 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     // Timer
     private float updateTimer;
 
+    CentralHall central;
 
     void Start()
     {
+        central = FindObjectOfType<CentralHall>();
         structure = GetComponent<Structure>();
         cropImageDisplay = GetComponentInChildren<CropImageDisplay>();
         cropSelectionUI = GameObject.FindGameObjectWithTag("CropSelectionUI");//dirty.
@@ -262,7 +264,9 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 
     public void ClaimHarvest()
     {
+        ResourceManager.Instance.AdjustPlayerCurrency(Currency.Gold, crop_SO.amountPerClaim);
         ResourceManager.Instance.AdjustPlayerResources(FoodResource.Plant, crop_SO.amountPerClaim);
+        central.AddToCentralExp(crop_SO.expPerClaim);
 
         //TODO: Possible optimization, use crop pools. May be temporary depending on UI
         Destroy(cropVisualPos.GetChild(0).gameObject);

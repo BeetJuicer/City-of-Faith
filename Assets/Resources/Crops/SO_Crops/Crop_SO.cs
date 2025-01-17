@@ -15,6 +15,7 @@ public class Crop_SO : ScriptableObject
     public GameObject cropPrefab;
 
     public int amountPerClaim;
+    public int expPerClaim;
 
     [Header("Time Needed Per Claim")]
     public int daysToClaim;
