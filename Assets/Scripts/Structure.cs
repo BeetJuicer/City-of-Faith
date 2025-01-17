@@ -48,8 +48,10 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     // In progress and built components
     private GameObject inProgressVisual;
     private GameObject builtVisual;
+    private GameObject timerUI;
     private const string IN_PROGRESS_VISUAL_NAME = "InProgressVisual";
     private const string BUILT_VISUAL_NAME = "BuiltVisual";
+    private const string TIMER_NAME = "BuildingTimerUI";
 
     private UIManager uiManager;
 
@@ -77,9 +79,11 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         // ENTER IN-PROGRESS STATE
         inProgressVisual = transform.Find(IN_PROGRESS_VISUAL_NAME).gameObject;
         builtVisual = transform.Find(BUILT_VISUAL_NAME).gameObject;
+        timerUI = transform.Find(TIMER_NAME).gameObject;
 
         Debug.Assert(inProgressVisual != null, "In Progress Visual not found. If the Visual exists, check the spelling.");
         Debug.Assert(builtVisual != null, "Built Visual not found. If the Visual exists, check the spelling.");
+        Debug.Assert(timerUI != null, "Timer UI not found. If the object exists, check the spelling.");
     }
 
     private void Start()
@@ -182,6 +186,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         // -- Visual Changes
         //TODO: VFX: Add vfx from object pool here.
         inProgressVisual.SetActive(false);
+        timerUI.SetActive(false);
         builtVisual.SetActive(true);
 
         // Exit state.

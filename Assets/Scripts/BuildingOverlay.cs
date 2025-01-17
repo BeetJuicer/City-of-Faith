@@ -13,7 +13,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     private Structure_SO structure_SO;
     private float halfHeight = 0;
 
-    public bool IsAllowedToPlace{
+    public bool IsAllowedToPlace {
         get
         {
             //remove destroyed objects(null references). OnTriggerExit doesn't account for triggered objects so we need to use a list.
