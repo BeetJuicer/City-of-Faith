@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b3b4fee4212c29448dccd273aa1cb51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 0}
   zoomSpeed: 0.1
   panSpeed: 0.75
   minZoom: 10
-  maxZoom: 44
+  maxZoom: 80

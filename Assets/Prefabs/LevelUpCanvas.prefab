@@ -196,7 +196,6 @@ GameObject:
   - component: {fileID: 5249703852210419009}
   - component: {fileID: 6181001362092057540}
   - component: {fileID: 8633728739892471503}
-  - component: {fileID: 5616780742608165650}
   m_Layer: 5
   m_Name: LevelUpCanvas
   m_TagString: Untagged
@@ -308,24 +307,6 @@ MonoBehaviour:
   SoftWheel: {fileID: 7593615082045556523}
   HardWheel: {fileID: 5588961582647507095}
   HUD: {fileID: 0}
---- !u!114 &5616780742608165650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957943621002296379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbac382b04b968040b300c67ad289fda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelSNumber: {fileID: 3055864708500249267}
-  unlockablesSO: {fileID: 11400000, guid: 59874d10a8b84c44fb0861ff919ff32f, type: 2}
-  newTemplate: {fileID: 6864909313829673533, guid: 66e1616157c218547a4c6e83fa6a29b0,
-    type: 3}
-  newBContent: {fileID: 8358332097553211902}
-  newCContent: {fileID: 3665146117293469449}
 --- !u!1 &1220092307917327684
 GameObject:
   m_ObjectHideFlags: 0

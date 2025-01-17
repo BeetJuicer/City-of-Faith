@@ -16,7 +16,7 @@ public class OpenCropTween : MonoBehaviour
 
     public void CloseBox()
     {
-        CropShop.LeanMoveLocalX(Screen.width, 0.5f).setEaseInExpo().setOnComplete(OnComplete);
+        CropShop.LeanMoveLocalX(-Screen.width, 0.5f).setEaseInExpo().setOnComplete(OnComplete);
     }
 
     void OnComplete()
