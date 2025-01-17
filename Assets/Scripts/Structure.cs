@@ -38,6 +38,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         }
     }
 
+    //getcomponentinparent<structure>().TimeBuildFinished
 
     private DateTime timeInstantiated;
     public DateTime TimeBuildFinished { get; private set; }
