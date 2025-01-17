@@ -14,6 +14,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     private float halfHeight = 0;
 
     public bool IsAllowedToPlace { get; private set; } = true;
+    //
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Database db;
 
@@ -26,6 +27,8 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     public bool isInBuildMode;
 
     private CentralHall centralHall;
+
+    private GameObject[] objectsInRangeForDebug;
 
     private void Start()
     {
@@ -66,11 +69,17 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             return;
 
         collidersInRange++;
+        print($"Detected collider. Num: {collidersInRange} Name: {other.gameObject.name}");
     }
 
     private void OnTriggerExit(Collider other)
     {
+        //Counts the number of objects in range. Do not count the ground.
+        if ((whatIsGround & (1 << other.gameObject.layer)) != 0)
+            return;
+
         collidersInRange--;
+        print($"Exited collider. Num: {collidersInRange} Name: {other.gameObject.name}");
         Debug.Assert(collidersInRange >= 0, "Negative count of colliders. Something is wrong.");
     }
 
@@ -78,7 +87,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     {
         if (!isInBuildMode) return;
 
-        print($"{halfHeight} + {transform.position.y}");
+        //print($"{halfHeight} + {transform.position.y}");
 
         int count = structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh.subMeshCount;
         for (int i = 0; i < count; i++)
@@ -108,18 +117,21 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     {
         if (!isInBuildMode)
         {
+
             Debug.LogWarning("Attempted to instantiate building while not in build mode.");
             return;
         }
 
-        if(ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
+        if (ResourceManager.Instance.HasEnoughResources(structure_SO.resourcesRequired))
         {
             Debug.LogError("Building overlay activated but player does not have enough money!");
+            return;
         }
 
-        if(collidersInRange > 0)
+        if (collidersInRange > 0)
         {
             print("Not allowed! Deactivate the UI button for user's confirmation if not allowed");
+            return;
         }
 
         Vector3 spawnPos;

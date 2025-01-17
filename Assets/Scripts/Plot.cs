@@ -22,7 +22,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     //TODO: Temporary serialize field for debugging
     [SerializeField] Crop_SO tempCropSO;
 
-    private GameObject cropSelectionUI; 
+    private CropManager cropManager;
     private CropVisual cropVisual;
     private CropImageDisplay cropImageDisplay;
     private Crop_SO crop_SO;
@@ -73,7 +73,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         central = FindObjectOfType<CentralHall>();
         structure = GetComponent<Structure>();
         cropImageDisplay = GetComponentInChildren<CropImageDisplay>();
-        cropSelectionUI = GameObject.FindGameObjectWithTag("CropSelectionUI");//dirty.
+        cropManager = FindObjectOfType<CropManager>();
         Debug.Assert(cropImageDisplay != null, "Cannot find crop image display in children!");
 
         if (plotData == null)
@@ -230,7 +230,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
                 }
             case PlotState.EMPTY:
                 {
-                    cropSelectionUI.GetComponent<CropManager>().OpenCropSelection(this);
+                    cropManager.OpenCropSelection(this);
                     break;
                 }
             case PlotState.GROWING:
