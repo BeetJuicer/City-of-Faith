@@ -82,7 +82,7 @@ public class ShopManager : MonoBehaviour
     public void PurchaseItem(Structure_SO so)
     {
         ShopManagerUi.SetActive(false);
-        dialogue.OnShopItemClicked();
+        //dialogue.OnShopItemClicked();
         buildingOverlay.EnterBuildMode(so);
         moveUI.OpenMoveUI();
     }

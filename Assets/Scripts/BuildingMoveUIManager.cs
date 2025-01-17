@@ -45,7 +45,7 @@ public class BuildingMoveUIManager : MonoBehaviour
 
     public void ConfirmBuildingPlacement()
     {
-        dialogue.PlaceBuilding();
+        //dialogue.PlaceBuilding();
         HUDCanvas.SetActive(true);
         buildingMoveUI.SetActive(false);
         buildingOverlay.InstantiateBuilding();
