@@ -13,13 +13,21 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     private Structure_SO structure_SO;
     private float halfHeight = 0;
 
-    public bool IsAllowedToPlace { get; private set; } = true;
-    //
+    public bool IsAllowedToPlace{
+        get
+        {
+            //remove destroyed objects(null references). OnTriggerExit doesn't account for triggered objects so we need to use a list.
+            objectsInRange.RemoveAll(obj => obj == null);
+
+            return objectsInRange.Count == 0;
+        }
+        private set => IsAllowedToPlace = value;
+    }
+
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Database db;
 
     [SerializeField] private Material buildPreviewMaterial;
-    private int collidersInRange;
     [SerializeField] private int incrementalMovementUnits = 1;
 
     [SerializeField] private GameObject overlayPlane;
@@ -28,7 +36,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
 
     private CentralHall centralHall;
 
-    //private List<GameObject> objectsInRangeForDebug = new();
+    private List<GameObject> objectsInRange = new();
 
     private void Start()
     {
@@ -38,6 +46,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     public void EnterBuildMode(Structure_SO structure_SO)
     {
         if (isInBuildMode) return;
+
 
         isInBuildMode = true;
 
@@ -58,8 +67,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     private void Update()
     {
         if (!isInBuildMode) return;
-        //green red visual TODO: isOnground
-        overlayPlane.GetComponent<MeshRenderer>().material.color = (collidersInRange == 0) ? Color.green : Color.red;
+        overlayPlane.GetComponent<MeshRenderer>().material.color = (IsAllowedToPlace) ? Color.green : Color.red;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -68,8 +76,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         if ((whatIsGround & (1 << other.gameObject.layer)) != 0)
             return;
 
-        collidersInRange++;
-        //objectsInRangeForDebug.Add(other.gameObject);
+        objectsInRange.Add(other.gameObject);
     }
 
     private void OnTriggerExit(Collider other)
@@ -78,9 +85,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         if ((whatIsGround & (1 << other.gameObject.layer)) != 0)
             return;
 
-        collidersInRange--;
-        //objectsInRangeForDebug.Remove(other.gameObject);
-        Debug.Assert(collidersInRange >= 0, "Negative count of colliders. Something is wrong.");
+        objectsInRange.Remove(other.gameObject);
     }
 
     private void OnRenderObject()
@@ -117,7 +122,6 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     {
         if (!isInBuildMode)
         {
-
             Debug.LogWarning("Attempted to instantiate building while not in build mode.");
             ExitBuildMode();
             return;
@@ -130,7 +134,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             return;
         }
 
-        if (collidersInRange > 0)
+        if (!IsAllowedToPlace)
         {
             print("Not allowed! Deactivate the UI button for user's confirmation if not allowed");
             ExitBuildMode();
@@ -140,14 +144,14 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         Vector3 spawnPos;
         //TODO: currently it's only shooting a ray when we hit instantiate building. Have the ray part of the checking for IsAllowedToBuild
         Ray ray = new Ray(transform.position, Vector3.down);
-        if(Physics.Raycast(ray, out RaycastHit hitInfo, 10f, whatIsGround))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 10f, whatIsGround))
         {
             float groundHeight = hitInfo.point.y;
             spawnPos = new Vector3(transform.position.x, groundHeight + halfHeight, transform.position.z);
 
             var newBuilding = Instantiate(structure_SO.structurePrefab, spawnPos, transform.rotation);
 
-                    //Subtract currency
+            //Subtract currency
             foreach (KeyValuePair<Currency, int> currencyCost in structure_SO.currencyRequired)
             {
                 ResourceManager.Instance.AdjustPlayerCurrency(currencyCost.Key, -currencyCost.Value);
