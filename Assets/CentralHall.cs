@@ -73,6 +73,8 @@ public class CentralHall : MonoBehaviour
     public void LoadData(Database.CentralData data)
     {
         this.centralData = data;
+        Level = data.level;
+        Exp = data.exp;
     }
 
     private void LoadDatabaseOrDefault()

@@ -31,6 +31,7 @@ public class ResourceManager : MonoBehaviour
     private Dictionary<Currency, Database.CurrencyData> currencyData = null;
 
     public event Action<Currency, int> OnCurrencyUpdated;
+    public event Action OnCurrencyLoaded;
 
     // serialize for now for debug purposes.
     [SerializedDictionary]
@@ -107,6 +108,8 @@ public class ResourceManager : MonoBehaviour
         {
             print(kv.Key + ": " + kv.Value);
         }
+
+        OnCurrencyLoaded?.Invoke();
     }
 
     private void InitializeDefaultCurrencyAndData()

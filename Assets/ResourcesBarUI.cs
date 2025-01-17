@@ -11,6 +11,11 @@ public class ResourcesBarUI : MonoBehaviour
 
     private void Start()
     {
+        ResourceManager.Instance.OnCurrencyLoaded += Initialize;
+    }
+
+    private void Initialize()
+    {
         ResourceManager resourceManager = ResourceManager.Instance;
 
         if (resourceManager != null)
@@ -42,6 +47,7 @@ public class ResourcesBarUI : MonoBehaviour
 
     private void OnDisable()
     {
+        ResourceManager.Instance.OnCurrencyLoaded -= Initialize;
         ResourceManager.Instance.OnCurrencyUpdated -= ResourceManager_OnCurrencyUpdated;
     }
 
