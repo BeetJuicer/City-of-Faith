@@ -23,6 +23,7 @@ MonoBehaviour:
   cropPrefab: {fileID: 1349990560990272166, guid: ce4ca3317b3e5154c803e5f9783d29c5,
     type: 3}
   amountPerClaim: 20
+  expPerClaim: 2
   daysToClaim: 0
   hoursToClaim: 0
   minutesToClaim: 5
