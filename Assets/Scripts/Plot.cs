@@ -220,6 +220,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     public void OnObjectClicked()
     {
         print("clicked. state is: " + currentPlotState);
+        AudioManager.Instance.PlaySFX("Plot");
         // State handling
         switch (CurrentPlotState)
         {
@@ -245,6 +246,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
                 }
             case PlotState.RIPE:
                 {
+                    //SoundEffectForRipe
                     ClaimHarvest();
                     break;
                 }
