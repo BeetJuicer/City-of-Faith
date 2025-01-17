@@ -4,43 +4,15 @@ using UnityEngine.UI;
 
 public class VolumeSettings : MonoBehaviour
 {
-    [SerializeField] private AudioMixer myMixer; // Reference to the Audio Mixer
-    [SerializeField] private Slider musicSlider; // Slider for adjusting music volume
-    [SerializeField] private Slider SFXSlider;   // Slider for adjusting SFX volume
-    [SerializeField] private AudioManager audioManager; // Reference to the AudioManager
+    public Slider _musicSlider, _sfxSlider;
 
-    private void Start()
+    public void MusicVolume()
     {
-        if (PlayerPrefs.HasKey("musicVolume"))
-        {
-            LoadVolume();
-        }
-        else
-        {
-            SetMusicVolume();
-            SetSFXVolume();
-        }
+        AudioManager.Instance.MusicVolume(_musicSlider.value);
     }
 
-    public void SetMusicVolume()
+    public void SFXVolume()
     {
-        float volume = musicSlider.value;
-        myMixer.SetFloat("music", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("musicVolume", volume);
-    }
-
-    public void SetSFXVolume()
-    {
-        float volume = SFXSlider.value;
-        myMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("SFXVolume", volume);
-    }
-
-    private void LoadVolume()
-    {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume");
-        SetMusicVolume();
-        SetSFXVolume();
+        AudioManager.Instance.SFXVolume(_sfxSlider.value);
     }
 }
