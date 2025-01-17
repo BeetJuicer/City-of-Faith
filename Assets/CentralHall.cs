@@ -114,11 +114,17 @@ public class CentralHall : MonoBehaviour
     private void LevelUp(int remainder)
     {
         Level++;
+        Exp = remainder;
+        //TODO: optimize and store locked structures only once, not everytime they're fetched.
         UnlockedStructures.Concat(unlockables_SO.unclockableStructures[level]);
         UnlockedCrops.Concat(unlockables_SO.unclockableCrops[level]);
-        //TODO: optimize and store locked structures only once, not everytime they're fetched.
-        //List<car> result = list2.Except(list1).ToList()
-        Exp = remainder;
+
+        //if exp is still greater, call level up again
+        if (Exp >= levelUpExpRequirements[Level])
+        {
+            LevelUp(Exp - LevelUpExpRequirements[Level]);
+        }
+
     }
 
     private List<Structure_SO> GetLockedStructureSOs()
