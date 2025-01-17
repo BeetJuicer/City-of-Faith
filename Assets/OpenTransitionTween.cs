@@ -26,6 +26,7 @@ public class OpenTransitionTween : MonoBehaviour
 
     void OnComplete()
     {
+        AudioManager.Instance.PlaySFX("Canvas");
         gameObject.SetActive(false);
     }
 }
