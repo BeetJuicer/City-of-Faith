@@ -704,6 +704,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingsMoveUI
       objectReference: {fileID: 0}
+    - target: {fileID: 7870754934766674068, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
         type: 3}
       propertyPath: dialogue
@@ -817,6 +822,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1084070077769703329, guid: 9897d7d59748e6f40be724c9694f5a95,
+        type: 3}
+      propertyPath: startingPlayerCurrencies._serializedList.Array.data[0].Value
+      value: 100000
+      objectReference: {fileID: 0}
     - target: {fileID: 2093132593490892666, guid: 9897d7d59748e6f40be724c9694f5a95,
         type: 3}
       propertyPath: m_Name
@@ -2129,7 +2139,7 @@ PrefabInstance:
     - target: {fileID: 7014676771989128693, guid: dc982e2ba541219489aa4da781647ae7,
         type: 3}
       propertyPath: username
-      value: gino
+      value: gino1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

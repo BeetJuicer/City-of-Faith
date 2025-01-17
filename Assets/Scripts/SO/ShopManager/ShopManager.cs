@@ -22,9 +22,14 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        centralhall.OnPlayerLevelUp += RefreshShop;
         FilterItemsByCategory(ItemCategory.Buildings);
     }
 
+    private void RefreshShop(int level)
+    {
+        FilterItemsByCategory(currentCategory);
+    }
 
     private void FilterItems(ItemCategory category)
     {
