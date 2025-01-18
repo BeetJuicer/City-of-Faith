@@ -219,6 +219,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     [Button]
     public void OnObjectClicked()
     {
+
         print("clicked. state is: " + currentPlotState);
         AudioManager.Instance.PlaySFX("Plot");
         // State handling
@@ -241,7 +242,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
                     //UIManager.OpenSellButton(this.GetComponent<Structure>())
 
                     TimeSpan totalTime = new TimeSpan(Crop_SO.daysToClaim, Crop_SO.hoursToClaim, Crop_SO.minutesToClaim, Crop_SO.secondsToClaim);
-                    uiManager.OpenBoostButton(this, GrowthFinishTime, totalTime);
+                    uiManager.ActivateBoostButton(this, GrowthFinishTime, totalTime);
                     break;
                 }
             case PlotState.RIPE:

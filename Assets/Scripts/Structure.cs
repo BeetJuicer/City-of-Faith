@@ -180,6 +180,8 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
 
     private void EnterBuiltState()
     {
+        if (centralHall == null)
+            centralHall = FindObjectOfType<CentralHall>();
 
         //Add xp.
         centralHall.AddToCentralExp(structure_so.expGivenOnBuild);
@@ -209,15 +211,12 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
             return;
         }
 
-        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode)
-            return;
-
         switch (CurrentBuildingState)
         {
             case BuildingState.IN_PROGRESS:
                 Debug.LogWarning("InProgress Working");
                 TimeSpan totaltime = new TimeSpan(structure_so.BuildDays, structure_so.BuildHours, structure_so.BuildMinutes, structure_so.BuildSeconds);
-                uiManager.OpenBoostButton(this, TimeBuildFinished, totaltime);
+                uiManager.ActivateBoostButton(this, TimeBuildFinished, totaltime);
                 uiManager.ActivateInfoButton(this);
                 uiManager.ActivateSellButton(this);
                 OnStructureInProgressClicked?.Invoke();

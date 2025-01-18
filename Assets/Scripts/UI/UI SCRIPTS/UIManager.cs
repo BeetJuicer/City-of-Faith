@@ -63,15 +63,7 @@ public class UIManager : MonoBehaviour
     {
         structureDisplayManager.DisplayStructureDetails(selectedStructure);
 
-        // Hide the Info and Sell buttons when info is clicked
-        infoButton.gameObject.SetActive(false);
-        sellButton?.gameObject.SetActive(false);
-
-    }
-
-    // Function that gets called when the Sell button is clicked
-    private void OnSellButtonClick()
-    {
+        DisableOnStructureClickButtons();
     }
 
     // Function that gets called when the Mini Game button is clicked
@@ -92,12 +84,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void OpenBoostButton(IBoostableObject boostableObject, DateTime finishTime, TimeSpan totalDuration)
-    {
-        glorySpeedUp.OpenGlorySpeedUpPanel(boostableObject, finishTime, totalDuration);
-    }
-
-    private void DisableOnStructureClickButtons()
+    public void DisableOnStructureClickButtons()
     {
         infoButton.gameObject.SetActive(false);
         sellButton.gameObject.SetActive(false);
@@ -105,8 +92,14 @@ public class UIManager : MonoBehaviour
         glorySpeedUp.CloseGlorySpeedUpPanel();
     }
 
+    #region structureClickButtons
     public void ActivateInfoButton(Structure structure)
     {
+        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode)
+            return;
+
+        GetComponent<CropManager>().CloseCropSelection();
+
         if (structure != null)
         {
             infoButton.gameObject.SetActive(true);
@@ -123,10 +116,25 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ActivateBoostButton(IBoostableObject boostableObject, DateTime finishTime, TimeSpan totalDuration)
+    {
+        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode)
+            return;
+
+        //GetComponent<CropManager>().CloseCropSelection();
+        glorySpeedUp.OpenGlorySpeedUpPanel(boostableObject, finishTime, totalDuration);
+    }
+
+
+
     // Method to activate the Sell button dynamically
     public void ActivateSellButton(Structure structure)
     {
+        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode)
+            return;
+
         Debug.Log("Structure Clicked");
+        //GetComponent<CropManager>().CloseCropSelection();
         // Show the action panel
 
         // Ensure the Sell button is visible
@@ -144,7 +152,11 @@ public class UIManager : MonoBehaviour
 
     public void ActivateMinigameButton(Structure structure)
     {
+        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode)
+            return;
+
         Debug.Log("minigame button activated");
+        //GetComponent<CropManager>().CloseCropSelection();
         string structureName = structure.structure_so.structurePrefab.name;
 
         miniGameButtonOpen.gameObject.SetActive(true);
@@ -169,6 +181,8 @@ public class UIManager : MonoBehaviour
         });
 
     }
+
+    #endregion
 
     private void SellStructure(Structure structure)
     {

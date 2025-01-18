@@ -72,6 +72,7 @@ public class CropManager : MonoBehaviour
         if (cropShopUI != null)
         {
             cropShopUI.SetActive(true);
+            GetComponent<UIManager>().DisableOnStructureClickButtons();
         }
         else
         {
@@ -83,7 +84,7 @@ public class CropManager : MonoBehaviour
     {
         if (cropShopUI != null)
         {
-            cropShopUI.SetActive(false);
+            cropShopUI.GetComponent<OpenCropTween>().CloseBox();
         }
         else
         {

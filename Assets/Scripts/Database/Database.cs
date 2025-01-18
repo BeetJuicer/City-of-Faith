@@ -207,6 +207,8 @@ public class Database : MonoBehaviour
             Vector3 pos = new Vector3(s_data.posX, s_data.posY, s_data.posZ);
             Quaternion rot = new Quaternion(s_data.rotX, s_data.rotY, s_data.rotZ, s_data.rotW);
 
+            print("Intantiating structure....");
+
             GameObject structure = (GameObject)Instantiate(prefab, pos, rot);
             structure.GetComponent<Structure>().LoadData(s_data, this);
 

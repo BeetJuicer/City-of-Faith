@@ -22,6 +22,9 @@ public class CentralHall : MonoBehaviour
         {
             level = value;
             centralData.level = level;
+            if (db == null)
+                db = FindObjectOfType<Database>();
+
             db.UpdateRecord(centralData);
             OnPlayerLevelUp?.Invoke(value);
         }
@@ -42,6 +45,9 @@ public class CentralHall : MonoBehaviour
         {
             exp = value;
             centralData.exp = exp;
+            if (db == null)
+                db = FindObjectOfType<Database>();
+
             db.UpdateRecord(centralData);
             OnExpChanged?.Invoke(value);
         }
@@ -73,8 +79,9 @@ public class CentralHall : MonoBehaviour
     public void LoadData(Database.CentralData data)
     {
         this.centralData = data;
-        Level = data.level;
-        Exp = data.exp;
+        //not using property since this is initialization
+        level = data.level; 
+        exp = data.exp;
     }
 
     private void LoadDatabaseOrDefault()
