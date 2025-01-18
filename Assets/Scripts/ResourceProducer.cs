@@ -176,9 +176,10 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
                 }
             case ProducerState.Producing:
                 {
-                    //UIManager.ActivateSellButton(goldOnSell);
-                    //UIManager.ActivateInfoButton(resourceProducerSo);
+                    uiManager.ActivateSellButton(GetComponent<Structure>());
+                    uiManager.ActivateInfoButton(GetComponent<Structure>());
                     uiManager.ActivateBoostButton(this);
+                    uiManager.ActivateMinigameButton(GetComponent<Structure>());
                     break;
                 }
             default:
