@@ -223,11 +223,14 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
                 break;
 
             case BuildingState.BUILT:
-                if (structure_so.Category == ItemCategory.Decorations)
+                if (TryGetComponent<ResourceProducer>(out ResourceProducer rp) || 
+                    TryGetComponent<Plot>(out Plot p))
                 {
-                    uiManager.ActivateInfoButton(this);
-                    uiManager.ActivateSellButton(this);
+                    return;// plot and resource producer handle built clicks
                 }
+
+                uiManager.ActivateInfoButton(this);
+                uiManager.ActivateSellButton(this);
                 break;
 
             default:
