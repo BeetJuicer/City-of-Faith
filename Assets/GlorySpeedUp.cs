@@ -22,7 +22,6 @@ public class GlorySpeedUp : MonoBehaviour
 
     private void Start()
     {
-        button.onClick.AddListener(() => finishTime = DateTime.Now);
         //dialogue.boostBuilding();
     }
 
@@ -31,20 +30,13 @@ public class GlorySpeedUp : MonoBehaviour
         container.SetActive(true);
         this.boostableObject = boostableObject;
         this.finishTime = boostableObject.GetTimeFinished();
+        button.onClick.AddListener(Boost);
     }
 
     private void Boost()
     {
         boostableObject.BoostProgress();
         ResourceManager.Instance.AdjustPlayerCurrency(Currency.Glory, CalculateGloryCost(finishTime.Subtract(DateTime.Now)));
-        //refresh:
-    }
-
-    public void CloseGlorySpeedUpPanel()
-    {
-        button.onClick.RemoveAllListeners();
-        container.SetActive(false);
-
         if (boostableObject.IsInBoostableState())
         {
             OpenGlorySpeedUpPanel(boostableObject);
@@ -53,7 +45,14 @@ public class GlorySpeedUp : MonoBehaviour
         {
             CloseGlorySpeedUpPanel();
         }
+        //refresh:
+    }
 
+    public void CloseGlorySpeedUpPanel()
+    {
+        finishTime = DateTime.Now;
+        button.onClick.RemoveAllListeners();
+        container.SetActive(false);
     }
 
     private void Update()
