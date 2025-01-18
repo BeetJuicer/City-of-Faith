@@ -25,12 +25,11 @@ MonoBehaviour:
     - Key: 2
       Value:
       - {fileID: 11400000, guid: 08a25eec9f62fbf42b8c174d7d825e2c, type: 2}
-      - {fileID: 11400000, guid: 52af7883aea7f9844b10f8aa7bc96f0e, type: 2}
-      - {fileID: 11400000, guid: 254a704fa72f91847966213f4baa69e4, type: 2}
-      - {fileID: 11400000, guid: bd0e2950df8d3464f8c0494a2c2e5ab6, type: 2}
+      - {fileID: 11400000, guid: 6277a94ce4f436149a4082142952290a, type: 2}
     - Key: 3
       Value:
       - {fileID: 11400000, guid: 55261ccf8e79d5f43a5e6cd25a01e936, type: 2}
+      - {fileID: 11400000, guid: 582e283644a715842830ec700353fbb0, type: 2}
   unclockableCrops:
     _serializedList:
     - Key: 0

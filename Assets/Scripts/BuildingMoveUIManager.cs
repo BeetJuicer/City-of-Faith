@@ -1,13 +1,17 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildingMoveUIManager : MonoBehaviour
 {
-    public RectTransform buildingMoveUIRectTransform;
+    [SerializeField] private RectTransform buildingMoveUIRectTransform;
     [SerializeField] private Vector3 offset;  // Offset from the building's position
-    public BuildingOverlay buildingOverlay;  // Reference to the BuildingOverlay script
-    public GameObject buildingMoveUI;  // Reference to the BuildingMoveUI GameObject
-    public GameObject HUDCanvas;
-    public Dialogue dialogue;
+    [SerializeField] private Button checkBtn;
+    [SerializeField] private BuildingOverlay buildingOverlay;  // Reference to the BuildingOverlay script
+    [SerializeField] private GameObject buildingMoveUI;  // Reference to the BuildingMoveUI GameObject
+    [SerializeField] private GameObject HUDCanvas;
+
+    public Color allowedColor = Color.green;
+    public Color disallowedColor = Color.black;
 
     public void OpenMoveUI()
     {
@@ -17,6 +21,20 @@ public class BuildingMoveUIManager : MonoBehaviour
     private void Update()
     {
         buildingMoveUIRectTransform.position = buildingOverlay.transform.position + offset;
+        UpdateButtonColor();
+    }
+
+    private void UpdateButtonColor()
+    {
+        if (!buildingOverlay.IsAllowedToPlace)
+        {
+            GetComponent<Button>().interactable = false;
+        }
+        //if (indicatorImage != null && buildingOverlay != null)
+        //{
+        //    checkBtn.gameObject.SetActive(false);
+        //    indicatorImage.gameObject.SetActive(!buildingOverlay.IsAllowedToPlace);
+        //}
     }
 
     public void MoveUp()

@@ -13,6 +13,7 @@ public class BuildingProgressTimer : MonoBehaviour
     [SerializeField] private Slider progressSlider;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private GameObject timerUI;
+    [SerializeField] private Structure structure;
 
 
     private DateTime timeBuildStarted;
@@ -20,10 +21,7 @@ public class BuildingProgressTimer : MonoBehaviour
 
     private void Start()
     {
-        if (structureData != null)
-        {
-            InitializeBuildTimer();
-        }
+        InitializeBuildTimer();
     }
 
     private void InitializeBuildTimer()
