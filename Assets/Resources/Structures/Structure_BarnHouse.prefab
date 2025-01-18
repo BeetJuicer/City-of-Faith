@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7df8812f4fe1c34aad2f1b0b583aad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  structure_so: {fileID: 0}
+  structure_so: {fileID: 11400000, guid: 08a25eec9f62fbf42b8c174d7d825e2c, type: 2}
 --- !u!114 &5211538326880462495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,7 +83,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f43381d34d6a254a8eb23899bad8a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceProducer_SO: {fileID: 0}
+  resourceProducer_SO: {fileID: 11400000, guid: ea4fbb5956da22641a190cf10a6c21dc,
+    type: 2}
   printTime: 0
 --- !u!1 &4332365218283698519
 GameObject:
