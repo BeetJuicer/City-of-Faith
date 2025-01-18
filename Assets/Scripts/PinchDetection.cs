@@ -11,13 +11,14 @@ public class PinchToZoomAndPan : MonoBehaviour
     [SerializeField] private float panSpeed = 0.5f;   // How fast the camera moves (panning)
     [SerializeField] private float minZoom = 2f;      // Minimum zoom (orthographic size)
     [SerializeField] private float maxZoom = 10f;     // Maximum zoom (orthographic size)
+    [SerializeField] private UIManager uiManager; // Reference to the UIManager
 
     private Camera mainCamera; // Reference to the main camera
     private float previousDistance; // Stores the previous frame's pinch distance
     private TouchControls controls; // Reference to the new input system
     private Coroutine zoomCoroutine;
     private Coroutine dragCoroutine;
-    private GameObject draggableObject;
+    [SerializeField] private GameObject draggableObject;
     private bool isDraggingBuilding = false; // Flag to check if a building is being dragged
 
     // Store last known primary finger position for panning
@@ -74,6 +75,22 @@ public class PinchToZoomAndPan : MonoBehaviour
         // Store information about what the ray hits
         RaycastHit hit;
 
+        // Define a layer mask for the Ground layer
+        int groundLayerMask = LayerMask.GetMask("Ground");
+
+        // Perform the raycast, but only check for objects in the Ground layer
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask))
+        {
+            print("Hit the ground.");
+
+            // Call the DisableOnStructureClickButtons method when the ground is hit
+            uiManager.DisableOnStructureClickButtons();
+        }
+        else
+        {
+            print("Raycast did not hit the ground.");
+        }
+
         // Perform the raycast and check if it hits something
         if (Physics.Raycast(ray, out hit))
         {
@@ -83,10 +100,11 @@ public class PinchToZoomAndPan : MonoBehaviour
                 obj.OnObjectClicked();
             }
 
-            if (hit.collider.TryGetComponent(out IDraggable draggable)){
+            if (hit.collider.TryGetComponent(out draggableObject)){
                 print("draggable object pressed.");
                 draggableObject = hit.collider.gameObject;
             }
+
         }
         else
         {
@@ -281,8 +299,13 @@ public class PinchToZoomAndPan : MonoBehaviour
             Vector3 directionToPinch = pinchWorldPoint - mainCamera.transform.position;
             mainCamera.transform.position += directionToPinch * (1 - 1 / zoomFactor);
 
+            // Interpolate near clip plane based on orthographic size
+            //float nearClipPlane = Mathf.Lerp(-100, -10000, (newSize - minZoom) / (maxZoom - minZoom));
+
             // Apply the new orthographic size
             virtualCamera.m_Lens.OrthographicSize = newSize;
+            //virtualCamera.m_Lens.NearClipPlane = nearClipPlane;
+            //Debug.Log($"Updated Near Clip Plane: {nearClipPlane}");
 
             // Panning (move the camera based on finger drag)
             Vector2 primaryFingerDelta = primaryFingerPosition - lastPrimaryFingerPosition;
