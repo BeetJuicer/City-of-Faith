@@ -5,13 +5,13 @@ public class BuildingMoveUIManager : MonoBehaviour
 {
     [SerializeField] private RectTransform buildingMoveUIRectTransform;
     [SerializeField] private Vector3 offset;  // Offset from the building's position
-    [SerializeField] private Button checkBtn;
+    [SerializeField] private Button checkButton;
     [SerializeField] private BuildingOverlay buildingOverlay;  // Reference to the BuildingOverlay script
     [SerializeField] private GameObject buildingMoveUI;  // Reference to the BuildingMoveUI GameObject
     [SerializeField] private GameObject HUDCanvas;
 
-    public Color allowedColor = Color.green;
-    public Color disallowedColor = Color.black;
+    public Color allowedColor = Color.white;
+    public Color disallowedColor = Color.gray;
 
     public void OpenMoveUI()
     {
@@ -26,15 +26,19 @@ public class BuildingMoveUIManager : MonoBehaviour
 
     private void UpdateButtonColor()
     {
-        if (!buildingOverlay.IsAllowedToPlace)
-        {
-            GetComponent<Button>().interactable = false;
-        }
-        //if (indicatorImage != null && buildingOverlay != null)
+        //if (!buildingOverlay.IsAllowedToPlace)
         //{
-        //    checkBtn.gameObject.SetActive(false);
-        //    indicatorImage.gameObject.SetActive(!buildingOverlay.IsAllowedToPlace);
+        //    GetComponent<Button>().interactable = false;
         //}
+        if (checkButton != null && buildingOverlay != null)
+        {
+            // Get the Image component of the button and update the color
+            Image buttonImage = checkButton.GetComponent<Image>();
+            if (buttonImage != null)
+            {
+                buttonImage.color = buildingOverlay.IsAllowedToPlace ? allowedColor : disallowedColor;
+            }
+        }
     }
 
     public void MoveUp()
