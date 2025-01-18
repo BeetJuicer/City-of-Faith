@@ -116,13 +116,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ActivateBoostButton(IBoostableObject boostableObject, DateTime finishTime, TimeSpan totalDuration)
+    public void ActivateBoostButton(IBoostableObject boostableObject)
     {
         if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode)
             return;
 
         //GetComponent<CropManager>().CloseCropSelection();
-        glorySpeedUp.OpenGlorySpeedUpPanel(boostableObject, finishTime, totalDuration);
+        glorySpeedUp.OpenGlorySpeedUpPanel(boostableObject);
     }
 
 

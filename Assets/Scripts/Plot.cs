@@ -240,9 +240,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
                 {
                     //UIManager.OpenInfoButton(cropSO);
                     //UIManager.OpenSellButton(this.GetComponent<Structure>())
-
-                    TimeSpan totalTime = new TimeSpan(Crop_SO.daysToClaim, Crop_SO.hoursToClaim, Crop_SO.minutesToClaim, Crop_SO.secondsToClaim);
-                    uiManager.ActivateBoostButton(this, GrowthFinishTime, totalTime);
+                    uiManager.ActivateBoostButton(this);
                     break;
                 }
             case PlotState.RIPE:
@@ -281,5 +279,20 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     public void BoostProgress()
     {
         GrowthFinishTime = DateTime.Now;
+    }
+
+    public bool IsInBoostableState()
+    {
+        return CurrentPlotState == PlotState.GROWING;
+    }
+
+    public DateTime GetTimeFinished()
+    {
+        return GrowthFinishTime;
+    }
+
+    public TimeSpan GetTotalDuration()
+    {
+        return new TimeSpan(Crop_SO.daysToClaim, Crop_SO.hoursToClaim, Crop_SO.minutesToClaim, Crop_SO.secondsToClaim);
     }
 }

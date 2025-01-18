@@ -198,4 +198,9 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
     {
         ClaimResources();
     }
+
+    public bool IsInBoostableState()
+    {
+        return CurrentProducerState == ProducerState.Producing;
+    }
 }

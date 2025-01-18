@@ -136,7 +136,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
 
         if (!IsAllowedToPlace)
         {
-            print("Not allowed! Deactivate the UI button for user's confirmation if not allowed");
+            Debug.LogWarning("Not allowed! Deactivate the UI button for user's confirmation if not allowed");
             ExitBuildMode();
             return;
         }

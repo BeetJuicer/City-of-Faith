@@ -215,8 +215,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         {
             case BuildingState.IN_PROGRESS:
                 Debug.LogWarning("InProgress Working");
-                TimeSpan totaltime = new TimeSpan(structure_so.BuildDays, structure_so.BuildHours, structure_so.BuildMinutes, structure_so.BuildSeconds);
-                uiManager.ActivateBoostButton(this, TimeBuildFinished, totaltime);
+                uiManager.ActivateBoostButton(this);
                 uiManager.ActivateInfoButton(this);
                 uiManager.ActivateSellButton(this);
                 OnStructureInProgressClicked?.Invoke();
@@ -224,10 +223,11 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
                 break;
 
             case BuildingState.BUILT:
-                uiManager.ActivateInfoButton(this);
-                uiManager.ActivateSellButton(this);
-                // Pass the clicked structure to ActivateMinigameButton
-                uiManager.ActivateMinigameButton(this);
+                if (structure_so.Category == ItemCategory.Decorations)
+                {
+                    uiManager.ActivateInfoButton(this);
+                    uiManager.ActivateSellButton(this);
+                }
                 break;
 
             default:
@@ -248,4 +248,18 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         TimeBuildFinished = DateTime.Now;
     }
 
+    public bool IsInBoostableState()
+    {
+        return CurrentBuildingState == BuildingState.IN_PROGRESS;
+    }
+
+    public DateTime GetTimeFinished()
+    {
+        return TimeBuildFinished;
+    }
+
+    public TimeSpan GetTotalDuration()
+    {
+        return new TimeSpan(structure_so.BuildDays, structure_so.BuildHours, structure_so.BuildMinutes, structure_so.BuildSeconds);
+    }
 }
