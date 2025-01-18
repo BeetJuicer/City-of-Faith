@@ -49,3 +49,5 @@ MonoBehaviour:
   panSpeed: 0.75
   minZoom: 10
   maxZoom: 80
+  uiManager: {fileID: 0}
+  draggableObject: {fileID: 0}
