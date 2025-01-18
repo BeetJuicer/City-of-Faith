@@ -31,8 +31,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3789876518995705558}
+  m_Children: []
   m_Father: {fileID: 1827711916603999523}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3677597841518074985
@@ -218,6 +217,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3789876518995705558}
   - {fileID: 595746124257048912}
   - {fileID: 8088707087956360937}
   m_Father: {fileID: 0}
@@ -262,7 +262,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 595746124257048912}
+    m_TransformParent: {fileID: 1827711916603999523}
     m_Modifications:
     - target: {fileID: 1407478550073438119, guid: fdbf7fe3e9e035448acf17ee0e527394,
         type: 3}
@@ -385,3 +385,4 @@ MonoBehaviour:
   progressSlider: {fileID: 8643472496160347799}
   timerText: {fileID: 2781162079521164042}
   timerUI: {fileID: 9006743080683086884}
+  structure: {fileID: 0}

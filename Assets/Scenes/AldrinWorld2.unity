@@ -1944,6 +1944,21 @@ PrefabInstance:
       objectReference: {fileID: 756359374}
     - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
         type: 3}
+      propertyPath: allowedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
+        type: 3}
+      propertyPath: allowedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
+        type: 3}
+      propertyPath: allowedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
+        type: 3}
       propertyPath: indicatorImage
       value: 
       objectReference: {fileID: 121709596}
@@ -1952,6 +1967,26 @@ PrefabInstance:
       propertyPath: buildingOverlay
       value: 
       objectReference: {fileID: 916827017}
+    - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
+        type: 3}
+      propertyPath: disallowedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
+        type: 3}
+      propertyPath: disallowedColor.b
+      value: 0.5188679
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
+        type: 3}
+      propertyPath: disallowedColor.g
+      value: 0.5188679
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
+        type: 3}
+      propertyPath: disallowedColor.r
+      value: 0.5188679
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
