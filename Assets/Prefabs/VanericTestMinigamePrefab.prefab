@@ -422,7 +422,42 @@ PrefabInstance:
     - target: {fileID: 2899411625739790913, guid: bb3148eaaae5ba546a719145a51e03e0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899411625739790913, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899411625739790913, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 575798929494510999}
+    - target: {fileID: 2899411625739790913, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5145488879632310335}
+    - target: {fileID: 2899411625739790913, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899411625739790913, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: DeactivateObjects
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899411625739790913, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: ActivateGameObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899411625739790913, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3503065244575432955, guid: bb3148eaaae5ba546a719145a51e03e0,
         type: 3}
@@ -532,6 +567,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 575798929494510999}
+    - targetCorrespondingSourceObject: {fileID: 4867996178756850572, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5145488879632310335}
   m_SourcePrefab: {fileID: 100100000, guid: bb3148eaaae5ba546a719145a51e03e0, type: 3}
 --- !u!114 &141097944056983435 stripped
 MonoBehaviour:
@@ -576,7 +615,7 @@ MonoBehaviour:
   exitButton: {fileID: 1873732878222354657}
   HUDCanvas: {fileID: 0}
   MainCamera3d: {fileID: 0}
-  BarnMinigamePrefab: {fileID: 189558986064642651}
+  BarnMinigamePrefab: {fileID: 4244264331427100909}
   audioManager: {fileID: 0}
   spawnParent: {fileID: 375754021462354835}
 --- !u!114 &1873732878222354657 stripped
@@ -585,7 +624,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3619787592741044896}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8192761410484212012}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -663,3 +702,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3619787592741044896}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8192761410484212012 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4867996178756850572, guid: bb3148eaaae5ba546a719145a51e03e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3619787592741044896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5145488879632310335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8192761410484212012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44829a8bd98d5d147bbfcaa33ec44a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToActivate: []
+  objectsToDeactivate:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

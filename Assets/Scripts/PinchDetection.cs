@@ -96,11 +96,12 @@ public class PinchToZoomAndPan : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out IClickableObject obj))
             {
-                print("clickable object pressed.");
+                Debug.Log($"Clickable object pressed: {hit.collider.gameObject.name}");
                 obj.OnObjectClicked();
             }
 
-            if (hit.collider.TryGetComponent(out draggableObject)){
+            if (hit.collider.TryGetComponent(out draggableObject))
+            {
                 print("draggable object pressed.");
                 draggableObject = hit.collider.gameObject;
             }

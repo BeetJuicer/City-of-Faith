@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18187064, g: 0.22754848, b: 0.3074189, a: 1}
+  m_IndirectSpecularColor: {r: 0.18187016, g: 0.22754742, b: 0.30741808, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -866,11 +866,6 @@ PrefabInstance:
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 1410813114}
-    - target: {fileID: 575798929494510999, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: BarnMinigamePrefab
-      value: 
-      objectReference: {fileID: 1593906575}
     - target: {fileID: 1812134448290597037, guid: 711a9300d78cd324ab991e6393a784dc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -921,84 +916,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1613651248}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1011865740}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExitGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: DeactivateObjects
-      objectReference: {fileID: 0}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ActivateGameObject, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1873732878222354657, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 4244264331427100909, guid: 711a9300d78cd324ab991e6393a784dc,
         type: 3}
       propertyPath: m_Name
       value: VanericTestMinigamePrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 5145488879632310335, guid: 711a9300d78cd324ab991e6393a784dc,
+        type: 3}
+      propertyPath: objectsToDeactivate.Array.data[0]
+      value: 
+      objectReference: {fileID: 740269818}
+    - target: {fileID: 5145488879632310335, guid: 711a9300d78cd324ab991e6393a784dc,
+        type: 3}
+      propertyPath: objectsToDeactivate.Array.data[1]
+      value: 
+      objectReference: {fileID: 2038451508}
+    - target: {fileID: 5145488879632310335, guid: 711a9300d78cd324ab991e6393a784dc,
+        type: 3}
+      propertyPath: objectsToDeactivate.Array.data[2]
+      value: 
+      objectReference: {fileID: 223625290}
+    - target: {fileID: 5145488879632310335, guid: 711a9300d78cd324ab991e6393a784dc,
+        type: 3}
+      propertyPath: objectsToDeactivate.Array.data[3]
+      value: 
+      objectReference: {fileID: 1716724401}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8192761410484212012, guid: 711a9300d78cd324ab991e6393a784dc,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1011865740}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 711a9300d78cd324ab991e6393a784dc, type: 3}
 --- !u!4 &465994033 stripped
 Transform:
@@ -1584,30 +1530,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85800e2aa149559478730c90bb4bd4bf, type: 3}
---- !u!1 &1011865735 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8192761410484212012, guid: 711a9300d78cd324ab991e6393a784dc,
-    type: 3}
-  m_PrefabInstance: {fileID: 372990568}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1011865740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011865735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44829a8bd98d5d147bbfcaa33ec44a57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectsToActivate: []
-  objectsToDeactivate:
-  - {fileID: 740269818}
-  - {fileID: 2038451508}
-  - {fileID: 223625290}
-  - {fileID: 1716724401}
 --- !u!4 &1031108861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3447563277728996553, guid: f0de145689231c54383377d8dae16093,
@@ -2251,10 +2173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208d5ec912173cf42936eae75c985368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicSounds: []
+  sfxSounds: []
   musicSource: {fileID: 325024251}
-  SFXSource: {fileID: 110837242}
-  background: {fileID: 8300000, guid: 307f3330283dee741935059ab040e4f4, type: 3}
-  start: {fileID: 8300000, guid: 3b5a105e8a4d20d4f912244c21c6bd11, type: 3}
+  sfxSource: {fileID: 0}
 --- !u!4 &1410813116
 Transform:
   m_ObjectHideFlags: 0
@@ -2643,18 +2565,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 372990568}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1613651248 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 575798929494510999, guid: 711a9300d78cd324ab991e6393a784dc,
-    type: 3}
-  m_PrefabInstance: {fileID: 372990568}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0e3894c023231047b92feb170a034e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1649995630
 PrefabInstance:
   m_ObjectHideFlags: 0
