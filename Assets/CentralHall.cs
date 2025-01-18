@@ -14,12 +14,22 @@ public class CentralHall : MonoBehaviour
     public event Action<int> OnExpChanged;
 
     [SerializeField] private Unlockables_SO unlockables_SO;
+    bool maxLevel;
     private int level;
     public int Level
     {
         get => level;
         private set
         {
+            if(value >= unlockables_SO.unclockableCrops.Count ||
+               value >= unlockables_SO.unclockableStructures.Count)
+            {
+                Debug.LogWarning("You've reached max level! Have UI here.");
+                Exp = levelUpExpRequirements[Level];
+                maxLevel = true;
+                return;
+            }
+
             level = value;
             centralData.level = level;
             if (db == null)
@@ -27,6 +37,7 @@ public class CentralHall : MonoBehaviour
 
             db.UpdateRecord(centralData);
             OnPlayerLevelUp?.Invoke(value);
+
         }
     }
 
@@ -43,6 +54,8 @@ public class CentralHall : MonoBehaviour
         get => exp;
         private set
         {
+            if (maxLevel) return;
+
             exp = value;
             centralData.exp = exp;
             if (db == null)
