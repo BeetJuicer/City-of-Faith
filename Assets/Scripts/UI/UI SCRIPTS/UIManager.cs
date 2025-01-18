@@ -113,7 +113,7 @@ public class UIManager : MonoBehaviour
             infoButton.onClick.RemoveAllListeners();
             infoButton.onClick.AddListener(() =>
             {
-                ShowStructureInfo(structure.GetStructureSO());
+                ShowStructureInfo(structure.structure_so);
                 DisableOnStructureClickButtons();
             });
         }

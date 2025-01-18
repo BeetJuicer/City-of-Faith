@@ -69,12 +69,6 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         GetChildrenVisuals();
     }
 
-    // Add this public getter method or property to the Structure class
-    public Structure_SO GetStructureSO()
-    {
-        return structure_so;
-    }
-
     private void GetChildrenVisuals()
     {
         // ENTER IN-PROGRESS STATE
@@ -121,6 +115,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
             };
 
             db.AddNewRecord(structureData);
+            print("new record added");
             StructureID = structureData.structure_id;
 
             Debug.Assert(StructureID != 0, "Structure ID is 0!");
@@ -214,6 +209,8 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
             return;
         }
 
+        if (GameManager.Instance.CurrentGameState == GameState.Edit_Mode)
+            return;
 
         switch (CurrentBuildingState)
         {
