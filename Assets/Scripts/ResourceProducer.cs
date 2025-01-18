@@ -178,7 +178,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
                 {
                     //UIManager.ActivateSellButton(goldOnSell);
                     //UIManager.ActivateInfoButton(resourceProducerSo);
-                    uiManager.ActivateBoostButton(this, ProductionFinishTime, timePerClaim);
+                    uiManager.ActivateBoostButton(this);
                     break;
                 }
             default:
@@ -202,5 +202,15 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
     public bool IsInBoostableState()
     {
         return CurrentProducerState == ProducerState.Producing;
+    }
+
+    public DateTime GetTimeFinished()
+    {
+        return ProductionFinishTime;
+    }
+
+    public TimeSpan GetTotalDuration()
+    {
+        return timePerClaim;
     }
 }
