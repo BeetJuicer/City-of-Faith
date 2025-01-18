@@ -36,7 +36,7 @@ public class GlorySpeedUp : MonoBehaviour
     private void Boost()
     {
         boostableObject.BoostProgress();
-        ResourceManager.Instance.AdjustPlayerCurrency(Currency.Glory, CalculateGloryCost(finishTime.Subtract(DateTime.Now)));
+        ResourceManager.Instance.AdjustPlayerCurrency(Currency.Glory, -CalculateGloryCost(finishTime.Subtract(DateTime.Now)));
         if (boostableObject.IsInBoostableState())
         {
             OpenGlorySpeedUpPanel(boostableObject);
