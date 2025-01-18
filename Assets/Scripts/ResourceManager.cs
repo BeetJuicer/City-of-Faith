@@ -31,7 +31,7 @@ public class ResourceManager : MonoBehaviour
     private Dictionary<Currency, Database.CurrencyData> currencyData = null;
 
     public event Action<Currency, int> OnCurrencyUpdated;
-    public event Action OnCurrencyLoaded;
+    public event Action<int> OnCurrencyLoaded;
 
     // serialize for now for debug purposes.
     [SerializedDictionary]
@@ -109,7 +109,7 @@ public class ResourceManager : MonoBehaviour
             print(kv.Key + ": " + kv.Value);
         }
 
-        OnCurrencyLoaded?.Invoke();
+        OnCurrencyLoaded?.Invoke(1);
     }
 
     private void InitializeDefaultCurrencyAndData()
@@ -163,25 +163,29 @@ public class ResourceManager : MonoBehaviour
 
     public void AdjustPlayerResources(FoodResource type, int amount)
     {
-        print("Added " + amount + " units of " + type.ToString() + " to storage!");
+        //print("Added " + amount + " units of " + type.ToString() + " to storage!");
 
         PlayerFoodResources[type] += amount;
     }
 
     public bool HasEnoughCurrency(Currency currency, int amount)
     {
+        //print($"Checking player:{PlayerCurrencies[currency]} is greater than {amount}?: {PlayerCurrencies[currency] > amount}");
         return PlayerCurrencies[currency] > amount;
     }
 
     public bool HasEnough<T>(Dictionary<T, int> cost, Dictionary<T, int> playerInventory)
     {
-        foreach (var keyValue in playerInventory)
+        foreach (var keyValue in cost)
         {
+            //print($"Checking {keyValue.Key}.... player: {playerInventory[keyValue.Key]}, cost: {keyValue.Value} ");
             if (playerInventory[keyValue.Key] < keyValue.Value)
             {
+                //print("Returning false");
                 return false;
             }
         }
+        //print("Returning true");
         return true;
     }
 

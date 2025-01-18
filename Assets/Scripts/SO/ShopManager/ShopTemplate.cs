@@ -27,31 +27,48 @@ public class ShopTemplate : MonoBehaviour
         costTxt.text = so.currencyRequired.Values.First().ToString();
         itemImg.sprite = so.displayImage;
 
-        lockedOverlay.SetActive(!isLocked);
+        lockedOverlay.SetActive(isLocked);
         //Debug.Log($"Setting lock overlay for {so.structureName} to {!isLocked}");
 
-        GetComponent<Button>().interactable = isLocked;
+        GetComponent<Button>().interactable = !isLocked;
         //ResourceManager.Instance.HasEnoughCurrency(so.currencyRequired
 
         GetComponent<Button>().onClick.RemoveAllListeners();
+        print("Init!");
 
-        if (!isLocked)
+        //foreach (var kv in so.currencyRequired)
+        //{
+        //    print($"Currency required of {so.name}: {so.currencyRequired[Currency.Gold]}");
+        //}
+        if (ResourceManager.Instance.HasEnoughCurrency(so.currencyRequired))
         {
-            if (ResourceManager.Instance.HasEnoughCurrency(so.currencyRequired))
-            {
-                Debug.Log("Resource Manager: " + ResourceManager.Instance.HasEnoughCurrency(so.currencyRequired));
-                GetComponent<Button>().onClick.AddListener(() => sm.PurchaseItem(so));
-            }
+            //Debug.Log("Resource Manager: " + ResourceManager.Instance.HasEnoughCurrency(so.currencyRequired));
+            GetComponent<Button>().onClick.AddListener(() => sm.PurchaseItem(so));
+            costTxt.color = Color.black;
+        }
+        else
+        {
+            GetComponent<Button>().onClick.AddListener(() => Feedback());
+            costTxt.color = Color.red;
+            //other indicators na bawal bilhin
+            //bg color ng card or logo ng coin na may strikethrough
         }
     }
 
 
-
-    public void OnClick()
+    private void Feedback()
     {
-        Debug.Log("ShopTemplate clicked!");
-        shopManager.PurchaseItem(siso);
+        //error sound
+        //shake card
     }
+
+
+
+    //public void OnClick()
+    //{
+    //    Debug.Log("ShopTemplate clicked!");
+    //    shopManager.PurchaseItem(siso);
+    //}
 
     //private void OnDestroy()
     //{

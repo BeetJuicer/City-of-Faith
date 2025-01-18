@@ -108,7 +108,8 @@ public class ShopManager : MonoBehaviour
             if (structure.Category == category)
             {
                 var card = Instantiate(ShopTemplate, transform.position, Quaternion.identity, shopContent.transform);
-                card.GetComponent<ShopTemplate>().Init(structure, this, isLocked: true);
+                card.GetComponent<ShopTemplate>().Init(structure, this, isLocked: false);
+                //print($"Initialized {structure.name}");
                 card.SetActive(true);
             }
         }
@@ -118,7 +119,8 @@ public class ShopManager : MonoBehaviour
             if (structure.Category == category)
             {
                 var card = Instantiate(ShopTemplate, transform.position, Quaternion.identity, shopContent.transform);
-                card.GetComponent<ShopTemplate>().Init(structure, this, isLocked: false);
+                card.GetComponent<ShopTemplate>().Init(structure, this, isLocked: true);
+                //print($"Initialized {structure.name}");
                 card.SetActive(true);
             }
         }

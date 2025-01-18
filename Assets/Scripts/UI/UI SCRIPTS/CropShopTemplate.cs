@@ -33,7 +33,7 @@ public class CropShopTemplate : MonoBehaviour
 
 
         lockedOverlay.SetActive(!isLocked);
-        Debug.Log($"Setting lock overlay for {so.cropName} to {!isLocked}");
+        //Debug.Log($"Setting lock overlay for {so.cropName} to {!isLocked}");
 
         button.interactable = isLocked;
 
