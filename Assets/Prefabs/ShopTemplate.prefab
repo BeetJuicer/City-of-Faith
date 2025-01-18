@@ -227,11 +227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336377349c228e144a8e2ab7ea1dd6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rm: {fileID: 1084070077769703329, guid: 9897d7d59748e6f40be724c9694f5a95, type: 3}
   titleTxt: {fileID: 7388620218962620357}
-  descriptionTxt: {fileID: 0}
   costTxt: {fileID: 8434314519562263383}
   itemImg: {fileID: 7885522877943631684}
-  button: {fileID: 0}
+  button: {fileID: 4828174433418994604}
   lockedOverlay: {fileID: 5123775015766914732}
 --- !u!114 &4828174433418994604
 MonoBehaviour:
@@ -280,19 +280,6 @@ MonoBehaviour:
       - m_Target: {fileID: 2337064185866386589}
         m_TargetAssemblyTypeName: ShopTemplate, Assembly-CSharp
         m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3429750908140298694, guid: c9cd204550ecf4a4e85b97ee2c3ea676,
-          type: 3}
-        m_TargetAssemblyTypeName: Dialogue, Assembly-CSharp
-        m_MethodName: OnShopItemClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

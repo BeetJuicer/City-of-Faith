@@ -9,14 +9,14 @@ public class ShopTemplate : MonoBehaviour
 {
     private Structure_SO siso;
     private ShopManager shopManager;
-
+    [SerializeField] private ResourceManager rm;
 
     [SerializeField] private TMP_Text titleTxt;
-    [SerializeField] private TMP_Text descriptionTxt;
     [SerializeField] private TMP_Text costTxt;
     [SerializeField] private Image itemImg;
     [SerializeField] private Button button;
     [SerializeField] private GameObject lockedOverlay;
+
 
     public void Init(Structure_SO so, ShopManager sm, bool isLocked)
     {
@@ -31,13 +31,21 @@ public class ShopTemplate : MonoBehaviour
         //Debug.Log($"Setting lock overlay for {so.structureName} to {!isLocked}");
 
         GetComponent<Button>().interactable = isLocked;
+        //ResourceManager.Instance.HasEnoughCurrency(so.currencyRequired
 
         GetComponent<Button>().onClick.RemoveAllListeners();
+
         if (!isLocked)
         {
-            GetComponent<Button>().onClick.AddListener(() => sm.PurchaseItem(so));
+            if (ResourceManager.Instance.HasEnoughCurrency(so.currencyRequired))
+            {
+                Debug.Log("Resource Manager: " + ResourceManager.Instance.HasEnoughCurrency(so.currencyRequired));
+                GetComponent<Button>().onClick.AddListener(() => sm.PurchaseItem(so));
+            }
         }
     }
+
+
 
     public void OnClick()
     {

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8894893234142074034}
   - component: {fileID: 1084070077769703329}
+  - component: {fileID: 6543639075184176568}
   m_Layer: 0
   m_Name: ResourceManager
   m_TagString: Untagged
@@ -59,3 +60,20 @@ MonoBehaviour:
     - Key: 2
       Value: 10000
   foodUnitsRequiredPerCitizen: 5
+--- !u!114 &6543639075184176568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093132593490892666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a3f792b5cc7514abd30b24d5d605b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerFoodResources:
+    _serializedList: []
+  startingPlayerCurrencies:
+    _serializedList: []
+  foodUnitsRequiredPerCitizen: 0

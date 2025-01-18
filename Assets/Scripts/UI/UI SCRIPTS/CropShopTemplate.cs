@@ -13,6 +13,8 @@ public class CropShopTemplate : MonoBehaviour
     [SerializeField] private TMP_Text titleTxt;
     [SerializeField] private TMP_Text descriptionTxt;
     [SerializeField] private TMP_Text costTxt;
+    [SerializeField] private TMP_Text goldAmount;
+    [SerializeField] private TMP_Text expAmount;
     [SerializeField] private Image itemImage;
     [SerializeField] private Button button;
     [SerializeField] private GameObject lockedOverlay;
@@ -26,6 +28,9 @@ public class CropShopTemplate : MonoBehaviour
         descriptionTxt.text = so.cropDetails;
         itemImage.sprite = so.cropImage;
         costTxt.text = so.cropPrice.Values.First().ToString(); //First for now. a bit hacky.
+        goldAmount.text = so.amountPerClaim.ToString();
+        expAmount.text = so.expPerClaim.ToString();
+
 
         lockedOverlay.SetActive(!isLocked);
         Debug.Log($"Setting lock overlay for {so.cropName} to {!isLocked}");

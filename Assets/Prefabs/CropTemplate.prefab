@@ -97,7 +97,11 @@ MonoBehaviour:
   titleTxt: {fileID: 1472415068585587636}
   descriptionTxt: {fileID: 9005427968686058772}
   costTxt: {fileID: 6132128854240001079}
+  goldAmount: {fileID: 8877111293750895208}
+  expAmount: {fileID: 6086986949581694784}
   itemImage: {fileID: 5514923408573986838}
+  goldImage: {fileID: 0}
+  expImage: {fileID: 0}
   button: {fileID: 5048842418649043931}
   lockedOverlay: {fileID: 7481197052260119099}
 --- !u!1 &1854013049272678220
