@@ -90,7 +90,11 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
             };
 
             db.AddNewRecord(plotData);
-            print($"Initial added plot {plotData.structure_id} to with crop_so_name: {Crop_SO.name} to database.");
+            print($"db_logs: Initial added plot#{plotData.structure_id} with crop_so_name: {Crop_SO.name} to database.");
+        }
+        else
+        {
+            print($"db_logs: not adding new plot to database!");
         }
 
         cropImageDisplay.UpdateVisual(CurrentPlotState, crop_SO);
@@ -99,7 +103,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 
     public void LoadData(Database.PlotData data, Database db)
     {
-        print("Loading crop......");
+        print("db_logs: Loading crop......");
         //not using the property so that I don't have to call the update database event. Just loading data. 
         plotData = data;
         this.db = db;
@@ -108,9 +112,16 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         growthFinishTime = data.growth_finish_time;
 
         string path = $"Crops/SO_Crops/{data.crop_so_name}";
+        print($"db_logs: Attempting to look for {path}");
         Crop_SO cropSO = (Crop_SO)Resources.Load(path);
         Debug.Assert(cropSO != null, $"{data.crop_so_name} does not exist in {path}!");
-        print($"Loaded {crop_SO.name} from database!");
+
+        if (cropSO == null)
+            print($"db_logs: {path} could not be found!");
+        else
+            print($"db_logs: {path} found!");
+
+        print($"db_logs: Loaded {crop_SO.name} from database!");
 
         crop_SO = cropSO;
 
@@ -227,7 +238,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         //update db when planted
         plotData.crop_so_name = crop_SO.name;
         db.UpdateRecord(plotData);
-        print($"Database Plant Log: Updating database of plot #{plotData.structure_id} with {crop_SO.name}. ");
+        print($"db_logs: Updating database of plot #{plotData.structure_id} with {crop_SO.name}. ");
     }
 
     /// <summary>

@@ -77,13 +77,18 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
             };
 
             db.AddNewRecord(resourceProducerData);
-            print($"Added resource producer {resourceProducerData.structure_id} to database.");
+            print($"db_logs: Added resource producer {resourceProducerData.structure_id} to database.");
+        }
+        else
+        {
+            print($"db_logs: rp data {resourceProducerData.structure_id} not null! should be loaded");
         }
 
         //Keep a base amount per claim in case leveling up buildings is possible.
         amountPerClaim = rp_SO.baseAmountPerClaim;
         timePerClaim = new TimeSpan(rp_SO.daysToClaim, rp_SO.hoursToClaim, rp_SO.minutesToClaim, rp_SO.secondsToClaim);
 
+        centralHall = FindObjectOfType<CentralHall>();
         uiManager = FindObjectOfType<UIManager>();
     }
 
