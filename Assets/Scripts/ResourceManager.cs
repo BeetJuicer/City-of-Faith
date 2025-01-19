@@ -224,4 +224,10 @@ public class ResourceManager : MonoBehaviour
             // satisfaction state = famine
         }
     }
+
+    public void TriggerCurrencyUpdated(Currency currencyType, int newAmount)
+    {
+        OnCurrencyUpdated?.Invoke(currencyType, newAmount);
+    }
+
 }

@@ -14,8 +14,6 @@ public class Structure_SO : ScriptableObject
     public string description;
     public GameObject structurePrefab;
     public Sprite displayImage;
-    public string structurePrefabName;
-    public string minigameSceneName;
 
     [Header("Category")]
     public ItemCategory Category;

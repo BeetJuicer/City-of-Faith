@@ -155,6 +155,14 @@ public class GameController : MonoBehaviour
         {
             HandleGameOver();
         }
+
+        foreach (Transform child in spawnParent)
+        {
+            if (child.position.y < Camera.main.transform.position.y - 5f) // Adjust threshold as needed
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
 
     private void SpawnObjects()
@@ -200,6 +208,9 @@ public class GameController : MonoBehaviour
             AudioSourceMiniGame.instance.PlayGameOverSound();
         }
 
+        // Destroy all remaining spawned objects (eggs and bombs)
+        ClearSpawnedObjects();
+
         // Display the game-over UI and show the final score
         gameOverPanel.SetActive(true);
         gameOverText.text = "Game Over";
@@ -213,16 +224,12 @@ public class GameController : MonoBehaviour
         expText.text = "EXP: " + exp;
 
         // Update player resources and central hall data
+
         if (resourceManager != null)
         {
             Debug.Log("Adding Gold");
             resourceManager.AdjustPlayerCurrency(Currency.Gold, gold);
         }
-        else
-        {
-            Debug.LogError("ResourceManager is null!");
-        }
-
         if (centralHall != null)
         {
             Debug.Log("Adding Exp");
@@ -232,11 +239,6 @@ public class GameController : MonoBehaviour
         {
             Debug.LogError("CentralHall is null!");
         }
-
-        //// Show exit button and assign the event listener
-        //exitButton.gameObject.SetActive(true);
-        //exitButton.onClick.RemoveAllListeners();  // Clear existing listeners to prevent duplicates
-        //exitButton.onClick.AddListener(ExitGame);
 
         // Pause the game
         Time.timeScale = 0f;
