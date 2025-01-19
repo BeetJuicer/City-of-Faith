@@ -205,6 +205,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 
         // Success
         GrowthFinishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
+        print("planted at time: " + DateTime.Now.ToString() + ", will finish at: " + GrowthFinishTime);
         CurrentPlotState = PlotState.GROWING;
 
         //Visual update
