@@ -556,7 +556,8 @@ MonoBehaviour:
   exitButton: {fileID: 7526860990699351799}
   HUDCanvas: {fileID: 0}
   MainCamera3d: {fileID: 0}
-  fishingScene: {fileID: 8135093324859270984}
+  fishingMinigamePrefab: {fileID: 8135093324859270984}
+  audioManager: {fileID: 0}
 --- !u!114 &6976952898738860025 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8416138006514740677, guid: 86056d97531bcc546a997c3703537347,

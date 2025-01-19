@@ -252,14 +252,14 @@ public class FishGameController : MonoBehaviour
         // Pause the game
         Time.timeScale = 0f;
         fishAudioSource.StopBackgroundMusic();
-        fishAudioSource.PlayGameOverSFX(); // Play game over sound
+        fishAudioSource.PlayGameOverSFX(); 
     }
 
     private void CalculateRewards()
     {
-        int lowAverageScore = 55;    // Low average range
-        int averageScore = 115;       // Average score
-        int highAverageScore = 230;   // High average range
+        int lowAverageScore = 55;
+        int averageScore = 115;
+        int highAverageScore = 230;
 
         int baseGold = 5;
         int baseExp = 5;
