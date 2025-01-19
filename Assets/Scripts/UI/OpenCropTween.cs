@@ -7,7 +7,7 @@ public class OpenCropTween : MonoBehaviour
     [SerializeField] GameObject CropShopInner;
     private Vector3 initialPosition; // Store the initial position of the GameObject
 
-    private void Start()
+    private void Awake()
     {
         // Save the initial position of CropShopInner when the script starts
         initialPosition = CropShopInner.transform.localPosition;

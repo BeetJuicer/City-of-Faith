@@ -10,11 +10,15 @@ public class DevotionalScript : MonoBehaviour
     public GameObject DevotionalNextButton;
     public TMP_Text VerseReferenceText; // TMP object for the verse reference
     public TMP_Text VerseContentText;   // TMP object for the verse content
+    [SerializeField] public GameObject HUDCanvas;
+    [SerializeField] private CentralHall centralHall;
+
 
     private List<Verse> verses;
 
     void Start()
     {
+
         ClearPreviousDate();
 
         // Load the JSON file and parse it into the list of verses
@@ -26,8 +30,11 @@ public class DevotionalScript : MonoBehaviour
         Debug.Log("Current Date: " + currentDate.ToString("yyyy-MM-dd"));
 
         // Check if it's a new day
-        if (IsNewDay(currentDate))
+        if (IsNewDay(currentDate) && centralHall.Level != 1)
         {
+            // Debug log to confirm the condition passed
+            Debug.Log("New day detected and player has seen the cutscene.");
+
             // Get a random verse and display it
             Verse verse = GetRandomVerse();
             if (verse != null)
@@ -39,8 +46,13 @@ public class DevotionalScript : MonoBehaviour
                 VerseContentText.text = verse.content;
             }
 
+            HUDCanvas.SetActive(false);
             OpenDevotional();
             SaveCurrentDate(currentDate);
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
     }
 
