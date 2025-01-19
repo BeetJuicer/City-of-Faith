@@ -15,7 +15,7 @@ public class TutorialVideoManager : MonoBehaviour
 
     private void Start()
     {
-        if (tutorialVideos.Length > 0)
+        if (tutorialVideos.Length > currentIndex)
         {
             Debug.Log("Starting the first tutorial video.");
             PlayTutorialVideo(0); //play first video
