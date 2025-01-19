@@ -12,17 +12,21 @@ public class HarvestUI : MonoBehaviour
 
     private void Start()
     {
-        ResourceProducer Rp = GetComponentInParent<ResourceProducer>();
+      Rp = GetComponentInParent<ResourceProducer>();
     }
 
     // Method to put the crop image to Image UI
     public void Update()
     {
+        Debug.Log("Harvest Ui called!!!");
         if (Rp.CurrentProducerState == ProducerState.Ready_To_Claim)
         {
             harvestCanvas.SetActive(true);
         }
-        else { harvestCanvas.SetActive(false); }
+        else
+        {
+            harvestCanvas.SetActive(false);
+        }
 
     }
 }
