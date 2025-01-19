@@ -108,6 +108,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         string path = $"Crops/SO_Crops/{data.crop_so_name}";
         Crop_SO cropSO = (Crop_SO)Resources.Load(path);
         Debug.Assert(cropSO != null, $"{data.crop_so_name} does not exist in {path}!");
+        print($"Loaded {crop_SO.name} from database!");
 
         crop_SO = cropSO;
 
@@ -210,16 +211,20 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 
         GrowthFinishTime = DateTime.Now.Add(plotCodeDuration);
 
-        print($"planted at time: {DateTime.Now.ToString()} will finish at: {GrowthFinishTime}. From {crop_SO.name} with durationPerClaim {crop_SO.baseTimeNeededPerClaim}\n " +
-            $"before: {crop_SO.baseTimeNeededPerClaim} + {DateTime.Now} = {DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim)}, \n" +
-            $"separated: {crop_SO.daysToClaim}, {crop_SO.hoursToClaim}, {crop_SO.minutesToClaim}, {crop_SO.secondsToClaim}. \n" +
-            $"test combination: {crop_SO.baseTimeNeededPerClaim} \n" +
-            $"compare: plottest: {plotCodeDuration} vs. propertytest: {propertyTest}");
+        print($"planted at time: {DateTime.Now.ToString()} will finish at: {GrowthFinishTime}. From {crop_SO.name} with durationPerClaim {crop_SO.baseTimeNeededPerClaim} \n " +
+                $"before: {crop_SO.baseTimeNeededPerClaim} + {DateTime.Now} = {DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim)}, \n" +
+                $"separated: {crop_SO.daysToClaim}, {crop_SO.hoursToClaim}, {crop_SO.minutesToClaim}, {crop_SO.secondsToClaim}. \n" +
+                $"test combination: {crop_SO.baseTimeNeededPerClaim} \n" +
+                $"compare: plottest: {plotCodeDuration} vs. propertytest: {propertyTest}");
         CurrentPlotState = PlotState.GROWING;
 
         //Visual update
         //TODO: Possible optimization, use crop pools.
         InstantiateCrop(crop_SO);
+
+        //update db when planted
+        plotData.crop_so_name = crop_SO.name;
+        db.UpdateRecord(plotData);
     }
 
     /// <summary>
