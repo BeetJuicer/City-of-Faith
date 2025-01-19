@@ -18,7 +18,7 @@ public class HarvestUI : MonoBehaviour
     // Method to put the crop image to Image UI
     public void Update()
     {
-        Debug.Log("Harvest Ui called!!!");
+        //Debug.Log("Harvest Ui called!!!");
         if (Rp.CurrentProducerState == ProducerState.Ready_To_Claim)
         {
             harvestCanvas.SetActive(true);
