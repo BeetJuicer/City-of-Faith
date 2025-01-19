@@ -21,7 +21,9 @@ public class CentralHall : MonoBehaviour
         get => level;
         private set
         {
-            if(value >= unlockables_SO.unclockableCrops.Count ||
+            if (maxLevel) return;
+
+            if (value >= unlockables_SO.unclockableCrops.Count ||
                value >= unlockables_SO.unclockableStructures.Count)
             {
                 Debug.LogWarning("You've reached max level! Have UI here.");
@@ -44,6 +46,8 @@ public class CentralHall : MonoBehaviour
     [Button]
     public void LevelUp()
     {
+        if (maxLevel) return;
+
         Level++;
         Debug.Log("Current Level: " + Level);
     }
@@ -135,6 +139,8 @@ public class CentralHall : MonoBehaviour
 
     private void LevelUp(int remainder)
     {
+        if (maxLevel) return;
+
         Level++;
         Exp = remainder;
         //TODO: optimize and store locked structures only once, not everytime they're fetched.
