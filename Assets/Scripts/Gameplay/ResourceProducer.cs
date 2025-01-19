@@ -197,7 +197,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
 
     public void BoostProgress()
     {
-        ClaimResources();
+        CurrentProducerState = ProducerState.Ready_To_Claim;
     }
 
     public bool IsInBoostableState()
