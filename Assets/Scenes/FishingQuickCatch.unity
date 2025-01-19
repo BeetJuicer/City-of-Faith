@@ -458,6 +458,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CarlTestMinigamePrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 8135093324859270984, guid: 9b16ec9905f6d1647b063f3f32475d21,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

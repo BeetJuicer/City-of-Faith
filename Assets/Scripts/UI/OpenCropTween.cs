@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class OpenCropTween : MonoBehaviour
 {
-    [SerializeField] GameObject CropShop;
+    [SerializeField] GameObject CropShopInner;
 
-    public void OnEnable()
+    private void OnEnable()
     {
         AudioManager.Instance.PlaySFX("Canvas");
         LeanTween.reset();
-        CropShop.transform.localScale = Vector3.zero;
-        LeanTween.scale(CropShop, Vector3.one, 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
+        CropShopInner.transform.localScale = Vector3.zero;
+        LeanTween.scale(CropShopInner, Vector3.one, 0.8f).setEase(LeanTweenType.easeOutExpo).setDelay(0.2f);
     }
 
     public void CloseBox()
     {
-        CropShop.LeanMoveLocalX(-Screen.width, 0.5f).setEaseInExpo().setOnComplete(OnComplete);
+        CropShopInner.LeanMoveLocalX(Screen.width, 0.5f).setEaseInExpo().setOnComplete(OnComplete);
     }
 
     void OnComplete()

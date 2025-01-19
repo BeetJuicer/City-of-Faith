@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6808500229470245457}
   - component: {fileID: 5300628410115529986}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BarnBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,6 +273,11 @@ MonoBehaviour:
   goldText: {fileID: 6166750909532455665}
   expText: {fileID: 7989764830970966003}
   exitButton: {fileID: 2899411625739790913}
+  HUDCanvas: {fileID: 0}
+  MainCamera3d: {fileID: 0}
+  BarnMinigamePrefab: {fileID: 0}
+  audioManager: {fileID: 0}
+  spawnParent: {fileID: 0}
 --- !u!1 &1746389733750342140
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,10 +442,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8516548860329586390}
-  - {fileID: 6808500229470245457}
   - {fileID: 2674515800969310175}
   - {fileID: 3973778072023523778}
   - {fileID: 1935803429780889384}
+  - {fileID: 6808500229470245457}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4138825534283390297

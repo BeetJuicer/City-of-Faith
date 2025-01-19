@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -189,10 +189,10 @@ TextureImporter:
       name: progress_3
       rect:
         serializedVersion: 2
-        x: 24
-        y: 15
-        width: 192
-        height: 39
+        x: 27
+        y: 12
+        width: 182
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
