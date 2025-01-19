@@ -7,6 +7,8 @@ public class TutorialVideoManager : MonoBehaviour
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private RawImage videoDisplay;
     [SerializeField] private Button closeButton;
+    [SerializeField] private GameObject HUDCanvas;
+    [SerializeField] private Image blurImage;
     [SerializeField] private VideoClip[] tutorialVideos;
 
     private int currentIndex = 1;
@@ -45,6 +47,8 @@ public class TutorialVideoManager : MonoBehaviour
 
         Debug.Log($"Video display active: {videoDisplay.gameObject.activeSelf}");
         Debug.Log($"Play Tutorial called at index {index}");
+        HUDCanvas.gameObject.SetActive(false);
+        blurImage.gameObject.SetActive(true);
         videoDisplay.gameObject.SetActive(true);
         closeButton.gameObject.SetActive(true);
         videoPlayer.clip = tutorialVideos[index];
@@ -56,6 +60,8 @@ public class TutorialVideoManager : MonoBehaviour
     public void CloseVideo()
     {
         videoPlayer.Stop();
+        HUDCanvas.gameObject.SetActive(true);
+        blurImage.gameObject.SetActive(false);
         videoDisplay.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
     }
