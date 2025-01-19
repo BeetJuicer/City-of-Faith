@@ -25,7 +25,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
     private Database db;
     private Database.ResourceProducerData resourceProducerData = null;
 
-    [SerializeField] private ResourceProducer_SO resourceProducer_SO;
+    [SerializeField] private ResourceProducer_SO rp_SO;
     private int amountPerClaim;
     private TimeSpan timePerClaim;
 
@@ -77,11 +77,12 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
             };
 
             db.AddNewRecord(resourceProducerData);
+            print($"Added resource producer {resourceProducerData.structure_id} to database.");
         }
 
         //Keep a base amount per claim in case leveling up buildings is possible.
-        amountPerClaim = resourceProducer_SO.baseAmountPerClaim;
-        timePerClaim = resourceProducer_SO.baseTimeNeededPerClaim;
+        amountPerClaim = rp_SO.baseAmountPerClaim;
+        timePerClaim = new TimeSpan(rp_SO.daysToClaim, rp_SO.hoursToClaim, rp_SO.minutesToClaim, rp_SO.secondsToClaim);
 
         uiManager = FindObjectOfType<UIManager>();
     }
@@ -153,11 +154,11 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
 
     public void ClaimResources()
     {
-        print("Claimed " + amountPerClaim + resourceProducer_SO.resource_SO.resourceType + "!");
+        print("Claimed " + amountPerClaim + rp_SO.resource_SO.resourceType + "!");
         ResourceManager.Instance.AdjustPlayerResources(FoodResource.Fish, amountPerClaim);
         //TODO: prototype - temporary claiming of gold
         ResourceManager.Instance.AdjustPlayerCurrency(Currency.Gold, amountPerClaim);
-        centralHall.AddToCentralExp(resourceProducer_SO.expGivenPerClaim);
+        centralHall.AddToCentralExp(rp_SO.expGivenPerClaim);
 
         StartProduction();
     }

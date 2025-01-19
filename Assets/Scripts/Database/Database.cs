@@ -207,21 +207,24 @@ public class Database : MonoBehaviour
             Vector3 pos = new Vector3(s_data.posX, s_data.posY, s_data.posZ);
             Quaternion rot = new Quaternion(s_data.rotX, s_data.rotY, s_data.rotZ, s_data.rotW);
 
-            print("Intantiating structure....");
 
             GameObject structure = (GameObject)Instantiate(prefab, pos, rot);
             structure.GetComponent<Structure>().LoadData(s_data, this);
 
+            print($"Instantiating structure: {s_data.structure_id}. {s_data.prefab_name}, from player {s_data.player_id}");
 
             // I don't like this checking each type of structure. Might refactor.
             // Loading ResourceProducerData
             if (structure.TryGetComponent(out ResourceProducer rp))
             {
+                print($"Instantiating rp: {resourceProducers[s_data.structure_id]}, from player {s_data.player_id}");
+
                 rp.LoadData(resourceProducers[s_data.structure_id], this);
             }
             else if (structure.TryGetComponent(out Plot plot))
             {
                 // Loading Plot
+                print($"Instantiating plot: {plots[s_data.structure_id]}, from player {s_data.player_id}");
                 plot.LoadData(plots[s_data.structure_id], this);
             }
         }
@@ -249,6 +252,7 @@ public class Database : MonoBehaviour
 
     public void AddNewRecord(IDatabaseData newRecord)
     {
+        print("new record added");
         db.Insert(newRecord);
     }
 

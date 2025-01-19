@@ -44,7 +44,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
             currentPlotState = value;
             plotData.plot_state = (int)currentPlotState;
             db.UpdateRecord(plotData);
-                //UI
+            //UI
             if (cropVisual != null) cropVisual.UpdateVisual(currentPlotState);
             if (cropImageDisplay != null) cropImageDisplay.UpdateVisual(currentPlotState, crop_SO);
         }
@@ -90,6 +90,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
             };
 
             db.AddNewRecord(plotData);
+            print($"Initial added plot {plotData.structure_id} to with crop_so_name: {Crop_SO.name} to database.");
         }
 
         cropImageDisplay.UpdateVisual(CurrentPlotState, crop_SO);
@@ -98,6 +99,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 
     public void LoadData(Database.PlotData data, Database db)
     {
+        print("Loading crop......");
         //not using the property so that I don't have to call the update database event. Just loading data. 
         plotData = data;
         this.db = db;
@@ -225,6 +227,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         //update db when planted
         plotData.crop_so_name = crop_SO.name;
         db.UpdateRecord(plotData);
+        print($"Database Plant Log: Updating database of plot #{plotData.structure_id} with {crop_SO.name}. ");
     }
 
     /// <summary>
