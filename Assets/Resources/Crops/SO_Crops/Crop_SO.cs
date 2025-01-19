@@ -23,10 +23,5 @@ public class Crop_SO : ScriptableObject
     public int minutesToClaim;
     public int secondsToClaim;
 
-    public TimeSpan baseTimeNeededPerClaim;
-
-    private void OnValidate()
-    {
-        baseTimeNeededPerClaim = new TimeSpan(daysToClaim, hoursToClaim, minutesToClaim, secondsToClaim);
-    }
+    public TimeSpan baseTimeNeededPerClaim { get => new TimeSpan(daysToClaim, hoursToClaim, minutesToClaim, secondsToClaim); set => baseTimeNeededPerClaim = value; }
 }

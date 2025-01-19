@@ -33,7 +33,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
     public bool printTime = false;
 
     UIManager uiManager;
-
+    CentralHall centralHall;
 
     private ProducerState currentProducerState = ProducerState.Waiting;
     public ProducerState CurrentProducerState
@@ -157,6 +157,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
         ResourceManager.Instance.AdjustPlayerResources(FoodResource.Fish, amountPerClaim);
         //TODO: prototype - temporary claiming of gold
         ResourceManager.Instance.AdjustPlayerCurrency(Currency.Gold, amountPerClaim);
+        centralHall
 
         StartProduction();
     }

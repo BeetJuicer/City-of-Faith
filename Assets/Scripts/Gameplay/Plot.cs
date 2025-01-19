@@ -204,9 +204,17 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         this.crop_SO = crop_SO;
 
         // Success
-        GrowthFinishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
-        print($"planted at time: {DateTime.Now.ToString()} will finish at: {GrowthFinishTime}. From {crop_SO.name} with durationPerClaim {crop_SO.baseTimeNeededPerClaim}.... " +
-            $"{crop_SO.baseTimeNeededPerClaim} + {DateTime.Now} = {DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim)}, separated: {crop_SO.daysToClaim}, {crop_SO.hoursToClaim}, {crop_SO.minutesToClaim}, {crop_SO.secondsToClaim}.  Big: {Crop_SO.minutesToClaim} minutes");
+        //GrowthFinishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
+        TimeSpan plotCodeDuration = new TimeSpan(crop_SO.daysToClaim, crop_SO.hoursToClaim, crop_SO.minutesToClaim, crop_SO.daysToClaim);
+        TimeSpan propertyTest = Crop_SO.baseTimeNeededPerClaim;
+
+        GrowthFinishTime = DateTime.Now.Add(plotCodeDuration);
+
+        print($"planted at time: {DateTime.Now.ToString()} will finish at: {GrowthFinishTime}. From {crop_SO.name} with durationPerClaim {crop_SO.baseTimeNeededPerClaim}\n " +
+            $"before: {crop_SO.baseTimeNeededPerClaim} + {DateTime.Now} = {DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim)}, \n" +
+            $"separated: {crop_SO.daysToClaim}, {crop_SO.hoursToClaim}, {crop_SO.minutesToClaim}, {crop_SO.secondsToClaim}. \n" +
+            $"test combination: {crop_SO.baseTimeNeededPerClaim} \n" +
+            $"compare: plottest: {plotCodeDuration} vs. propertytest: {propertyTest}");
         CurrentPlotState = PlotState.GROWING;
 
         //Visual update
