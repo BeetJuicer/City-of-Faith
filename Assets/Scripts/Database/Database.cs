@@ -217,14 +217,14 @@ public class Database : MonoBehaviour
             // Loading ResourceProducerData
             if (structure.TryGetComponent(out ResourceProducer rp))
             {
-                print($"Instantiating rp: {resourceProducers[s_data.structure_id]}, from player {s_data.player_id}");
+                print($"Instantiating rp: {resourceProducers[s_data.structure_id].structure_id}, from player {s_data.player_id}");
 
                 rp.LoadData(resourceProducers[s_data.structure_id], this);
             }
             else if (structure.TryGetComponent(out Plot plot))
             {
                 // Loading Plot
-                print($"Instantiating plot: {plots[s_data.structure_id]}, from player {s_data.player_id}");
+                print($"Instantiating plot: {plots[s_data.structure_id].structure_id}, from player {s_data.player_id}");
                 plot.LoadData(plots[s_data.structure_id], this);
             }
         }
