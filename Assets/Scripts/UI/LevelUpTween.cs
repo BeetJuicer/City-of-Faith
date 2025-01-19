@@ -38,7 +38,7 @@ public class LevelUpTween : MonoBehaviour
         gameObject.SetActive(false);
         HUD.SetActive(true);
         Debug.Log("Completed LevelUP");
-        //VideoManager.TriggerTutorial();
+        VideoManager.TriggerTutorial();
     }
 
 }
