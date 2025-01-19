@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6252171148444184858}
   - component: {fileID: 6379754331242377408}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Fishing  Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -347,10 +347,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4496856675189963342, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501994938621818109, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 613.2343
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501994938621818109, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 211.7962
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501994938621818109, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 321.69983
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501994938621818109, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -106.53229
+      objectReference: {fileID: 0}
     - target: {fileID: 5164921790947408336, guid: 86056d97531bcc546a997c3703537347,
         type: 3}
       propertyPath: m_Name
       value: FishingMiniGame - QuickFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608828371125143822, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121877418089799681, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 4078907416212774821}
+    - target: {fileID: 8121877418089799681, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218518515857269040, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218518515857269040, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218518515857269040, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941343225168492705, guid: 86056d97531bcc546a997c3703537347,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8965529336768539851, guid: 86056d97531bcc546a997c3703537347,
         type: 3}

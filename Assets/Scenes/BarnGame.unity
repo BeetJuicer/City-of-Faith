@@ -463,6 +463,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VanericTestMinigamePrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 4244264331427100909, guid: 711a9300d78cd324ab991e6393a784dc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

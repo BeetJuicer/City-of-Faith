@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1497752471125887571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8403666498696019095}
+  - component: {fileID: 3250025674494591043}
+  - component: {fileID: 2675896198905472413}
+  m_Layer: 5
+  m_Name: BARNBG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8403666498696019095
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497752471125887571}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1666851177314364799}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3250025674494591043
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497752471125887571}
+  m_CullTransparentMesh: 1
+--- !u!114 &2675896198905472413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497752471125887571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 9d980fa738cad2440bb49ed3652539e7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2206824212754802297
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1812134448290597037
 Transform:
   m_ObjectHideFlags: 0
@@ -282,7 +357,7 @@ GameObject:
   - component: {fileID: 8303924590108717140}
   - component: {fileID: 6827600460455423391}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Barn Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,6 +489,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1812134448290597037}
     m_Modifications:
+    - target: {fileID: 1820780401902876209, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 8579433470601021168}
+    - target: {fileID: 1820780401902876209, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2805997924320179240, guid: bb3148eaaae5ba546a719145a51e03e0,
         type: 3}
       propertyPath: m_UiScaleMode
@@ -464,6 +549,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: BarnMiniGame - Egg Catcher
       objectReference: {fileID: 0}
+    - target: {fileID: 3503065244575432955, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4951549179580940963, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300628410115529986, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5300628410115529986, guid: bb3148eaaae5ba546a719145a51e03e0,
         type: 3}
       propertyPath: m_SortingLayer
@@ -472,6 +572,11 @@ PrefabInstance:
     - target: {fileID: 5300628410115529986, guid: bb3148eaaae5ba546a719145a51e03e0,
         type: 3}
       propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300628410115529986, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5418422200805599661, guid: bb3148eaaae5ba546a719145a51e03e0,
@@ -562,6 +667,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 375754021462354835}
+    - targetCorrespondingSourceObject: {fileID: 2674515800969310175, guid: bb3148eaaae5ba546a719145a51e03e0,
+        type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 8403666498696019095}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3503065244575432955, guid: bb3148eaaae5ba546a719145a51e03e0,
         type: 3}
@@ -618,6 +727,12 @@ MonoBehaviour:
   BarnMinigamePrefab: {fileID: 4244264331427100909}
   audioManager: {fileID: 0}
   spawnParent: {fileID: 375754021462354835}
+--- !u!224 &1666851177314364799 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2674515800969310175, guid: bb3148eaaae5ba546a719145a51e03e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3619787592741044896}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1873732878222354657 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2899411625739790913, guid: bb3148eaaae5ba546a719145a51e03e0,
