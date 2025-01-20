@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelUpTween : MonoBehaviour
 {
     [SerializeField] GameObject SoftWheel, HardWheel, HUD;
+    [SerializeField] TutorialVideoManager VideoManager;
     // Store LeanTween IDs
     private int softWheelTweenId, hardWheelTweenId;
 
@@ -20,6 +21,7 @@ public class LevelUpTween : MonoBehaviour
 
     public void CloseLevel()
     {
+        Debug.Log("Close Level called");
         StopAnimations();
         OnComplete();
     }
@@ -35,10 +37,8 @@ public class LevelUpTween : MonoBehaviour
     {
         gameObject.SetActive(false);
         HUD.SetActive(true);
-
-        //ResourceManager rs;
-        //text.text = rs.PlayerCurrencies[Currency.Glory].ToString();
+        Debug.Log("Completed LevelUP");
+        VideoManager.TriggerTutorial();
     }
-
 
 }

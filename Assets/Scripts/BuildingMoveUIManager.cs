@@ -26,13 +26,11 @@ public class BuildingMoveUIManager : MonoBehaviour
 
     private void UpdateButtonColor()
     {
-        //if (!buildingOverlay.IsAllowedToPlace)
-        //{
-        //    GetComponent<Button>().interactable = false;
-        //}
         if (checkButton != null && buildingOverlay != null)
         {
-            // Get the Image component of the button and update the color
+            bool isAllowed = buildingOverlay.IsAllowedToPlace;
+            checkButton.interactable = isAllowed;
+
             Image buttonImage = checkButton.GetComponent<Image>();
             if (buttonImage != null)
             {

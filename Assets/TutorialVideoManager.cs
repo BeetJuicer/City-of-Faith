@@ -8,57 +8,56 @@ public class TutorialVideoManager : MonoBehaviour
     [SerializeField] private RawImage videoDisplay;
     [SerializeField] private Button closeButton;
     [SerializeField] private VideoClip[] tutorialVideos;
-    [SerializeField] private CentralHall centralHall;
 
+    private int currentIndex = 1;
 
-    private void OnEnable()
-    {
-        if (centralHall != null)
-        {
-            centralHall.OnPlayerLevelUp += TriggerTutorial;
-        }
-    }
-
-
-    private void OnDisable()
-    {
-        if (centralHall != null)
-        {
-            centralHall.OnPlayerLevelUp -= TriggerTutorial;
-        }
-    }
     private void Start()
     {
-        PlayTutorialVideo(1);
-        closeButton.onClick.AddListener(CloseVideo);
-    }
-
-    // Method to play the tutorial based on the player's level
-    public void TriggerTutorial(int newLevel)
-    {
-        if (newLevel == 1)
+        if (tutorialVideos.Length > 0)
         {
-            PlayTutorialVideo(2);
+            Debug.Log("Starting the first tutorial video.");
+            PlayTutorialVideo(0); //play first video
+            closeButton.onClick.RemoveAllListeners();
+            closeButton.onClick.AddListener(CloseVideo);
+        }
+        else
+        {
+            Debug.LogError("No tutorial videos assigned in the tutorialVideos array.");
         }
     }
 
-    // Play the tutorial video corresponding to the current level
-    public void PlayTutorialVideo(int level)
+    public void TriggerTutorial()
     {
-        if (level > 0 && level <= tutorialVideos.Length)
+        Debug.Log($"TriggerTutorial called at index {currentIndex}");
+        if (currentIndex < tutorialVideos.Length)
         {
-            videoPlayer.clip = tutorialVideos[level - 1];  // Assign the correct video clip based on the level
-            videoDisplay.gameObject.SetActive(true);  // Show the RawImage panel to display the video
-            closeButton.gameObject.SetActive(true);
-            videoPlayer.Play();
+            PlayTutorialVideo(currentIndex); //play 2nd video which is index = 1
+            currentIndex++; // increment for future videos
+        }
+        else
+        {
+            Debug.LogWarning("All tutorial videos have been played.");
         }
     }
 
-    // Close the video when the button is pressed
+    public void PlayTutorialVideo(int index)
+    {
+
+        Debug.Log($"Video display active: {videoDisplay.gameObject.activeSelf}");
+        Debug.Log($"Play Tutorial called at index {index}");
+        videoDisplay.gameObject.SetActive(true);
+        closeButton.gameObject.SetActive(true);
+        videoPlayer.clip = tutorialVideos[index];
+        videoPlayer.enabled = true;
+        videoPlayer.Prepare();
+        videoPlayer.Play();
+    }
+
     public void CloseVideo()
     {
-        videoPlayer.Stop();  // Stop the video playback
-        videoDisplay.gameObject.SetActive(false);  // Hide the RawImage panel
+        videoPlayer.Stop();
+        videoDisplay.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
     }
+
 }
