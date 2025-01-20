@@ -283,6 +283,16 @@ PrefabInstance:
       propertyPath: progressSlider
       value: 
       objectReference: {fileID: 5506001798511925410}
+    - target: {fileID: 212892785631247488, guid: fdbf7fe3e9e035448acf17ee0e527394,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212892785631247488, guid: fdbf7fe3e9e035448acf17ee0e527394,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1407478550073438119, guid: fdbf7fe3e9e035448acf17ee0e527394,
         type: 3}
       propertyPath: m_Name
@@ -291,7 +301,7 @@ PrefabInstance:
     - target: {fileID: 6624346216037381461, guid: fdbf7fe3e9e035448acf17ee0e527394,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 6624346216037381461, guid: fdbf7fe3e9e035448acf17ee0e527394,
         type: 3}
@@ -301,7 +311,7 @@ PrefabInstance:
     - target: {fileID: 6624346216037381461, guid: fdbf7fe3e9e035448acf17ee0e527394,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 6624346216037381461, guid: fdbf7fe3e9e035448acf17ee0e527394,
         type: 3}
