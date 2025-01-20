@@ -109,6 +109,7 @@ public class Database : MonoBehaviour
     }
 
     public PlayerData CurrentPlayerData { get; private set; }
+    private string path = $"{Application.persistentDataPath}/MyDb.db";
 
     private void Awake()
     {
@@ -122,7 +123,7 @@ public class Database : MonoBehaviour
         }
         //TODO FOR DATABASE: PASSWORD CHECKING
 
-        db = new SQLiteConnection($"{Application.persistentDataPath}/MyDb.db");
+        db = new SQLiteConnection(path);
 
         //activate foreign key constraints
         db.Execute("PRAGMA foreign_keys = ON");
@@ -169,7 +170,7 @@ public class Database : MonoBehaviour
             LoadGame();
         }
 
-        //db.Close()
+        db.Close();
     }
 
     // When player reenters game.
@@ -181,6 +182,8 @@ public class Database : MonoBehaviour
 
     private void LoadGame()
     {
+        db = new SQLiteConnection(path);
+
         var structures = GetStructureData();
         if (structures.Count == 0)
         {
@@ -241,57 +244,78 @@ public class Database : MonoBehaviour
                 plot.LoadData(plots[s_data.structure_id], this);
             }
         }
+
+        db.Close();
     }
 
 
     public List<StructureData> GetStructureData()
     {
-        return db.Table<StructureData>().Where((row) => row.player_id == PlayerId).ToList();
+        db = new SQLiteConnection(path);
+        var result = db.Table<StructureData>().Where((row) => row.player_id == PlayerId).ToList();
+        db.Close();
+        return result;
     }
 
     public List<CurrencyData> GetCurrencyData()
     {
-        return db.Table<CurrencyData>().Where((row) => row.player_id == PlayerId).ToList();
+        db = new SQLiteConnection(path);
+        var result = db.Table<CurrencyData>().Where((row) => row.player_id == PlayerId).ToList();
+        db.Close();
+        return result;
     }
 
     public CentralData GetCentralData()
     {
+        db = new SQLiteConnection(path);
         var centralTable = db.Table<CentralData>().ToList().Where(row => row.player_id == PlayerId);
+        db.Close();
         if (centralTable.Count() == 0)
             return null;
         else
             return centralTable.First();
+
     }
 
     public void AddNewRecord(IDatabaseData newRecord)
     {
-        print("new record added");
+        db = new SQLiteConnection(path);
         db.Insert(newRecord);
+        print("new record added");
+        db.Close();
     }
 
     //debug
     public void AddNewRecord(PlotData newRecord)
     {
-        print("new record added");
+        db = new SQLiteConnection(path);
         db.Insert(newRecord);
+        print("new record added");
+        db.Close();
     }
 
     public void UpdateRecord(IDatabaseData newRecord)
     {
+        db = new SQLiteConnection(path);
         db.Update(newRecord);
+        db.Close();
     }
 
     public void UpdateRecords(IEnumerable<IDatabaseData> newRecords)
     {
+        db = new SQLiteConnection(path);
         foreach (var record in newRecords)
         {
             db.Update(record);
         }
+        db.Close();
     }
 
     public void DeleteRecord(IDatabaseData recordToDelete)
     {
+            db = new SQLiteConnection(path);
         db.Delete(recordToDelete);
+       db.Close();
     }
 
 }
