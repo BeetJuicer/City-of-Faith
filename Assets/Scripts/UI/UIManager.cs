@@ -163,7 +163,6 @@ public class UIManager : MonoBehaviour
         miniGameButtonOpen.onClick.RemoveAllListeners();
         miniGameButtonOpen.onClick.AddListener(() =>
         {
-            DisableOnStructureClickButtons();
 
             Debug.Log($"Starting mini game for {structureName}");
             switch (structureName)
@@ -178,6 +177,8 @@ public class UIManager : MonoBehaviour
                     Debug.LogWarning("No minigame associated with this structure.");
                     break;
             }
+
+            DisableOnStructureClickButtons();
         });
 
     }

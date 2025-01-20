@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Cinemachine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PinchToZoomAndPan : MonoBehaviour
 {
@@ -94,10 +95,14 @@ public class PinchToZoomAndPan : MonoBehaviour
         // Perform the raycast and check if it hits something
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.TryGetComponent(out IClickableObject obj))
+            IClickableObject[] clickables = hit.collider.GetComponents<IClickableObject>();
+            if (clickables.Length > 0)
             {
-                Debug.Log($"Clickable object pressed: {hit.collider.gameObject.name}");
-                obj.OnObjectClicked();
+                foreach (IClickableObject clickable in clickables)
+                {
+                    Debug.Log($"Clickable object pressed: {hit.collider.gameObject.name} at {hit.point}");
+                    clickable.OnObjectClicked();
+                }
             }
 
             if (hit.collider.TryGetComponent(out draggableObject))

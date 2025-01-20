@@ -439,6 +439,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HarvestResProUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5556565899530203140, guid: d6af44136a37a2140ba1dfe0ed7ebd4a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6957925799771575048, guid: d6af44136a37a2140ba1dfe0ed7ebd4a,
         type: 3}
       propertyPath: m_LocalPosition.z
