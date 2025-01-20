@@ -155,6 +155,9 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
     {
         print("Claimed " + amountPerClaim + resourceProducer_SO.resource_SO.resourceType + "!");
         ResourceManager.Instance.AdjustPlayerResources(FoodResource.Fish, amountPerClaim);
+        //TODO: prototype - temporary claiming of gold
+        ResourceManager.Instance.AdjustPlayerCurrency(Currency.Gold, amountPerClaim);
+
         StartProduction();
     }
 
