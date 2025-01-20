@@ -2825,6 +2825,11 @@ PrefabInstance:
       objectReference: {fileID: 1994064818}
     - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
         type: 3}
+      propertyPath: offset.x
+      value: -22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538103113714481779, guid: 1acd70bae1a39ca4db8c2d2da36efb8b,
+        type: 3}
       propertyPath: HUDCanvas
       value: 
       objectReference: {fileID: 1770438026}
