@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using SQLite;
 using System;
 using System.Linq;
@@ -13,7 +14,13 @@ public class Database : MonoBehaviour
     private readonly int USERNAME_CHARACTER_LIMIT = 50;
     private readonly int MINIMUM_PASSWORD_LENGTH = 8;
 
-    [SerializeField] private string username = "Test Tickles";
+    [SerializeField] private int mainGameIndex;
+    [SerializeField] private string testingpo;
+
+    [HideInInspector]
+    public string Username { get; private set; }
+    //temp for prototype
+
     private string password = "";
     public int PlayerId { get; private set; }
 
@@ -112,9 +119,56 @@ public class Database : MonoBehaviour
     public PlayerData CurrentPlayerData { get; private set; }
     private string path;
 
+    [NaughtyAttributes.Button]
+    public void EnterTest()
+    {
+        SetUser(testingpo);
+    }
+
+
+    public void SetUser(string s)
+    {
+        var db = new SQLiteConnection(path);
+
+        Username = s;
+
+        //Query for user
+        TableQuery<PlayerData> query = db.Table<PlayerData>().Where(row => row.Username.Equals(Username));
+
+        // No player. Start new game.
+        //TODO: set flags for tutorials.
+        if (query.Count() == 0)
+        {
+            // Create a new player.
+            var newPlayer = new PlayerData()
+            {
+                Username = Username,
+                Password = password
+            };
+            db.Insert(newPlayer);
+            PlayerId = newPlayer.Player_id;
+            CurrentPlayerData = newPlayer;
+            print($"User {Username} not found. Creating new game with id:{newPlayer.Player_id}");
+            return;
+        }
+        else // not new player
+        {
+            CurrentPlayerData = query.ToList<PlayerData>().First();
+            PlayerId = CurrentPlayerData.Player_id;
+            //increase play sessions count
+            CurrentPlayerData.Play_sessions += 1;
+
+            db.Update(CurrentPlayerData);
+        }
+
+        db.Close();
+    }
+
     private void Awake()
     {
         path = $"{Application.persistentDataPath}/MyDb.db";
+
+        SceneManager.DontDestroyOnLoad(this);
 
         if (Instance != null && Instance != this)
         {
@@ -128,12 +182,12 @@ public class Database : MonoBehaviour
 
         db = new SQLiteConnection(path);
 
-        print("db_logs: printing all!");
-        var allstructures = db.Table<StructureData>();
-        foreach (var item in allstructures)
-        {
-            print($"{item.structure_id} owned by {item.player_id}");
-        }
+        //print("db_logs: printing all!");
+        //var allstructures = db.Table<StructureData>();
+        //foreach (var item in allstructures)
+        //{
+        //    print($"{item.structure_id} owned by {item.player_id}");
+        //}
 
 
         //activate foreign key constraints
@@ -146,42 +200,12 @@ public class Database : MonoBehaviour
         db.CreateTable<CurrencyData>();
         db.CreateTable<CentralData>();
 
-        //Query for user
-        TableQuery<PlayerData> query = db.Table<PlayerData>().Where(row => row.Username.Equals(username));
-
-        // No player. Start new game.
-        //TODO: set flags for tutorials.
-        if (query.Count() == 0)
-        {
-            // Create a new player.
-            var newPlayer = new PlayerData()
-            {
-                Username = username,
-                Password = password
-            };
-            db.Insert(newPlayer);
-            PlayerId = newPlayer.Player_id;
-            print($"User {username} not found. Creating new game.");
-            return;
-        }
-        else // not new player
-        {
-            CurrentPlayerData = query.ToList<PlayerData>().First();
-            PlayerId = CurrentPlayerData.Player_id;
-            //increase play sessions count
-            CurrentPlayerData.Play_sessions += 1;
-
-            db.Update(CurrentPlayerData);
-
-            //Exit out if we're in the loading screen. No need to load game because we are not in game screen yet.
-            if (!IsGameplayScene) 
-                return;
-
-            print($"User {username} found and in gameplay. Loading Game.");
-            LoadGame();
-        }
-
         db.Close();
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
     }
 
     // When player reenters game.
@@ -190,6 +214,25 @@ public class Database : MonoBehaviour
     //    if (focus)
     //        LoadGame();
     //}
+
+    private void Start()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+    }
+
+    private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (CurrentPlayerData == null)
+        {
+            Debug.LogWarning("Player data is null!");
+            return;
+        }
+        if (scene.buildIndex == mainGameIndex)
+        {
+            LoadGame();
+        }
+
+    }
 
     private void LoadGame()
     {
