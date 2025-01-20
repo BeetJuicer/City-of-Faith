@@ -262,6 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2653418224118656517}
   - component: {fileID: 3102126976202974905}
+  - component: {fileID: 5502803573254500573}
   m_Layer: 0
   m_Name: HarvestResProUI
   m_TagString: Untagged
@@ -299,6 +300,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   harvestCanvas: {fileID: 2482069581418431663}
   image: {fileID: 3851870220299880844}
+--- !u!114 &5502803573254500573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556565899530203140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba6f92e16cdedf4c81e8e45e9a0ec5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transform: {fileID: 2653418224118656517}
 --- !u!1 &7971733743577056193
 GameObject:
   m_ObjectHideFlags: 0
