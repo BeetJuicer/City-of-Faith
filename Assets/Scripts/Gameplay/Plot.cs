@@ -43,6 +43,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         {
             currentPlotState = value;
             plotData.plot_state = (int)currentPlotState;
+            if (db == null) print("db_logs: db in plot is null!!");
             db.UpdateRecord(plotData);
             //UI
             if (cropVisual != null) cropVisual.UpdateVisual(currentPlotState);
@@ -90,7 +91,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
             };
 
             db.AddNewRecord(plotData);
-            print($"db_logs: Initial added plot#{plotData.structure_id} with crop_so_name: {crop_SO.name} to database.");
+            print($"db_logs: Initial added plot# {plotData.structure_id} with crop_so_name: null to database.");
         }     
         else
         {
@@ -111,6 +112,9 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         currentPlotState = (PlotState)data.plot_state;
         growthFinishTime = data.growth_finish_time;
 
+        if (plotData.crop_so_name == null)
+            return;
+
         string path = $"Crops/SO_Crops/{data.crop_so_name}";
         print($"db_logs: Attempting to look for {path}");
         Crop_SO cropSO = (Crop_SO)Resources.Load(path);
@@ -121,9 +125,9 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         else
             print($"db_logs: {path} found!");
 
+        crop_SO = cropSO;
         print($"db_logs: Loaded {crop_SO.name} from database!");
 
-        crop_SO = cropSO;
 
         if (currentPlotState == PlotState.GROWING)
         {

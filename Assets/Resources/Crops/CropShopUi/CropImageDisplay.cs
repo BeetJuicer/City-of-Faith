@@ -18,6 +18,11 @@ public class CropImageDisplay : MonoBehaviour
     // Method to put the crop image to Image UI
     public void UpdateVisual(Plot.PlotState state, Crop_SO so)
     {
+        if(so == null)
+        {
+            print("null so");
+            return;
+        }
         image.sprite = so.cropImage;
         harvestCanvas.SetActive(state == Plot.PlotState.RIPE);
     }

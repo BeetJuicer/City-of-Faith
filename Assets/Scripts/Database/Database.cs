@@ -4,6 +4,7 @@ using UnityEngine;
 using SQLite;
 using System;
 using System.Linq;
+using System.Xml.Schema;
 
 public class Database : MonoBehaviour
 {
@@ -109,10 +110,12 @@ public class Database : MonoBehaviour
     }
 
     public PlayerData CurrentPlayerData { get; private set; }
-    private string path = $"{Application.persistentDataPath}/MyDb.db";
+    private string path;
 
     private void Awake()
     {
+        path = $"{Application.persistentDataPath}/MyDb.db";
+
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -124,6 +127,14 @@ public class Database : MonoBehaviour
         //TODO FOR DATABASE: PASSWORD CHECKING
 
         db = new SQLiteConnection(path);
+
+        print("db_logs: printing all!");
+        var allstructures = db.Table<StructureData>();
+        foreach (var item in allstructures)
+        {
+            print($"{item.structure_id} owned by {item.player_id}");
+        }
+
 
         //activate foreign key constraints
         db.Execute("PRAGMA foreign_keys = ON");
@@ -182,12 +193,18 @@ public class Database : MonoBehaviour
 
     private void LoadGame()
     {
-        db = new SQLiteConnection(path);
+        var db = new SQLiteConnection(path);
 
         var structures = GetStructureData();
+        print("db_logs: printing result of GetStructureData()");
+        foreach (var item in structures)
+        {
+            print($"{item.structure_id} owned by {item.player_id}");
+        }
+
         if (structures.Count == 0)
         {
-            print($"db_logs: no structure found. returning.");
+            print($"db_logs: no strsucture found. returning.");
             return;
         }
 
@@ -217,17 +234,22 @@ public class Database : MonoBehaviour
         {
             // Instantiation of GameObject
             string path = $"Structures/{s_data.prefab_name}";
-            var prefab = Resources.Load(path);
+            print($"db_logs: loop passes through {s_data.structure_id}. {s_data.prefab_name}");
+            object prefab = Resources.Load(path);
             Debug.Assert(prefab != null, $"{s_data.prefab_name} does not exist in {path}!");
+            print($"db_logs: loop found {path}!");
 
             Vector3 pos = new Vector3(s_data.posX, s_data.posY, s_data.posZ);
             Quaternion rot = new Quaternion(s_data.rotX, s_data.rotY, s_data.rotZ, s_data.rotW);
 
+            print($"db_logs: loop attempting to instantiate prefab {path}!");
 
-            GameObject structure = (GameObject)Instantiate(prefab, pos, rot);
+            GameObject structure = Instantiate(prefab as GameObject, pos, rot);
+
+            print($"db_logs: Structure is {structure}");
             structure.GetComponent<Structure>().LoadData(s_data, this);
 
-            print($"Instantiating structure: {s_data.structure_id}. {s_data.prefab_name}, from player {s_data.player_id}");
+            print($"db_logs: Instantiating structure: {s_data.structure_id}. {s_data.prefab_name}, from player {s_data.player_id}");
 
             // I don't like this checking each type of structure. Might refactor.
             // Loading ResourceProducerData
@@ -251,7 +273,7 @@ public class Database : MonoBehaviour
 
     public List<StructureData> GetStructureData()
     {
-        db = new SQLiteConnection(path);
+        var db = new SQLiteConnection(path);
         var result = db.Table<StructureData>().Where((row) => row.player_id == PlayerId).ToList();
         db.Close();
         return result;
@@ -259,7 +281,7 @@ public class Database : MonoBehaviour
 
     public List<CurrencyData> GetCurrencyData()
     {
-        db = new SQLiteConnection(path);
+        var db = new SQLiteConnection(path);
         var result = db.Table<CurrencyData>().Where((row) => row.player_id == PlayerId).ToList();
         db.Close();
         return result;
@@ -267,7 +289,7 @@ public class Database : MonoBehaviour
 
     public CentralData GetCentralData()
     {
-        db = new SQLiteConnection(path);
+        var db = new SQLiteConnection(path);
         var centralTable = db.Table<CentralData>().ToList().Where(row => row.player_id == PlayerId);
         db.Close();
         if (centralTable.Count() == 0)
@@ -279,7 +301,7 @@ public class Database : MonoBehaviour
 
     public void AddNewRecord(IDatabaseData newRecord)
     {
-        db = new SQLiteConnection(path);
+        var db = new SQLiteConnection(path);
         db.Insert(newRecord);
         print("new record added");
         db.Close();
@@ -288,7 +310,7 @@ public class Database : MonoBehaviour
     //debug
     public void AddNewRecord(PlotData newRecord)
     {
-        db = new SQLiteConnection(path);
+        var db = new SQLiteConnection(path);
         db.Insert(newRecord);
         print("new record added");
         db.Close();
@@ -296,14 +318,14 @@ public class Database : MonoBehaviour
 
     public void UpdateRecord(IDatabaseData newRecord)
     {
-        db = new SQLiteConnection(path);
+        var db = new SQLiteConnection(path);
         db.Update(newRecord);
         db.Close();
     }
 
     public void UpdateRecords(IEnumerable<IDatabaseData> newRecords)
     {
-        db = new SQLiteConnection(path);
+        var db = new SQLiteConnection(path);
         foreach (var record in newRecords)
         {
             db.Update(record);
@@ -313,7 +335,7 @@ public class Database : MonoBehaviour
 
     public void DeleteRecord(IDatabaseData recordToDelete)
     {
-            db = new SQLiteConnection(path);
+        var db = new SQLiteConnection(path);
         db.Delete(recordToDelete);
        db.Close();
     }
