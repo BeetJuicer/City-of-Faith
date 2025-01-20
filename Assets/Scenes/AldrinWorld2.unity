@@ -557,7 +557,7 @@ PrefabInstance:
     - target: {fileID: 1084070077769703329, guid: 9897d7d59748e6f40be724c9694f5a95,
         type: 3}
       propertyPath: startingPlayerCurrencies._serializedList.Array.data[0].Value
-      value: 10000
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 1084070077769703329, guid: 9897d7d59748e6f40be724c9694f5a95,
         type: 3}
@@ -2085,7 +2085,7 @@ PrefabInstance:
     - target: {fileID: 7014676771989128693, guid: dc982e2ba541219489aa4da781647ae7,
         type: 3}
       propertyPath: username
-      value: mamamiya
+      value: mamamiyaya
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
