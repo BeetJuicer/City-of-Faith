@@ -78,7 +78,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 
         if (plotData == null)
         {
-            Crop_SO = tempCropSO;
+            Crop_SO = null;
             db = FindFirstObjectByType<Database>();
 
             plotData = new Database.PlotData
@@ -86,12 +86,12 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
                 structure_id = structure.StructureID,
                 growth_finish_time = GrowthFinishTime,
                 plot_state = (int)currentPlotState,
-                crop_so_name = Crop_SO.name
+                crop_so_name = null
             };
 
             db.AddNewRecord(plotData);
-            print($"db_logs: Initial added plot#{plotData.structure_id} with crop_so_name: {Crop_SO.name} to database.");
-        }
+            print($"db_logs: Initial added plot#{plotData.structure_id} with crop_so_name: {crop_SO.name} to database.");
+        }     
         else
         {
             print($"db_logs: not adding new plot to database!");
@@ -125,8 +125,19 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 
         crop_SO = cropSO;
 
-        if (currentPlotState == PlotState.GROWING ||
-            currentPlotState == PlotState.RIPE)
+        if (currentPlotState == PlotState.GROWING)
+        {
+            print("db_logs: last saved is " + currentPlotState + ".");
+            TimeSpan timeLeftToClaim = GrowthFinishTime - DateTime.Now;
+            if (timeLeftToClaim <= TimeSpan.Zero)
+            {
+                print("db_logs: moving to ripe state");
+                CurrentPlotState = (PlotState.RIPE);
+            }
+
+            InstantiateCrop(cropSO);
+        }
+        else if (currentPlotState == PlotState.RIPE)
         {
             InstantiateCrop(cropSO);
         }
@@ -186,6 +197,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     // Calls update visual on the crop as well.
     private void InstantiateCrop(Crop_SO crop_SO)
     {
+        print($"db_logs: instantiating {crop_SO.name}");
         var cropGO = Instantiate(crop_SO.cropPrefab, cropVisualPos);
         if (cropGO.TryGetComponent(out cropVisual))
         {

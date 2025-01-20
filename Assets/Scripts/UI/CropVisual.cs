@@ -21,6 +21,7 @@ public class CropVisual : MonoBehaviour
 
     public void UpdateVisual(Plot.PlotState state)
     {
+        print($"db_logs: updating state as {state}");
         switch (state)
         {
             case Plot.PlotState.EMPTY:

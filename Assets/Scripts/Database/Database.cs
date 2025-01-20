@@ -17,6 +17,7 @@ public class Database : MonoBehaviour
     public int PlayerId { get; private set; }
 
     SQLiteConnection db;
+    [SerializeField] private bool IsGameplayScene;
 
     public interface IDatabaseData { }
 
@@ -151,17 +152,24 @@ public class Database : MonoBehaviour
             print($"User {username} not found. Creating new game.");
             return;
         }
-        else
+        else // not new player
         {
             CurrentPlayerData = query.ToList<PlayerData>().First();
             PlayerId = CurrentPlayerData.Player_id;
             //increase play sessions count
             CurrentPlayerData.Play_sessions += 1;
 
-            print($"User {username} found. Loading Game.");
             db.Update(CurrentPlayerData);
+
+            //Exit out if we're in the loading screen. No need to load game because we are not in game screen yet.
+            if (!IsGameplayScene) 
+                return;
+
+            print($"User {username} found and in gameplay. Loading Game.");
             LoadGame();
         }
+
+        //db.Close()
     }
 
     // When player reenters game.
@@ -174,6 +182,11 @@ public class Database : MonoBehaviour
     private void LoadGame()
     {
         var structures = GetStructureData();
+        if (structures.Count == 0)
+        {
+            print($"db_logs: no structure found. returning.");
+            return;
+        }
 
         // Keeping structureIds for multiple queries.
         var structureIds = structures.Select(s => s.structure_id).ToList();
@@ -251,6 +264,13 @@ public class Database : MonoBehaviour
     }
 
     public void AddNewRecord(IDatabaseData newRecord)
+    {
+        print("new record added");
+        db.Insert(newRecord);
+    }
+
+    //debug
+    public void AddNewRecord(PlotData newRecord)
     {
         print("new record added");
         db.Insert(newRecord);

@@ -58,14 +58,14 @@ public class PinchToZoomAndPan : MonoBehaviour
 
     private void OnPrimaryTouchPress()
     {
-        print("On Primary Touch called.");
+        //print("On Primary Touch called.");
         // Get the touch position from the input system
         Vector2 touchPosition = controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>();
-        print("Touch position is: " + touchPosition);
+        //print("Touch position is: " + touchPosition);
 
         if (IsTouchOverUI(touchPosition))
         {
-            print("Touched UI. Not clicking object.");
+          //  print("Touched UI. Not clicking object.");
             return;
         }
 
@@ -81,14 +81,14 @@ public class PinchToZoomAndPan : MonoBehaviour
         // Perform the raycast, but only check for objects in the Ground layer
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask))
         {
-            print("Hit the ground.");
+            //print("Hit the ground.");
 
             // Call the DisableOnStructureClickButtons method when the ground is hit
             uiManager.DisableOnStructureClickButtons();
         }
         else
         {
-            print("Raycast did not hit the ground.");
+            //print("Raycast did not hit the ground.");
         }
 
         // Perform the raycast and check if it hits something
@@ -102,7 +102,7 @@ public class PinchToZoomAndPan : MonoBehaviour
 
             if (hit.collider.TryGetComponent(out draggableObject))
             {
-                print("draggable object pressed.");
+                //print("draggable object pressed.");
                 draggableObject = hit.collider.gameObject;
             }
 
@@ -124,7 +124,7 @@ public class PinchToZoomAndPan : MonoBehaviour
                 dragCoroutine = StartCoroutine(DragObject());
             }
 
-            Debug.Log("Primary touch hold detected, object is being dragged.");
+            //Debug.Log("Primary touch hold detected, object is being dragged.");
         }
     }
 
@@ -141,7 +141,7 @@ public class PinchToZoomAndPan : MonoBehaviour
         draggableObject = null;
         isDraggingBuilding = false;
 
-        Debug.Log("Primary touch hold released, object settled.");
+        //Debug.Log("Primary touch hold released, object settled.");
     }
 
     // Coroutine to update the object's position while being held
@@ -201,7 +201,7 @@ public class PinchToZoomAndPan : MonoBehaviour
         EventSystem.current.RaycastAll(eventData, results);
         foreach (var result in results)
         {
-            print("touched UI: " + result.gameObject.name);
+          //  print("touched UI: " + result.gameObject.name);
         }
 
         return results.Count > 0;

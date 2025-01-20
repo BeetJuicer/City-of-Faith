@@ -65,6 +65,8 @@ public class LoadingScreen : MonoBehaviour
             return;
         }
 
+        Debug.LogWarning("This is new code part 2!!!");
+
         if (!currentPlayer.HasSeenCutscene)
         {
             // New player: Play the cutscene and update the database
