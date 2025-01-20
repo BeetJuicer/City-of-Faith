@@ -115,7 +115,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
             };
 
             db.AddNewRecord(structureData);
-            print($"db_logs: Added {structureData.structure_id}. {structureData.prefab_name} to player {structureData.player_id}'s database.");
+            print($"db_logs: Added new structure: #{structureData.structure_id}. {structureData.prefab_name} to player {structureData.player_id}'s database.");
             StructureID = structureData.structure_id;
 
             Debug.Assert(StructureID != 0, "Structure ID is 0!");
