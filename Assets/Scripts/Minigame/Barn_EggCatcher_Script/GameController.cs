@@ -305,6 +305,19 @@ public class GameController : MonoBehaviour
         MainCamera3d.gameObject.SetActive(true);
         audioManager.gameObject.SetActive(true);
 
+
+        //// Trigger ResourceManager to notify the UI of the updated currency
+        //if (resourceManager != null)
+        //{
+        //    // Debugging log to ensure the currency is being updated
+        //    Debug.Log("Triggering currency update for Gold: " + resourceManager.PlayerCurrencies[Currency.Gold]);
+        //    resourceManager.TriggerCurrencyUpdated(Currency.Gold, resourceManager.PlayerCurrencies[Currency.Gold]);
+        //}
+        //else
+        //{
+        //    Debug.LogError("ResourceManager is null! Cannot update currency UI.");
+        //}
+
         Debug.Log("Exiting mini-game and saving rewards.");
     }
 
