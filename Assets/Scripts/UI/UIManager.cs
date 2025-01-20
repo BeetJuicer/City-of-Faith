@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
         DOTween.KillAll();
         MainCamera3d.gameObject.SetActive(false);
         fishingMinigamePrefab.SetActive(true);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public void LoadBarnMinigame()
@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
         DOTween.KillAll();
         MainCamera3d.gameObject.SetActive(false);
         BarnMinigamePrefab.SetActive(true);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
 

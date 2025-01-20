@@ -67,10 +67,8 @@ public class FishGameController : MonoBehaviour
 
     void OnEnable()
     {
-        if (isGameOver)
-        {
-            ResetGameState();
-        }
+        HUDCanvas.SetActive(false);
+        ResetGameState();
 
         // Initialize variables and set up game
         mainCamera = Camera.main;
@@ -223,32 +221,6 @@ public class FishGameController : MonoBehaviour
         goldText.text = "Gold: " + goldReward;   // Use goldReward
         expText.text = "EXP: " + expReward;      // Use expReward
 
-        // Update player resources and central hall data
-        if (resourceManager != null)
-        {
-            Debug.Log("Adding Gold");
-            resourceManager.AdjustPlayerCurrency(Currency.Gold, goldReward);
-        }
-        else
-        {
-            Debug.LogError("ResourceManager is null!");
-        }
-
-        if (centralHall != null)
-        {
-            Debug.Log("Adding Exp");
-            centralHall.AddToCentralExp(expReward);
-        }
-        else
-        {
-            Debug.LogError("CentralHall is null!");
-        }
-
-        //// Show exit button and assign the event listener
-        //exitButton.gameObject.SetActive(true);
-        //exitButton.onClick.RemoveAllListeners();
-        //exitButton.onClick.AddListener(ExitToMainScene);
-
         // Pause the game
         Time.timeScale = 0f;
         fishAudioSource.StopBackgroundMusic();
@@ -307,6 +279,28 @@ public class FishGameController : MonoBehaviour
         HUDCanvas.SetActive(true);
         MainCamera3d.gameObject.SetActive(true);
         audioManager.gameObject.SetActive(true);
+
+
+        // Update player resources and central hall data
+        if (resourceManager != null)
+        {
+            Debug.Log("Adding Gold");
+            ResourceManager.Instance.AdjustPlayerCurrency(Currency.Gold, goldReward);
+        }
+        else
+        {
+            Debug.LogError("ResourceManager is null!");
+        }
+
+        if (centralHall != null)
+        {
+            Debug.Log("Adding Exp");
+            centralHall.AddToCentralExp(expReward);
+        }
+        else
+        {
+            Debug.LogError("CentralHall is null!");
+        }
 
         Debug.Log("Exiting mini-game and saving rewards.");
     }

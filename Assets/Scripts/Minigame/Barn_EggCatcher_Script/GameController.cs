@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour
     {
         // Initialize the game state
         ResetGameState();
+        HUDCanvas.SetActive(false);
 
         // Initialize UI elements
         timeText.text = "Time Left: " + Mathf.RoundToInt(timer) + "s";
@@ -223,22 +224,7 @@ public class GameController : MonoBehaviour
         goldText.text = "Gold: " + gold;
         expText.text = "EXP: " + exp;
 
-        // Update player resources and central hall data
-
-        if (resourceManager != null)
-        {
-            Debug.Log("Adding Gold");
-            resourceManager.AdjustPlayerCurrency(Currency.Gold, gold);
-        }
-        if (centralHall != null)
-        {
-            Debug.Log("Adding Exp");
-            centralHall.AddToCentralExp(exp);
-        }
-        else
-        {
-            Debug.LogError("CentralHall is null!");
-        }
+        
 
         // Pause the game
         Time.timeScale = 0f;
@@ -305,18 +291,22 @@ public class GameController : MonoBehaviour
         MainCamera3d.gameObject.SetActive(true);
         audioManager.gameObject.SetActive(true);
 
+        // Update player resources and central hall data
 
-        //// Trigger ResourceManager to notify the UI of the updated currency
-        //if (resourceManager != null)
-        //{
-        //    // Debugging log to ensure the currency is being updated
-        //    Debug.Log("Triggering currency update for Gold: " + resourceManager.PlayerCurrencies[Currency.Gold]);
-        //    resourceManager.TriggerCurrencyUpdated(Currency.Gold, resourceManager.PlayerCurrencies[Currency.Gold]);
-        //}
-        //else
-        //{
-        //    Debug.LogError("ResourceManager is null! Cannot update currency UI.");
-        //}
+        if (resourceManager != null)
+        {
+            Debug.Log("Adding Gold");
+            ResourceManager.Instance.AdjustPlayerCurrency(Currency.Gold, gold);
+        }
+        if (centralHall != null)
+        {
+            Debug.Log("Adding Exp");
+            centralHall.AddToCentralExp(exp);
+        }
+        else
+        {
+            Debug.LogError("CentralHall is null!");
+        }
 
         Debug.Log("Exiting mini-game and saving rewards.");
     }
