@@ -84,7 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f43381d34d6a254a8eb23899bad8a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rp_SO: {fileID: 11400000, guid: ea4fbb5956da22641a190cf10a6c21dc, type: 2}
+  resourceProducer_SO: {fileID: 11400000, guid: ea4fbb5956da22641a190cf10a6c21dc,
+    type: 2}
   printTime: 0
 --- !u!1 &4332365218283698519
 GameObject:
@@ -394,7 +395,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -708
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5502803573254500573, guid: d6af44136a37a2140ba1dfe0ed7ebd4a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

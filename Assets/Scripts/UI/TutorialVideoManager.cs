@@ -10,31 +10,30 @@ public class TutorialVideoManager : MonoBehaviour
     [SerializeField] private GameObject HUDCanvas;
     [SerializeField] private Image blurImage;
     [SerializeField] private VideoClip[] tutorialVideos;
+    [SerializeField] private CentralHall centralHall;
 
-    private int currentIndex = 1;
+
+
 
     private void Start()
     {
-        if (tutorialVideos.Length > currentIndex)
+        if (centralHall.Level == 1 && tutorialVideos.Length > 0)
         {
-            Debug.Log("Starting the first tutorial video.");
-            PlayTutorialVideo(0); //play first video
+            PlayTutorialVideo(0);
             closeButton.onClick.RemoveAllListeners();
             closeButton.onClick.AddListener(CloseVideo);
         }
         else
         {
-            Debug.LogError("No tutorial videos assigned in the tutorialVideos array.");
+            CloseVideo();
         }
     }
-
     public void TriggerTutorial()
     {
-        Debug.Log($"TriggerTutorial called at index {currentIndex}");
-        if (currentIndex < tutorialVideos.Length)
+
+        if (centralHall.Level < tutorialVideos.Length)
         {
-            PlayTutorialVideo(currentIndex); //play 2nd video which is index = 1
-            currentIndex++; // increment for future videos
+            PlayTutorialVideo(centralHall.Level - 1); //play 2nd video which is index = 1
         }
         else
         {
@@ -45,8 +44,6 @@ public class TutorialVideoManager : MonoBehaviour
     public void PlayTutorialVideo(int index)
     {
 
-        Debug.Log($"Video display active: {videoDisplay.gameObject.activeSelf}");
-        Debug.Log($"Play Tutorial called at index {index}");
         HUDCanvas.gameObject.SetActive(false);
         blurImage.gameObject.SetActive(true);
         videoDisplay.gameObject.SetActive(true);
