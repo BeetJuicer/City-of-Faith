@@ -14,6 +14,7 @@ public class CropManager : MonoBehaviour
     [SerializeField] private CentralHall centralhall;
     [SerializeField] private GameObject cropCardTemplate;
     [SerializeField] private GameObject csContent;
+    [SerializeField] private Button cropSellButton;
 
 
     private void Start()
@@ -73,10 +74,27 @@ public class CropManager : MonoBehaviour
         {
             cropShopUI.SetActive(true);
             GetComponent<UIManager>().DisableOnStructureClickButtons();
+            cropSellButton.onClick.AddListener(() =>
+            {
+                SellPlot(plot);
+            });
         }
         else
         {
             Debug.LogError("Error in OpenCropSelection");
+        }
+    }
+
+    public void SellPlot(Plot plot)
+    {
+        if (plot != null)
+        {
+            plot.GetComponent<Structure>().DestroyStructure();
+            CloseCropSelection();
+        }
+        else
+        {
+            Debug.LogWarning("Structure is null. Cannot sell.");
         }
     }
 

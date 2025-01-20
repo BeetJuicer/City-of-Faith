@@ -15,6 +15,7 @@ public class CropShopTemplate : MonoBehaviour
     [SerializeField] private TMP_Text costTxt;
     [SerializeField] private TMP_Text goldAmount;
     [SerializeField] private TMP_Text expAmount;
+    [SerializeField] private TMP_Text duration;
     [SerializeField] private Image itemImage;
     [SerializeField] private Button button;
     [SerializeField] private GameObject lockedOverlay;
@@ -30,6 +31,7 @@ public class CropShopTemplate : MonoBehaviour
         costTxt.text = so.cropPrice.Values.First().ToString(); //First for now. a bit hacky.
         goldAmount.text = so.amountPerClaim.ToString();
         expAmount.text = so.expPerClaim.ToString();
+        UpdateDurationText();
 
 
         lockedOverlay.SetActive(!isLocked);
@@ -49,6 +51,27 @@ public class CropShopTemplate : MonoBehaviour
         // call cm.Purchase when button is clicked.
         button.onClick.AddListener(() => cm.Purchase(so));
     }
+
+    private void UpdateDurationText()
+    {
+        if (so.daysToClaim > 0)
+        {
+            duration.text = so.daysToClaim + " d";
+        }
+        else if (so.hoursToClaim > 0)
+        {
+            duration.text = so.hoursToClaim + " hr";
+        }
+        else if (so.minutesToClaim > 0)
+        {
+            duration.text = so.minutesToClaim + " m";
+        }
+        else
+        {
+            duration.text = so.secondsToClaim + " s";
+        }
+    }
+
 
     private void OnDestroy()
     {

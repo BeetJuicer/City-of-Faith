@@ -7,17 +7,9 @@ public class OpenCropTween : MonoBehaviour
     [SerializeField] GameObject CropShopInner;
     private Vector3 initialPosition; // Store the initial position of the GameObject
 
-    private void Awake()
-    {
-        // Save the initial position of CropShopInner when the script starts
-        initialPosition = CropShopInner.transform.localPosition;
-    }
 
     private void OnEnable()
     {
-        CropShopInner.transform.localPosition = initialPosition;
-        CropShopInner.transform.localScale = Vector3.zero;
-
         AudioManager.Instance.PlaySFX("Canvas");
         LeanTween.reset();
         CropShopInner.transform.localScale = Vector3.zero;
@@ -26,7 +18,8 @@ public class OpenCropTween : MonoBehaviour
 
     public void CloseBox()
     {
-        CropShopInner.LeanMoveLocalX(Screen.width, 0.5f).setEaseInExpo().setOnComplete(OnComplete);
+        LeanTween.scale(CropShopInner, new Vector3(1.15f, 1.15f, 1.15f), 0.3f).setEase(LeanTweenType.easeOutExpo);
+        LeanTween.scale(CropShopInner, Vector3.zero, 0.3f).setEase(LeanTweenType.easeOutExpo).setDelay(0.1f).setOnComplete(OnComplete);
     }
 
     void OnComplete()
