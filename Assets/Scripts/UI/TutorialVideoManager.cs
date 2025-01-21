@@ -124,7 +124,6 @@ public class TutorialVideoManager : MonoBehaviour
     public void CloseVideo()
     {
         videoPlayer.Stop();
-        HUDCanvas.gameObject.SetActive(true);
         blurImage.gameObject.SetActive(false);
         videoDisplay.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);

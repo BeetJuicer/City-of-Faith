@@ -8,6 +8,8 @@ public class ResourcesBarUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text goldText; // Reference to a UI Text component for gold
     [SerializeField] private TMP_Text gloryText; // Reference to a UI Text component for glory
+    [SerializeField] private TMP_Text shopGoldText; // Reference to a UI Text component for gold
+    [SerializeField] private TMP_Text shopGloryText;
 
     /*
      Note: Make sure that ResourceManager is above this script in execution order.
@@ -31,6 +33,8 @@ public class ResourcesBarUI : MonoBehaviour
 
         goldText.text = goldValue.ToString();
         gloryText.text = gloryValue.ToString();
+        shopGoldText.text = goldValue.ToString();
+        shopGloryText.text = gloryValue.ToString();
 
         ResourceManager.Instance.OnCurrencyUpdated += ResourceManager_OnCurrencyUpdated;
     }
@@ -45,9 +49,15 @@ public class ResourcesBarUI : MonoBehaviour
         print($"Should be setting UI to {amount}.");
 
         if (type == Currency.Gold)
+        {
             goldText.text = amount.ToString();
+            shopGoldText.text = amount.ToString();
+        }
         else if (type == Currency.Glory)
+        {
             gloryText.text = amount.ToString();
+            shopGloryText.text = amount.ToString();
+        }
         else
             Debug.LogWarning("Currency type not handled by resources UI!");
     }
