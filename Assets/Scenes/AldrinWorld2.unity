@@ -1820,7 +1820,12 @@ PrefabInstance:
     - target: {fileID: 7014676771989128693, guid: dc982e2ba541219489aa4da781647ae7,
         type: 3}
       propertyPath: username
-      value: asas
+      value: aldrinpogi9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7014676771989128693, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: IsGameplayScene
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2547,7 +2552,7 @@ PrefabInstance:
         type: 3}
       propertyPath: VideoManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 288212100}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

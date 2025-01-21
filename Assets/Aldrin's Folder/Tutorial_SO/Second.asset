@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0ec0ea672935b42ac1752f48ba1464, type: 3}
+  m_Name: Second
+  m_EditorClassIdentifier: 
+  tutorialTexts:
+  - Let's start PLANTING by opening the Shop.
+  - Tap the Plot
+  - Place it by tapping the Check Button
+  - Tap the Plot to speed up
+  - Boost it by pressing the Speed Up Button.
+  - Now, TAP the plot to open Crop Shop
+  - Select a Crop
+  - Boost it by pressing the Speed up button,
+  - Tap to claim the crop and you're done!
+  tutorialVideos:
+  - {fileID: 32900000, guid: 6300ba975e3441441a1d88b331bb467c, type: 3}
+  - {fileID: 32900000, guid: b1e65cad0b2d35a478f4414711788982, type: 3}
+  - {fileID: 32900000, guid: 06f4f1022543866479906d31b6834f37, type: 3}
+  - {fileID: 32900000, guid: c12b98fd036bafb4e8252aa37f92cca4, type: 3}
+  - {fileID: 32900000, guid: baf08d2574d25ef4faad45bd6b3210a3, type: 3}
+  - {fileID: 32900000, guid: cc4ef418b1e88004ca9dc1db8f3a97ab, type: 3}
+  - {fileID: 32900000, guid: b5002b6da1dad9045ae0f2b8d54fa551, type: 3}
+  - {fileID: 32900000, guid: d2bcd6dbfd65f2f41a1b0639d92e0e62, type: 3}
+  - {fileID: 32900000, guid: 365e8847b4376f04fb05cc6d5abbf887, type: 3}

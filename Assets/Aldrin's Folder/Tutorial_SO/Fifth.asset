@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0ec0ea672935b42ac1752f48ba1464, type: 3}
+  m_Name: Fifth
+  m_EditorClassIdentifier: 
+  tutorialTexts:
+  - Let's Decorate! Open the Shop
+  - Select the Decoration Bar below the Building Bar!
+  - Select the design that you want!
+  - Tap the check to place it!
+  - Speed it up! Goodluck Designing your City of Faith!
+  tutorialVideos:
+  - {fileID: 32900000, guid: 6b3e63253da893846820487c231949ae, type: 3}
+  - {fileID: 32900000, guid: 52733002ad9e0e44397ac6d6eca7cf13, type: 3}
+  - {fileID: 32900000, guid: e66e9fc827629f34182a5f5fc860dbb7, type: 3}
+  - {fileID: 32900000, guid: 2f0714d31c741c54183f42a1496c3035, type: 3}
+  - {fileID: 32900000, guid: 3f69d2b91a855c74aacfcdc025fbc96b, type: 3}

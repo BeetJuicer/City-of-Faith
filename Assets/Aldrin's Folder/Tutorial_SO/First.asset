@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0ec0ea672935b42ac1752f48ba1464, type: 3}
+  m_Name: First
+  m_EditorClassIdentifier: 
+  tutorialTexts:
+  - Welcome! Let us build our new home. Open the Shop
+  - Tap the Villager House
+  - Place it by tapping the Check Button
+  - Tap the Villager House to speed up
+  - Boost it by pressing the Speed Up Button and you're done!
+  tutorialVideos:
+  - {fileID: 32900000, guid: 6300ba975e3441441a1d88b331bb467c, type: 3}
+  - {fileID: 32900000, guid: 5d9b028ed634fbd42b39cf3d87d4a0bf, type: 3}
+  - {fileID: 32900000, guid: 50fe3d88d0925514ca702de022e95e92, type: 3}
+  - {fileID: 32900000, guid: 98768266064d01744bfc4153a569e823, type: 3}
+  - {fileID: 32900000, guid: 4b8c1cda843d5b24e95cb129ffe0e086, type: 3}

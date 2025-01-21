@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0ec0ea672935b42ac1752f48ba1464, type: 3}
+  m_Name: Third
+  m_EditorClassIdentifier: 
+  tutorialTexts:
+  - 'Minigame Tutorial: Open the shop'
+  - Tap the Barn House!
+  - Place it by tapping the Check Button
+  - Boost it by pressing the Speed Up Button!
+  - Tap the Barn House, then Tap the Minigame Icon
+  - Collect the egg by aiming the basket at the falling eggs! Beware of Bombs!
+  - Exit and you're done!
+  tutorialVideos:
+  - {fileID: 32900000, guid: 0e981a3c411abf1408023ddbe5c12363, type: 3}
+  - {fileID: 32900000, guid: f330a8413f712b547bb1b335cb074340, type: 3}
+  - {fileID: 32900000, guid: 66484202c1cd92c408ae7c13447076ca, type: 3}
+  - {fileID: 32900000, guid: e7f34e7c4bc96c948a1af1aa99cbdf91, type: 3}
+  - {fileID: 32900000, guid: 806c5f31364ccdc4db5e99efad9c9180, type: 3}
+  - {fileID: 32900000, guid: 850046cd55de5b24bbc8ffbc4626eef5, type: 3}
+  - {fileID: 32900000, guid: 07e6f9c32b991ac429e5005d17af77cc, type: 3}

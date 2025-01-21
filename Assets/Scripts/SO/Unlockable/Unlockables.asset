@@ -15,21 +15,25 @@ MonoBehaviour:
   unclockableStructures:
     _serializedList:
     - Key: 0
-      Value:
-      - {fileID: 11400000, guid: c843465539497d74986b0b041463682e, type: 2}
+      Value: []
     - Key: 1
       Value:
-      - {fileID: 11400000, guid: 3b901db40f406b645a12d6b799437a7f, type: 2}
-      - {fileID: 11400000, guid: d2051b2a8e1fc8144914a13d2f9dae38, type: 2}
-      - {fileID: 11400000, guid: d6f2d15a35608b4489b99e0e8cf47e35, type: 2}
+      - {fileID: 11400000, guid: c843465539497d74986b0b041463682e, type: 2}
     - Key: 2
       Value:
-      - {fileID: 11400000, guid: 08a25eec9f62fbf42b8c174d7d825e2c, type: 2}
-      - {fileID: 11400000, guid: 5f209cd26d685dc42aa9a9586a96dc98, type: 2}
+      - {fileID: 11400000, guid: 3b901db40f406b645a12d6b799437a7f, type: 2}
     - Key: 3
       Value:
+      - {fileID: 11400000, guid: 08a25eec9f62fbf42b8c174d7d825e2c, type: 2}
+    - Key: 4
+      Value:
+      - {fileID: 11400000, guid: 5f209cd26d685dc42aa9a9586a96dc98, type: 2}
+    - Key: 5
+      Value:
+      - {fileID: 11400000, guid: d2051b2a8e1fc8144914a13d2f9dae38, type: 2}
       - {fileID: 11400000, guid: 55261ccf8e79d5f43a5e6cd25a01e936, type: 2}
       - {fileID: 11400000, guid: 582e283644a715842830ec700353fbb0, type: 2}
+      - {fileID: 11400000, guid: d6f2d15a35608b4489b99e0e8cf47e35, type: 2}
   unclockableCrops:
     _serializedList:
     - Key: 0
@@ -51,8 +55,10 @@ MonoBehaviour:
       Value:
       - {fileID: 11400000, guid: cd1280b978bdef04eb1444fe89178823, type: 2}
       - {fileID: 11400000, guid: 87f6198545aba7b4ea1890a0babff650, type: 2}
-      - {fileID: 11400000, guid: 67630f350abe0d9459a8df995ffad383, type: 2}
+    - Key: 5
+      Value:
       - {fileID: 11400000, guid: 3e351ef23c29ced47add4bae8f8ee1ed, type: 2}
+      - {fileID: 11400000, guid: 67630f350abe0d9459a8df995ffad383, type: 2}
   populationLimit:
     _serializedList:
     - Key: 0
