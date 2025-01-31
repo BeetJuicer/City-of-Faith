@@ -305,10 +305,10 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         }
     }
 
-    private void OnMouseDown()
-    {
-        OnObjectClicked();
-    }
+    //private void OnMouseDown()
+    //{
+    //    OnObjectClicked();
+    //}
 
 
 

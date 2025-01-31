@@ -108,7 +108,7 @@
                 {
                     "name": "",
                     "id": "2e54fce0-a003-46df-a3f6-f01dabd1bdec",
-                    "path": "<Touchscreen>/Press",
+                    "path": "<Touchscreen>/touch0/tap",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -120,7 +120,7 @@
                     "name": "",
                     "id": "8631735d-beb3-485e-a548-92a0d2ad87b3",
                     "path": "<Touchscreen>/Press",
-                    "interactions": "Hold(duration=1)",
+                    "interactions": "Hold(duration=1.5)",
                     "processors": "",
                     "groups": "",
                     "action": "PrimaryTouchHoldRelease",
