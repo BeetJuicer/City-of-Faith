@@ -47,11 +47,11 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
             db.UpdateRecord(plotData);
             //UI
             if (cropVisual != null) cropVisual.UpdateVisual(currentPlotState);
-            if (cropImageDisplay != null) cropImageDisplay.UpdateVisual(currentPlotState, crop_SO);
+            if (cropImageDisplay != null) cropImageDisplay.UpdateVisual(currentPlotState, Crop_SO1);
         }
     }
 
-    public Crop_SO Crop_SO { get { return crop_SO; } set { crop_SO = value; } }
+    public Crop_SO Crop_SO { get { return Crop_SO1; } set { Crop_SO1 = value; } }
     private DateTime growthFinishTime;
     public DateTime GrowthFinishTime
     {
@@ -63,6 +63,9 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
             db.UpdateRecord(plotData);
         }
     }
+
+    public Crop_SO Crop_SO1 { get => Crop_SO2; set => Crop_SO2 = value; }
+    public Crop_SO Crop_SO2 { get => crop_SO; set => crop_SO = value; }
 
     // Timer
     private float updateTimer;
@@ -98,7 +101,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
             print($"db_logs: not adding new plot to database!");
         }
 
-        cropImageDisplay.UpdateVisual(CurrentPlotState, crop_SO);
+        cropImageDisplay.UpdateVisual(CurrentPlotState, Crop_SO1);
         uiManager = FindObjectOfType<UIManager>();
     }
 
@@ -125,8 +128,8 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         else
             print($"db_logs: {path} found!");
 
-        crop_SO = cropSO;
-        print($"db_logs: Loaded {crop_SO.name} from database!");
+        Crop_SO1 = cropSO;
+        print($"db_logs: Loaded {Crop_SO1.name} from database!");
 
 
         if (currentPlotState == PlotState.GROWING)
@@ -231,7 +234,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         Debug.Assert(CurrentPlotState == PlotState.EMPTY, "Cannot plant while plot is not empty!");
         Debug.Assert(crop_SO.baseTimeNeededPerClaim >= TimeSpan.Zero, "Time needed cannot be negative!");
 
-        this.crop_SO = crop_SO;
+        this.Crop_SO1 = crop_SO;
 
         // Success
         //GrowthFinishTime = DateTime.Now.Add(crop_SO.baseTimeNeededPerClaim);
@@ -311,9 +314,9 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 
     public void ClaimHarvest()
     {
-        ResourceManager.Instance.AdjustPlayerCurrency(Currency.Gold, crop_SO.amountPerClaim);
-        ResourceManager.Instance.AdjustPlayerResources(FoodResource.Plant, crop_SO.amountPerClaim);
-        central.AddToCentralExp(crop_SO.expPerClaim);
+        ResourceManager.Instance.AdjustPlayerCurrency(Currency.Gold, Crop_SO1.amountPerClaim);
+        ResourceManager.Instance.AdjustPlayerResources(FoodResource.Plant, Crop_SO1.amountPerClaim);
+        central.AddToCentralExp(Crop_SO1.expPerClaim);
 
         //TODO: Possible optimization, use crop pools. May be temporary depending on UI
         Destroy(cropVisualPos.GetChild(0).gameObject);
