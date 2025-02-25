@@ -21,6 +21,7 @@ public class PinchToZoomAndPan : MonoBehaviour
     private Coroutine dragCoroutine;
     private GameObject draggableObject;
     private IClickableObject lastClickedObject;
+    private List<IClickableObject> lastClickedObjects = new List<IClickableObject>();
     private bool isDraggingBuilding = false; // Flag to check if a building is being dragged
 
     // Store last known primary finger position for panning
@@ -98,38 +99,43 @@ public class PinchToZoomAndPan : MonoBehaviour
         {
             print("Object hitted.");
             IClickableObject[] clickables = objectHit.Value.collider.GetComponents<IClickableObject>();
+
+            bool isSameObjectClicked = clickables.Length > 0 && lastClickedObjects.SequenceEqual(clickables);
+            if (isSameObjectClicked)
+            {
+                print("Same object clicked again. Ignoring.");
+                return; // Stop execution to prevent re-clicking the same object
+            }
+
+            foreach (IClickableObject lastClickable in lastClickedObjects)
+            {
+                lastClickable.ResetPopState();
+            }
+            lastClickedObjects.Clear(); // Clear previous clicks
+
             foreach (IClickableObject clickable in clickables)
             {
-
-                if (lastClickedObject != null && lastClickedObject != clickable)
-                {
-                    if (lastClickedObject is IClickableObject clickableComponent)
-                    {
-                        clickableComponent.ResetPopState();
-                    }
-                }
-
                 Debug.Log($"Clickable object pressed: {objectHit.Value.collider.gameObject.name} at {objectHit.Value.point}");
                 clickable.OnObjectClicked();
-                lastClickedObject = clickable;
+                lastClickedObjects.Add(clickable);
             }
 
-            if (objectHit.Value.collider.TryGetComponent(out IDraggable draggableObject))
-            {
-                print("Object is draggable");
-                draggableObject = objectHit.Value.collider.gameObject.GetComponent<IDraggable>();
+            //if (objectHit.Value.collider.TryGetComponent(out IDraggable draggableObject))
+            //{
+            //    print("Object is draggable");
+            //    draggableObject = objectHit.Value.collider.gameObject.GetComponent<IDraggable>();
 
-            }
+            //}
         }
         else if (groundHit.HasValue) // Only process ground if no object was hit
         {
             print("Ground hitted.");
             uiManager.DisableOnStructureClickButtons();
-            if (lastClickedObject is IClickableObject clickableComponent)
+            foreach (IClickableObject lastClickable in lastClickedObjects)
             {
-                clickableComponent.ResetPopState();
-                lastClickedObject = null;
+                lastClickable.ResetPopState();
             }
+            lastClickedObjects.Clear();
         }
     }
 
