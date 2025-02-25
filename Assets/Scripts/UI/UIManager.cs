@@ -12,7 +12,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Button infoButton; // Reference to the Info button
     [SerializeField] private Button sellButton; // Reference to the Sell button
+    [SerializeField] private Button confirmSellButton; // Reference to the Sell button
     [SerializeField] private Button miniGameButtonOpen;// Reference to the Mini Game button
+    [SerializeField] private GameObject sellConfirmation;
 
     private Structure_SO selectedStructure; // The structure that is currently selected/clicked
 
@@ -21,6 +23,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject BarnMinigamePrefab;
     [SerializeField] private GlorySpeedUp glorySpeedUp;
 
+    [SerializeField] private PinchToZoomAndPan PinchToZoomAndPan;
     [SerializeField] private GameObject audioManager;
 
     private const string BARN_GAME = "BarnGame";
@@ -144,10 +147,24 @@ public class UIManager : MonoBehaviour
         sellButton.onClick.RemoveAllListeners();
         sellButton.onClick.AddListener(() =>
         {
-            SellStructure(structure);
-            DisableOnStructureClickButtons();
+            //SellStructure(structure);
+            OnConfirmSell(structure);
         });
 
+    }
+
+    public void OnConfirmSell(Structure structure)
+    {
+        sellConfirmation.SetActive(true);
+        confirmSellButton.onClick.RemoveAllListeners();
+        confirmSellButton.onClick.AddListener(() =>
+        {
+            PinchToZoomAndPan.ClearClickedObjects();
+            structure.ResetPopState();
+            SellStructure(structure);
+            sellConfirmation.SetActive(false);
+            DisableOnStructureClickButtons();
+        });
     }
 
     public void ActivateMinigameButton(Structure structure)

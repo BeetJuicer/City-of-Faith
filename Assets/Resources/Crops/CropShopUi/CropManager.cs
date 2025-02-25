@@ -15,6 +15,7 @@ public class CropManager : MonoBehaviour
     [SerializeField] private GameObject cropCardTemplate;
     [SerializeField] private GameObject csContent;
     [SerializeField] private Button cropSellButton;
+    [SerializeField] private PinchToZoomAndPan PinchToZoomAndPan;
 
 
     private void Start()
@@ -89,6 +90,8 @@ public class CropManager : MonoBehaviour
     {
         if (plot != null)
         {
+            PinchToZoomAndPan.ClearClickedObjects();
+            plot.GetComponent<Structure>().ResetPopState();
             plot.GetComponent<Structure>().DestroyStructure();
             CloseCropSelection();
         }

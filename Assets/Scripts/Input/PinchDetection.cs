@@ -139,6 +139,11 @@ public class PinchToZoomAndPan : MonoBehaviour
         }
     }
 
+    public void ClearClickedObjects()
+    {
+        lastClickedObjects.Clear();
+    }
+
     private void OnPrimaryTouchHold()
     {
         if (draggableObject != null && !isDraggingBuilding)
