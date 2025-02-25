@@ -46,7 +46,8 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     public void EnterBuildMode(Structure_SO structure_SO)
     {
         if (isInBuildMode) return;
-
+        //find center of screen world position.
+        //transform.position = center
 
         isInBuildMode = true;
 

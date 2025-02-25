@@ -7,6 +7,7 @@ public enum GameState
     Sequence,
     Gameplay,
     Edit_Mode,
+    //cropselectionstate
 }
 
 public class GameManager : MonoBehaviour
@@ -22,12 +23,14 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         else
             _instance = this;
+        //singleton accessing. GameManager.Instance()
     }
 
     public void ChangeGameState(GameState state)
     {
         CurrentGameState = state;
     }
+
 
     public void ToggleBuildMode()
     {
