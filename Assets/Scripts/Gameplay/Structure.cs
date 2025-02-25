@@ -49,9 +49,11 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     private GameObject inProgressVisual;
     private GameObject builtVisual;
     private GameObject timerUI;
+    private GameObject builtHighlight;
     private const string IN_PROGRESS_VISUAL_NAME = "InProgressVisual";
     private const string BUILT_VISUAL_NAME = "BuiltVisual";
     private const string TIMER_NAME = "BuildingTimerUI";
+    private const string BUILT_HIGHLIGHT_NAME = "BuiltHighlight";
 
     private UIManager uiManager;
 
@@ -75,10 +77,12 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         inProgressVisual = transform.Find(IN_PROGRESS_VISUAL_NAME).gameObject;
         builtVisual = transform.Find(BUILT_VISUAL_NAME).gameObject;
         timerUI = transform.Find(TIMER_NAME).gameObject;
+        builtHighlight = transform.Find(BUILT_HIGHLIGHT_NAME).gameObject;
 
         Debug.Assert(inProgressVisual != null, "In Progress Visual not found. If the Visual exists, check the spelling.");
         Debug.Assert(builtVisual != null, "Built Visual not found. If the Visual exists, check the spelling.");
         Debug.Assert(timerUI != null, "Timer UI not found. If the object exists, check the spelling.");
+        Debug.Assert(builtHighlight != null, "Highlight not found. If the object exists, check the spelling.");
     }
 
     private void Start()
@@ -204,6 +208,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     [Button]
     public void OnObjectClicked()
     {
+        PopOnClick();
         // Ensure UIManager is assigned before proceeding
         if (uiManager == null)
         {
@@ -237,6 +242,21 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
                 Debug.LogWarning("Unhandled building state case!");
                 break;
         }
+    }
+
+    private void PopOnClick()
+    {
+        builtHighlight.SetActive(true);
+        Vector3 originalScale = builtVisual.transform.localScale; // Store the original scale
+        Vector3 targetScale = originalScale + new Vector3(1f, 1f, 1f); // Add 1.5f to each axis
+
+        LeanTween.scale(builtVisual, targetScale, 0.3f)
+            .setEase(LeanTweenType.easeOutExpo)
+            .setOnComplete(() => {
+                LeanTween.scale(builtVisual, originalScale, 0.3f)
+                    .setEase(LeanTweenType.easeOutExpo)
+                    .setDelay(0.1f);
+            });
     }
 
 
