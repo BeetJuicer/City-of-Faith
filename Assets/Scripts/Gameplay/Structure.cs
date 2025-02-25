@@ -57,6 +57,8 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
 
     private UIManager uiManager;
 
+    private bool hasPopped = false;
+
     public event Action OnStructureInProgressClicked;
     CentralHall centralHall;
 
@@ -208,12 +210,16 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     [Button]
     public void OnObjectClicked()
     {
-        PopOnClick();
         // Ensure UIManager is assigned before proceeding
         if (uiManager == null)
         {
             Debug.LogError("UIManager is not assigned or found!");
             return;
+        }
+
+        if (hasPopped == false)
+        {
+            PopOnClick();
         }
 
         switch (CurrentBuildingState)
@@ -244,11 +250,12 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
         }
     }
 
-    private void PopOnClick()
+    public void PopOnClick()
     {
+        hasPopped = true;
         builtHighlight.SetActive(true);
         Vector3 originalScale = builtVisual.transform.localScale; // Store the original scale
-        Vector3 targetScale = originalScale + new Vector3(1f, 1f, 1f); // Add 1.5f to each axis
+        Vector3 targetScale = originalScale + new Vector3(0.5f, 0.5f, 0.5f); // Add 1.5f to each axis
 
         LeanTween.scale(builtVisual, targetScale, 0.3f)
             .setEase(LeanTweenType.easeOutExpo)
@@ -257,6 +264,12 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
                     .setEase(LeanTweenType.easeOutExpo)
                     .setDelay(0.1f);
             });
+    }
+
+    public void ResetPopState()
+    {
+        hasPopped = false;
+        builtHighlight.SetActive(false);
     }
 
 

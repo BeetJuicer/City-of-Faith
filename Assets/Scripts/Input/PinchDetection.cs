@@ -20,6 +20,7 @@ public class PinchToZoomAndPan : MonoBehaviour
     private Coroutine zoomCoroutine;
     private Coroutine dragCoroutine;
     private GameObject draggableObject;
+    private IClickableObject lastClickedObject;
     private bool isDraggingBuilding = false; // Flag to check if a building is being dragged
 
     // Store last known primary finger position for panning
@@ -99,8 +100,18 @@ public class PinchToZoomAndPan : MonoBehaviour
             IClickableObject[] clickables = objectHit.Value.collider.GetComponents<IClickableObject>();
             foreach (IClickableObject clickable in clickables)
             {
+
+                if (lastClickedObject != null && lastClickedObject != clickable)
+                {
+                    if (lastClickedObject is IClickableObject clickableComponent)
+                    {
+                        clickableComponent.ResetPopState();
+                    }
+                }
+
                 Debug.Log($"Clickable object pressed: {objectHit.Value.collider.gameObject.name} at {objectHit.Value.point}");
                 clickable.OnObjectClicked();
+                lastClickedObject = clickable;
             }
 
             if (objectHit.Value.collider.TryGetComponent(out IDraggable draggableObject))
@@ -114,6 +125,11 @@ public class PinchToZoomAndPan : MonoBehaviour
         {
             print("Ground hitted.");
             uiManager.DisableOnStructureClickButtons();
+            if (lastClickedObject is IClickableObject clickableComponent)
+            {
+                clickableComponent.ResetPopState();
+                lastClickedObject = null;
+            }
         }
     }
 

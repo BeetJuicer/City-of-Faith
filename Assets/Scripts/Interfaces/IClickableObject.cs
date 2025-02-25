@@ -5,5 +5,6 @@ using UnityEngine;
 public interface IClickableObject
 {
     public abstract void OnObjectClicked();
+    public abstract void ResetPopState();
 }
 

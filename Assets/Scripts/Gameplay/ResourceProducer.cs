@@ -31,6 +31,7 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
 
     //temp debug bool
     public bool printTime = false;
+    private bool hasPopped = false;
 
     UIManager uiManager;
     CentralHall centralHall;
@@ -171,6 +172,12 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
     [Button]
     public void OnObjectClicked()
     {
+
+        if (hasPopped == false)
+        {
+            PopOnClick();
+        }
+
         switch (CurrentProducerState)
         {
             case ProducerState.Waiting:
@@ -198,6 +205,18 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
                     break;
                 }
         }
+    }
+
+    public void PopOnClick()
+    {
+        hasPopped = true;
+        structure.PopOnClick();
+    }
+
+    public void ResetPopState()
+    {
+        hasPopped = false;
+        structure.ResetPopState();
     }
 
     //private void OnMouseDown()

@@ -22,6 +22,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     //TODO: Temporary serialize field for debugging
     [SerializeField] Crop_SO tempCropSO;
 
+    private bool hasPopped = false;
     private CropManager cropManager;
     private CropVisual cropVisual;
     private CropImageDisplay cropImageDisplay;
@@ -270,6 +271,12 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 
         print("clicked. state is: " + currentPlotState);
         AudioManager.Instance.PlaySFX("Plot");
+
+        if (hasPopped == false)
+        {
+            PopOnClick();
+        }
+
         // State handling
         switch (CurrentPlotState)
         {
@@ -309,12 +316,22 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         }
     }
 
+    public void PopOnClick()
+    {
+        hasPopped = true;
+        structure.PopOnClick();
+    }
+
+    public void ResetPopState()
+    {
+        hasPopped = false;
+        structure.ResetPopState();
+    }
+
     //private void OnMouseDown()
     //{
     //    OnObjectClicked();
     //}
-
-
 
     public void ClaimHarvest()
     {
