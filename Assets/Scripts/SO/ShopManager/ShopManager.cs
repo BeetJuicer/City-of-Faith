@@ -23,9 +23,9 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        buildingOverlayObject.SetActive(true);
         centralhall.OnPlayerLevelUp += RefreshShop;
         FilterItemsByCategory(ItemCategory.Buildings);
+        buildingOverlayObject.SetActive(true);
     }
 
     private void RefreshShop(int level)
