@@ -388,12 +388,12 @@ PrefabInstance:
     - target: {fileID: 2653418224118656517, guid: d6af44136a37a2140ba1dfe0ed7ebd4a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1480
+      value: 1495.6
       objectReference: {fileID: 0}
     - target: {fileID: 2653418224118656517, guid: d6af44136a37a2140ba1dfe0ed7ebd4a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 720
+      value: 721.11
       objectReference: {fileID: 0}
     - target: {fileID: 2653418224118656517, guid: d6af44136a37a2140ba1dfe0ed7ebd4a,
         type: 3}
@@ -440,28 +440,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: HarvestResProUI
       objectReference: {fileID: 0}
-    - target: {fileID: 5556565899530203140, guid: d6af44136a37a2140ba1dfe0ed7ebd4a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6957925799771575048, guid: d6af44136a37a2140ba1dfe0ed7ebd4a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6957925799771575048, guid: d6af44136a37a2140ba1dfe0ed7ebd4a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -1490
-      objectReference: {fileID: 0}
-    - target: {fileID: 6957925799771575048, guid: d6af44136a37a2140ba1dfe0ed7ebd4a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -708
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5502803573254500573, guid: d6af44136a37a2140ba1dfe0ed7ebd4a, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -120,12 +120,12 @@ public class PinchToZoomAndPan : MonoBehaviour
                 lastClickedObjects.Add(clickable);
             }
 
-            //if (objectHit.Value.collider.TryGetComponent(out IDraggable draggableObject))
-            //{
-            //    print("Object is draggable");
-            //    draggableObject = objectHit.Value.collider.gameObject.GetComponent<IDraggable>();
+            if (objectHit.Value.collider.TryGetComponent(out IDraggable draggableObject))
+            {
+                print("Object is draggable");
+                draggableObject = objectHit.Value.collider.gameObject.GetComponent<IDraggable>();
 
-            //}
+            }
         }
         else if (groundHit.HasValue) // Only process ground if no object was hit
         {

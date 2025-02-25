@@ -13,6 +13,7 @@ public class ShopTemplate : MonoBehaviour
 
     [SerializeField] private TMP_Text titleTxt;
     [SerializeField] private TMP_Text costTxt;
+    [SerializeField] private TMP_Text expTxt;
     [SerializeField] private Image itemImg;
     [SerializeField] private Button button;
     [SerializeField] private GameObject lockedOverlay;
@@ -25,6 +26,7 @@ public class ShopTemplate : MonoBehaviour
 
         titleTxt.text = so.structureName;
         costTxt.text = so.currencyRequired.Values.First().ToString();
+        expTxt.text = so.expGivenOnBuild.ToString();
         itemImg.sprite = so.displayImage;
 
         lockedOverlay.SetActive(isLocked);

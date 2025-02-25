@@ -6,7 +6,7 @@ public class OpenCropTween : MonoBehaviour
 {
     [SerializeField] GameObject CropShopInner;
     private Vector3 initialPosition; // Store the initial position of the GameObject
-
+    private Structure structure;
 
     private void OnEnable()
     {
