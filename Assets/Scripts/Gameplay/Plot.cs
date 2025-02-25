@@ -277,6 +277,10 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
                 }
             case PlotState.EMPTY:
                 {
+                    //if(cropselection)
+                    //    //add to crops selected.
+                    //pagkapili ng crop, for all crops selected, Plant(napilingCrop)
+
                     cropManager.OpenCropSelection(this);
                     print("Empty plot clicked." + "Opening crop selection");
                     break;
