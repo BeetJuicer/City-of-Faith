@@ -241,10 +241,10 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
 
 
     //for pc
-    private void OnMouseDown()
-    {
-        OnObjectClicked();
-    }
+    //private void OnMouseDown()
+    //{
+    //    OnObjectClicked();
+    //}
 
     public void BoostProgress()
     {

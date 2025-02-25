@@ -62,7 +62,35 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         GetComponent<BoxCollider>().size = structureSize;
         overlayPlane.transform.localScale = new Vector3(structureSize.x, overlayPlane.transform.localScale.y, structureSize.z);
 
+
         overlayPlane.SetActive(true);
+
+        PositionStructureAtScreenCenter();
+    }
+    private void PositionStructureAtScreenCenter()
+    {
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null) return;
+
+        // Get the center of the screen
+        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+
+        // Create a ray from the center of the screen
+        Ray ray = mainCamera.ScreenPointToRay(screenCenter);
+
+        // Raycast to detect the ground
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        {
+            // Move the structure to where the ray hits
+            transform.position = new Vector3(hit.point.x, hit.point.y + halfHeight, hit.point.z);
+        }
+        else
+        {
+            // If no ground is detected, place it in front of the camera at a default distance
+            Vector3 fallbackPosition = mainCamera.transform.position + mainCamera.transform.forward * 5f;
+            transform.position = new Vector3(fallbackPosition.x, halfHeight, fallbackPosition.z);
+        }
     }
 
     private void Update()

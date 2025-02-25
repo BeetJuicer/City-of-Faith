@@ -9,6 +9,7 @@ public class BuildingMoveUIManager : MonoBehaviour
     [SerializeField] private BuildingOverlay buildingOverlay;  // Reference to the BuildingOverlay script
     [SerializeField] private GameObject buildingMoveUI;  // Reference to the BuildingMoveUI GameObject
     [SerializeField] private GameObject HUDCanvas;
+    //[SerializeField] private BlockOtherUIClicks uiBlocker;
 
     public Color allowedColor = Color.white;
     public Color disallowedColor = Color.gray;
@@ -16,6 +17,7 @@ public class BuildingMoveUIManager : MonoBehaviour
     public void OpenMoveUI()
     {
         buildingMoveUI.SetActive(true);
+        //uiBlocker.EnableBlocker();
     }
 
     private void Update()
@@ -69,6 +71,7 @@ public class BuildingMoveUIManager : MonoBehaviour
         HUDCanvas.SetActive(true);
         buildingMoveUI.SetActive(false);
         buildingOverlay.InstantiateBuilding();
+        //uiBlocker.DisableBlocker();
     }
 
     public void CancelBuildingPlacement()
@@ -76,6 +79,7 @@ public class BuildingMoveUIManager : MonoBehaviour
         buildingOverlay.ExitBuildMode();
         buildingMoveUI.SetActive(false);
         HUDCanvas.SetActive(true);
+        //uiBlocker.DisableBlocker();
     }
 
     public void RotateBuilding()

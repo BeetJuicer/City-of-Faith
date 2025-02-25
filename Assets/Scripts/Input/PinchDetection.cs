@@ -19,7 +19,7 @@ public class PinchToZoomAndPan : MonoBehaviour
     private TouchControls controls; // Reference to the new input system
     private Coroutine zoomCoroutine;
     private Coroutine dragCoroutine;
-    [SerializeField] private GameObject draggableObject;
+    private GameObject draggableObject;
     private bool isDraggingBuilding = false; // Flag to check if a building is being dragged
 
     // Store last known primary finger position for panning
@@ -42,16 +42,16 @@ public class PinchToZoomAndPan : MonoBehaviour
         controls.Touch.PrimaryTouchPress.performed += ctx => OnPrimaryTouchPress();
 
         // Hold detection
-        //controls.Touch.PrimaryTouchHoldRelease.performed += ctx => OnPrimaryTouchHold();
-        //controls.Touch.PrimaryTouchHoldRelease.canceled += ctx => OnPrimaryTouchHoldRelease();
+        controls.Touch.PrimaryTouchHoldRelease.performed += ctx => OnPrimaryTouchHold();
+        controls.Touch.PrimaryTouchHoldRelease.canceled += ctx => OnPrimaryTouchHoldRelease();
     }
 
     private void OnDisable()
     {
         controls.Disable();
         controls.Touch.PrimaryTouchPress.performed -= ctx => OnPrimaryTouchPress();
-        //controls.Touch.PrimaryTouchHoldRelease.performed -= ctx => OnPrimaryTouchHold();
-        //controls.Touch.PrimaryTouchHoldRelease.canceled -= ctx => OnPrimaryTouchHoldRelease();
+        controls.Touch.PrimaryTouchHoldRelease.performed -= ctx => OnPrimaryTouchHold();
+        controls.Touch.PrimaryTouchHoldRelease.canceled -= ctx => OnPrimaryTouchHoldRelease();
         controls.Touch.SecondaryTouchContact.started -= _ => ZoomStart();
         controls.Touch.SecondaryTouchContact.canceled -= _ => ZoomEnd();
     }
@@ -62,59 +62,58 @@ public class PinchToZoomAndPan : MonoBehaviour
         //print("On Primary Touch called.");
         // Get the touch position from the input system
         Vector2 touchPosition = controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>();
+        int groundLayerMask = LayerMask.GetMask("Ground");
         //print("Touch position is: " + touchPosition);
 
         if (IsTouchOverUI(touchPosition))
         {
-          //  print("Touched UI. Not clicking object.");
+            print("Touched UI. Not clicking object.");
             return;
         }
 
         // Convert the touch position to a ray
         Ray ray = mainCamera.ScreenPointToRay(touchPosition);
 
-        // Store information about what the ray hits
-        RaycastHit hit;
+        // Perform a RaycastAll to get all objects hit by the ray
+        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity);
 
-        // Define a layer mask for the Ground layer
-        int groundLayerMask = LayerMask.GetMask("Ground");
+        RaycastHit? groundHit = null;
+        RaycastHit? objectHit = null;
 
-        // Perform the raycast, but only check for objects in the Ground layer
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask))
+        foreach (RaycastHit hit in hits)
         {
-            //print("Hit the ground.");
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                groundHit = hit; // Store the first ground hit
+            }
+            else
+            {
+                objectHit = hit; // Store the first object hit (structure, draggable, etc.)
+            }
+        }
 
-            // Call the DisableOnStructureClickButtons method when the ground is hit
+        // Prioritize object hit over ground hit
+        if (objectHit.HasValue)
+        {
+            print("Object hitted.");
+            IClickableObject[] clickables = objectHit.Value.collider.GetComponents<IClickableObject>();
+            foreach (IClickableObject clickable in clickables)
+            {
+                Debug.Log($"Clickable object pressed: {objectHit.Value.collider.gameObject.name} at {objectHit.Value.point}");
+                clickable.OnObjectClicked();
+            }
+
+            if (objectHit.Value.collider.TryGetComponent(out IDraggable draggableObject))
+            {
+                print("Object is draggable");
+                draggableObject = objectHit.Value.collider.gameObject.GetComponent<IDraggable>();
+
+            }
+        }
+        else if (groundHit.HasValue) // Only process ground if no object was hit
+        {
+            print("Ground hitted.");
             uiManager.DisableOnStructureClickButtons();
-        }
-        else
-        {
-            //print("Raycast did not hit the ground.");
-        }
-
-        // Perform the raycast and check if it hits something
-        if (Physics.Raycast(ray, out hit))
-        {
-            IClickableObject[] clickables = hit.collider.GetComponents<IClickableObject>();
-            if (clickables.Length > 0)
-            {
-                foreach (IClickableObject clickable in clickables)
-                {
-                    Debug.Log($"Clickable object pressed: {hit.collider.gameObject.name} at {hit.point}");
-                    clickable.OnObjectClicked();
-                }
-            }
-
-            if (hit.collider.TryGetComponent(out draggableObject))
-            {
-                //print("draggable object pressed.");
-                draggableObject = hit.collider.gameObject;
-            }
-
-        }
-        else
-        {
-            Debug.Log("No GameObject detected at this position.");
         }
     }
 
@@ -206,7 +205,7 @@ public class PinchToZoomAndPan : MonoBehaviour
         EventSystem.current.RaycastAll(eventData, results);
         foreach (var result in results)
         {
-          //  print("touched UI: " + result.gameObject.name);
+          //print("touched UI: " + result.gameObject.name);
         }
 
         return results.Count > 0;

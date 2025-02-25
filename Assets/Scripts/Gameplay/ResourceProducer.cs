@@ -200,10 +200,10 @@ public class ResourceProducer : MonoBehaviour, IClickableObject, IBoostableObjec
         }
     }
 
-    private void OnMouseDown()
-    {
-        OnObjectClicked();
-    }
+    //private void OnMouseDown()
+    //{
+    //    OnObjectClicked();
+    //}
 
     public void BoostProgress()
     {
