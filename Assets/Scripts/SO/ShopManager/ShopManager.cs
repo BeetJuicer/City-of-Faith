@@ -16,12 +16,14 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private CentralHall centralhall;
     [SerializeField] private GameObject ShopTemplate;
     [SerializeField] private GameObject shopContent;
+    [SerializeField] private GameObject buildingOverlayObject;
 
     private ItemCategory currentCategory = ItemCategory.Buildings;
 
 
     private void Start()
     {
+        buildingOverlayObject.SetActive(true);
         centralhall.OnPlayerLevelUp += RefreshShop;
         FilterItemsByCategory(ItemCategory.Buildings);
     }

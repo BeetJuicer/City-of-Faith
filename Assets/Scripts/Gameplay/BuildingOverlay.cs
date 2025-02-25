@@ -190,6 +190,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             Debug.Log("Instantiate building end reached.");
             OnStructureBuilt?.Invoke(spawnPos, newBuilding.GetComponent<Structure>());
             Debug.Log("OnStructureBuilt Invoked.");
+            gameObject.SetActive(false);
         }
 
         ExitBuildMode();
