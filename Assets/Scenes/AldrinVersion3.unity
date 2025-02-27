@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18187037, g: 0.22754803, b: 0.30741802, a: 1}
+  m_IndirectSpecularColor: {r: 0.18187016, g: 0.22754742, b: 0.30741808, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -239,6 +239,84 @@ MonoBehaviour:
   expSlider: {fileID: 1854366527}
   expText: {fileID: 6438518087670584309}
   centralHall: {fileID: 0}
+--- !u!1001 &353424281
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 679637168415426032, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.828556
+      objectReference: {fileID: 0}
+    - target: {fileID: 679637168415426032, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 25.592777
+      objectReference: {fileID: 0}
+    - target: {fileID: 679637168415426032, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 43.615246
+      objectReference: {fileID: 0}
+    - target: {fileID: 679637168415426032, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 679637168415426032, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679637168415426032, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679637168415426032, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679637168415426032, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679637168415426032, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679637168415426032, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148078443447872087, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: m_Name
+      value: Database
+      objectReference: {fileID: 0}
+    - target: {fileID: 7014676771989128693, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: testingpo
+      value: Drin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7014676771989128693, guid: dc982e2ba541219489aa4da781647ae7,
+        type: 3}
+      propertyPath: IsGameplayScene
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc982e2ba541219489aa4da781647ae7, type: 3}
 --- !u!1001 &365702795
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1223,7 +1301,7 @@ PrefabInstance:
     - target: {fileID: 4185856721764061388, guid: e02e208b1235ba64da9e89954ed8862b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4629733666107050957, guid: e02e208b1235ba64da9e89954ed8862b,
         type: 3}
@@ -9546,11 +9624,14 @@ MonoBehaviour:
   structureDisplayManager: {fileID: 4163264072775250440}
   infoButton: {fileID: 6428229710662291243}
   sellButton: {fileID: 878286669730183377}
+  confirmSellButton: {fileID: 0}
   miniGameButtonOpen: {fileID: 0}
+  sellConfirmation: {fileID: 0}
   MainCamera3d: {fileID: 0}
   fishingMinigamePrefab: {fileID: 0}
   BarnMinigamePrefab: {fileID: 0}
   glorySpeedUp: {fileID: 0}
+  PinchToZoomAndPan: {fileID: 0}
   audioManager: {fileID: 0}
 --- !u!222 &5766596528246160448
 CanvasRenderer:
@@ -13603,6 +13684,7 @@ MonoBehaviour:
   ShopTemplate: {fileID: 1961006091164401258, guid: db29d42c6b83f4f4181e8663dda18334,
     type: 3}
   shopContent: {fileID: 1884576488017290472}
+  buildingOverlayObject: {fileID: 0}
 --- !u!222 &8765924472527107142
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14263,6 +14345,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1189960088}
+  - {fileID: 353424281}
   - {fileID: 1897672932}
   - {fileID: 1400022579}
   - {fileID: 1037961158}
