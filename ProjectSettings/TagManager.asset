@@ -13,6 +13,9 @@ TagManager:
   - PlasticBottle
   - Trashbag
   - UI_Button
+  - Fence
+  - Obstacle
+  - Sheep
   layers:
   - Default
   - TransparentFX
@@ -23,8 +26,8 @@ TagManager:
   - Structure
   - Ground
   - MiniGameObjects
-  - 
-  - 
+  - Sheep
+  - Fence
   - 
   - 
   - 
