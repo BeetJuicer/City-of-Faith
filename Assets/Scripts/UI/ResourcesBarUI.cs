@@ -10,13 +10,17 @@ public class ResourcesBarUI : MonoBehaviour
     [SerializeField] private TMP_Text gloryText; // Reference to a UI Text component for glory
     [SerializeField] private TMP_Text shopGoldText; // Reference to a UI Text component for gold
     [SerializeField] private TMP_Text shopGloryText;
-
+    [SerializeField] GameObject CoinBar;
+    public static RectTransform coinBarRect;
+    public static Vector3 coinBarPosition;
     /*
      Note: Make sure that ResourceManager is above this script in execution order.
      */
 
     private void Start()
     {
+        coinBarRect = CoinBar.GetComponent<RectTransform>();
+        coinBarPosition = coinBarRect.position;
         Initialize();
     }
 

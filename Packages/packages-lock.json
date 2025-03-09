@@ -7,6 +7,12 @@
       "dependencies": {},
       "hash": "a49684b95e7ecc62d7880bc03911c609ff176728"
     },
+    "com.kyrylokuzyk.primetween": {
+      "version": "file:../Assets/Plugins/PrimeTween/internal/com.kyrylokuzyk.primetween.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
     "com.unify.unified-universal-blur": {
       "version": "https://github.com/lukakldiashvili/Unified-Universal-Blur.git#0.2.2",
       "depth": 0,

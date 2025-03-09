@@ -97,10 +97,11 @@ public class PinchToZoomAndPan : MonoBehaviour
         // Prioritize object hit over ground hit
         if (objectHit.HasValue)
         {
-            print("Object hitted.");
+            GameObject clickedObject = objectHit.Value.collider.gameObject;
+            print($"Object hitted: {clickedObject.name}");
             IClickableObject[] clickables = objectHit.Value.collider.GetComponents<IClickableObject>();
 
-            bool isSameObjectClicked = clickables.Length > 0 && lastClickedObjects.SequenceEqual(clickables);
+            bool isSameObjectClicked = clickables.Length > 0 && lastClickedObjects.SequenceEqual(clickables) && clickedObject.name != "Temple_Merged";
             if (isSameObjectClicked)
             {
                 print("Same object clicked again. Ignoring.");

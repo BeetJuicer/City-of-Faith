@@ -28,6 +28,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     private CropImageDisplay cropImageDisplay;
     private Crop_SO crop_SO;
     private UIManager uiManager;
+    private CoinSpawnerOnDisable coinSpawner;
     [SerializeField] private Transform cropVisualPos;
 
     // Database
@@ -77,6 +78,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     {
         central = FindObjectOfType<CentralHall>();
         structure = GetComponent<Structure>();
+        coinSpawner = FindObjectOfType<CoinSpawnerOnDisable>();
         cropImageDisplay = GetComponentInChildren<CropImageDisplay>();
         cropManager = FindObjectOfType<CropManager>();
         Debug.Assert(cropImageDisplay != null, "Cannot find crop image display in children!");
@@ -306,6 +308,8 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
                 {
                     //SoundEffectForRipe
                     ClaimHarvest();
+                    Vector3 startPosition = transform.position;
+                    coinSpawner.SpawnCoins(transform.position);
                     break;
                 }
             default:
