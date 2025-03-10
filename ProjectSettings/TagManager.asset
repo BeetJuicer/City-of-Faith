@@ -16,6 +16,9 @@ TagManager:
   - Fence
   - Obstacle
   - Sheep
+  - BigFish
+  - SmallFish
+  - Fish
   layers:
   - Default
   - TransparentFX
@@ -28,9 +31,9 @@ TagManager:
   - MiniGameObjects
   - Sheep
   - Fence
-  - 
-  - 
-  - 
+  - FishCatching
+  - DockLayer
+  - Fish
   - 
   - 
   - 

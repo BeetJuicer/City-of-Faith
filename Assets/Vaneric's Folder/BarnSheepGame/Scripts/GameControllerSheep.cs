@@ -3,9 +3,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Xml.Linq;
+using System.Resources;
 
 public class GameControllerSheep : MonoBehaviour
 {
+    public static GameControllerSheep Instance;
     public SheepSpawner sheepSpawner;
     public TextMeshProUGUI sheepCounterText, timerText, waveText, waveNameText, messageText;
     public Button callSheepButton;
@@ -17,23 +19,40 @@ public class GameControllerSheep : MonoBehaviour
     public TextMeshProUGUI expText;
     public Button exitButton;
 
+    [SerializeField] private GameObject HUDCanvas;
+    [SerializeField] private Camera MainCamera3d;
+    [SerializeField] private GameObject barnMinigamePrefab;
     [SerializeField] private GameObject AudioManager;
 
+    private ResourceManager resourceManager;
+    private CentralHall centralHall;
+    private int goldReward = 0;
+    private int expReward = 0;
     private int totalSheep = 99;
     private int caughtSheep = 0;
     private int wave = 1;
-    private float gameDuration = 120f;
+    private float gameDuration = 90f;
     private int callSheepTaps = 0;
     private bool lostSheepSpawned = false;
     private bool gameEnded = false;
     private Coroutine currentMessageCoroutine; // Track the active message coroutine
-
-    void Start()
+    void Awake()
     {
-        AudioSourceSheep.Instance.PlayBackgroundMusic();
-        // Hide UI elements at start
-        HideUIElements();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
+    void OnEnable()
+    {
+        HideUIElements();
+        HUDCanvas.SetActive(false);
+        ResetGameState();
         endGamePanel.SetActive(false);
 
         // Ensure SheepSpawner is assigned
@@ -46,7 +65,7 @@ public class GameControllerSheep : MonoBehaviour
                 return;
             }
         }
-
+        AudioSourceSheep.Instance.PlayBackgroundMusic();
         StartCoroutine(StartWaves());
         StartCoroutine(GameTimer());
         callSheepButton.gameObject.SetActive(false);
@@ -60,6 +79,29 @@ public class GameControllerSheep : MonoBehaviour
         waveNameText.gameObject.SetActive(false);
         messageBackground.gameObject.SetActive(false);
         messageText.gameObject.SetActive(false);
+    }
+
+    public void ResetGameState()
+    {
+        gameEnded = false;
+        gameDuration = 90f;
+        caughtSheep = 0;
+        goldReward = 0;
+        expReward = 0;
+        wave = 1;
+        callSheepTaps = 0;
+        lostSheepSpawned = false;
+
+        if (endGamePanel != null)
+            endGamePanel.SetActive(false);
+
+        UpdateSheepCounter();
+        UpdateWaveText();
+
+        if (barnMinigamePrefab != null)
+            barnMinigamePrefab.SetActive(true);
+
+        Debug.Log("Game state has been reset.");
     }
 
     IEnumerator StartWaves()
@@ -182,7 +224,6 @@ public class GameControllerSheep : MonoBehaviour
         }
     }
 
-
     IEnumerator ShowLostSheep()
     {
         yield return new WaitForSeconds(1f);
@@ -227,8 +268,6 @@ public class GameControllerSheep : MonoBehaviour
         if (gameEnded) return; // Prevents multiple triggers
         gameEnded = true;
 
-        Debug.Log("EndGame Triggered!");
-
         // Stop all coroutines to prevent overlapping behaviors
         StopAllCoroutines();
 
@@ -236,13 +275,9 @@ public class GameControllerSheep : MonoBehaviour
         endGamePanel.SetActive(true);
         Time.timeScale = 0;
 
-        Debug.Log("EndGamePanel should now be visible.");
-
-        // Calculate Rewards
-        int goldReward = Mathf.Min(wave * 100, 500);
-        int expReward = Mathf.Min(wave * 100, 500);
-
-        Debug.Log($"Rewards Calculated -> Gold: {goldReward}, Exp: {expReward}");
+        // Calculate Rewards (But do NOT give them yet)
+        goldReward = Mathf.Min(wave * 100, 500);
+        expReward = Mathf.Min(wave * 100, 500);
 
         // Set End Game Message based on progress
         if (caughtSheep == 100)
@@ -266,12 +301,9 @@ public class GameControllerSheep : MonoBehaviour
         {
             quoteText.text = "So close! The lost sheep still waits for you.";
         }
-
-        // Display rewards
-        goldText.text = $"{goldReward}";
-        expText.text = $"{expReward}";
-
-        // Display the panel with a delay for polish
+        // display gold and exp
+        goldText.text = $"{goldReward} ";
+        expText.text = $"{expReward} ";
         StartCoroutine(ShowEndGamePanel());
     }
 
@@ -284,8 +316,6 @@ public class GameControllerSheep : MonoBehaviour
 
         Debug.Log("End Game Panel Fully Visible!");
     }
-
-
 
     int GetSheepSpeedForWave()
     {
@@ -316,7 +346,7 @@ public class GameControllerSheep : MonoBehaviour
 
         yield return FadeUI(messageBackground, messageText, false, 0.8f); // Fade out
 
-        currentMessageCoroutine = null; // Reset after completion
+        currentMessageCoroutine = null;
     }
 
 
@@ -347,5 +377,40 @@ public class GameControllerSheep : MonoBehaviour
             bg.gameObject.SetActive(false);
             text.gameObject.SetActive(false);
         }
+    }
+    public void ExitToMainScene()
+    {
+        Time.timeScale = 1f;
+        barnMinigamePrefab.SetActive(false);
+        HUDCanvas.SetActive(true);
+        MainCamera3d.gameObject.SetActive(true);
+        AudioManager.gameObject.SetActive(true);
+
+        // Update player resources and central hall data
+        if (resourceManager != null)
+        {
+            Debug.Log("Adding Gold");
+            ResourceManager.Instance.AdjustPlayerCurrency(Currency.Gold, goldReward);
+        }
+        else
+        {
+            Debug.LogError("ResourceManager is null!");
+        }
+
+        if (centralHall != null)
+        {
+            Debug.Log("Adding Exp");
+            centralHall.AddToCentralExp(expReward);
+        }
+        else
+        {
+            Debug.LogError("CentralHall is null!");
+        }
+
+        // Reset rewards after granting
+        goldReward = 0;
+        expReward = 0;
+
+        Debug.Log("Exiting mini-game and saving rewards.");
     }
 }

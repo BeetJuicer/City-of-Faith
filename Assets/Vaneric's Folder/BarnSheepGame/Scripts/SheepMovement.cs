@@ -9,14 +9,24 @@ public class SheepMovement : MonoBehaviour
     private Animator animator;
     private bool isMoving = false;
 
-    private float centerBias = 0.7f;
+    private Vector2 minBounds;
+    private Vector2 maxBounds;
+
     private Vector2[] directions = { Vector2.left, Vector2.right, Vector2.up, Vector2.down };
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        StartCoroutine(ChangeDirectionRoutine());
+
+        UpdateBounds();
+        StartCoroutine(MovementRoutine());
+    }
+
+    void UpdateBounds()
+    {
+        minBounds = Camera.main.ViewportToWorldPoint(Vector2.zero);
+        maxBounds = Camera.main.ViewportToWorldPoint(Vector2.one);
     }
 
     void FixedUpdate()
@@ -24,49 +34,100 @@ public class SheepMovement : MonoBehaviour
         if (isMoving)
         {
             Vector2 newPosition = rb.position + movementDirection * moveSpeed * Time.fixedDeltaTime;
+            newPosition = ClampToBounds(newPosition);
             rb.MovePosition(newPosition);
         }
 
-        UpdateAnimationState();
+        UpdateAnimation();
     }
 
-    IEnumerator ChangeDirectionRoutine()
+    IEnumerator MovementRoutine()
     {
         while (true)
         {
-            ChangeDirection();
-            isMoving = true;
-            yield return new WaitForSeconds(Random.Range(2f, 4f)); // Move for a few seconds
-            isMoving = false;
-            yield return new WaitForSeconds(Random.Range(1f, 2f)); // Pause before changing direction
+            if (Random.value < 0.9f) // 90% chance to move
+            {
+                ChooseDirection();
+                isMoving = true;
+                yield return new WaitForSeconds(Random.Range(2f, 4f));
+
+                if (IsNearBoundary(rb.position))
+                {
+                    MoveTowardCenter();
+                    yield return new WaitForSeconds(Random.Range(2f, 5f));
+                }
+            }
+            else
+            {
+                isMoving = false;
+                yield return new WaitForSeconds(Random.Range(1f, 3f)); // Idle time
+            }
         }
     }
 
-    void ChangeDirection()
+    void ChooseDirection()
     {
-        Vector2 position = rb.position;
+        Vector2 currentPos = rb.position;
 
-        if (position.x < -3 && Random.value < centerBias) movementDirection = Vector2.right;
-        else if (position.x > 3 && Random.value < centerBias) movementDirection = Vector2.left;
-        else if (position.y < -3 && Random.value < centerBias) movementDirection = Vector2.up;
-        else if (position.y > 3 && Random.value < centerBias) movementDirection = Vector2.down;
-        else movementDirection = directions[Random.Range(0, directions.Length)];
-    }
-
-    void UpdateAnimationState()
-    {
-        if (animator == null) return;
-
-        if (isMoving)
+        if (IsNearBoundary(currentPos))
         {
-            animator.SetFloat("MoveX", movementDirection.x);
-            animator.SetFloat("MoveY", movementDirection.y);
+            movementDirection = AvoidBoundary(currentPos);
         }
         else
         {
-            animator.SetFloat("MoveX", 0);
-            animator.SetFloat("MoveY", 0);
+            movementDirection = MoveTowardCenter();
         }
+    }
+
+    Vector2 MoveTowardCenter()
+    {
+        Vector2 centerPosition = (minBounds + maxBounds) / 2; // Get the middle of the screen
+        Vector2 centerDirection = (centerPosition - rb.position).normalized;
+
+        if (Mathf.Abs(centerDirection.x) > Mathf.Abs(centerDirection.y))
+        {
+            movementDirection = centerDirection.x > 0 ? Vector2.right : Vector2.left;
+        }
+        else
+        {
+            movementDirection = centerDirection.y > 0 ? Vector2.up : Vector2.down;
+        }
+
+        return movementDirection;
+    }
+
+    bool IsNearBoundary(Vector2 position)
+    {
+        return position.x <= minBounds.x + 2f || position.x >= maxBounds.x - 2f ||
+               position.y <= minBounds.y + 2f || position.y >= maxBounds.y - 2f;
+    }
+
+    Vector2 AvoidBoundary(Vector2 position)
+    {
+        Vector2 away = Vector2.zero;
+
+        if (position.x <= minBounds.x + 2f) away += Vector2.right;
+        if (position.x >= maxBounds.x - 2f) away += Vector2.left;
+        if (position.y <= minBounds.y + 2f) away += Vector2.up;
+        if (position.y >= maxBounds.y - 2f) away += Vector2.down;
+
+        return away.normalized;
+    }
+
+    Vector2 ClampToBounds(Vector2 position)
+    {
+        position.x = Mathf.Clamp(position.x, minBounds.x + 1f, maxBounds.x - 1f);
+        position.y = Mathf.Clamp(position.y, minBounds.y + 1f, maxBounds.y - 1f);
+        return position;
+    }
+
+    void UpdateAnimation()
+    {
+        if (animator == null) return;
+
+        animator.SetFloat("MoveX", movementDirection.x);
+        animator.SetFloat("MoveY", movementDirection.y);
+        animator.SetBool("IsMoving", isMoving);
     }
 
     public void SetSpeed(float speed)
@@ -76,30 +137,14 @@ public class SheepMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Fence")) 
+        if (collision.gameObject.CompareTag("Fence"))
         {
-            StartCoroutine(ForceChangeDirection());
+            ChooseDirection(); // Change direction when hitting fence
         }
-    }
-
-    IEnumerator ForceChangeDirection()
-    {
-        int attempts = 0;
-
-        while (attempts < 5) 
+        else if (collision.gameObject.CompareTag("Sheep"))
         {
-            ChangeDirection();
-            yield return new WaitForSeconds(0.1f);
-
-            if (!IsBlocked()) break; 
-
-            attempts++;
+            Vector2 pushDirection = (rb.position - (Vector2)collision.transform.position).normalized;
+            rb.MovePosition(rb.position + pushDirection * 0.3f);
         }
-    }
-
-    bool IsBlocked()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(rb.position, movementDirection, 0.5f);
-        return hit.collider != null && hit.collider.CompareTag("Fence");
     }
 }
