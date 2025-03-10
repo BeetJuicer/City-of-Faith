@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Gino Touch Scene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StartMenuWithCutScene.unity
     guid: 811dd728b3e5f234197250c19d6e376f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GinoWorld.unity
     guid: 4cebb10a63384a944967513a9893b84d
   - enabled: 0
@@ -32,7 +32,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/AldrinWorld2.unity
     guid: 6fbd0a1a8dccc3d4cb43d0671cb480c2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AldrinVersion3.unity
     guid: e9cc8201fa4c0374c964e3bde1638f54
+  - enabled: 1
+    path: Assets/Cloud/Cloud.unity
+    guid: e3b2094aa8263ea49b8e4c40ec64c3d6
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
