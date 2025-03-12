@@ -128,6 +128,29 @@ public class Database : MonoBehaviour
 
     public void SetUser(string s)
     {
+        //CloudSaveDB.LoadData(); load data to path
+        // db(json now. OR cloud save directly. dictionary dictionary) = path
+        // decrypt json, load world, encrypt json
+
+
+        //SaveData()
+        //CloudSave.SaveAsync(playerData, PlayerData)
+
+        /*
+         PlayerData{
+            <id, structure> structureData,
+            <id, rp> rpData,
+            <id, p> plotData,
+            centralData(one.),
+            currency sa unity economy
+            resources>? economy?
+            
+        }
+         
+         */
+
+
+
         var db = new SQLiteConnection(path);
 
         Username = s;
