@@ -3,7 +3,7 @@
 public class FishMovement : MonoBehaviour
 {
     public float speed = 2f;
-    public Collider2D boundaryArea; // Use Collider2D instead of RectTransform
+    public Collider2D boundaryArea;
     public LayerMask obstacleLayer;
     private Vector2 targetPosition;
     private Animator animator;

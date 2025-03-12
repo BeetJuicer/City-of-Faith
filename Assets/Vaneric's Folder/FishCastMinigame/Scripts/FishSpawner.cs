@@ -11,14 +11,21 @@ public class FishSpawner : MonoBehaviour
     public int initialSmallFishCount = 9;
 
     private List<GameObject> activeFishes = new List<GameObject>();
+    private bool hasSpawned = false; // Prevents multiple spawns on first run
 
     void Start()
     {
-        SpawnInitialFish();
+        if (!hasSpawned)
+        {
+            hasSpawned = true; // Mark as spawned
+            ClearAllFish();  // Ensure no extra fish exist
+            SpawnInitialFish();
+        }
     }
 
-    void SpawnInitialFish()
+    public void SpawnInitialFish()
     {
+        if (activeFishes.Count > 0) return; // Prevent double spawning
         SpawnFish(bigFishPrefab, initialBigFishCount);
         SpawnFish(smallFishPrefab, initialSmallFishCount);
     }
@@ -59,20 +66,17 @@ public class FishSpawner : MonoBehaviour
         activeFishes.Remove(caughtFish);
         Destroy(caughtFish);
 
-        int spawnAmount = Random.Range(1, 3);
-        for (int i = 0; i < spawnAmount; i++)
-        {
-            GameObject newFishPrefab = (Random.value > 0.5f) ? bigFishPrefab : smallFishPrefab;
-            Vector2 spawnPosition = GetRandomPositionInsideBoundary();
-            GameObject newFish = Instantiate(newFishPrefab, spawnPosition, Quaternion.identity);
-            activeFishes.Add(newFish);
+        GameObject newFishPrefab = (Random.value > 0.5f) ? bigFishPrefab : smallFishPrefab;
+        Vector2 spawnPosition = GetRandomPositionInsideBoundary();
+        GameObject newFish = Instantiate(newFishPrefab, spawnPosition, Quaternion.identity);
+        activeFishes.Add(newFish);
 
-            if (newFish.TryGetComponent(out FishMovement fishMovement))
-            {
-                fishMovement.boundaryArea = boundaryArea;
-            }
+        if (newFish.TryGetComponent(out FishMovement fishMovement))
+        {
+            fishMovement.boundaryArea = boundaryArea;
         }
-        Debug.Log($"{spawnAmount} new fish spawned!");
+
+        Debug.Log("1 new fish spawned!");
     }
 
     public void ClearAllFish()

@@ -35,7 +35,7 @@ public class GameControllerSheep : MonoBehaviour
     private int callSheepTaps = 0;
     private bool lostSheepSpawned = false;
     private bool gameEnded = false;
-    private Coroutine currentMessageCoroutine; // Track the active message coroutine
+    private Coroutine currentMessageCoroutine;
     void Awake()
     {
         if (Instance == null)
@@ -55,7 +55,6 @@ public class GameControllerSheep : MonoBehaviour
         ResetGameState();
         endGamePanel.SetActive(false);
 
-        // Ensure SheepSpawner is assigned
         if (!sheepSpawner)
         {
             sheepSpawner = FindObjectOfType<SheepSpawner>();
@@ -265,7 +264,7 @@ public class GameControllerSheep : MonoBehaviour
 
     void EndGame()
     {
-        if (gameEnded) return; // Prevents multiple triggers
+        if (gameEnded) return; // prevent unnecessary execution of code when the game is already ended
         gameEnded = true;
 
         // Stop all coroutines to prevent overlapping behaviors
@@ -275,7 +274,7 @@ public class GameControllerSheep : MonoBehaviour
         endGamePanel.SetActive(true);
         Time.timeScale = 0;
 
-        // Calculate Rewards (But do NOT give them yet)
+        // Calculate Rewards limit of 500
         goldReward = Mathf.Min(wave * 100, 500);
         expReward = Mathf.Min(wave * 100, 500);
 
@@ -301,7 +300,7 @@ public class GameControllerSheep : MonoBehaviour
         {
             quoteText.text = "So close! The lost sheep still waits for you.";
         }
-        // display gold and exp
+
         goldText.text = $"{goldReward} ";
         expText.text = $"{expReward} ";
         StartCoroutine(ShowEndGamePanel());

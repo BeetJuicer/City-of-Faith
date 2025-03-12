@@ -24,6 +24,9 @@ public class PauseMenuFish : MonoBehaviour
     public Slider musicSlider;
     public Slider sfxSlider;
 
+    [SerializeField] private GameObject HUDCanvas;
+    [SerializeField] private Camera MainCamera3d;
+    [SerializeField] private GameObject fishingMinigamePrefab;
     [SerializeField] private GameObject AudioManager;
 
     private bool isPaused = false;
@@ -67,7 +70,7 @@ public class PauseMenuFish : MonoBehaviour
         AudioSourceFish.Instance.PlayTapSound();
         if (isPaused) return;
         isPaused = true;
-        Time.timeScale = 0; // Freeze game
+        Time.timeScale = 0; // Pause game
         pauseMenuUI.SetActive(true);
     }
 
@@ -137,6 +140,30 @@ public class PauseMenuFish : MonoBehaviour
     }
     public void ExitGame()
     {
+        Time.timeScale = 1f;
+        FishingController.Instance?.ResetGameState();
 
+        pauseMenuUI.SetActive(false);
+        soundMenuUI.SetActive(false);
+        exitConfirmationPanel.SetActive(false);
+        isPaused = false;
+
+        // Ensure the fishing mini-game is deactivated properly
+        if (fishingMinigamePrefab != null)
+            fishingMinigamePrefab.SetActive(false);
+
+        // Restore HUD and camera visibility
+        if (HUDCanvas != null)
+            HUDCanvas.SetActive(true);
+
+        if (MainCamera3d != null)
+            MainCamera3d.gameObject.SetActive(true);
+
+        // Ensure audio manager remains active
+        if (AudioManager != null)
+            AudioManager.gameObject.SetActive(true);
+
+        Debug.Log("Exited fishing mini-game and restored game state.");
     }
+
 }

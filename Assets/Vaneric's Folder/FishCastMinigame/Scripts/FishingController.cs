@@ -2,9 +2,13 @@
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class FishingController : MonoBehaviour
 {
+    public static FishingController Instance;
+
+    [Header("UI Elements")]
     public Image messageBackground;
     public TMP_Text messageText;
     public TMP_Text timerText;
@@ -16,48 +20,124 @@ public class FishingController : MonoBehaviour
     public JoystickCapture joystickCapture;
     public FishSpawner fishSpawner;
 
+    [Header("End Game UI")]
     public GameObject endGamePanel;
     public TMP_Text quoteText;
     public TMP_Text goldText;
     public TMP_Text expText;
     public Button exitGameButton;
 
+    [Header("References")]
+    [SerializeField] private GameObject HUDCanvas;
+    [SerializeField] private Camera MainCamera3d;
+    [SerializeField] private GameObject fishingMinigamePrefab;
     [SerializeField] private GameObject AudioManager;
 
+    private ResourceManager resourceManager;
+    private CentralHall centralHall;
+
     private int score = 0;
-    private float timer = 60f;
+    private int goldReward = 0;
+    private int expReward = 0;
+    private float timer = 70f;
     private bool canCast = false;
     private bool gameEnded = false;
     private bool hasCast = false;
-
+    private Vector3 originalPosition;
     private Coroutine currentMessageCoroutine = null;
 
-    void Start()
+    private void Awake()
     {
-        messageBackground.gameObject.SetActive(false);
-        messageText.gameObject.SetActive(false);
+        resourceManager = FindObjectOfType<ResourceManager>();
+        centralHall = FindObjectOfType<CentralHall>();
+
+        if (resourceManager == null)
+            Debug.LogError("ResourceManager is not found in the scene!");
+
+        if (centralHall == null)
+            Debug.LogError("CentralHall is not found in the scene!");
+    }
+
+    void OnEnable()
+    {
+        HUDCanvas.SetActive(false);
+        ResetGameState();
+        endGamePanel.SetActive(false);
         fishermanAnimator.SetFloat("Blend", 0f);
         StartCoroutine(StartGameSequence());
         castButton.onClick.AddListener(OnCastButtonPressed);
-        exitGameButton.onClick.AddListener(ExitGame);
-        castButton.gameObject.SetActive(false);
-        exitButton.gameObject.SetActive(false);
-        endGamePanel.SetActive(false);
-        joystick.SetActive(false);
-        joystickCapture.HideCaptureBox();
+        exitButton.onClick.AddListener(() => StartCoroutine(WaitThenExit()));
         UpdateScoreText();
         AudioSourceFish.Instance.PlayBackgroundMusic();
     }
 
-    void Update()
+    void HideUIElements()
+    {
+        messageBackground.gameObject.SetActive(false);
+        messageText.gameObject.SetActive(false);
+        castButton.gameObject.SetActive(false);
+        exitButton.gameObject.SetActive(false);
+        joystick.SetActive(false);
+        joystickCapture.HideCaptureBox();
+    }
+
+    public void ResetGameState()
+    {
+        gameEnded = false;
+        timer = 70f;
+        score = 0;
+        goldReward = 0;
+        expReward = 0;
+        hasCast = false;
+        canCast = false;
+
+        if (endGamePanel != null) endGamePanel.SetActive(false);
+        if (castButton != null) castButton.gameObject.SetActive(false);
+        if (exitButton != null) exitButton.gameObject.SetActive(false);
+
+        if (joystick != null) joystick.SetActive(false);
+        if (joystickCapture != null) joystickCapture.HideCaptureBox();
+
+        if (fishermanAnimator != null)
+        {
+            fishermanAnimator.gameObject.SetActive(true);
+            fishermanAnimator.SetFloat("Blend", 0f);
+            fishermanAnimator.enabled = false;
+            fishermanAnimator.enabled = true;
+
+            if (originalPosition != Vector3.zero)
+            {
+                fishermanAnimator.transform.position = originalPosition;
+            }
+        }
+
+        if (fishSpawner != null)
+        {
+            fishSpawner.ClearAllFish();
+            StartCoroutine(SpawnFishWithDelay());
+        }
+
+        ResetJoystick();
+        UpdateScoreText();
+        StartCoroutine(StartGameSequence());
+    }
+
+    private IEnumerator SpawnFishWithDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        fishSpawner.SpawnInitialFish();
+    }
+
+    private void Update()
     {
         if (!gameEnded)
         {
             timer -= Time.deltaTime;
-            timerText.text = Mathf.Ceil(timer).ToString();
+            UpdateTimerUI();
 
             if (timer <= 0)
             {
+                timer = 0;
                 EndGame();
             }
         }
@@ -65,11 +145,10 @@ public class FishingController : MonoBehaviour
 
     IEnumerator StartGameSequence()
     {
-        yield return ShowMessage("When God speaks, trust his timing for abundance", 3f);
+        yield return StartCoroutine(ShowMessage("When God speaks, trust his timing for abundance", 2f));
+        yield return new WaitForSeconds(Random.Range(2, 3));
+        yield return StartCoroutine(ShowMessage("Go fishing now!", 2f));
 
-        yield return new WaitForSeconds(Random.Range(3, 5));
-
-        yield return ShowMessage("Go fishing now!", 2f);
         canCast = true;
         castButton.gameObject.SetActive(true);
     }
@@ -81,8 +160,7 @@ public class FishingController : MonoBehaviour
         canCast = false;
         hasCast = true;
         castButton.gameObject.SetActive(false);
-
-        AudioSourceFish.Instance.PlayTapSound(); // Play tap sound
+        AudioSourceFish.Instance.PlayTapSound();
         StartCoroutine(FishingSequence());
     }
 
@@ -90,34 +168,19 @@ public class FishingController : MonoBehaviour
     {
         yield return ShowMessage("You cast your net in faith. Trust in the Lord’s timing!", 2f);
 
-        // Set animation to casting state
         fishermanAnimator.SetFloat("Blend", 0.5f);
         yield return new WaitForSeconds(1.5f);
-
-        // Stay in waiting animation (prevents looping)
         fishermanAnimator.SetFloat("Blend", 0.8f);
+        yield return new WaitForSeconds(2.5f);
 
         joystick.SetActive(true);
         joystickCapture.ShowCaptureBox();
     }
 
-
     public void AddScore(int points)
     {
         score += points;
         UpdateScoreText();
-
-        // Correct message based on fish points
-        if (points == 10)  // Big Fish
-        {
-            StartCoroutine(ShowMessage("Your faith has brought you abundance!", 2f));
-        }
-        else if (points == 5)  // Small Fish
-        {
-            StartCoroutine(ShowMessage("You obeyed Jesus and received a great blessing!", 2f));
-        }
-
-        // Play fish catch sound when score increases
         AudioSourceFish.Instance.PlayFishCatchSound();
     }
 
@@ -126,72 +189,83 @@ public class FishingController : MonoBehaviour
         scoreText.text = score.ToString();
     }
 
+    private void UpdateTimerUI()
+    {
+        int minutes = Mathf.FloorToInt(timer / 60);
+        int seconds = Mathf.CeilToInt(timer % 60);
+
+        if (minutes > 0)
+        {
+            timerText.text = string.Format("{0}:{1:00}", minutes, seconds);
+        }
+        else
+        {
+            timerText.text = seconds.ToString();
+        }
+    }
+
     void EndGame()
     {
         gameEnded = true;
         messageText.text = $"Fishing Over! You scored {score} points.";
-
-        // Hide UI elements
         joystick.SetActive(false);
         joystickCapture.HideCaptureBox();
-
-        // Clear all fish to reduce lag
         fishSpawner.ClearAllFish();
 
-        // Calculate Gold & EXP Rewards
-        int gold, exp;
         string quote = "Trust in the Lord’s abundance.";
 
         if (score >= 200)
         {
-            gold = 500;
-            exp = 500;
+            goldReward = 500;
+            expReward = 500;
             quote = "With faith, the net overflows.";
         }
         else if (score >= 100)
         {
-            gold = 300;
-            exp = 300;
+            goldReward = 300;
+            expReward = 300;
             quote = "Those who obey receive in full.";
         }
         else
         {
-            gold = 150;
-            exp = 150;
-            quote = "Small faith brings small blessings.";
+            goldReward = 150;
+            expReward = 150;
         }
 
-        // Play Reward Sound
         AudioSourceFish.Instance.PlayRewardSound();
 
-        // Show EndGame Panel
         endGamePanel.SetActive(true);
         quoteText.text = quote;
-        goldText.text = gold.ToString();
-        expText.text = exp.ToString();
+        goldText.text = goldReward.ToString();
+        expText.text = expReward.ToString();
         exitButton.gameObject.SetActive(true);
-    }
-
-    void ExitGame()
-    {
-        Debug.Log("Exiting game...");
     }
 
     IEnumerator ShowMessage(string message, float duration)
     {
         if (currentMessageCoroutine != null)
+        {
             StopCoroutine(currentMessageCoroutine);
+        }
 
-        currentMessageCoroutine = StartCoroutine(FadeUI(messageBackground, messageText, true, 0.8f)); // Fade in
-        messageText.text = message;
+        // Ensure UI elements are active before fading in
+        messageBackground.gameObject.SetActive(true);
+        messageText.gameObject.SetActive(true);
+
+        messageText.text = message; // Ensure text updates before fading
+
+        currentMessageCoroutine = StartCoroutine(FadeUI(messageBackground, messageText, true, 0.8f));
 
         yield return new WaitForSeconds(duration);
 
-        currentMessageCoroutine = StartCoroutine(FadeUI(messageBackground, messageText, false, 0.8f)); // Fade out
+        yield return StartCoroutine(FadeUI(messageBackground, messageText, false, 0.8f));
+
+        currentMessageCoroutine = null; // Ensure coroutine reference resets
     }
 
     IEnumerator FadeUI(Image bg, TMP_Text text, bool fadeIn, float duration)
     {
+        // Ensure UI elements are active before fading
         bg.gameObject.SetActive(true);
         text.gameObject.SetActive(true);
 
@@ -200,22 +274,86 @@ public class FishingController : MonoBehaviour
         float startTextAlpha = fadeIn ? 0 : 1;
         float endTextAlpha = fadeIn ? 1 : 0;
 
-        for (float t = 0; t < duration; t += Time.deltaTime)
+        float elapsed = 0;
+        while (elapsed < duration)
         {
-            float alpha = Mathf.Lerp(startAlpha, endAlpha, t / duration);
-            float textAlpha = Mathf.Lerp(startTextAlpha, endTextAlpha, t / duration);
-            bg.color = new Color(0, 0, 0, alpha);
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / duration);
+            float textAlpha = Mathf.Lerp(startTextAlpha, endTextAlpha, elapsed / duration);
+
+            bg.color = new Color(bg.color.r, bg.color.g, bg.color.b, alpha);
             text.color = new Color(text.color.r, text.color.g, text.color.b, textAlpha);
+
             yield return null;
         }
 
-        bg.color = new Color(0, 0, 0, endAlpha);
+        bg.color = new Color(bg.color.r, bg.color.g, bg.color.b, endAlpha);
         text.color = new Color(text.color.r, text.color.g, text.color.b, endTextAlpha);
 
+        // Disable UI after fading out
         if (!fadeIn)
         {
             bg.gameObject.SetActive(false);
             text.gameObject.SetActive(false);
         }
     }
+
+    public void ExitGame()
+    {
+        fishingMinigamePrefab.SetActive(false);
+        HUDCanvas.SetActive(true);
+        MainCamera3d.gameObject.SetActive(true);
+        AudioManager.gameObject.SetActive(true);
+
+        if (resourceManager != null)
+        {
+            resourceManager.AdjustPlayerCurrency(Currency.Gold, goldReward);
+            Debug.Log("Gold Updated!");
+        }
+        else
+        {
+            Debug.LogError("resourceManager is NULL!");
+        }
+
+        if (centralHall != null)
+        {
+            centralHall.AddToCentralExp(expReward);
+            Debug.Log("Exp Updated!");
+        }
+        else
+        {
+            Debug.LogError("centralHall is NULL!");
+        }
+
+        goldReward = 0;
+        expReward = 0;
+    }
+
+    private void ResetJoystick()
+    {
+        if (joystick != null)
+        {
+            StartCoroutine(DelayResetJoystick());
+        }
+    }
+    private IEnumerator DelayResetJoystick()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        // Ensure joystick registers as released before disabling
+        PointerEventData pointerEvent = new PointerEventData(EventSystem.current);
+        ExecuteEvents.Execute(joystick.gameObject, pointerEvent, ExecuteEvents.pointerUpHandler);
+
+        // Small delay to fully clear input before disabling
+        yield return new WaitForSeconds(0.05f);
+
+        joystick.SetActive(false);
+    }
+
+    IEnumerator WaitThenExit()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ExitGame();
+    }
+
 }

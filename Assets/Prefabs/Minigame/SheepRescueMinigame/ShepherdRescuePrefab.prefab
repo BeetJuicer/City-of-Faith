@@ -4917,7 +4917,7 @@ GameObject:
   - component: {fileID: 3954287261499990190}
   - component: {fileID: 3417537836501234863}
   - component: {fileID: 1896992836665581915}
-  - component: {fileID: 7567020923370495347}
+  - component: {fileID: 8816042215267267194}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5002,7 +5002,7 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &7567020923370495347
+--- !u!114 &8816042215267267194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

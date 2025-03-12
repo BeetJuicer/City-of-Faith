@@ -224,8 +224,6 @@ public class GameController : MonoBehaviour
         goldText.text = "Gold: " + gold;
         expText.text = "EXP: " + exp;
 
-        
-
         // Pause the game
         Time.timeScale = 0f;
     }

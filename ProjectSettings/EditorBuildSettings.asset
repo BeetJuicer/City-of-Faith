@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartMenuWithCutScene.unity
     guid: 811dd728b3e5f234197250c19d6e376f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GinoWorld.unity
     guid: 4cebb10a63384a944967513a9893b84d
   - enabled: 0
@@ -35,4 +35,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/AldrinVersion3.unity
     guid: e9cc8201fa4c0374c964e3bde1638f54
+  - enabled: 0
+    path: Assets/Scenes/SanPascualWorld.unity
+    guid: bd620b20f32f1a84ebe54dacdb767cd0
+  - enabled: 1
+    path: Assets/Scenes/SanPascual2.unity
+    guid: 7cc83c626294d9a4fa976edfd329a4ad
   m_configObjects: {}

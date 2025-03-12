@@ -1,15 +1,20 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class JoystickCapture : MonoBehaviour
 {
-    public bl_Joystick joystick;  // Joystick UI element
-    public Transform redOutline;  // Now using Transform (World Space)
-    public Camera mainCamera;  // Assign Main Camera
-    public float moveSpeed = 1f;
+    [Header("References")]
+    public bl_Joystick joystick;  // Reference to the bl_Joystick script
+    public Transform redOutline;  // The capture box that moves
+    public Camera mainCamera;     // Main game camera
+
+    [Header("Movement Settings")]
+    public float moveSpeed = 60f; // Speed of the red outline movement
 
     private Vector3 minBounds;
     private Vector3 maxBounds;
     private Vector3 initialPosition;
+    private bool isMoving = false;
 
     void Start()
     {
@@ -19,8 +24,8 @@ public class JoystickCapture : MonoBehaviour
             return;
         }
 
-        SetWorldBoundaries(); // Set movement limits
-        SetInitialPosition(); // Start at the correct position
+        SetWorldBoundaries();
+        SetInitialPosition();
     }
 
     void Update()
@@ -28,46 +33,67 @@ public class JoystickCapture : MonoBehaviour
         MoveCaptureBox();
     }
 
+    /// <summary>
+    /// Moves the capture box based on joystick input while staying within screen boundaries.
+    /// </summary>
     private void MoveCaptureBox()
     {
         Vector2 moveDirection = new Vector2(joystick.Horizontal, joystick.Vertical);
 
-        if (moveDirection.magnitude > 0.1f)
+        if (moveDirection.magnitude > 0.01f)
         {
-            Vector3 move = new Vector3(moveDirection.x, moveDirection.y, 0) * moveSpeed * Time.deltaTime;
+            isMoving = true;
+            Vector3 move = new Vector3(moveDirection.x, moveDirection.y, 0) * moveSpeed * Time.unscaledDeltaTime;
             redOutline.position += move;
 
-            // Clamp inside the screen boundaries (not FishBoundary)
             redOutline.position = new Vector3(
                 Mathf.Clamp(redOutline.position.x, minBounds.x, maxBounds.x),
                 Mathf.Clamp(redOutline.position.y, minBounds.y, maxBounds.y),
                 redOutline.position.z
             );
         }
+        else if (isMoving)
+        {
+            isMoving = false;
+            Debug.Log("Joystick stopped moving");
+        }
     }
 
+    /// <summary>
+    /// Sets movement boundaries based on screen size in world space.
+    /// </summary>
     private void SetWorldBoundaries()
     {
         Vector3 screenBottomLeft = mainCamera.ScreenToWorldPoint(new Vector3(0, 0, mainCamera.nearClipPlane));
         Vector3 screenTopRight = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.nearClipPlane));
 
-        minBounds = new Vector3(screenBottomLeft.x + 0.5f, screenBottomLeft.y + 0.5f, 0);
-        maxBounds = new Vector3(screenTopRight.x - 0.5f, screenTopRight.y - 0.5f, 0);
+        float padding = 0.5f; // Optional padding to avoid edges
+
+        minBounds = new Vector3(screenBottomLeft.x + padding, screenBottomLeft.y + padding, 0);
+        maxBounds = new Vector3(screenTopRight.x - padding, screenTopRight.y - padding, 0);
     }
 
+    /// <summary>
+    /// Sets the initial position of the capture box.
+    /// </summary>
     private void SetInitialPosition()
     {
-        initialPosition = new Vector3(0, 0, 0); // Adjust as needed
+        initialPosition = Vector3.zero; // Default position
         redOutline.position = initialPosition;
     }
 
-    // **Restoring ShowCaptureBox & HideCaptureBox**
+    /// <summary>
+    /// Shows and resets the capture box.
+    /// </summary>
     public void ShowCaptureBox()
     {
-        redOutline.position = initialPosition; // Reset position
+        redOutline.position = initialPosition;
         redOutline.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Hides the capture box.
+    /// </summary>
     public void HideCaptureBox()
     {
         redOutline.gameObject.SetActive(false);
