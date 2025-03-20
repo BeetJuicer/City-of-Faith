@@ -38,5 +38,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Cloud/Cloud.unity
     guid: e3b2094aa8263ea49b8e4c40ec64c3d6
+  - enabled: 1
+    path: Assets/Scenes/CloudWorld.unity
+    guid: 6d112dae3288ae8479d1f491045cd90f
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

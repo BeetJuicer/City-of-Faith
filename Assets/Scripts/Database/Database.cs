@@ -149,7 +149,7 @@ public class Database : MonoBehaviour
          
          */
 
-
+        //Changed. Only one player is in the mydb.db
 
         var db = new SQLiteConnection(path);
 

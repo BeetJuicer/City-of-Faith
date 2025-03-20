@@ -58,6 +58,10 @@ public class UsernamePasswordAuth : MonoBehaviour
             // Notify the player with the proper error message
             Debug.LogException(ex);
         }
+
+        //new player. Grab .db template from cloud and save it to application persistent data
+
+
     }
 
     async Task SignInWithUsernamePasswordAsync(string username, string password)
@@ -79,6 +83,8 @@ public class UsernamePasswordAuth : MonoBehaviour
             // Notify the player with the proper error message
             Debug.LogException(ex);
         }
+
+        Database.Instance?.SetUser(username);
     }
 
     async Task UpdatePasswordAsync(string currentPassword, string newPassword)

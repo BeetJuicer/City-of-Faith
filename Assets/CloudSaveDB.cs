@@ -4,12 +4,25 @@ using System.Collections.Generic;
 using Unity.Services.CloudSave;
 using System.Threading.Tasks;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class CloudSaveDB : MonoBehaviour
 {
+    private readonly float secondsPerAutosave = 10f;
     private async void Awake()
     {
         await UnityServices.InitializeAsync();
+    }
+
+    private void Start()
+    {
+        //autosave every 5 minutes
+        InvokeRepeating(nameof(SavePlayerFile), secondsPerAutosave, secondsPerAutosave);
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        SavePlayerFile();
     }
 
     private async Task SaveFileBytes(string key, byte[] bytes)
@@ -89,6 +102,7 @@ public class CloudSaveDB : MonoBehaviour
         var bytes = await LoadFileBytes("databaseSave");
         File.WriteAllBytes($"{Application.persistentDataPath}/MyDb.db", bytes);
         Debug.Log("Successfully loaded cloud saved database!");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("CloudWorld");
     }
 
     private async Task<byte[]> LoadFileBytes(string key)
