@@ -5,20 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - CropSelectionUI
-  - YellowFish
-  - OrangeFish
-  - PurpleFish
-  - LargeFish
-  - RottenBanana
-  - PlasticBottle
-  - Trashbag
   - UI_Button
   - Fence
   - Obstacle
-  - Sheep
   - BigFish
   - SmallFish
   - Fish
+  - Background
+  - Sheep
+  - Grass
+  - Flower
+  - Border
+  - Wolf
   layers:
   - Default
   - TransparentFX
@@ -34,10 +32,10 @@ TagManager:
   - FishCatching
   - DockLayer
   - Fish
-  - 
-  - 
-  - 
-  - 
+  - Obstacle
+  - Flower
+  - Wolf
+  - Borders
   - 
   - 
   - 
