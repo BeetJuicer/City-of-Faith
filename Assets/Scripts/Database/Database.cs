@@ -124,7 +124,21 @@ public class Database : MonoBehaviour
     {
         SetUser(testingpo);
     }
+    private void Awake()
+    {
+        SceneManager.DontDestroyOnLoad(this);
 
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        CreateDatabaseFileIfNotExists();
+    }
 
     public void SetUser(string s)
     {
@@ -150,7 +164,7 @@ public class Database : MonoBehaviour
          */
 
         //Changed. Only one player is in the mydb.db
-
+        print("User set with username: " + s);
         var db = new SQLiteConnection(path);
 
         Username = s;
@@ -187,20 +201,13 @@ public class Database : MonoBehaviour
         db.Close();
     }
 
-    private void Awake()
+    public void CreateDatabaseFileIfNotExists()
     {
         path = $"{Application.persistentDataPath}/MyDb.db";
 
-        SceneManager.DontDestroyOnLoad(this);
+        if (System.IO.File.Exists(path))
+            return;
 
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
         //TODO FOR DATABASE: PASSWORD CHECKING
 
         db = new SQLiteConnection(path);

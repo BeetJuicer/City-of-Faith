@@ -11,6 +11,8 @@ using SQLite;
 public class CloudSaveDB : MonoBehaviour
 {
     private readonly float secondsPerAutosave = 10f;
+    UsernamePasswordAuth UPA;
+
     private async void Awake()
     {
         await UnityServices.InitializeAsync();
@@ -18,12 +20,28 @@ public class CloudSaveDB : MonoBehaviour
 
     private void Start()
     {
+        UPA = FindAnyObjectByType<UsernamePasswordAuth>();
+        if (UPA == null)
+            Debug.LogWarning("UPA not found!");
+
+        Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+
+        //We do not want to call autosave if we're not in the game scene. This causes file access issues to the save file because Auth also has the file open.
+        if (scene.buildIndex <= 1)
+            return;
+
+        print("Not in main menu. Starting Autosave");
         //autosave every 5 minutes
         InvokeRepeating(nameof(SavePlayerFile), secondsPerAutosave, secondsPerAutosave);
     }
 
     private void OnApplicationPause(bool pause)
     {
+
+        Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        if (scene.buildIndex <= 1)
+            return;
+
         SavePlayerFile();
     }
 
@@ -101,18 +119,22 @@ public class CloudSaveDB : MonoBehaviour
 
     public async void LoadDatabase()
     {
+        Database.Instance?.CreateDatabaseFileIfNotExists();
+
         var bytes = await LoadFileBytes("databaseSave");
 
         // No cloud save file found. Initialize new scene.
         if (bytes == null)
         {
-            print("Loading new scene...");
+            print("No cloud save found. Initializing new scene.");
+            Database.Instance?.SetUser(UPA._USERNAME);
             UnityEngine.SceneManagement.SceneManager.LoadScene("CloudWorld");
             return;
         }
 
         File.WriteAllBytes($"{Application.persistentDataPath}/MyDb.db", bytes);
         Debug.Log("Successfully loaded cloud saved database!");
+        Database.Instance?.SetUser(UPA._USERNAME);
         UnityEngine.SceneManagement.SceneManager.LoadScene("CloudWorld");
     }
 

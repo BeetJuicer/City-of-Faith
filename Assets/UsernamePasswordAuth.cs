@@ -9,6 +9,8 @@ public class UsernamePasswordAuth : MonoBehaviour
 {
     [SerializeField] private TMP_InputField username;
     [SerializeField] private TMP_InputField password;
+    CloudSaveDB cloudSave;
+    public string _USERNAME { get; private set; }
     async void Awake()
     {
         try
@@ -21,6 +23,10 @@ public class UsernamePasswordAuth : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        cloudSave = FindAnyObjectByType<CloudSaveDB>();
+    }
 
     public async void SignUp()
     {
@@ -44,7 +50,9 @@ public class UsernamePasswordAuth : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(username, password);
-            Debug.Log("SignUp is successful.");
+            _USERNAME = username;
+            Debug.Log("SignUp is successful for username: " + _USERNAME);
+            cloudSave.LoadDatabase();
         }
         catch (AuthenticationException ex)
         {
@@ -69,7 +77,9 @@ public class UsernamePasswordAuth : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
-            Debug.Log("SignIn is successful.");
+            _USERNAME = username;
+            Debug.Log("SignIn is successful for username: " + _USERNAME);
+            cloudSave.LoadDatabase();
         }
         catch (AuthenticationException ex)
         {
@@ -83,8 +93,6 @@ public class UsernamePasswordAuth : MonoBehaviour
             // Notify the player with the proper error message
             Debug.LogException(ex);
         }
-
-        Database.Instance?.SetUser(username);
     }
 
     async Task UpdatePasswordAsync(string currentPassword, string newPassword)
