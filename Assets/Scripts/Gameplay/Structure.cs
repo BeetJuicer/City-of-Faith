@@ -140,6 +140,8 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
 
         TimeBuildFinished = data.time_build_finished;
 
+        print($"Loaded data. Time this building finished is: {TimeBuildFinished}. Time remaining is: {TimeBuildFinished.Subtract(DateTime.Now)}");
+
         //not using the property so that I don't have to call the update database event. Just loading data. 
         currentBuildingState = (BuildingState)data.building_state;
 
