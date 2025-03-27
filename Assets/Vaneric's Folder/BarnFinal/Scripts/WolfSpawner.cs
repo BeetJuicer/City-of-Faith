@@ -12,7 +12,7 @@ public class WolfSpawner : MonoBehaviour
     private float spawnInterval;
     private bool isSpawning = false;
     private float difficultyMultiplier = 0.95f;
-    private bool stopSpawning = false;
+    private bool stopSpawning = true;
     private float minSpawnInterval = 1.8f;
 
     void Start()
@@ -25,11 +25,12 @@ public class WolfSpawner : MonoBehaviour
 
         if (wolfPrefab == null)
         {
-            Debug.LogError("wolfPrefab is NOT assigned in WolfSpawner!");
+            Debug.LogError("Wolf prefab is NOT assigned in WolfSpawner!");
             return;
         }
 
         spawnInterval = initialSpawnInterval;
+        stopSpawning = true;
     }
 
     public void StartSpawning()
@@ -47,6 +48,7 @@ public class WolfSpawner : MonoBehaviour
         while (isSpawning)
         {
             if (stopSpawning) yield break;
+
             yield return new WaitForSeconds(spawnInterval);
             SpawnWolf();
         }
@@ -83,5 +85,17 @@ public class WolfSpawner : MonoBehaviour
             Destroy(wolf);
         }
         Debug.Log("All wolves cleared!");
+    }
+
+    public void ResetSpawning()
+    {
+        StopSpawning();
+        ClearAllWolves();
+        StartSpawning();
+    }
+
+    public void EnableSpawning()
+    {
+        stopSpawning = false;
     }
 }

@@ -38,4 +38,14 @@ public class TrustMeter : MonoBehaviour
     {
         return (currentTrust / maxTrust) * 100f;
     }
+    public void ResetTrust()
+    {
+        currentTrust = 0f;
+        if (trustSlider != null)
+        {
+            trustSlider.value = currentTrust;
+        }
+        Debug.Log("Trust meter reset!");
+    }
+
 }

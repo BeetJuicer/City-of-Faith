@@ -24,6 +24,9 @@ public class PauseMenuManager : MonoBehaviour
     public Slider musicSlider;
     public Slider sfxSlider;
 
+    [SerializeField] private GameObject HUDCanvas;
+    [SerializeField] private Camera MainCamera3d;
+    [SerializeField] private GameObject BarnMinigamePrefab;
     [SerializeField] private GameObject AudioManager;
 
     private bool isPaused = false;
@@ -131,7 +134,24 @@ public class PauseMenuManager : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("Exited barn mini-game and restored game state.");
+        Time.timeScale = 1f;
+        GameManagerSheep.Instance?.ResetGameState();
+        pauseManager.SetActive(false);
+        soundPanel.SetActive(false);
+        exitConfirmationPanel.SetActive(false);
+        isPaused = false;
+
+        if (BarnMinigamePrefab != null)
+            BarnMinigamePrefab.SetActive(false);
+
+        if (HUDCanvas != null)
+            HUDCanvas.SetActive(true);
+
+        if (MainCamera3d != null)
+            MainCamera3d.gameObject.SetActive(true);
+
+        if (AudioManager != null)
+            AudioManager.gameObject.SetActive(true);
     }
 
 }
