@@ -50,6 +50,7 @@ public class UsernamePasswordAuth : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(username, password);
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(username);
             _USERNAME = username;
             Debug.Log("SignUp is successful for username: " + _USERNAME);
             cloudSave.LoadDatabase();
@@ -77,11 +78,6 @@ public class UsernamePasswordAuth : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
-            await AuthenticationService.Instance.UpdatePlayerNameAsync(username);
-            _USERNAME = username;
-            string playername = await AuthenticationService.Instance.GetPlayerNameAsync();
-            Debug.Log("SignIn is successful for username: " + _USERNAME);
-            Debug.Log("signin from auth is:" + playername);
             cloudSave.LoadDatabase();
         }
         catch (AuthenticationException ex)

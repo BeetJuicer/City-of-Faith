@@ -31,11 +31,23 @@ namespace Unity.Services.Samples.Friends
         PlayerProfile m_LoggedPlayerProfile;
 
         private FriendsEventConnectionState m_current_state;
+        //
+        bool initialized = false;
+
+        public void EnableUI()
+        {
+            if (!initialized)
+                return;
+
+            RefreshAll();
+            m_RelationshipsViewGameObject.SetActive(!m_RelationshipsViewGameObject.activeInHierarchy);
+        }
 
         async void Start()
         {
+            print("relationships start");
             //If this is added to a larger project, the service init order should be controlled from one place, and replace this.
-            await UnityServiceAuthenticator.SignIn();
+            //await UnityServiceAuthenticator.SignIn();
             await Init();
         }
 
@@ -43,21 +55,24 @@ namespace Unity.Services.Samples.Friends
         {
             // Registering callbacks before Friends Initializing to ensure the receiving of all
             // `NotificationsConnectivityChanged` events.
-            RegisterFriendsEventCallbacks(); 
-            
+            RegisterFriendsEventCallbacks();
+            print("Friends Init");
             await FriendsService.Instance.InitializeAsync();
             UIInit();
             await LogInAsync();
             RefreshAll();
+            initialized = true;
         }
 
         void UIInit()
         {
+            print("pass 1");
             if (m_RelationshipsViewGameObject == null)
             {
                 Debug.LogError($"Missing GameObject in {name}", gameObject);
                 return;
             }
+            print("pass 2");
 
             m_RelationshipsView = m_RelationshipsViewGameObject.GetComponent<IRelationshipsView>();
             if (m_RelationshipsView == null)
@@ -66,10 +81,12 @@ namespace Unity.Services.Samples.Friends
                     m_RelationshipsViewGameObject);
                 return;
             }
+            print("pass 3");
 
             m_RelationshipsView.Init();
             m_LocalPlayerView = m_RelationshipsView.LocalPlayerView;
             m_AddFriendView = m_RelationshipsView.AddFriendView;
+            print("pass 4");
 
             //Bind Lists
             m_FriendsListView = m_RelationshipsView.FriendsListView;
@@ -78,6 +95,7 @@ namespace Unity.Services.Samples.Friends
             m_RequestListView.BindList(m_RequestsEntryDatas);
             m_BlockListView = m_RelationshipsView.BlockListView;
             m_BlockListView.BindList(m_BlockEntryDatas);
+            print("pass 5");
 
             //Bind Friends SDK Callbacks
             m_AddFriendView.onFriendRequestSent += AddFriendAsync;
@@ -88,6 +106,8 @@ namespace Unity.Services.Samples.Friends
             m_RequestListView.onBlock += BlockFriendAsync;
             m_BlockListView.onUnblock += UnblockFriendAsync;
             m_LocalPlayerView.onPresenceChanged += SetPresenceAsync;
+            print("pass 6");
+
         }
 
         async Task LogInAsync()
@@ -168,6 +188,7 @@ namespace Unity.Services.Samples.Friends
 
         void RefreshFriends()
         {
+            print("Refreshing friends");
             m_FriendsEntryDatas.Clear();
 
             var friends = GetFriends();
@@ -203,11 +224,15 @@ namespace Unity.Services.Samples.Friends
 
         void RefreshRequests()
         {
+            print("Refreshing requests... you should get a tick.");
             m_RequestsEntryDatas.Clear();
             var requests = GetRequests();
 
             foreach (var request in requests)
+            {
+                print("There is a request here.");
                 m_RequestsEntryDatas.Add(new PlayerProfile(request.Profile.Name, request.Id));
+            }
 
             m_RelationshipsView.RelationshipBarView.Refresh();
         }

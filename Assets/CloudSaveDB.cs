@@ -7,6 +7,7 @@ using System.IO;
 using UnityEngine.SceneManagement;
 using DG.Tweening.Plugins.Core.PathCore;
 using SQLite;
+using Unity.Services.Authentication;
 
 public class CloudSaveDB : MonoBehaviour
 {
@@ -130,6 +131,7 @@ public class CloudSaveDB : MonoBehaviour
     public async void LoadDatabase()
     {
         Database.Instance?.CreateDatabaseFileIfNotExists();
+        string playerName = await AuthenticationService.Instance.GetPlayerNameAsync();
 
         var bytes = await LoadFileBytes("databaseSave");
 
@@ -137,14 +139,17 @@ public class CloudSaveDB : MonoBehaviour
         if (bytes == null)
         {
             print("No cloud save found. Initializing new scene.");
-            Database.Instance?.SetUser(UPA._USERNAME);
+
+            Database.Instance?.SetUser(playerName);
+
             UnityEngine.SceneManagement.SceneManager.LoadScene("CloudWorld");
             return;
         }
 
         File.WriteAllBytes($"{Application.persistentDataPath}/MyDb.db", bytes);
         Debug.Log("Successfully loaded cloud saved database!");
-        Database.Instance?.SetUser(UPA._USERNAME);
+        Database.Instance?.SetUser(playerName);
+        print("database set as " + playerName);
         UnityEngine.SceneManagement.SceneManager.LoadScene("CloudWorld");
     }
 
