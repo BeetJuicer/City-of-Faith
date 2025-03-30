@@ -37,7 +37,17 @@ public class CloudSaveDB : MonoBehaviour
 
     private void OnApplicationPause(bool pause)
     {
+        //Temporary Solution. We don't want to save anything if we're in the main menu screen.
+        Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        if (scene.buildIndex <= 1)
+            return;
 
+        SavePlayerFile();
+    }
+
+    private void OnApplicationQuit()
+    {
+        //Temporary Solution. We don't want to save anything if we're in the main menu screen.
         Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         if (scene.buildIndex <= 1)
             return;
