@@ -5,9 +5,11 @@ using UnityEngine.UI;
 public class QuizManager : MonoBehaviour
 {
     public TMP_Text questionText;
+    public TMP_Text npcTitleText;
+    public TMP_Text characterNameText;
     public Button[] answerButtons;
-    public QuizQuestion[] quizQuestions;
-    private int currentQuestionIndex = 0;
+    public GameObject quizPanel;
+    private QuizQuestion_SO currentQuiz;
     private int correctAnswers = 0;
 
     private Color defaultColor = new Color(1f, 1f, 1f, 1f);
@@ -23,31 +25,37 @@ public class QuizManager : MonoBehaviour
     private int expRewardPerCorrect = 5;
     private int gold = 0;
     private int exp = 0;
-    private int totalQuestions;
 
     void Start()
     {
-        totalQuestions = quizQuestions.Length;
-        LoadQuestion();
+        quizPanel.SetActive(false);
         rewardsPanel.SetActive(false);
     }
 
-    // Load the current question and answer choices.
+    public void StartQuiz(QuizQuestion_SO quizData)
+    {
+        currentQuiz = quizData;
+        quizPanel.SetActive(true);
+        correctAnswers = 0;
+        LoadQuestion();
+    }
+
     void LoadQuestion()
     {
-        if (currentQuestionIndex >= totalQuestions)
+        if (currentQuiz == null)
         {
-            ShowRewards();
+            Debug.LogWarning("No quiz loaded!");
             return;
         }
 
-        QuizQuestion currentQuestion = quizQuestions[currentQuestionIndex];
-        questionText.text = currentQuestion.question;
+        npcTitleText.text = currentQuiz.npcTitle;
+        characterNameText.text = currentQuiz.characterName;
+        questionText.text = currentQuiz.question;
 
         for (int i = 0; i < answerButtons.Length; i++)
         {
             int index = i;
-            answerButtons[i].GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[i];
+            answerButtons[i].GetComponentInChildren<TMP_Text>().text = currentQuiz.answers[i];
             answerButtons[i].GetComponent<Image>().color = defaultColor;
             answerButtons[i].onClick.RemoveAllListeners();
             answerButtons[i].onClick.AddListener(() => CheckAnswer(index));
@@ -55,10 +63,9 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    // Find the correct answer index, check color green and red, if green add gold and exp.
     void CheckAnswer(int selectedIndex)
     {
-        int correctIndex = quizQuestions[currentQuestionIndex].correctAnswerIndex;
+        int correctIndex = currentQuiz.correctAnswerIndex;
 
         foreach (Button btn in answerButtons)
         {
@@ -78,13 +85,7 @@ public class QuizManager : MonoBehaviour
             answerButtons[correctIndex].GetComponent<Image>().color = correctColor;
         }
 
-        Invoke("NextQuestion", 2f);
-    }
-
-    void NextQuestion()
-    {
-        currentQuestionIndex++;
-        LoadQuestion();
+        Invoke("ShowRewards", 2f);
     }
 
     void ShowRewards()
@@ -92,7 +93,6 @@ public class QuizManager : MonoBehaviour
         rewardsPanel.SetActive(true);
         goldText.text = $"{gold}";
         expText.text = $"{exp}";
-
         quoteText.text = "Well done! True wisdom comes from continuous learning.";
     }
 }

@@ -3033,7 +3033,7 @@ PrefabInstance:
     - target: {fileID: 4185856721764061388, guid: e02e208b1235ba64da9e89954ed8862b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4629733666107050957, guid: e02e208b1235ba64da9e89954ed8862b,
         type: 3}
@@ -8749,6 +8749,74 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &1846731834704616888
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2935629999482739157, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_Name
+      value: NpcQuizManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863289244087879054, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863289244087879054, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863289244087879054, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863289244087879054, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863289244087879054, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863289244087879054, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863289244087879054, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863289244087879054, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863289244087879054, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863289244087879054, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4992a2529b808b7488675ed37f621e9a, type: 3}
 --- !u!1 &1884576488017290472
 GameObject:
   m_ObjectHideFlags: 0
@@ -17883,6 +17951,7 @@ SceneRoots:
   - {fileID: 365702795}
   - {fileID: 426622166}
   - {fileID: 1154612071}
+  - {fileID: 1846731834704616888}
   - {fileID: 822889359}
   - {fileID: 894860882}
   - {fileID: 1046153955241545660}
