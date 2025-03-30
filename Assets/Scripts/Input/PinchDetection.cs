@@ -7,16 +7,21 @@ using System.Linq;
 
 public class PinchToZoomAndPan : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera1;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera2;
     [SerializeField] private float zoomSpeed = 0.1f;  // How fast the camera zooms in and out
     [SerializeField] private float panSpeed = 0.5f;   // How fast the camera moves (panning)
     [SerializeField] private float minZoom = 2f;      // Minimum zoom (orthographic size)
     [SerializeField] private float maxZoom = 10f;     // Maximum zoom (orthographic size)
     [SerializeField] private UIManager uiManager; // Reference to the UIManager
+    [SerializeField] private BuildingOverlay buildingOverlay;
+    [SerializeField] private CropManager cropManager;
 
     private Camera mainCamera; // Reference to the main camera
     private float previousDistance; // Stores the previous frame's pinch distance
     private TouchControls controls; // Reference to the new input system
+    
     private Coroutine zoomCoroutine;
     private Coroutine dragCoroutine;
     private GameObject draggableObject;
@@ -29,8 +34,18 @@ public class PinchToZoomAndPan : MonoBehaviour
 
     private void Awake()
     {
+        if (draggableObject == null)
+        {
+            draggableObject = GameObject.FindWithTag("BuildingOverlay");
+        }
         controls = new TouchControls();
         mainCamera = Camera.main;
+        virtualCamera = virtualCamera1;
+    }
+
+    public List<Plot> GetSelectedPlots()
+    {
+        return lastClickedObjects.OfType<Plot>().ToList(); // Filter only Plot objects
     }
 
     private void OnEnable()
@@ -101,6 +116,11 @@ public class PinchToZoomAndPan : MonoBehaviour
             print($"Object hitted: {clickedObject.name}");
             IClickableObject[] clickables = objectHit.Value.collider.GetComponents<IClickableObject>();
 
+            if (cropManager.MultiplePlot)
+            {
+                clickables = clickables.Where(c => c is Plot).ToArray();
+            }
+
             bool isSameObjectClicked = clickables.Length > 0 && lastClickedObjects.SequenceEqual(clickables) && clickedObject.name != "Temple_Merged";
             if (isSameObjectClicked)
             {
@@ -108,11 +128,15 @@ public class PinchToZoomAndPan : MonoBehaviour
                 return; // Stop execution to prevent re-clicking the same object
             }
 
-            foreach (IClickableObject lastClickable in lastClickedObjects)
+            // Only reset pop state & clear list if MultiplePlot is false
+            if (!cropManager.MultiplePlot)
             {
-                lastClickable.ResetPopState();
+                foreach (IClickableObject lastClickable in lastClickedObjects)
+                {
+                    lastClickable.ResetPopState();
+                }
+                lastClickedObjects.Clear(); // Clear previous clicks
             }
-            lastClickedObjects.Clear(); // Clear previous clicks
 
             foreach (IClickableObject clickable in clickables)
             {
@@ -120,23 +144,20 @@ public class PinchToZoomAndPan : MonoBehaviour
                 clickable.OnObjectClicked();
                 lastClickedObjects.Add(clickable);
             }
-
-            if (objectHit.Value.collider.TryGetComponent(out IDraggable draggableObject))
-            {
-                print("Object is draggable");
-                draggableObject = objectHit.Value.collider.gameObject.GetComponent<IDraggable>();
-
-            }
         }
         else if (groundHit.HasValue) // Only process ground if no object was hit
         {
             print("Ground hitted.");
             uiManager.DisableOnStructureClickButtons();
-            foreach (IClickableObject lastClickable in lastClickedObjects)
+            // Only reset pop state & clear list if MultiplePlot is false
+            if (!cropManager.MultiplePlot)
             {
-                lastClickable.ResetPopState();
+                foreach (IClickableObject lastClickable in lastClickedObjects)
+                {
+                    lastClickable.ResetPopState();
+                }
+                lastClickedObjects.Clear();
             }
-            lastClickedObjects.Clear();
         }
     }
 
@@ -147,17 +168,24 @@ public class PinchToZoomAndPan : MonoBehaviour
 
     private void OnPrimaryTouchHold()
     {
-        if (draggableObject != null && !isDraggingBuilding)
+        //if (draggableObject != null && !isDraggingBuilding)
+        //{
+        //    isDraggingBuilding = true;
+        //    // Start the dragging coroutine if it's not already running
+          
+
+        //    //Debug.Log("Primary touch hold detected, object is being dragged.");
+        //}
+
+        if (buildingOverlay.isInBuildMode)
         {
-            isDraggingBuilding = true;
-            // Start the dragging coroutine if it's not already running
+            CameraManager.SwitchCamera(virtualCamera2);
             if (dragCoroutine == null)
             {
                 dragCoroutine = StartCoroutine(DragObject());
             }
-
-            //Debug.Log("Primary touch hold detected, object is being dragged.");
         }
+
     }
 
     private void OnPrimaryTouchHoldRelease()
@@ -169,9 +197,9 @@ public class PinchToZoomAndPan : MonoBehaviour
             dragCoroutine = null;
         }
 
-        // Reset draggable object
-        draggableObject = null;
-        isDraggingBuilding = false;
+        //// Reset draggable object
+        //draggableObject = null;
+        //isDraggingBuilding = false;
 
         //Debug.Log("Primary touch hold released, object settled.");
     }
@@ -179,7 +207,7 @@ public class PinchToZoomAndPan : MonoBehaviour
     // Coroutine to update the object's position while being held
     IEnumerator DragObject()
     {
-        while (isDraggingBuilding && draggableObject != null)
+        while (buildingOverlay.isInBuildMode && draggableObject != null)
         {
             // Get the current touch position
             Vector2 touchPosition = controls.Touch.PrimaryFingerPosition.ReadValue<Vector2>();
@@ -219,9 +247,14 @@ public class PinchToZoomAndPan : MonoBehaviour
     private void Update()
     {
         //if(gamemanager is in play mode)
+        virtualCamera = CameraManager.ActiveCamera;
         HandleSingleFingerPan();
-        //else buildmode
-        //handlemovingbuildingoverlay() or let building overlay handle following finger.
+
+        if (buildingOverlay.isInBuildMode)
+        {
+            CameraManager.SwitchCamera(virtualCamera2);
+        }
+
     }
 
     private bool IsTouchOverUI(Vector2 touchPosition)

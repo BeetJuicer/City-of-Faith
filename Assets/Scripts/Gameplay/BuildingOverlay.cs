@@ -10,6 +10,8 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     public event Action<Vector3, Structure> OnStructureBuilt;
 
     [SerializeField] private Structure_SO debugStructureSO;
+    [SerializeField] private GameObject Visuals;
+    [SerializeField] private Material inprogressmat;
     private Structure_SO structure_SO;
     private float halfHeight = 0;
 
@@ -62,6 +64,18 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         GetComponent<BoxCollider>().size = structureSize;
         overlayPlane.transform.localScale = new Vector3(structureSize.x, overlayPlane.transform.localScale.y, structureSize.z);
 
+
+        //visual update
+        //an error here might mean that InProgresssVisual's name has changed in SStructure Prefab
+        var visual = Instantiate(structure_SO.structurePrefab.transform.Find("InProgressVisual"), Visuals.transform);
+        int count = structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh.subMeshCount;
+        List<Material> mat = new List<Material>();
+        mat.Add(inprogressmat);
+
+        for (int i = 0; i < count; i++)
+        {
+            visual.GetComponentInChildren<MeshRenderer>().SetSharedMaterials(mat);
+        }
 
         overlayPlane.SetActive(true);
 
@@ -123,11 +137,11 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
 
         //print($"{halfHeight} + {transform.position.y}");
 
-        int count = structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh.subMeshCount;
-        for (int i = 0; i < count; i++)
-        {
-            Graphics.DrawMesh(structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh, new Vector3(transform.position.x, transform.position.y + halfHeight, transform.position.z), transform.rotation, buildPreviewMaterial, 0, null, i);
-        }
+        //int count = structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh.subMeshCount;
+        //for (int i = 0; i < count; i++)
+        //{
+        //    Graphics.DrawMesh(structure_SO.structurePrefab.GetComponentInChildren<MeshFilter>().sharedMesh, new Vector3(transform.position.x, transform.position.y + halfHeight, transform.position.z), transform.rotation, buildPreviewMaterial, 0, null, i);
+        //}
     }
 
     // Naughty Attributes methods.
@@ -144,6 +158,11 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
         Destroy(previewGO);
         overlayPlane.SetActive(false);
         isInBuildMode = false;
+        var childcount = Visuals.transform.childCount;
+        for (int i = 0; i < childcount; i++)
+        {
+            Destroy(Visuals.transform.GetChild(i).gameObject);
+        }
     }
 
     [Button]

@@ -16,17 +16,47 @@ public class CropManager : MonoBehaviour
     [SerializeField] private GameObject csContent;
     [SerializeField] private Button cropSellButton;
     [SerializeField] private PinchToZoomAndPan PinchToZoomAndPan;
+    [SerializeField] private GameObject multipleSign;
+    public bool MultiplePlot;
 
 
     private void Start()
     {
         LoadCropPanels();
+        MultiplePlot = false;
     }
 
     public void Purchase(Crop_SO so)
     {
         // this is only called when the button is enabled anyway, so no checking needed.
-        selectedPlot.Plant(so);
+        //selectedPlot.Plant(so);
+        //ResourceManager.Instance.AdjustPlayerCurrency(so.cropPrice); // TODO: negative dapat
+        //CloseCropSelection();
+
+        if (MultiplePlot)
+        {
+            List<Plot> selectedPlots = PinchToZoomAndPan.GetSelectedPlots(); // Get selected plots
+
+            foreach (Plot plot in selectedPlots)
+            {
+                plot.Plant(so);
+            }
+
+            MultiplePlot = false;
+            multipleSign.SetActive(false);
+
+            foreach (Plot plot in selectedPlots)
+            {
+                plot.ResetPopState();
+            }
+
+            PinchToZoomAndPan.ClearClickedObjects();
+        }
+        else
+        {
+            selectedPlot.Plant(so);
+        }
+
         ResourceManager.Instance.AdjustPlayerCurrency(so.cropPrice); // TODO: negative dapat
         CloseCropSelection();
     }
@@ -110,6 +140,15 @@ public class CropManager : MonoBehaviour
         else
         {
             Debug.LogError("Error in OpenCropSelection");
+        }
+    }
+
+    public void MultipleCropMode()
+    {
+        if (!MultiplePlot)
+        {
+            MultiplePlot = true;
+            multipleSign.SetActive(true);
         }
     }
 }

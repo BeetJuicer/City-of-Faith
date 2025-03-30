@@ -90,6 +90,7 @@ public class ShopManager : MonoBehaviour
     {
         ShopManagerUi.SetActive(false);
         //dialogue.OnShopItemClicked();
+        buildingOverlayObject.SetActive(true);
         buildingOverlay.EnterBuildMode(so);
         moveUI.OpenMoveUI();
     }

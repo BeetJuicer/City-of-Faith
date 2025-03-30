@@ -346,6 +346,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4167342344541294656}
     m_Modifications:
+    - target: {fileID: 738217202156089980, guid: a3b62cee7fb07c448bca2fbaa79b4803,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1838446130962193502, guid: a3b62cee7fb07c448bca2fbaa79b4803,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -360,6 +365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HarvestTimerUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451885715365343757, guid: a3b62cee7fb07c448bca2fbaa79b4803,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6245193704436617663, guid: a3b62cee7fb07c448bca2fbaa79b4803,
         type: 3}
