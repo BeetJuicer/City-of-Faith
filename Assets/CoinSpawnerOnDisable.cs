@@ -10,7 +10,7 @@ public class CoinSpawnerOnDisable : MonoBehaviour
     [SerializeField] private TweenSettings tweenSettings;
     [SerializeField] private Camera mainCamera;
 
-    public void SpawnCoins(Vector3 startPosition, int coinCount = 5, float spreadRadius = 50f, float spawnDelay = 0.1f, float moveDelay = 0.3f)
+    public void SpawnCoins(Vector3 startPosition, int coinCount = 10, float spreadRadius = 20f, float spawnDelay = 0.1f, float moveDelay = 0.3f)
     {
         StartCoroutine(SpawnCoinsRoutine(startPosition, coinCount, spreadRadius, spawnDelay, moveDelay));
     }

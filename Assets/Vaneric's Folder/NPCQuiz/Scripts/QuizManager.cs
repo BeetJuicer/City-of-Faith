@@ -7,6 +7,7 @@ public class QuizManager : MonoBehaviour
     public TMP_Text questionText;
     public TMP_Text npcTitleText;
     public TMP_Text characterNameText;
+    public GameObject HUDCanvas;
     public Button[] answerButtons;
     public GameObject quizPanel;
     private QuizQuestion_SO currentQuiz;
@@ -36,6 +37,7 @@ public class QuizManager : MonoBehaviour
     {
         currentQuiz = quizData;
         quizPanel.SetActive(true);
+        HUDCanvas.SetActive(false);
         correctAnswers = 0;
         LoadQuestion();
     }

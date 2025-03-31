@@ -17,13 +17,16 @@ MonoBehaviour:
   structurePrefab: {fileID: 1482177645635640231, guid: f0de145689231c54383377d8dae16093,
     type: 3}
   displayImage: {fileID: 21300000, guid: 9091f749025989243a715c725db6f1bf, type: 3}
+  Category: 2
   expGivenOnBuild: 100
-  townHallLevelRequirement: 6
+  townHallLevelRequirement: 4
   numberOfCitizensAdded: 5
   currencyRequired:
     _serializedList:
     - Key: 1
       Value: 5000
+  currencyReturnedOnResell:
+    _serializedList: []
   resourcesRequired:
     _serializedList: []
   resourcesReturnedOnResell:

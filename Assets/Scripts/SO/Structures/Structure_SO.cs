@@ -52,5 +52,6 @@ public class Structure_SO : ScriptableObject
 public enum ItemCategory
 {
     Buildings,
-    Decorations
+    Decorations,
+    People
 }

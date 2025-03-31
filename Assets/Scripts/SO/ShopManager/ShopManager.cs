@@ -140,6 +140,11 @@ public class ShopManager : MonoBehaviour
         FilterItemsByCategory(ItemCategory.Decorations);
     }
 
+    public void ShowPeople()
+    {
+        FilterItemsByCategory(ItemCategory.People);
+    }
+
 
     //public void ShowBuildings()
     //{
