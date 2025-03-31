@@ -6,9 +6,7 @@ using UnityEngine;
 public class Tracker : MonoBehaviour
 {
     private List<Plot> plots;
-    private BuildingOverlay buildingOverlay;
-
-
+    private List<BuildingOverlay> buildingOverlays;
     private int harvestCount = 0;
     private int minigameCount = 0;
     private int buildingCount = 0;
@@ -23,6 +21,11 @@ public class Tracker : MonoBehaviour
             plot.OnHarvest += TrackHarvest;
         }
 
+        //buildingOverlays = new List<BuildingOverlay>(FindObjectOfType<BuildingOverlay>());
+        //foreach (BuildingOverlay buildingOverlay in buildingOverlays)
+        //{
+        //    buildingOverlay.OnBuilt += TrackBuilding;
+        //}
         //buildingOverlay = FindObjectOfType<BuildingOverlay>();
         //buildingOverlay.OnBuilt += TrackBuilding;
     }
