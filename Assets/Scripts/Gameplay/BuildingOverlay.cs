@@ -8,6 +8,7 @@ using System;
 public class BuildingOverlay : MonoBehaviour, IDraggable
 {
     public event Action<Vector3, Structure> OnStructureBuilt;
+    public event Action<Structure> OnBuilt;
 
     [SerializeField] private Structure_SO debugStructureSO;
     [SerializeField] private GameObject Visuals;
@@ -31,7 +32,7 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
 
     [SerializeField] private Material buildPreviewMaterial;
     [SerializeField] private int incrementalMovementUnits = 1;
-
+    [SerializeField] private Dialogue dialogue;
     [SerializeField] private GameObject overlayPlane;
     private GameObject previewGO;
     public bool isInBuildMode;
@@ -208,10 +209,12 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
 
             Debug.Log("Instantiate building end reached.");
             OnStructureBuilt?.Invoke(spawnPos, newBuilding.GetComponent<Structure>());
+            OnBuilt?.Invoke(newBuilding.GetComponent<Structure>());
             Debug.Log("OnStructureBuilt Invoked.");
             gameObject.SetActive(false);
         }
 
+        dialogue.PlaceBuilding();
         ExitBuildMode();
     }
 

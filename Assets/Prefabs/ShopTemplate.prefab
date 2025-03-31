@@ -357,7 +357,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2337064185866386589}
         m_TargetAssemblyTypeName: ShopTemplate, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: ItemClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

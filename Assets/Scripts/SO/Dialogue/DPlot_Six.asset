@@ -10,12 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5feb03e258349524b90d83ddefa295f7, type: 3}
-  m_Name: DPlot_Seven
+  m_Name: DPlot_Six
   m_EditorClassIdentifier: 
   dialogueLines:
   - Our community grows, but with more mouths to feed, we must labor to ensure abundance.
-  - The Lord has provided fertile land for us to sow crops and reap His blessings.
-  - Let us prepare a PLOT of land for planting. This will sustain us and bring prosperity
-    to our people.
-  - Open shop and buy a PLOT and place it in town.
+  - Boost to speed up planting.
   npcImage: {fileID: 21300000, guid: 368ceaf0ec3f3ce4b8de9ae8144b8b70, type: 3}

@@ -158,7 +158,8 @@ MonoBehaviour:
   db: {fileID: 0}
   buildPreviewMaterial: {fileID: 2100000, guid: 6007be16c80cbe04b8c9aa060296b280,
     type: 2}
-  incrementalMovementUnits: 5
+  incrementalMovementUnits: 11
+  dialogue: {fileID: 0}
   overlayPlane: {fileID: 1012247035820665570}
   isInBuildMode: 0
 --- !u!54 &6460048284096014190

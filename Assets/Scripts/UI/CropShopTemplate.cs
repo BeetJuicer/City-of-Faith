@@ -49,7 +49,11 @@ public class CropShopTemplate : MonoBehaviour
         // ideally, gray yung card.
 
         // call cm.Purchase when button is clicked.
-        button.onClick.AddListener(() => cm.Purchase(so));
+        button.onClick.AddListener(() =>
+        {
+            cm.Purchase(so);
+            NotifyDialogue();
+        });
     }
 
     private void UpdateDurationText()
@@ -69,6 +73,19 @@ public class CropShopTemplate : MonoBehaviour
         else
         {
             duration.text = so.secondsToClaim + " s";
+        }
+    }
+    private void NotifyDialogue()
+    {
+        Debug.Log("On Crop Item Clicked!!!");
+        Dialogue dialogue = FindObjectOfType<Dialogue>();
+        if (dialogue != null)
+        {
+            dialogue.OnCropItemClicked();   // Call the method
+        }
+        else
+        {
+            Debug.LogWarning("Dialogue script not found in the scene!");
         }
     }
 

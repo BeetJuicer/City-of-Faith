@@ -6,6 +6,7 @@ public class LevelUpTween : MonoBehaviour
 {
     [SerializeField] GameObject SoftWheel, HardWheel, HUD;
     [SerializeField] TutorialVideoManager VideoManager;
+    [SerializeField] private Dialogue dialogue;
     // Store LeanTween IDs
     private int softWheelTweenId, hardWheelTweenId;
 
@@ -36,9 +37,9 @@ public class LevelUpTween : MonoBehaviour
     public void OnComplete()
     {
         gameObject.SetActive(false);
+        dialogue.OnLevelUp();
         HUD.SetActive(true);
         Debug.Log("Completed LevelUP");
-        VideoManager.TriggerTutorial();
     }
 
 }

@@ -38,6 +38,7 @@ public class Database : MonoBehaviour
         public string Password { get; set; }
         public int Play_sessions { get; set; }
 
+        public int TutorialStep { get; set; }
         public bool HasSeenCutscene { get; set; } // Flag to track cutscene viewing
     }
 

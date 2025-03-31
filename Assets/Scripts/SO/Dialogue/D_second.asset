@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: D_second
   m_EditorClassIdentifier: 
   dialogueLines:
-  - This is your Shop!
-  - Where you can buy the things that you need.
-  - Now, to start your journey...
-  - Click on the Villager House to build in your world.
+  - Nice!
+  - ' You can boost the building time by using Glory.'
   npcImage: {fileID: 21300000, guid: 368ceaf0ec3f3ce4b8de9ae8144b8b70, type: 3}

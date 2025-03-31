@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Dialogue : MonoBehaviour
 {
@@ -13,71 +14,71 @@ public class Dialogue : MonoBehaviour
         OpenShop,
         NPCDialogue2,
         ShowArrowToItem,
-        NPCDialogue3,
         PlaceBuilding,
-        NPCDialogue4,
         ShowArrowToBuilding,
+        ShowArrowToBoost,
         NPCDialogue5,
         Complete,
     }
 
     public enum TutorialSection2Steps
     {
+        ShowArrowToShop,
+        ShowArrowToShop2,
+        ShowArrowToPlot,
+        ShowArrowToBuilding,
+        PlaceBuilding2,
+        NPCDialogue3,
+        NPCDialogue4,
+        NPCDialogue5,
+        WaitForPlant,
+        NPCDialogue6,
+        WaitForCropBoost,
         NPCDialogue7,
+        WaitForLevel3,
+        NPCDialogue8,
+        ShowArrowToBarn,
         Complete,
     }
 
-    public TutorialSection1Steps section1Step;
-    public TutorialSection2Steps section2Step;
+    [SerializeField] private TutorialSection1Steps section1Step;
+    [SerializeField] private TutorialSection2Steps section2Step;
     [SerializeField] private Dialogue_SO[] lines;
-    public TMP_Text textComponent;
-    public Button nextButton;
-    public float textSpeed;
-    public GameObject dialogueBox; // Reference to the dialogue box GameObject
-    public Image arrow; // Reference to the Arrow GameObject (not just the Image)
-    public GameObject shopButton;
-    public CentralHall centralHall;
-    public BuildingOverlay buildingOverlay;
-    [SerializeField] private Camera cam;
+    [SerializeField] private TMP_Text textComponent;
+    [SerializeField] private Button nextButton;
+    [SerializeField] private float textSpeed;
+    [SerializeField] private GameObject dialogueBox; // Reference to the dialogue box GameObject
+    [SerializeField] private Image arrow; // Reference to the Arrow GameObject (not just the Image)
+    [SerializeField] private Image arrowInBuilding;
+    [SerializeField] private GameObject shopButton;
+    [SerializeField] private CentralHall centralHall;
+    [SerializeField] private BuildingOverlay buildingOverlay;
+    [SerializeField] private HUDController controller;
 
     private int dialogueIndex = 0;
     private int index = 0;
     private bool isShopTutorialComplete = false;
     private bool isItemClickComplete = false;
     private bool isItemBuild = false;
-    private bool isItemBuilding = false;
+    private bool isPlotBoosted = false;
+    private bool isBuildingClicked = false;
+    private bool isPlotBuild = false;
+    private bool isCropClickComplete = false;
+    private bool isTutorialComplete = false;
+    private bool isPlotClickComplete = false;
+
+    private HashSet<TutorialSection1Steps> completedSection1Steps = new HashSet<TutorialSection1Steps>();
+    private HashSet<TutorialSection2Steps> completedSection2Steps = new HashSet<TutorialSection2Steps>();
+
+
 
     private Structure structureObservee;
 
     void Start()
     {
-        textComponent.text = string.Empty;
-        nextButton.onClick.AddListener(OnNextButtonClick);
-        arrow.gameObject.SetActive(false);
-        section1Step = TutorialSection1Steps.StartDialogue; // Initialize to StartDialogue step
+        section1Step = TutorialSection1Steps.StartDialogue;
         HandleTutorialSteps();
     }
-
-    private void TriggerTutorial(int level)
-    {
-        if (level == 1)
-        {
-            textComponent.text = string.Empty;
-            nextButton.onClick.AddListener(OnNextButtonClick);
-            arrow.gameObject.SetActive(false);
-            section2Step = TutorialSection2Steps.NPCDialogue7; // Initialize to StartDialogue step
-            HandleTutorialSteps();
-        }
-        //else if (level == 2)
-        //{
-        //    textComponent.text = string.Empty;
-        //    nextButton.onClick.AddListener(OnNextButtonClick);
-        //    arrow.gameObject.SetActive(false);
-        //    currentStep = TutorialStep.NPCDialogue7; // Initialize to start the Plot Tutorial (DPlot_Seven)
-        //    HandleTutorialSteps();
-        //}
-    }
-
 
     void HandleTutorialSteps()
     {
@@ -85,64 +86,44 @@ public class Dialogue : MonoBehaviour
         switch (section1Step)
         {
             case TutorialSection1Steps.StartDialogue:
-                ToggleButtons(false);
+                controller.HideAll();
                 StartDialogue();
                 break;
             case TutorialSection1Steps.ShowArrowToShop:
-                shopButton.SetActive(true);
-                ToggleButtons(true);
-                ShowArrow(new Vector3(285f, -111f, 0));
+                controller.HideAllExceptShopButton(); // Call ShowAll() if you want to activate HUD canvas
+                ShowArrow(new Vector3(802, -173, 0));
                 break;
 
             case TutorialSection1Steps.NPCDialogue2:
-                ToggleButtons(false);
                 StartDialogue2();
                 break;
 
             case TutorialSection1Steps.ShowArrowToItem:
-                ShowArrow(new Vector3(-75f, 57f, 1f)); // Offset arrow above shop item
-                break;
-
-            case TutorialSection1Steps.NPCDialogue3:
-                StartDialogue2();
+                ShowArrow(new Vector3(-300, 200, 0)); // Offset arrow above shop item
                 break;
 
             case TutorialSection1Steps.PlaceBuilding:
-                buildingOverlay.OnStructureBuilt += ShowArrowViewpoint;
-
-                //Wait for the player to place the structure
-                break;
-
-            case TutorialSection1Steps.NPCDialogue4:
-                StartDialogue2();
+                controller.HideAllExceptBoostButton();
+                //Sa part na to, activate the arrow image in the villager house
+                //
                 break;
 
             case TutorialSection1Steps.ShowArrowToBuilding:
+                //wait
+                break;
 
-                if (buildingOverlay != null)
-                {
-                    Debug.Log("listening to buildingoverlay!");
-                }
+            case TutorialSection1Steps.ShowArrowToBoost:
+
                 break;
 
             case TutorialSection1Steps.NPCDialogue5:
                 StartDialogue2();
                 break;
 
-            /*
-             case naclickna, boost naman
-                structure.OnStructureInProgressClicked += boostdialoguecucgy   
-             
-             */
-
-            //case TutorialStep.NPCDialogue7:
-            //    StartDialogue2();
+            //case TutorialSection1Steps.Complete:
+            //    Debug.Log("Tutorial Complete!!!");
+            //    ToggleButtons(true);
             //    break;
-
-            case TutorialSection1Steps.Complete:
-                Debug.Log("Tutorial Complete!!!");
-                ToggleButtons(true);
-                break;
 
             default:
                 Debug.LogWarning("Unhandled tutorial step: " + section1Step);
@@ -154,14 +135,75 @@ public class Dialogue : MonoBehaviour
     {
         switch (section2Step)
         {
+            case TutorialSection2Steps.NPCDialogue3: // Player Level Up, Plot Dialogue, Open Shop and Buy a Plot
+                StartDialogue2();
+                break;
+
+            case TutorialSection2Steps.ShowArrowToShop: //Arrow points the shop, wait for the player to OpenShop
+                controller.HideAllExceptShopButton();
+                ShowArrow(new Vector3(802, -173, 0));
+                break;
+
+            case TutorialSection2Steps.ShowArrowToShop2:
+                controller.HideAllExceptShopButton(); // Call ShowAll() if you want to activate HUD canvas
+                ShowArrow(new Vector3(802, -173, 0));
+                break;
+
+            case TutorialSection2Steps.ShowArrowToPlot: //Arrow points to Plot Shop Item, wait for the player to ClickShopItem
+                controller.HideAllExceptBoostButton();
+                ShowArrow(new Vector3(15, 200, 0));
+                break;
+
+            case TutorialSection2Steps.PlaceBuilding2: //Building Overlay mode, user place the building
+                controller.HideAllExceptBoostButton();
+                break;
+
+            case TutorialSection2Steps.ShowArrowToBuilding: //Wait for Boost Structure
+                controller.HideAllExceptBoostButton(); //Close All HUD except the boost button
+                break;
+
+            case TutorialSection2Steps.NPCDialogue4: //NPC will order the player to boost the plot in progress building
+                StartDialogue2();
+                break;
+
+            case TutorialSection2Steps.NPCDialogue5: //NPC will order player to plant Beet
+                StartDialogue2();
+                break;
+
+            case TutorialSection2Steps.WaitForPlant:
+                break;
+
+            case TutorialSection2Steps.NPCDialogue6:
+                StartDialogue2();
+                break;
+
+            case TutorialSection2Steps.WaitForCropBoost:
+                break;
+
             case TutorialSection2Steps.NPCDialogue7:
                 StartDialogue2();
                 break;
+
+            case TutorialSection2Steps.WaitForLevel3: //Player will play the game to reach level 3
+                Debug.Log("End of Plot Tutorial Reached");
+                dialogueBox.SetActive(false);
+                controller.ShowAll();
+                break;
+
+            case TutorialSection2Steps.NPCDialogue8:
+                StartDialogue2();
+                break;
+
+
         }
     }
+
     void StartDialogue()
     {
         Debug.Log("Starting dialogue at index 0");
+        textComponent.text = string.Empty;
+        nextButton.onClick.AddListener(OnNextButtonClick);
+        arrow.gameObject.SetActive(false);
         StartCoroutine(TypeLine());
     }
     IEnumerator TypeLine()
@@ -192,7 +234,6 @@ public class Dialogue : MonoBehaviour
         // Ensure the listener is removed to avoid issues when re-adding
         nextButton.onClick.RemoveListener(() => isTypingSkipped = true);
     }
-
 
     void OnNextButtonClick()
     {
@@ -228,115 +269,253 @@ public class Dialogue : MonoBehaviour
     void StartDialogue2()
     {
         Debug.Log("Starting dialogue at Dialogue index" + dialogueIndex);
-        textComponent.text = string.Empty;
         dialogueBox.SetActive(true);
-        index = 0;
-        dialogueIndex++;
-        StartCoroutine(TypeLine());
+        textComponent.text = string.Empty;
+        index = 0; // this index is for every Lines in 1 scriptable object, sa loob ng so maraming lines
+        dialogueIndex++; //this dialogueIndex is for every Scriptable Objects of Dialogue, to change the topic of tutorial
+        StartCoroutine(TypeLine()); // Start typing...
     }
 
     void EndDialogue()
     {
-        Debug.Log("Ending dialogue. Current step: " + section1Step);
+        Debug.Log("Ending dialogue. Current steps - Section 1: " + section1Step + ", Section 2: " + section2Step);
         dialogueBox.SetActive(false);
 
-        if (section1Step == TutorialSection1Steps.StartDialogue)
+        // Handle Section 1 Steps (Only if not already completed)
+        if (!completedSection1Steps.Contains(section1Step))
         {
-            section1Step = TutorialSection1Steps.ShowArrowToShop;
-        }
-        else if (section1Step == TutorialSection1Steps.NPCDialogue2)
-        {
-            section1Step = TutorialSection1Steps.ShowArrowToItem;
-        }
-        else if (section1Step == TutorialSection1Steps.NPCDialogue3)
-        {
-            section1Step = TutorialSection1Steps.PlaceBuilding;
-        }
-        else if (section1Step == TutorialSection1Steps.NPCDialogue4)
-        {
-            section1Step = TutorialSection1Steps.ShowArrowToBuilding;
-        }
-        else if (section1Step == TutorialSection1Steps.NPCDialogue5)
-        {
-            section1Step = TutorialSection1Steps.Complete;
+            switch (section1Step)
+            {
+                case TutorialSection1Steps.StartDialogue:
+                    section1Step = TutorialSection1Steps.ShowArrowToShop;
+                    HandleTutorialSteps();
+                    completedSection1Steps.Add(TutorialSection1Steps.StartDialogue);
+                    break;
+
+                case TutorialSection1Steps.NPCDialogue2:
+                    section1Step = TutorialSection1Steps.ShowArrowToBuilding;
+                    HandleTutorialSteps();
+                    completedSection1Steps.Add(TutorialSection1Steps.NPCDialogue2);
+                    break;
+
+                //case TutorialSection1Steps.NPCDialogue5:
+                //    section1Step = TutorialSection1Steps.Complete;
+                //    HandleTutorialSteps();
+                //    completedSection1Steps.Add(TutorialSection1Steps.NPCDialogue5);
+                //    break;
+            }
         }
 
-        HandleTutorialSteps();
+        // Handle Section 2 Steps (Only if not already completed)
+        if (!completedSection2Steps.Contains(section2Step))
+        {
+            switch (section2Step)
+            {
+                case TutorialSection2Steps.NPCDialogue3:
+                    Debug.Log("Tutorial Plot Scene");
+                    section2Step = TutorialSection2Steps.ShowArrowToShop;
+                    HandleTutorialSteps2();
+                    completedSection2Steps.Add(TutorialSection2Steps.NPCDialogue3);
+                    break;
+
+                case TutorialSection2Steps.NPCDialogue4:
+                    section2Step = TutorialSection2Steps.ShowArrowToBuilding;
+                    HandleTutorialSteps2();
+                    completedSection2Steps.Add(TutorialSection2Steps.NPCDialogue4);
+                    break;
+
+                case TutorialSection2Steps.NPCDialogue5:
+                    section2Step = TutorialSection2Steps.WaitForPlant;
+                    HandleTutorialSteps2();
+                    completedSection2Steps.Add(TutorialSection2Steps.NPCDialogue5);
+                    break;
+
+                case TutorialSection2Steps.NPCDialogue6:
+                    section2Step = TutorialSection2Steps.WaitForCropBoost;
+                    HandleTutorialSteps2();
+                    completedSection2Steps.Add(TutorialSection2Steps.NPCDialogue6);
+                    break;
+
+                case TutorialSection2Steps.NPCDialogue7:
+                    section2Step = TutorialSection2Steps.WaitForLevel3;
+                    HandleTutorialSteps2();
+                    completedSection2Steps.Add(TutorialSection2Steps.NPCDialogue7);
+                    break;
+
+                case TutorialSection2Steps.NPCDialogue8:
+                    section2Step = TutorialSection2Steps.ShowArrowToShop2;
+                    HandleTutorialSteps2();
+                    completedSection2Steps.Add(TutorialSection2Steps.NPCDialogue7);
+                    break;
+                //case TutorialSection2Steps.ShowArrowToBarn:
+                //    break;
+            }
+        }
     }
 
     void ShowArrow(Vector3 newPosition)
     {
-        Vector2 ScreenPosition = cam.WorldToScreenPoint(newPosition);
         RectTransform rectTransform = arrow.rectTransform; // Get RectTransform of the Image
         rectTransform.anchoredPosition = new Vector2(newPosition.x, newPosition.y); // Update position
         arrow.gameObject.SetActive(true);
         Debug.Log($"Arrow Position Updated: {newPosition}");
     }
-    void ShowArrowViewpoint(Vector3 newPosition, Structure structure)
-    {
-        structureObservee = structure;
-        Vector2 viewportPoint = cam.WorldToViewportPoint(newPosition);
-        RectTransform rectTransform = arrow.rectTransform; // Get RectTransform of the Image
-        rectTransform.anchorMin = viewportPoint;
-        rectTransform.anchorMax = viewportPoint;
-        rectTransform.anchoredPosition = viewportPoint;//new Vector2(newPosition.x, newPosition.y); // Update position
-        arrow.gameObject.SetActive(true);
-        print("Viewportpoint is: " + viewportPoint);
-    }
 
     public void OnShopButtonClicked()
     {
+        arrow.gameObject.SetActive(false);
         if (isShopTutorialComplete)
         {
             return;
         }
-
-        arrow.gameObject.SetActive(false);
-        section1Step = TutorialSection1Steps.NPCDialogue2;
-        HandleTutorialSteps();
-
-        isShopTutorialComplete = true;
+        else if (section1Step == TutorialSection1Steps.ShowArrowToShop)
+        {
+            section1Step = TutorialSection1Steps.ShowArrowToItem;
+            HandleTutorialSteps();
+        }
+        else if (section2Step == TutorialSection2Steps.ShowArrowToShop)
+        {
+            section2Step = TutorialSection2Steps.ShowArrowToPlot;
+            HandleTutorialSteps2();
+            isShopTutorialComplete = true;
+        }
+        //else if (section2Step == TutorialSection2Steps.ShowArrowToShop2)
+        //{
+        //    section2Step = TutorialSection2Steps.ShowArrowToBarn;
+        //    HandleTutorialSteps2();
+        //    isShopTutorialComplete = true;
+        //}
+        Debug.Log("Shop Button Clicked");
     }
 
     public void OnShopItemClicked()
     {
-        //Debug.Log("On Shop item clicked is working");
-        if (isItemClickComplete)
+        Debug.Log("ShopItem Clicked");
+
+        arrow.gameObject.SetActive(false);
+
+        if (section1Step == TutorialSection1Steps.ShowArrowToItem)
+        {
+
+            section1Step = TutorialSection1Steps.PlaceBuilding;
+            HandleTutorialSteps();
+        }
+        else if (section2Step == TutorialSection2Steps.ShowArrowToPlot)
+        {
+
+            section2Step = TutorialSection2Steps.PlaceBuilding2;
+            HandleTutorialSteps2();
+            isPlotClickComplete = true;
+        }
+        else
+        {
+            if (isPlotClickComplete)
+            {
+                //Debug.Log("tutorial done");
+                return;
+            }
+        }
+
+    }
+
+    public void OnCropItemClicked()
+    {
+
+        if (isCropClickComplete)
         {
             //Debug.Log("tutorial done");
             return;
         }
-        //Debug.Log("arrow false item click");
+        controller.HideAllExceptBoostButton();
+        section2Step = TutorialSection2Steps.NPCDialogue6;
+        HandleTutorialSteps2();
+        isCropClickComplete = true;
+    }
+
+    public void OnBuildingClicked()
+    {
+        if (isBuildingClicked)
+        {
+            return;
+        }
+
         arrow.gameObject.SetActive(false);
-        section1Step = TutorialSection1Steps.NPCDialogue3;
+        section1Step = TutorialSection1Steps.ShowArrowToBoost;
         HandleTutorialSteps();
 
-        isItemClickComplete = true;
+        isBuildingClicked = true;
+
+        Debug.Log("Villager House Clicked");
     }
 
     public void PlaceBuilding()
     {
-        if (isItemBuild)
+        if (section1Step == TutorialSection1Steps.PlaceBuilding)
         {
-            return;
-        }
-        section1Step = TutorialSection1Steps.NPCDialogue4;
-        HandleTutorialSteps();
+            Debug.Log("Place Building: Villager House");
 
-        isItemClickComplete = true;
+            section1Step = TutorialSection1Steps.NPCDialogue2;
+            HandleTutorialSteps();
+        }
+        else if (section2Step == TutorialSection2Steps.PlaceBuilding2)
+        {
+            Debug.Log("Place Building: Plot");
+
+            section2Step = TutorialSection2Steps.NPCDialogue4;
+            HandleTutorialSteps2();
+
+            isPlotBuild = true;
+        }
+        else
+        {
+            if (isPlotBuild)
+            {
+                return;
+            }
+        }
+
     }
 
-    public void boostBuilding()
+    public void OnLevelUp()
     {
-        if (isItemBuilding)
+        if (section2Step == TutorialSection2Steps.WaitForLevel3)
         {
-            return;
+            controller.HideAll();
+            section2Step = TutorialSection2Steps.NPCDialogue8;
+            HandleTutorialSteps2();
         }
-        Debug.Log("Building Boosted");
-        section1Step = TutorialSection1Steps.NPCDialogue5;
-        HandleTutorialSteps();
+        else
+        {
+            controller.HideAll();
+            section2Step = TutorialSection2Steps.NPCDialogue3;
+            HandleTutorialSteps2();
+        }
+    }
 
-        isItemBuilding = true;
+    public void OnBoostBuilding()
+    {
+        Debug.Log("Boosted in the Tutorial");
+
+        if (section2Step == TutorialSection2Steps.ShowArrowToBuilding)
+        {
+            controller.HideAll();
+            section2Step = TutorialSection2Steps.NPCDialogue5;
+            HandleTutorialSteps2();
+        }
+        else if (section2Step == TutorialSection2Steps.WaitForCropBoost)
+        {
+            if (isPlotBoosted)
+            {
+                return;
+            }
+
+            controller.HideAll();
+            section2Step = TutorialSection2Steps.NPCDialogue7;
+            HandleTutorialSteps2();
+
+            isPlotBoosted = true;
+        }
+
     }
 
     void ToggleButtons(bool state)
@@ -354,22 +533,5 @@ public class Dialogue : MonoBehaviour
             }
         }
     }
-
-    private void OnEnable()
-    {
-        centralHall.OnPlayerLevelUp += TriggerTutorial;
-    }
-
-    private void OnDisable()
-    {
-        centralHall.OnPlayerLevelUp -= TriggerTutorial;
-    }
-
-    private void OnDestroy()
-    {
-        buildingOverlay.OnStructureBuilt -= ShowArrowViewpoint;
-    }
-
-
 
 }

@@ -15,15 +15,10 @@ public class GlorySpeedUp : MonoBehaviour
     [SerializeField] private int costMedium;
     [SerializeField] private int costHigh;
     [SerializeField] private Button button;
+    [SerializeField] private Dialogue dialogue;
 
     private DateTime finishTime;
-    public Dialogue dialogue;
     IBoostableObject boostableObject;
-
-    private void Start()
-    {
-        //dialogue.boostBuilding();
-    }
 
     public void OpenGlorySpeedUpPanel(IBoostableObject boostableObject)
     {
@@ -38,10 +33,25 @@ public class GlorySpeedUp : MonoBehaviour
         boostableObject.BoostProgress();
         ResourceManager.Instance.AdjustPlayerCurrency(Currency.Glory, -CalculateGloryCost(finishTime.Subtract(DateTime.Now)));
 
+        if (dialogue == null)
+        {
+            dialogue = FindObjectOfType<Dialogue>();
+        }
+
+        if (dialogue != null)
+        {
+            dialogue.OnBoostBuilding();
+        }
+        else
+        {
+            Debug.LogWarning("Dialogue reference is still missing on GlorySpeedUp!");
+        }
+
         if (boostableObject.IsInBoostableState())
         {
             print("boost remains open");
             OpenGlorySpeedUpPanel(boostableObject);
+            dialogue.OnBoostBuilding();
         }
         else
         {

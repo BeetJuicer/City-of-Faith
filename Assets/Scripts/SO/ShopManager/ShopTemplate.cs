@@ -23,7 +23,6 @@ public class ShopTemplate : MonoBehaviour
     {
         this.siso = so;
         this.shopManager = sm;
-
         titleTxt.text = so.structureName;
         costTxt.text = so.currencyRequired.Values.First().ToString();
         expTxt.text = so.expGivenOnBuild.ToString();
@@ -41,11 +40,15 @@ public class ShopTemplate : MonoBehaviour
         //foreach (var kv in so.currencyRequired)
         //{
         //    print($"Currency required of {so.name}: {so.currencyRequired[Currency.Gold]}");
-        //}
+        //}      
         if (ResourceManager.Instance.HasEnoughCurrency(so.currencyRequired))
         {
             //Debug.Log("Resource Manager: " + ResourceManager.Instance.HasEnoughCurrency(so.currencyRequired));
-            GetComponent<Button>().onClick.AddListener(() => sm.PurchaseItem(so));
+            GetComponent<Button>().onClick.AddListener(() =>
+            {
+                sm.PurchaseItem(so);  // your existing purchase logic
+                NotifyDialogue();     // call the Dialogue method
+            });
             costTxt.color = Color.black;
         }
         else
@@ -56,21 +59,24 @@ public class ShopTemplate : MonoBehaviour
             //bg color ng card or logo ng coin na may strikethrough
         }
     }
-
+    private void NotifyDialogue()
+    {
+        Dialogue dialogue = FindObjectOfType<Dialogue>();
+        if (dialogue != null)
+        {
+            dialogue.OnShopItemClicked();   // Call the method
+        }
+        else
+        {
+            Debug.LogWarning("Dialogue script not found in the scene!");
+        }
+    }
 
     private void Feedback()
     {
         //error sound
         //shake card
     }
-
-
-
-    //public void OnClick()
-    //{
-    //    Debug.Log("ShopTemplate clicked!");
-    //    shopManager.PurchaseItem(siso);
-    //}
 
     //private void OnDestroy()
     //{

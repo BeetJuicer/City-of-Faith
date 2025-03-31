@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using NaughtyAttributes;
+using System.Diagnostics.Tracing;
 
 [RequireComponent(typeof(Structure))]
 public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 {
+    public event Action OnHarvest;
+
     private Structure structure;
     public enum PlotState
     {
@@ -26,6 +29,7 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
     private CropManager cropManager;
     private CropVisual cropVisual;
     private CropImageDisplay cropImageDisplay;
+    private HarvestTimer harvestTimer;
     private Crop_SO crop_SO;
     private UIManager uiManager;
     private CoinSpawnerOnDisable coinSpawner;
@@ -98,13 +102,13 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 
             db.AddNewRecord(plotData);
             print($"db_logs: Initial added plot# {plotData.structure_id} with crop_so_name: null to database.");
-        }     
+        }
         else
         {
             print($"db_logs: not adding new plot to database!");
         }
-
         cropImageDisplay.UpdateVisual(CurrentPlotState, Crop_SO1);
+
         uiManager = FindObjectOfType<UIManager>();
     }
 
@@ -346,8 +350,12 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         //TODO: Possible optimization, use crop pools. May be temporary depending on UI
         Destroy(cropVisualPos.GetChild(0).gameObject);
 
+        OnHarvest?.Invoke(); //Tracks the number of Harvest
+
         CurrentPlotState = PlotState.EMPTY;
     }
+
+
 
     public void BoostProgress()
     {

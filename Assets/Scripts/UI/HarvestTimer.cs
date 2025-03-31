@@ -11,14 +11,14 @@ public class HarvestTimer : MonoBehaviour
 {
     private Plot plot;
     [SerializeField] private Slider timerSlider;
-    [SerializeField] private TMP_Text timerText;
     [SerializeField] private GameObject timerUI;
-
+    [SerializeField] private Image image;
+    private Crop_SO crop_so;
 
     private void Start()
     {
-        plot = GetComponentInParent<Plot>(); // Assumes UI is a child of the plot
-        timerSlider.gameObject.SetActive(false); // Hide initially
+        plot = GetComponentInParent<Plot>();
+        timerSlider.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -29,13 +29,15 @@ public class HarvestTimer : MonoBehaviour
         if (plot.CurrentPlotState == Plot.PlotState.GROWING)
         {
             timerSlider.gameObject.SetActive(true); // Show the slider when growing
-            timerText.gameObject.SetActive(true);
             UpdateSlider();
+            UpdateCropImage(plot.Crop_SO1);
+            timerUI.SetActive(true);
+
         }
         else
         {
             timerSlider.gameObject.SetActive(false); // Hide when not growing
-            timerText.gameObject.SetActive(false);
+            timerUI.SetActive(false);
         }
     }
 
@@ -46,6 +48,16 @@ public class HarvestTimer : MonoBehaviour
 
         float progress = 1f - (float)(remainingTime.TotalSeconds / totalDuration.TotalSeconds);
         timerSlider.value = Mathf.Clamp01(progress); // Ensures value stays between 0 and 1
-        timerText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", remainingTime.Hours, remainingTime.Minutes, remainingTime.Seconds);
+        //timerText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", remainingTime.Hours, remainingTime.Minutes, remainingTime.Seconds);
+    }
+    public void UpdateCropImage(Crop_SO so)
+    {
+        if (so == null)
+        {
+            print("null so");
+            return;
+        }
+        image.sprite = so.cropImage;
+
     }
 }
