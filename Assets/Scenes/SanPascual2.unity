@@ -8762,6 +8762,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: NpcQuizManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2935629999482739157, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3200516431512175128, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5863289244087879054, guid: 4992a2529b808b7488675ed37f621e9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8811,6 +8821,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228334059512973122, guid: 4992a2529b808b7488675ed37f621e9a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
