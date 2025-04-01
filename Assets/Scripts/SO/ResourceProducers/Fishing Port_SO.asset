@@ -16,5 +16,6 @@ MonoBehaviour:
   baseAmountPerClaim: 500
   daysToClaim: 0
   hoursToClaim: 0
-  minutesToClaim: 2
-  secondsToClaim: 2
+  minutesToClaim: 3
+  secondsToClaim: 0
+  expGivenPerClaim: 60

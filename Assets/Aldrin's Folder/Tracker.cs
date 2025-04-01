@@ -1,18 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Experimental.RestService;
 using UnityEngine;
+using static Database;
 
 public class Tracker : MonoBehaviour
 {
     private List<Plot> plots;
     private List<BuildingOverlay> buildingOverlays;
     private int harvestCount = 0;
-    private int minigameCount = 0;
+    //private int minigameCount = 0;
     private int buildingCount = 0;
+
+
 
     private void Start()
     {
+        PlayerData playerData = Database.Instance.CurrentPlayerData;
         // Find the Plot and subscribe to its OnCropHarvested event
         Debug.Log("Tracker Script started!");
         plots = new List<Plot>(FindObjectsOfType<Plot>());
@@ -36,8 +42,9 @@ public class Tracker : MonoBehaviour
     {
         harvestCount++;
         Debug.Log($"Harvest event received! Current subscriber count:" + harvestCount);
-
     }
+
+
     private void TrackBuilding(Structure s)
     {
         buildingCount++;

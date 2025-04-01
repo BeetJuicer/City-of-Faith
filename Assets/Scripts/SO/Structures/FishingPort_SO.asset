@@ -18,15 +18,16 @@ MonoBehaviour:
   structurePrefab: {fileID: 2548659967747740700, guid: 365edbf86ff00ea48bec33800b265f65,
     type: 3}
   displayImage: {fileID: 21300000, guid: da14b6baf3b112440a2f1e81e0ea42f4, type: 3}
-  structurePrefabName: Structure_FishingPort
-  minigameSceneName: FishingQuickCatch
-  expGivenOnBuild: 100
+  Category: 0
+  expGivenOnBuild: 200
   townHallLevelRequirement: 5
   numberOfCitizensAdded: 3
   currencyRequired:
     _serializedList:
     - Key: 1
-      Value: 5000
+      Value: 750
+  currencyReturnedOnResell:
+    _serializedList: []
   resourcesRequired:
     _serializedList: []
   resourcesReturnedOnResell:

@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: -1262825482751638524}
   - component: {fileID: -4685383482717976552}
   - component: {fileID: 2688994211800940463}
+  - component: {fileID: 149599650542647785}
   m_Layer: 0
   m_Name: Structure_Shepherds
   m_TagString: Untagged
@@ -173,6 +174,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPCHuman: {fileID: 7470851801873843664}
+--- !u!114 &149599650542647785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482177645635640231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 757d14b4daf02424295050e54b2144ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5848843529118003614
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,16 +17,14 @@ MonoBehaviour:
   structurePrefab: {fileID: 8699902465094047844, guid: 100599859de4086449a983c8f164fef7,
     type: 3}
   displayImage: {fileID: 21300000, guid: afec2b736d382cb41bb680bfdd26f858, type: 3}
-  structurePrefabName: 
-  minigameSceneName: 
   Category: 0
-  expGivenOnBuild: 0
+  expGivenOnBuild: 30
   townHallLevelRequirement: 0
   numberOfCitizensAdded: 0
   currencyRequired:
     _serializedList:
     - Key: 1
-      Value: 120
+      Value: 50
   currencyReturnedOnResell:
     _serializedList: []
   resourcesRequired:
@@ -37,5 +35,5 @@ MonoBehaviour:
     _serializedList: []
   BuildDays: 0
   BuildHours: 0
-  BuildMinutes: 5
-  BuildSeconds: 3
+  BuildMinutes: 1
+  BuildSeconds: 0

@@ -17,13 +17,13 @@ MonoBehaviour:
   cropPrice:
     _serializedList:
     - Key: 1
-      Value: 15
+      Value: 60
   cropImage: {fileID: 21300000, guid: 5349f84fdd022f94db1b16670653b5d0, type: 3}
   cropPrefab: {fileID: 3583997188421615192, guid: cdbcfa765d399bc48ba96754eb4ab175,
     type: 3}
   amountPerClaim: 5
-  expPerClaim: 4
+  expPerClaim: 50
   daysToClaim: 0
   hoursToClaim: 0
-  minutesToClaim: 2
-  secondsToClaim: 10
+  minutesToClaim: 3
+  secondsToClaim: 0

@@ -212,9 +212,10 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
             OnBuilt?.Invoke(newBuilding.GetComponent<Structure>());
             Debug.Log("OnStructureBuilt Invoked.");
             gameObject.SetActive(false);
+            dialogue.PlaceBuilding();
         }
 
-        dialogue.PlaceBuilding();
+
         ExitBuildMode();
     }
 

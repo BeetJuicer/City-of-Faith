@@ -19,6 +19,14 @@ public class NPCBuilding : MonoBehaviour, IBuffable
         }
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        if (npcData == null) return;
+
+        Gizmos.color = Color.green; // Set the color of the Gizmo
+        Gizmos.DrawWireSphere(transform.position, npcData.detectionRadius); // Draw a wire sphere
+    }
+
     // Implementing the ApplyBuff method from IBuffable
     public void ApplyBuff()
     {

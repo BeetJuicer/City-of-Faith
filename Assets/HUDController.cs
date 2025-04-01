@@ -7,6 +7,7 @@ public class HUDController : MonoBehaviour
     [SerializeField] private GameObject hudCanvas;
     [SerializeField] private GameObject shopButton;
     [SerializeField] private GameObject boostButton;
+    [SerializeField] private GameObject questButton;
 
     // This Script is for the Tutorial so that HUD canvas can be disable and enable
 
@@ -31,13 +32,28 @@ public class HUDController : MonoBehaviour
         // Ensure the shop button stays visible
         shopButton.SetActive(true);
     }
-    public void HideAllExceptBoostButton()
+    public void HideAllExceptQuestButton()
     {
-        if (hudCanvas == null || boostButton == null)
+        if (hudCanvas == null || questButton == null)
         {
-            Debug.LogWarning("HUD Canvas or Shop Button is not assigned.");
+            Debug.LogWarning("HUD Canvas or Quest Button is not assigned.");
             return;
         }
+        // Loop through all children of the HUD Canvas
+        foreach (Transform child in hudCanvas.transform)
+        {
+            // Set active false for everything except the ShopButton
+            if (child.gameObject != questButton)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+
+        // Ensure the shop button stays visible
+        questButton.SetActive(true);
+    }
+    public void HideAllExceptBoostButton()
+    {
 
         // Loop through all children of the HUD Canvas
         foreach (Transform child in hudCanvas.transform)

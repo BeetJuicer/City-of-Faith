@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelUpTween : MonoBehaviour
 {
     [SerializeField] GameObject SoftWheel, HardWheel, HUD;
-    [SerializeField] TutorialVideoManager VideoManager;
+    //[SerializeField] TutorialVideoManager VideoManager;
     [SerializeField] private Dialogue dialogue;
     // Store LeanTween IDs
     private int softWheelTweenId, hardWheelTweenId;

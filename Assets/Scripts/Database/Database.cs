@@ -37,8 +37,10 @@ public class Database : MonoBehaviour
         public string Username { get; set; }
         public string Password { get; set; }
         public int Play_sessions { get; set; }
+        public int TutorialStep2 { get; set; }
 
-        public int TutorialStep { get; set; }
+        public int HarvestCount { get; set; }
+
         public bool HasSeenCutscene { get; set; } // Flag to track cutscene viewing
     }
 

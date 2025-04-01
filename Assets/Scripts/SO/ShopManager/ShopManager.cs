@@ -26,6 +26,7 @@ public class ShopManager : MonoBehaviour
         centralhall.OnPlayerLevelUp += RefreshShop;
         FilterItemsByCategory(ItemCategory.Buildings);
         buildingOverlayObject.SetActive(true);
+       // dialogue.OnShopButtonClicked();
     }
 
     private void RefreshShop(int level)
