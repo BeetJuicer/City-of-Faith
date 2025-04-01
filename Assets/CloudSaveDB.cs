@@ -101,10 +101,17 @@ public class CloudSaveDB : MonoBehaviour
         print("JSON SAVED: " + json);
     }
 
-    public async void LoadPublicPlayerData()
-    {
-
-
+    public async Task LoadPublicPlayerData()
+    {  
+        //var data = await CloudSaveService.Instance.LoadAsync(villageKey);
+        //if (data.TryGetValue(villageKey, out string json))
+        //{
+        //    village = JsonUtility.FromJson<VillageData>(json);
+        //}
+        //else
+        //{
+        //    Debug.Log("No village data found.");
+        //}
     }
 
     public async void SaveData()
