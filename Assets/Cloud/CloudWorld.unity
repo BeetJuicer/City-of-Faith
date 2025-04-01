@@ -1841,6 +1841,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1164742142}
+        m_TargetAssemblyTypeName: CloudSaveDB, Assembly-CSharp
+        m_MethodName: SaveData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 406137335}
         m_TargetAssemblyTypeName: SignOut, Assembly-CSharp
         m_MethodName: LogOut
@@ -2912,12 +2924,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164742141}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -14.564573, y: -73.82546, z: -37.24083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1571417553}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1180928593
 PrefabInstance:
@@ -3740,8 +3752,7 @@ Transform:
   m_LocalPosition: {x: -14.564573, y: -73.82546, z: -37.24083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1164742143}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1602611787
@@ -16641,6 +16652,7 @@ SceneRoots:
   - {fileID: 2241582850719438718}
   - {fileID: 1658765710}
   - {fileID: 1571417553}
+  - {fileID: 1164742143}
   - {fileID: 4734353071800007986}
   - {fileID: 687135118}
   - {fileID: 1159923826}

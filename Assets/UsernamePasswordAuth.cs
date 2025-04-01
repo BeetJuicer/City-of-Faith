@@ -4,12 +4,16 @@ using Unity.Services.Core;
 using System.Threading.Tasks;
 using TMPro;
 using System;
+using Unity.Services.Authentication.PlayerAccounts;
 
 public class UsernamePasswordAuth : MonoBehaviour
 {
     [SerializeField] private TMP_InputField username;
     [SerializeField] private TMP_InputField password;
     CloudSaveDB cloudSave;
+    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private GameObject loginCanvas;
+
     public string _USERNAME { get; private set; }
     async void Awake()
     {
@@ -23,9 +27,30 @@ public class UsernamePasswordAuth : MonoBehaviour
         }
     }
 
-    private void Start()
+    private async void Start()
     {
+        // await PlayerAccountService.Instance.StartSignInAsync(); for third party logins.
         cloudSave = FindAnyObjectByType<CloudSaveDB>();
+        if (AuthenticationService.Instance.SessionTokenExists)
+        {
+            Debug.Log("Cached session exists. Attempting to restore session...");
+            try
+            {
+                // SignInAnonymouslyAsync isn't just for guest accounts. This is how session token is used apparently.
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+                cloudSave.LoadDatabase();
+            }
+            catch (RequestFailedException ex)
+            {
+                Debug.LogException(ex);
+                text.text = "Failed to restore session.";
+            }
+        }
+        else
+        {
+            text.text = "";
+            loginCanvas.SetActive(true);
+        }
     }
 
     public async void SignUp()

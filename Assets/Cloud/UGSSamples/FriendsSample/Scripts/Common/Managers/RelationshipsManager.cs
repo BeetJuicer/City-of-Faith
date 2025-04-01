@@ -36,6 +36,7 @@ namespace Unity.Services.Samples.Friends
 
         public void EnableUI()
         {
+            print("attempting to enable UI.");
             if (!initialized)
                 return;
 
@@ -48,6 +49,11 @@ namespace Unity.Services.Samples.Friends
             print("relationships start");
             //If this is added to a larger project, the service init order should be controlled from one place, and replace this.
             //await UnityServiceAuthenticator.SignIn();
+            Invoke("DelayInit", 0);
+        }
+
+        private async void DelayInit()
+        {
             await Init();
         }
 
@@ -56,12 +62,17 @@ namespace Unity.Services.Samples.Friends
             // Registering callbacks before Friends Initializing to ensure the receiving of all
             // `NotificationsConnectivityChanged` events.
             RegisterFriendsEventCallbacks();
-            print("Friends Init");
+            print("Friends Init 1");
             await FriendsService.Instance.InitializeAsync();
+            print("Friends Init 2");
             UIInit();
+            print("Friends Init 3");
             await LogInAsync();
+            print("Friends Init 4");
             RefreshAll();
+            print("Friends Init 5");
             initialized = true;
+            print("Friends Init finished.");
         }
 
         void UIInit()
