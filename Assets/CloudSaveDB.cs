@@ -84,6 +84,27 @@ public class CloudSaveDB : MonoBehaviour
         byte[] file = System.IO.File.ReadAllBytes($"{Application.persistentDataPath}/MyDb.db");
 
         await SaveFileBytes("databaseSave", file);
+
+        //also update the public village data.
+        if (Database.Instance == null)
+            Debug.LogError("No Database singleton instance!"); // js in case
+
+        var pb_structures = Database.Instance?.GetPublicStructureData();
+
+        Database.PublicVillageData pb_data = new Database.PublicVillageData
+        {
+            structures = pb_structures,
+            level = Database.Instance.GetCentralData().level
+        };
+
+        string json = JsonUtility.ToJson(pb_data);
+        print("JSON SAVED: " + json);
+    }
+
+    public async void LoadPublicPlayerData()
+    {
+
+
     }
 
     public async void SaveData()

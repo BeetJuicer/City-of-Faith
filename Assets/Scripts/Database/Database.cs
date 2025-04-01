@@ -27,6 +27,25 @@ public class Database : MonoBehaviour
     SQLiteConnection db;
     [SerializeField] private bool IsGameplayScene;
 
+    #region Publicly Accessible Data (For Visits)
+
+    [System.Serializable]
+    public struct PublicStructureData
+    {
+        public string name;
+        public Vector3 position;
+    }
+
+    [System.Serializable]
+    public class PublicVillageData
+    {
+        public List<PublicStructureData> structures;
+        public int level;
+    }
+
+    #endregion
+
+
     public interface IDatabaseData { }
 
     [Table("tbl_player")]
@@ -349,6 +368,29 @@ public class Database : MonoBehaviour
         var db = new SQLiteConnection(path);
         var result = db.Table<StructureData>().Where((row) => row.player_id == PlayerId).ToList();
         db.Close();
+        return result;
+    }
+
+    public List<PublicStructureData> GetPublicStructureData()
+    {
+        var db = new SQLiteConnection(path);
+        var result = db.Table<StructureData>()
+                        .Where((row) => row.player_id == PlayerId && row.building_state == 2) //building_state == 2 is BUILT. Refer to Structure.cs BuildingState
+                        .Select(row => new PublicStructureData
+                                        {
+                                            name = row.prefab_name,
+                                            position = new Vector3(row.posX, row.posY, row.posZ)
+                                        })
+                        .ToList();
+
+        //for testing.
+        //foreach (var row in result)
+        //{
+        //    print($"pb_data: {row.name} at {row.position}");
+        //}
+
+        db.Close();
+
         return result;
     }
 
