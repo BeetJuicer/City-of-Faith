@@ -241,7 +241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564c2bf6a0446c8458c96eeef74c31f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  section1Step: 0
   section2Step: 0
   lines:
   - {fileID: 11400000, guid: 8c912d60a8aaa6a42a0462e3bbf57d32, type: 2}
@@ -285,6 +284,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -10
       objectReference: {fileID: 0}
+    - target: {fileID: 2689758873204481411, guid: 353bc1bc843141447ab8665cbaf8698e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 802ece0fe04f28b4c92ed45f97ff6cbb,
+        type: 3}
     - target: {fileID: 3953677565955020398, guid: 353bc1bc843141447ab8665cbaf8698e,
         type: 3}
       propertyPath: m_TagString
@@ -437,12 +442,12 @@ PrefabInstance:
     - target: {fileID: 6915853356703044061, guid: 353bc1bc843141447ab8665cbaf8698e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -723
+      value: -693
       objectReference: {fileID: 0}
     - target: {fileID: 6915853356703044061, guid: 353bc1bc843141447ab8665cbaf8698e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -126
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 7111692914477809228, guid: 353bc1bc843141447ab8665cbaf8698e,
         type: 3}

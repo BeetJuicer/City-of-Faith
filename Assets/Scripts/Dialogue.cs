@@ -129,13 +129,14 @@ public class Dialogue : MonoBehaviour
                 break;
 
             case TutorialSection2Steps.ShowArrowToBuilding:
-                arrowInBuilding.EnableImage();
+                arrowInBuilding.EnableArrowBuilding();
                 break;
 
             case TutorialSection2Steps.NPCDialogue5:
                 StartDialogue2();
                 break;
             case TutorialSection2Steps.NPCDialogue3: // Player Level Up, Plot Dialogue, Open Shop and Buy a Plot
+                arrowInBuilding.DisableArrowBuilding();
                 StartDialogue2();
                 break;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using static UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera;
+using static UnityEngine.Rendering.Universal.PixelPerfectCamera;
 
 public class CropManager : MonoBehaviour
 {
