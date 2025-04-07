@@ -9,6 +9,7 @@ namespace Unity.Services.Samples.Friends.UIToolkit
     {
         public Action<string> onRemove { get; set; }
         public Action<string> onBlock { get; set; }
+        public Action<string, string> onVisit { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         const string k_FriendsListViewName = "friends-list";
 

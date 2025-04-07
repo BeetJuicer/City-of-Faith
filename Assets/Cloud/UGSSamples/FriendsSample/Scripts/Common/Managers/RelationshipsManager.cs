@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace Unity.Services.Samples.Friends
         IFriendsListView m_FriendsListView;
         IRequestListView m_RequestListView;
         IBlockedListView m_BlockListView;
+
+        public Action<string, string> onVisit;
 
         PlayerProfile m_LoggedPlayerProfile;
 
@@ -112,6 +115,7 @@ namespace Unity.Services.Samples.Friends
             m_AddFriendView.onFriendRequestSent += AddFriendAsync;
             m_FriendsListView.onRemove += RemoveFriendAsync;
             m_FriendsListView.onBlock += BlockFriendAsync;
+            m_FriendsListView.onVisit += CallVisitFriend;
             m_RequestListView.onAccept += AcceptRequestAsync;
             m_RequestListView.onDecline += DeclineRequestAsync;
             m_RequestListView.onBlock += BlockFriendAsync;
@@ -119,6 +123,12 @@ namespace Unity.Services.Samples.Friends
             m_LocalPlayerView.onPresenceChanged += SetPresenceAsync;
             print("pass 6");
 
+        }
+
+        private void CallVisitFriend(string id, string username)
+        {
+            print("invokedevent from rmmanager.");
+            onVisit?.Invoke(id, username);
         }
 
         async Task LogInAsync()

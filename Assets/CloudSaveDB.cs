@@ -10,12 +10,14 @@ using SQLite;
 using Unity.Services.Authentication;
 using Unity.Services.CloudSave.Models.Data.Player;
 using SaveOptions = Unity.Services.CloudSave.Models.Data.Player.SaveOptions;
+using Unity.Services.Samples.Friends;
 
 public class CloudSaveDB : MonoBehaviour
 {
     private readonly float secondsPerAutosave = 10f;
     UsernamePasswordAuth UPA;
     [SerializeField] string debugTestID;
+    RelationshipsManager rm_manager;
 
     private async void Awake()
     {
@@ -28,9 +30,14 @@ public class CloudSaveDB : MonoBehaviour
         if (UPA == null)
             Debug.LogWarning("UPA not found!");
 
-        Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        rm_manager = FindAnyObjectByType<RelationshipsManager>();
+        if (rm_manager == null)
+            Debug.LogWarning("RelationshipsManager not found!");
+
+        rm_manager.onVisit += VisitVillage;
 
         //We do not want to call autosave if we're not in the game scene. This causes file access issues to the save file because Auth also has the file open.
+        Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         if (scene.buildIndex <= 1)
             return;
 
@@ -123,17 +130,14 @@ public class CloudSaveDB : MonoBehaviour
         await CloudSaveService.Instance.Data.Player.SaveAsync(data, new SaveOptions(new PublicWriteAccessClassOptions()));
     }
 
-    [NaughtyAttributes.Button]
-    public void TestLoadPublic()
+    public async void VisitVillage(string playerId, string username)
     {
-        VisitVillage(debugTestID);
-    }
+        print("visiting village of " + username);
 
-    public void VisitVillage(string playerId)
-    {
         Database.PublicVillageData villageData = null;
 
-        var data = LoadPublicDataByPlayerId(playerId, "PublicVillageData").Result;
+        var data = await LoadPublicDataByPlayerId(playerId, "PublicVillageData");
+
         if (data.TryGetValue("PublicVillageData", out var keyname))
         {
             string jsonData = keyname.Value.GetAs<string>();
@@ -145,12 +149,12 @@ public class CloudSaveDB : MonoBehaviour
             return;
         }
 
-        foreach (var item in data)
+        foreach (var item in villageData.structures)
         {
-            print("Data: " + item.Key + ", " + item.Value);
+            print("Data: " + item.name + ", " + item.position);
         }
 
-        VisitCloudLoader.Instance.SetVillageToVisit(villageData);
+        VisitCloudLoader.Instance.SetVillageToVisit(villageData, username);
         UnityEngine.SceneManagement.SceneManager.LoadScene(3); // Again. Magic number for testing. Refactor.
     }
 

@@ -39,6 +39,7 @@ public class Database : MonoBehaviour
     [System.Serializable]
     public class PublicVillageData
     {
+        public string username;
         public List<PublicStructureData> structures;
         public int level;
     }

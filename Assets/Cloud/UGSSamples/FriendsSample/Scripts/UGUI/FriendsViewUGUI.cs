@@ -14,6 +14,7 @@ namespace Unity.Services.Samples.Friends.UGUI
 
         public Action<string> onRemove { get; set; }
         public Action<string> onBlock { get; set; }
+        public Action<string, string> onVisit { get; set; }
 
         public void BindList(List<FriendsEntryData> friendEntryDatas)
         {
@@ -38,6 +39,12 @@ namespace Unity.Services.Samples.Friends.UGUI
                 {
                     onBlock?.Invoke(friendsEntryData.Id);
                     entry.gameObject.SetActive(false);
+                });
+                entry.visitFriendButton.onClick.AddListener(() =>
+                {
+                    print("invoked event fromview");
+                    onVisit?.Invoke(friendsEntryData.Id, friendsEntryData.Name);
+                    //entry.gameObject.SetActive(false);
                 });
                 m_FriendEntries.Add(entry);
             }

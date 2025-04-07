@@ -6,12 +6,13 @@ using Unity.Services.Core;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.CloudSave.Models.Data.Player;
+using Unity.Services.Friends;
 
 public class VisitCloudLoader : MonoBehaviour
 {
     public static VisitCloudLoader Instance { get; private set; }
-    Database.PublicVillageData villageData;
-    public Database.PublicVillageData VillageData;
+    public Database.PublicVillageData VillageData { get; private set; }
+    public string friendUsername { get; private set; }
 
     private void Awake()
     {
@@ -37,9 +38,15 @@ public class VisitCloudLoader : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= LoadVillage;
     }
 
-    public void SetVillageToVisit(Database.PublicVillageData villageData)
+    //private void Start()
+    //{
+    //    LoadVillageDebug();
+    //}
+
+    public void SetVillageToVisit(Database.PublicVillageData villageData, string username)
     {
-        this.villageData = villageData;
+        this.friendUsername = username;
+        this.VillageData = villageData;
     }
 
     public void LoadVillage(Scene scene, LoadSceneMode mode)
@@ -48,15 +55,15 @@ public class VisitCloudLoader : MonoBehaviour
         if (scene.buildIndex != 3) //scene MUST be 3 in build index. Magic number. Refactor.
             return;
 
-        if (villageData == null)
+        if (VillageData == null)
         {
             Debug.LogWarning("Village Data is null!");
             return;
         }
 
-        print("village level: " + villageData.level);
+        print("village level: " + VillageData.level);
 
-        foreach (var structure in villageData.structures)
+        foreach (var structure in VillageData.structures)
         {
             print("Instantiating: " + structure.name);
             string path = $"Structures/{structure.name}";
