@@ -315,7 +315,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!223 &77977934
 Canvas:
   m_ObjectHideFlags: 0
@@ -1744,7 +1743,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!223 &1252117357
 Canvas:
   m_ObjectHideFlags: 0
@@ -2086,6 +2084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f19847eb7caa6734d9f63e2ca785badc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugTestID: XymEkaQZy2J9YdmdYja4wJw5Qbkp
 --- !u!4 &1465255860
 Transform:
   m_ObjectHideFlags: 0
@@ -2443,7 +2442,7 @@ PrefabInstance:
     - target: {fileID: 7014676771989128693, guid: dc982e2ba541219489aa4da781647ae7,
         type: 3}
       propertyPath: mainGameIndex
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3683,7 +3682,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!114 &3122056274171729785
 MonoBehaviour:
   m_ObjectHideFlags: 0

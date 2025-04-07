@@ -8,11 +8,14 @@ using UnityEngine.SceneManagement;
 using DG.Tweening.Plugins.Core.PathCore;
 using SQLite;
 using Unity.Services.Authentication;
+using Unity.Services.CloudSave.Models.Data.Player;
+using SaveOptions = Unity.Services.CloudSave.Models.Data.Player.SaveOptions;
 
 public class CloudSaveDB : MonoBehaviour
 {
     private readonly float secondsPerAutosave = 10f;
     UsernamePasswordAuth UPA;
+    [SerializeField] string debugTestID;
 
     private async void Awake()
     {
@@ -80,6 +83,7 @@ public class CloudSaveDB : MonoBehaviour
 
     public async void SavePlayerFile()
     {
+        print("ID: " + AuthenticationService.Instance.PlayerId);
         print($"Saving path: { Application.persistentDataPath}/MyDb.db");
         byte[] file = System.IO.File.ReadAllBytes($"{Application.persistentDataPath}/MyDb.db");
 
@@ -98,20 +102,56 @@ public class CloudSaveDB : MonoBehaviour
         };
 
         string json = JsonUtility.ToJson(pb_data);
+        SavePublicData("PublicVillageData", json);
         print("JSON SAVED: " + json);
     }
 
-    public async Task LoadPublicPlayerData()
-    {  
-        //var data = await CloudSaveService.Instance.LoadAsync(villageKey);
-        //if (data.TryGetValue(villageKey, out string json))
-        //{
-        //    village = JsonUtility.FromJson<VillageData>(json);
-        //}
-        //else
-        //{
-        //    Debug.Log("No village data found.");
-        //}
+    public async Task<Dictionary<string, Unity.Services.CloudSave.Models.Item>> LoadPublicDataByPlayerId(string playerId, string key)
+    {
+        var playerData = await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string> { key }, new LoadOptions(new PublicReadAccessClassOptions(playerId)));
+        if (playerData.TryGetValue("keyName", out var keyName))
+        {
+            Debug.Log($"keyName: {keyName.Value.GetAs<string>()}");
+        }
+
+        return playerData;
+    }
+
+    public async void SavePublicData<T>(string keyname, T value)
+    {
+        var data = new Dictionary<string, object> { { keyname, value } };
+        await CloudSaveService.Instance.Data.Player.SaveAsync(data, new SaveOptions(new PublicWriteAccessClassOptions()));
+    }
+
+    [NaughtyAttributes.Button]
+    public void TestLoadPublic()
+    {
+        VisitVillage(debugTestID);
+    }
+
+    public void VisitVillage(string playerId)
+    {
+        Database.PublicVillageData villageData = null;
+
+        var data = LoadPublicDataByPlayerId(playerId, "PublicVillageData").Result;
+        if (data.TryGetValue("PublicVillageData", out var keyname))
+        {
+            string jsonData = keyname.Value.GetAs<string>();
+            villageData = JsonUtility.FromJson<Database.PublicVillageData>(jsonData);
+        }
+        else
+        {
+            Debug.LogError("PublicVillageData value not found!");
+            return;
+        }
+
+        foreach (var item in data)
+        {
+            print("Data: " + item.Key + ", " + item.Value);
+        }
+
+        VisitCloudLoader.Instance.SetVillageToVisit(villageData);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(3); // Again. Magic number for testing. Refactor.
     }
 
     public async void SaveData()
