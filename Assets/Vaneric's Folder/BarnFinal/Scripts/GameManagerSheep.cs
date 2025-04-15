@@ -2,9 +2,11 @@
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System;
 
 public class GameManagerSheep : MonoBehaviour
 {
+    public event Action finishBarnGame;
     public static GameManagerSheep Instance { get; private set; }
 
     [Header("UI Elements")]
@@ -129,9 +131,9 @@ public class GameManagerSheep : MonoBehaviour
 
     public void EndGame()
     {
+
         if (gameEnded) return;
         gameEnded = true;
-
         Debug.Log("Trust Meter Full! Ending game...");
         SetBackgroundState(false);
 
@@ -256,6 +258,7 @@ public class GameManagerSheep : MonoBehaviour
     }
     public void ExitGame()
     {
+        finishBarnGame?.Invoke();
         BarnMinigamePrefab.SetActive(false);
         HUDCanvas.SetActive(true);
         MainCamera3d.gameObject.SetActive(true);

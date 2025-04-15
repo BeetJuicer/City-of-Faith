@@ -3,9 +3,11 @@ using UnityEngine.UI;
 using System.Collections;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 public class FishingController : MonoBehaviour
 {
+    public event Action finishFishingGame;
     public static FishingController Instance;
 
     [Header("UI Elements")]
@@ -146,7 +148,7 @@ public class FishingController : MonoBehaviour
     IEnumerator StartGameSequence()
     {
         yield return StartCoroutine(ShowMessage("When God speaks, trust his timing for abundance", 2f));
-        yield return new WaitForSeconds(Random.Range(2, 3));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(2, 3));
         yield return StartCoroutine(ShowMessage("Go fishing now!", 2f));
 
         canCast = true;
@@ -211,6 +213,7 @@ public class FishingController : MonoBehaviour
         joystick.SetActive(false);
         joystickCapture.HideCaptureBox();
         fishSpawner.ClearAllFish();
+        finishFishingGame?.Invoke();
 
         string quote = "Trust in the Lord’s abundance.";
 
@@ -239,6 +242,7 @@ public class FishingController : MonoBehaviour
         goldText.text = goldReward.ToString();
         expText.text = expReward.ToString();
         exitButton.gameObject.SetActive(true);
+
     }
 
     IEnumerator ShowMessage(string message, float duration)

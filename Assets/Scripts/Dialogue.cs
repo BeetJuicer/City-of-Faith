@@ -69,8 +69,8 @@ public class Dialogue : MonoBehaviour
 
 
 
-    private int dialogueIndex = 0;
-    private int index = 0;
+    private int dialogueIndex;
+    private int index;
     private bool isCropClickComplete = false;
 
     void Start()
@@ -84,181 +84,232 @@ public class Dialogue : MonoBehaviour
     {
         section2Step = (TutorialSection2Steps)playerData.TutorialStep2;
         print(section2Step);
+        dialogueIndex = playerData.DialogueIndex;
         dialogueBox.SetActive(false);
+        nextButton.onClick.AddListener(OnNextButtonClick);
+        Debug.Log("Is nextButton interactable? = " + nextButton.interactable);
         HandleTutorialSteps2();
     }
 
     public void SaveTutorialProgressToDatabase(PlayerData playerData)
     {
         playerData.TutorialStep2 = (int)section2Step;
-
-
         Database.Instance.UpdateRecord(playerData);
     }
+
+    public void SaveDialogueToDatabase(PlayerData playerData)
+    {
+
+        playerData.DialogueIndex = dialogueIndex;
+        Database.Instance.UpdateRecord(playerData);
+    }
+
+
 
     void HandleTutorialSteps2()
     {
         PlayerData playerData = Database.Instance.CurrentPlayerData;
-        SaveTutorialProgressToDatabase(playerData);
-
         print(section2Step);
         switch (section2Step)
         {
             case TutorialSection2Steps.StartDialogue:
+                SaveTutorialProgressToDatabase(playerData);
                 controller.HideAll();
                 StartDialogue();
                 break;
             case TutorialSection2Steps.ShowArrowToShop:
+                SaveTutorialProgressToDatabase(playerData);
                 controller.HideAllExceptShopButton(); // Call ShowAll() if you want to activate HUD canvas
                 ShowArrow(new Vector3(802, -173, 0));
                 Debug.Log("Show Arrow Section 1 tutorial");
                 break;
 
             case TutorialSection2Steps.NPCDialogue2:
+                SaveTutorialProgressToDatabase(playerData);
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.ShowArrowToItem:
+                SaveTutorialProgressToDatabase(playerData);
                 ShowArrow(new Vector3(-350, 200, 0)); // Offset arrow above shop item
                 break;
 
             case TutorialSection2Steps.PlaceBuilding:
+                SaveTutorialProgressToDatabase(playerData);
                 controller.HideAllExceptBoostButton();
                 //Sa part na to, activate the arrow image in the villager house
                 //
                 break;
 
             case TutorialSection2Steps.ShowArrowToBuilding:
+                SaveTutorialProgressToDatabase(playerData);
                 arrowInBuilding.EnableArrowBuilding();
                 break;
 
-            case TutorialSection2Steps.NPCDialogue5:
-                StartDialogue2();
-                break;
             case TutorialSection2Steps.NPCDialogue3: // Player Level Up, Plot Dialogue, Open Shop and Buy a Plot
+                SaveTutorialProgressToDatabase(playerData);
                 arrowInBuilding.DisableArrowBuilding();
                 StartDialogue2();
                 break;
 
+            case TutorialSection2Steps.NPCDialogue5:
+                SaveTutorialProgressToDatabase(playerData);
+                StartDialogue2();
+                break;
+
             case TutorialSection2Steps.ShowArrowToShop3:
+                SaveTutorialProgressToDatabase(playerData);
                 controller.HideAllExceptShopButton(); // Call ShowAll() if you want to activate HUD canvas
                 ShowArrow(new Vector3(802, -173, 0));
                 Debug.Log("Show Arrow Barn tutorial");
                 break;
 
             case TutorialSection2Steps.ShowArrowToQuest:
+                SaveTutorialProgressToDatabase(playerData);
                 controller.HideAllExceptQuestButton(); // Call ShowAll() if you want to activate HUD canvas
                 ShowArrow(new Vector3(-565, -237, 0));
                 break;
 
             case TutorialSection2Steps.ShowArrowToPlot: //Arrow points to Plot Shop Item, wait for the player to ClickShopItem (SHOW ARROW TO VILLAGER HOUSE)
+                SaveTutorialProgressToDatabase(playerData);
                 controller.HideAllExceptBoostButton();
                 ShowArrow(new Vector3(15, 200, 0));
                 break;
 
             case TutorialSection2Steps.PlaceBuilding2: //Building Overlay mode, user place the building
+                SaveTutorialProgressToDatabase(playerData);
                 controller.HideAllExceptBoostButton();
                 break;
 
             case TutorialSection2Steps.ShowArrowToBuilding2: //Wait for Boost Structure
-                arrowPlot.EnableImage();
+                SaveTutorialProgressToDatabase(playerData);
+                arrowPlot.EnableArrowPlot();
                 controller.HideAllExceptBoostButton(); //Close All HUD except the boost button
                 break;
 
             case TutorialSection2Steps.NPCDialogue4: //NPC will order the player to boost the plot in progress building
+                SaveTutorialProgressToDatabase(playerData);
+                arrowPlot.EnableArrowPlot();
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.NPCDialogue52: //NPC will order player to plant Beet
+                SaveTutorialProgressToDatabase(playerData);
+                arrowPlot.EnableArrowPlot();
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.WaitForPlant:
-
+                SaveTutorialProgressToDatabase(playerData);
                 break;
 
-            case TutorialSection2Steps.NPCDialogue6:
+            case TutorialSection2Steps.NPCDialogue6://Player needs to boost the crop
+                arrowPlot.EnableArrowPlot();
+                SaveTutorialProgressToDatabase(playerData);
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.WaitForCropBoost:
+                arrowPlot.EnableArrowPlot();
+                SaveTutorialProgressToDatabase(playerData);
                 break;
 
-            case TutorialSection2Steps.NPCDialogue7:
+            case TutorialSection2Steps.NPCDialogue7: //After Boosting
+                SaveTutorialProgressToDatabase(playerData);
+                arrowPlot.DisableArrowPlot();
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.NPCDialogue8:
+                SaveTutorialProgressToDatabase(playerData);
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.WaitQuestClose:
+                SaveTutorialProgressToDatabase(playerData);
+                controller.HideAll();
                 break;
 
             case TutorialSection2Steps.NPCDialogue9:
+                SaveTutorialProgressToDatabase(playerData);
+                controller.HideAll();
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.WaitForLevel3: //Player will play the game to reach level 3
                 Debug.Log("End of Plot Tutorial Reached");
+                SaveTutorialProgressToDatabase(playerData);
                 dialogueBox.SetActive(false);
                 controller.ShowAll();
                 break;
 
             case TutorialSection2Steps.NPCDialogue10:
+                SaveTutorialProgressToDatabase(playerData);
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.ShowArrowToShop2:
+                SaveTutorialProgressToDatabase(playerData);
                 controller.HideAllExceptShopButton();
                 ShowArrow(new Vector3(802, -173, 0));
                 break;
 
             case TutorialSection2Steps.ShowArrowToBarn:
+                SaveTutorialProgressToDatabase(playerData);
                 ShowArrow(new Vector3(250, 200, 0));
                 break;
 
             case TutorialSection2Steps.PlaceBuilding3:
+                SaveTutorialProgressToDatabase(playerData);
                 controller.HideAllExceptBoostButton();
                 break;
 
             case TutorialSection2Steps.NPCDialogue11:
+                SaveTutorialProgressToDatabase(playerData);
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.NPCDialogue12:
+                SaveTutorialProgressToDatabase(playerData);
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.NPCDialogue13:
+                SaveTutorialProgressToDatabase(playerData);
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.NPCDialogue14:
+                SaveTutorialProgressToDatabase(playerData);
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.NPCDialogue15:
+                SaveTutorialProgressToDatabase(playerData);
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.WaitForLevel4:
+                SaveTutorialProgressToDatabase(playerData);
                 Debug.Log("End of Barn Tutorial Reached");
                 dialogueBox.SetActive(false);
                 controller.ShowAll();
                 break;
 
             case TutorialSection2Steps.WaitForLevel5:
+                SaveTutorialProgressToDatabase(playerData);
                 Debug.Log("End of Fishing Tutorial Reached");
                 dialogueBox.SetActive(false);
                 controller.ShowAll();
                 break;
 
             case TutorialSection2Steps.NPCDialogue16:
+                SaveTutorialProgressToDatabase(playerData);
                 StartDialogue2();
                 break;
 
             case TutorialSection2Steps.NPCDialogue17:
+                SaveTutorialProgressToDatabase(playerData);
                 StartDialogue2();
                 break;
         }
@@ -276,7 +327,7 @@ public class Dialogue : MonoBehaviour
     IEnumerator TypeLine()
     {
         Debug.Log("Typing line at index " + index);
-
+        Debug.Log("Starting dialogue at dialogue index = " + lines[dialogueIndex]);
         nextButton.interactable = true;
         bool isTypingSkipped = false;
         nextButton.onClick.AddListener(() => isTypingSkipped = true);
@@ -340,7 +391,10 @@ public class Dialogue : MonoBehaviour
         textComponent.text = string.Empty;
         index = 0; // this index is for every Lines in 1 scriptable object, sa loob ng so maraming lines
         dialogueIndex++; //this dialogueIndex is for every Scriptable Objects of Dialogue, to change the topic of tutorial
+        PlayerData playerData = Database.Instance.CurrentPlayerData;
+        SaveDialogueToDatabase(playerData);
         StartCoroutine(TypeLine()); // Start typing...
+
     }
 
     void EndDialogue()
@@ -383,7 +437,7 @@ public class Dialogue : MonoBehaviour
                 break;
 
             case TutorialSection2Steps.NPCDialogue7:
-                arrowPlot.DisableImageBuilt();
+                arrowPlot.DisableArrowPlot();
                 section2Step = TutorialSection2Steps.ShowArrowToQuest;
                 HandleTutorialSteps2();
                 break;
@@ -403,6 +457,7 @@ public class Dialogue : MonoBehaviour
                 break;
 
             //Skip NPC 11
+
 
             case TutorialSection2Steps.NPCDialogue12:
                 section2Step = TutorialSection2Steps.WaitForLevel4;
@@ -538,6 +593,7 @@ public class Dialogue : MonoBehaviour
         {
             Debug.Log("Place Building: Barn");
             section2Step = TutorialSection2Steps.NPCDialogue11;
+            controller.ShowAll();
             HandleTutorialSteps2();
         }
         else if (section2Step == TutorialSection2Steps.PlaceBuilding4)

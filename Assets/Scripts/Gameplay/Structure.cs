@@ -56,6 +56,7 @@ public class Structure : MonoBehaviour, IClickableObject, IBoostableObject
     private const string BUILT_HIGHLIGHT_NAME = "BuiltHighlight";
 
     private UIManager uiManager;
+    private Dialogue dialogue;
 
     private bool hasPopped = false;
 

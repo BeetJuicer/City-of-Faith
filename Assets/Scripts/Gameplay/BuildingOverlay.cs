@@ -28,16 +28,15 @@ public class BuildingOverlay : MonoBehaviour, IDraggable
     }
 
     [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private Database db;
-
+    [SerializeField] private Dialogue dialogue;
     [SerializeField] private Material buildPreviewMaterial;
     [SerializeField] private int incrementalMovementUnits = 1;
-    [SerializeField] private Dialogue dialogue;
     [SerializeField] private GameObject overlayPlane;
     private GameObject previewGO;
     public bool isInBuildMode;
 
     private CentralHall centralHall;
+
 
     private List<GameObject> objectsInRange = new();
 

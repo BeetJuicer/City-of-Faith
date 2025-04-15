@@ -4,11 +4,17 @@ using UnityEngine;
 using System;
 using NaughtyAttributes;
 using System.Diagnostics.Tracing;
+using static Database;
 
 [RequireComponent(typeof(Structure))]
 public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
 {
     public event Action OnHarvest;
+    private int wheat;
+    private int carrot;
+    private int corn;
+    private int tomato;
+    private int beet;
 
     private Structure structure;
     public enum PlotState
@@ -346,7 +352,42 @@ public class Plot : MonoBehaviour, IClickableObject, IBoostableObject
         ResourceManager.Instance.AdjustPlayerCurrency(Currency.Gold, Crop_SO1.amountPerClaim);
         ResourceManager.Instance.AdjustPlayerResources(FoodResource.Plant, Crop_SO1.amountPerClaim);
         central.AddToCentralExp(Crop_SO1.expPerClaim);
+        if (crop_SO.name == "SO_Crop_Wheat")
+        {
 
+            plotData.wheat = wheat++;
+            db.UpdateRecord(plotData);
+            Debug.Log("1 Wheat Harvested");
+        }
+
+        if (crop_SO.name == "SO_Crop_Carrot")
+        {
+            plotData.carrot = carrot++;
+            db.UpdateRecord(plotData);
+            Debug.Log("1 Carrot Harvested");
+        }
+        if (crop_SO.name == "SO_Crop_Corn")
+        {
+            plotData.corn = corn++;
+            db.UpdateRecord(plotData);
+            Debug.Log("1 Corn Harvested");
+        }
+        if (crop_SO.name == "SO_Crop_Tomato")
+        {
+            plotData.tomato = tomato++;
+            db.UpdateRecord(plotData);
+            Debug.Log("1 Tomato Harvested");
+        }
+        if (crop_SO.name == "SO_Crop_Beet")
+        {
+            plotData.beet = beet++;
+            db.UpdateRecord(plotData);
+            Debug.Log("1 Beet Harvested");
+        }
+        else
+        {
+            Debug.Log("Cannot find the name of the crop!!! Found: " + crop_SO.name);
+        }
         //TODO: Possible optimization, use crop pools. May be temporary depending on UI
         Destroy(cropVisualPos.GetChild(0).gameObject);
 

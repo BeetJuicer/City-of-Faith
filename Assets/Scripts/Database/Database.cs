@@ -37,10 +37,11 @@ public class Database : MonoBehaviour
         public string Username { get; set; }
         public string Password { get; set; }
         public int Play_sessions { get; set; }
-        public int TutorialStep2 { get; set; }
-
-        public int HarvestCount { get; set; }
-
+        public int TutorialStep2 { get; set; } = 0;
+        public int DialogueIndex { get; set; } = 0;
+        public int HarvestCount { get; set; } = 0;
+        public int BuildingCount { get; set; } = 0;
+        public int MinigameCount { get; set; } = 0;
         public bool HasSeenCutscene { get; set; } // Flag to track cutscene viewing
     }
 
@@ -93,6 +94,14 @@ public class Database : MonoBehaviour
         public int plot_state { get; set; }
         public DateTime growth_finish_time { get; set; }
         public string crop_so_name { get; set; }
+
+        //CROPS
+
+        public int wheat { get; set; }
+        public int carrot { get; set; }
+        public int corn { get; set; }
+        public int tomato { get; set; }
+        public int beet { get; set; }
     }
 
     [Table("tbl_currency")]

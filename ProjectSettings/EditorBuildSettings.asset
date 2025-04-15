@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartMenuWithCutScene.unity
     guid: 811dd728b3e5f234197250c19d6e376f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GinoWorld.unity
     guid: 4cebb10a63384a944967513a9893b84d
   - enabled: 0
@@ -25,7 +25,7 @@ EditorBuildSettings:
     guid: f2532f3e731afc44593edce06db28745
   - enabled: 0
     path: Assets/Scenes/VanericWorld.unity
-    guid: 35d2afc0d61d2ae48acf8ae74eb13d19
+    guid: a070ee3855ce9174aa00dfd6a6ee1608
   - enabled: 0
     path: Assets/Scenes/DesertScene.unity
     guid: 0edecaf13b593624e8812d812e8bb8c8
@@ -41,4 +41,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SanPascual2.unity
     guid: 7cc83c626294d9a4fa976edfd329a4ad
+  - enabled: 1
+    path: Assets/Scenes/AldrinWorld.unity
+    guid: e004474c6e2320645bac8af60cfc5f5a
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

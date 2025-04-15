@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
     private const string BARN_GAME = "BarnGame";
     private const string FISHING_GAME = "FishingGame";
 
+    public event Action<Structure> OnRemove;
+
 
     public void LoadFishingMinigame()
     {
@@ -209,6 +211,7 @@ public class UIManager : MonoBehaviour
         if (structure != null)
         {
             structure.GetComponent<Structure>().DestroyStructure();
+            OnRemove?.Invoke(structure.GetComponent<Structure>());
         }
         else
         {
