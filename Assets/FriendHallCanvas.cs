@@ -17,6 +17,14 @@ public class FriendHallCanvas : MonoBehaviour, ICanvasView
         donateBtn.onClick.AddListener(() => Donate_Clicked?.Invoke());
     }
 
+
+    private void OnDestroy()
+    {
+        exitBtn.onClick.RemoveAllListeners();
+        donateBtn.onClick.RemoveAllListeners();
+    }
+
+
     public void Activate()
     {
         panel.SetActive(true);

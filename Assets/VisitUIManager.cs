@@ -26,8 +26,15 @@ public class VisitUIManager : MonoBehaviour
         //FriendHallCanvas stuff.
         friendHallCanvas = friendHallCanvasGO.GetComponent<ICanvasView>();
         friendHall = FindFirstObjectByType<FriendCentralHall>();
+
         friendHall.FriendHallClicked += FriendHallClicked;
         friendHallCanvas.Canvas_Deactivated += Canvas_Deactivated;
+    }
+
+    private void OnDestroy()
+    {
+        friendHall.FriendHallClicked -= FriendHallClicked;
+        friendHallCanvas.Canvas_Deactivated -= Canvas_Deactivated;
     }
 
     private void Canvas_Deactivated()

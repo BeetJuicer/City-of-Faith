@@ -66,7 +66,7 @@ public class VisitCloudLoader : MonoBehaviour
         foreach (var structure in VillageData.structures)
         {
             print("Instantiating: " + structure.name);
-            string path = $"Structures/{structure.name}";
+            string path = $"FriendStructures/Friend{structure.name}";
             Instantiate(Resources.Load(path), structure.position, Quaternion.identity);
         }
     }
